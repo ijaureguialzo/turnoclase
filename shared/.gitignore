@@ -1,0 +1,7 @@
+global.json
+
+FirebaseFunctions/functions/node_modules/
+
+*.log
+
+\.idea/
