@@ -1,0 +1,24 @@
+platform :ios, '8.0'
+use_frameworks!
+
+workspace 'TurnoClase'
+
+def turnoclase_pods
+    # REF: Librería para mostrar mensajes de depuración: https://github.com/DaveWoodCom/XCGLogger
+    pod 'XCGLogger'
+
+    # REF: Google Firebase: https://firebase.google.com/docs/ios
+    pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+    pod 'FirebaseFirestore'
+end
+
+target 'TurnoClaseProfesor' do
+    project 'TurnoClaseProfesor/TurnoClaseProfesor'
+    turnoclase_pods
+end
+
+target 'TurnoClase' do
+    project 'TurnoClase/TurnoClase'
+    turnoclase_pods
+end

@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		410D511C1F58365B00401C6C /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D511B1F58365B00401C6C /* Nombres.swift */; };
+		410D71021FA8D634009AC062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 410D71011FA8D633009AC062 /* GoogleService-Info.plist */; };
+		4116087A1B517B88008C9A1E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 411608781B517B88008C9A1E /* Licenses */; };
+		4116087B1B517B88008C9A1E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 411608791B517B88008C9A1E /* Settings.bundle */; };
+		411609241B41B7E700E5BD59 /* TurnoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411609231B41B7E700E5BD59 /* TurnoViewController.swift */; };
+		414EC8621B4C8B1B0002492C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414EC8641B4C8B1B0002492C /* Localizable.strings */; };
+		414EE62D1FB7B1CB00126C74 /* Aula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EE62C1FB7B1CA00126C74 /* Aula.swift */; };
+		415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BC6471B2F5305004FADE0 /* AppDelegate.swift */; };
+		415BC64A1B2F5305004FADE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BC6491B2F5305004FADE0 /* ViewController.swift */; };
+		415BC64D1B2F5305004FADE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BC64B1B2F5305004FADE0 /* Main.storyboard */; };
+		415BC64F1B2F5305004FADE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415BC64E1B2F5305004FADE0 /* Images.xcassets */; };
+		415BC6521B2F5305004FADE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415BC6501B2F5305004FADE0 /* LaunchScreen.xib */; };
+		416796721B50461C00DCF09B /* BotonGrafico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416796701B50461C00DCF09B /* BotonGrafico.swift */; };
+		416796731B50461C00DCF09B /* FondoCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416796711B50461C00DCF09B /* FondoCircular.swift */; };
+		AECE5F0A672A15C55191EEE7 /* Pods_TurnoClase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 514134A13F09CC115CE339B4 /* Pods_TurnoClase.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A5CF5583161E0C351BE0C6E /* Pods-TurnoClase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.release.xcconfig"; sourceTree = "<group>"; };
+		410D511B1F58365B00401C6C /* Nombres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nombres.swift; sourceTree = "<group>"; };
+		410D71011FA8D633009AC062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		411608781B517B88008C9A1E /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Licenses; path = TurnoClase/Licenses; sourceTree = "<group>"; };
+		411608791B517B88008C9A1E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = TurnoClase/Settings.bundle; sourceTree = "<group>"; };
+		411609231B41B7E700E5BD59 /* TurnoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnoViewController.swift; sourceTree = "<group>"; };
+		414EC8541B4C83CB0002492C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		414EC8551B4C83CB0002492C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		414EC8561B4C85260002492C /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Main.strings; sourceTree = "<group>"; };
+		414EC8571B4C85260002492C /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		414EC8631B4C8B1B0002492C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		414EC8651B4C8B570002492C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		414EC8661B4C8B580002492C /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		414EE62C1FB7B1CA00126C74 /* Aula.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aula.swift; sourceTree = "<group>"; };
+		415BC6421B2F5305004FADE0 /* TurnoClase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurnoClase.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		415BC6461B2F5305004FADE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		415BC6471B2F5305004FADE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		415BC6491B2F5305004FADE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		415BC64C1B2F5305004FADE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		415BC64E1B2F5305004FADE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		415BC6511B2F5305004FADE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		416796701B50461C00DCF09B /* BotonGrafico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonGrafico.swift; sourceTree = "<group>"; };
+		416796711B50461C00DCF09B /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
+		4199FF0B1E32EF9500F9E42F /* TurnoClase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TurnoClase.entitlements; sourceTree = "<group>"; };
+		514134A13F09CC115CE339B4 /* Pods_TurnoClase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C9EE04D4D010E3B35A683FC /* Pods-TurnoClase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		415BC63F1B2F5305004FADE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AECE5F0A672A15C55191EEE7 /* Pods_TurnoClase.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2CB722A7981E4D494818F997 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8C9EE04D4D010E3B35A683FC /* Pods-TurnoClase.debug.xcconfig */,
+				1A5CF5583161E0C351BE0C6E /* Pods-TurnoClase.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		411608771B517B6E008C9A1E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				411608781B517B88008C9A1E /* Licenses */,
+				411608791B517B88008C9A1E /* Settings.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		415BC6391B2F5305004FADE0 = {
+			isa = PBXGroup;
+			children = (
+				415BC6441B2F5305004FADE0 /* TurnoClase */,
+				411608771B517B6E008C9A1E /* Resources */,
+				415BC6431B2F5305004FADE0 /* Products */,
+				2CB722A7981E4D494818F997 /* Pods */,
+				F3C9CC95803DC895133DA292 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		415BC6431B2F5305004FADE0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				415BC6421B2F5305004FADE0 /* TurnoClase.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		415BC6441B2F5305004FADE0 /* TurnoClase */ = {
+			isa = PBXGroup;
+			children = (
+				415BC6471B2F5305004FADE0 /* AppDelegate.swift */,
+				415BC6491B2F5305004FADE0 /* ViewController.swift */,
+				411609231B41B7E700E5BD59 /* TurnoViewController.swift */,
+				414EE62C1FB7B1CA00126C74 /* Aula.swift */,
+				410D511B1F58365B00401C6C /* Nombres.swift */,
+				41BD61D41FB79521002385FE /* UI */,
+				415BC6451B2F5305004FADE0 /* Supporting Files */,
+			);
+			path = TurnoClase;
+			sourceTree = "<group>";
+		};
+		415BC6451B2F5305004FADE0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4199FF0B1E32EF9500F9E42F /* TurnoClase.entitlements */,
+				410D71011FA8D633009AC062 /* GoogleService-Info.plist */,
+				415BC6461B2F5305004FADE0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		41BD61D41FB79521002385FE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				415BC64B1B2F5305004FADE0 /* Main.storyboard */,
+				416796711B50461C00DCF09B /* FondoCircular.swift */,
+				416796701B50461C00DCF09B /* BotonGrafico.swift */,
+				415BC64E1B2F5305004FADE0 /* Images.xcassets */,
+				415BC6501B2F5305004FADE0 /* LaunchScreen.xib */,
+				414EC8641B4C8B1B0002492C /* Localizable.strings */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		F3C9CC95803DC895133DA292 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				514134A13F09CC115CE339B4 /* Pods_TurnoClase.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		415BC6411B2F5305004FADE0 /* TurnoClase */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 415BC6611B2F5305004FADE0 /* Build configuration list for PBXNativeTarget "TurnoClase" */;
+			buildPhases = (
+				C90BA8C9451A54300514196E /* [CP] Check Pods Manifest.lock */,
+				415BC63E1B2F5305004FADE0 /* Sources */,
+				415BC63F1B2F5305004FADE0 /* Frameworks */,
+				415BC6401B2F5305004FADE0 /* Resources */,
+				9C4A1177216046EAF577148B /* [CP] Embed Pods Frameworks */,
+				A85A5FC2198F889C43659F04 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TurnoClase;
+			productName = TurnoClase;
+			productReference = 415BC6421B2F5305004FADE0 /* TurnoClase.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		415BC63A1B2F5305004FADE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Ion Jaureguialzo Sarasola";
+				TargetAttributes = {
+					415BC6411B2F5305004FADE0 = {
+						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = RSEH385M54;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 415BC63D1B2F5305004FADE0 /* Build configuration list for PBXProject "TurnoClase" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				eu,
+				es,
+			);
+			mainGroup = 415BC6391B2F5305004FADE0;
+			productRefGroup = 415BC6431B2F5305004FADE0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				415BC6411B2F5305004FADE0 /* TurnoClase */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		415BC6401B2F5305004FADE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				414EC8621B4C8B1B0002492C /* Localizable.strings in Resources */,
+				410D71021FA8D634009AC062 /* GoogleService-Info.plist in Resources */,
+				415BC64D1B2F5305004FADE0 /* Main.storyboard in Resources */,
+				415BC6521B2F5305004FADE0 /* LaunchScreen.xib in Resources */,
+				4116087A1B517B88008C9A1E /* Licenses in Resources */,
+				415BC64F1B2F5305004FADE0 /* Images.xcassets in Resources */,
+				4116087B1B517B88008C9A1E /* Settings.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9C4A1177216046EAF577148B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A85A5FC2198F889C43659F04 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C90BA8C9451A54300514196E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TurnoClase-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		415BC63E1B2F5305004FADE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				416796721B50461C00DCF09B /* BotonGrafico.swift in Sources */,
+				415BC64A1B2F5305004FADE0 /* ViewController.swift in Sources */,
+				415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */,
+				416796731B50461C00DCF09B /* FondoCircular.swift in Sources */,
+				411609241B41B7E700E5BD59 /* TurnoViewController.swift in Sources */,
+				414EE62D1FB7B1CB00126C74 /* Aula.swift in Sources */,
+				410D511C1F58365B00401C6C /* Nombres.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		414EC8641B4C8B1B0002492C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				414EC8631B4C8B1B0002492C /* Base */,
+				414EC8651B4C8B570002492C /* es */,
+				414EC8661B4C8B580002492C /* eu */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		415BC64B1B2F5305004FADE0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				415BC64C1B2F5305004FADE0 /* Base */,
+				414EC8541B4C83CB0002492C /* es */,
+				414EC8561B4C85260002492C /* eu */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		415BC6501B2F5305004FADE0 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				415BC6511B2F5305004FADE0 /* Base */,
+				414EC8551B4C83CB0002492C /* es */,
+				414EC8571B4C85260002492C /* eu */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		415BC65F1B2F5305004FADE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ion Jaureguialzo Sarasola (CN85Y9YK74)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ion Jaureguialzo Sarasola (CN85Y9YK74)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
+				PROVISIONING_PROFILE = "73042be8-d400-4bbd-bfa6-16ef08334331";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		415BC6601B2F5305004FADE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ion Jaureguialzo Sarasola (CN85Y9YK74)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ion Jaureguialzo Sarasola (CN85Y9YK74)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "73042be8-d400-4bbd-bfa6-16ef08334331";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		415BC6621B2F5305004FADE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C9EE04D4D010E3B35A683FC /* Pods-TurnoClase.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ion Jaureguialzo Sarasola (CN85Y9YK74)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = RSEH385M54;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = TurnoClase/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClase;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		415BC6631B2F5305004FADE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A5CF5583161E0C351BE0C6E /* Pods-TurnoClase.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ion Jaureguialzo Sarasola (RSEH385M54)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = RSEH385M54;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = TurnoClase/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClase;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		415BC63D1B2F5305004FADE0 /* Build configuration list for PBXProject "TurnoClase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				415BC65F1B2F5305004FADE0 /* Debug */,
+				415BC6601B2F5305004FADE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		415BC6611B2F5305004FADE0 /* Build configuration list for PBXNativeTarget "TurnoClase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				415BC6621B2F5305004FADE0 /* Debug */,
+				415BC6631B2F5305004FADE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 415BC63A1B2F5305004FADE0 /* Project object */;
+}

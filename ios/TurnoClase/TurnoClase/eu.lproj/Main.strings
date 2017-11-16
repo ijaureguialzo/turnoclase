@@ -1,0 +1,15 @@
+
+/* Class = "UITextField"; placeholder = "BE131"; ObjectID = "KDG-Yu-H2h"; */
+"KDG-Yu-H2h.placeholder" = "BE131";
+
+/* Class = "UILabel"; text = "NAME"; ObjectID = "i6B-ON-j6k"; */
+"i6B-ON-j6k.text" = "IZENA";
+
+/* Class = "UILabel"; text = "..."; ObjectID = "j8F-6N-3YS"; */
+"j8F-6N-3YS.text" = "···";
+
+/* Class = "UILabel"; text = "CLASS"; ObjectID = "l5W-k5-R8I"; */
+"l5W-k5-R8I.text" = "IKASGELA";
+
+/* Class = "UITextField"; placeholder = "a224p05"; ObjectID = "w4Z-4N-Fld"; */
+"w4Z-4N-Fld.placeholder" = "a224p05";
