@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    tools:context="com.jaureguialzo.turnoclase.MainActivity">
+
+    <TextView
+        android:id="@+id/circuloAmarillo"
+        android:layout_width="285dp"
+        android:layout_height="285dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/fondo_amarillo"
+        android:elegantTextHeight="false"
+        android:gravity="center_vertical|center_horizontal"
+        android:includeFontPadding="false"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18pt" />
+
+
+    <FrameLayout
+        android:id="@+id/contenedorBotonAula"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:width="72dp"
+        android:height="72dp"
+        android:layout_above="@+id/circuloAmarillo"
+        android:layout_toLeftOf="@+id/circuloAmarillo"
+        android:layout_toStartOf="@+id/circuloAmarillo"
+        android:layout_marginBottom="-107dp"
+        android:layout_marginRight="-65dp"
+        android:background="@drawable/circulo_gris">
+
+        <Button
+            android:id="@+id/botonCodigoAula"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:width="72dp"
+            android:height="72dp"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="···"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black" />
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/contenedorBotonSiguiente"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:width="72dp"
+        android:height="72dp"
+        android:layout_below="@+id/circuloAmarillo"
+        android:layout_toEndOf="@+id/circuloAmarillo"
+        android:layout_toRightOf="@+id/circuloAmarillo"
+        android:layout_marginLeft="-107dp"
+        android:layout_marginTop="-65dp"
+        android:background="@drawable/circulo_azul">
+
+        <Button
+            android:id="@+id/botonSiguiente"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:width="72dp"
+            android:height="72dp"
+            android:background="@drawable/boton_siguiente"
+            android:gravity="center_vertical|center_horizontal" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/contenedorRestantes"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:width="72dp"
+        android:height="72dp"
+        android:layout_above="@+id/circuloAmarillo"
+        android:layout_toEndOf="@+id/circuloAmarillo"
+        android:layout_toRightOf="@+id/circuloAmarillo"
+        android:layout_marginBottom="-65dp"
+        android:layout_marginLeft="-107dp"
+        android:background="@drawable/circulo_rojo">
+
+        <Button
+            android:id="@+id/botonEnCola"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:width="72dp"
+            android:height="72dp"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="···"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=""
+            android:id="@+id/etiquetaNumero"
+            android:textSize="16pt"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:elegantTextHeight="false"
+            android:includeFontPadding="false" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="boton_alumno">Alumno</string>
+    <string name="boton_profesor">Profesor</string>
+    <string name="etiqueta_selecciona_rol">Por favor, selecciona tu perfil:</string>
+    <string name="etiqueta_bienvenido">Bienvenido a TurnoClase</string>
+    <string name="etiqueta_nombre_usuario">Nombre</string>
+    <string name="boton_conectar">Conectar</string>
+    <string name="etiqueta_introduce_datos">Introduce tus datos y pulsa en conectar.</string>
+    <string name="etiqueta_aula">Aula</string>
+    <string name="botonActualizar">Actualizar</string>
+    <string name="etiqueta_turnos_restantes">Por delante en la cola:</string>
+    <string name="boton_cancelar">Cancelar</string>
+    <string name="mensaje_turno">¡Es tu turno!</string>
+    <string name="menu_acerca_de">Acerca de...</string>
+    <string name="etiqueta_titulo_licencia">Licencia</string>
+    <string name="etiqueta_titulo_reconocimientos">Reconocimientos</string>
+</resources>

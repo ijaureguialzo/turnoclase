@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="botonActualizar">Eguneratu</string>
+    <string name="boton_alumno">Ikaslea</string>
+    <string name="boton_cancelar">Utzi</string>
+    <string name="boton_conectar">Konektatu</string>
+    <string name="boton_profesor">Irakaslea</string>
+    <string name="etiqueta_aula">Ikasgela</string>
+    <string name="etiqueta_bienvenido">Ongi etorria TurnoClase-ra</string>
+    <string name="etiqueta_introduce_datos">Sartu zure datuak esta sakatu konektatu.</string>
+    <string name="etiqueta_nombre_usuario">Izena</string>
+    <string name="etiqueta_selecciona_rol">Aukeratu zure perfila:</string>
+    <string name="etiqueta_turnos_restantes">Zure aurretik lerroan:</string>
+    <string name="mensaje_turno">Zure txanda da!</string>
+    <string name="menu_acerca_de">...buruz</string>
+    <string name="etiqueta_titulo_licencia">Lizentzia</string>
+    <string name="etiqueta_titulo_reconocimientos">Aitorpenak</string>
+</resources>

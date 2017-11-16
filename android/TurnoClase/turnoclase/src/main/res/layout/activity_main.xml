@@ -1,0 +1,100 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jaureguialzo.turnoclase.MainActivity"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/circuloGris"
+        android:layout_width="285dp"
+        android:layout_height="285dp"
+        android:background="@drawable/fondo_gris"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <FrameLayout
+        android:id="@+id/contenedorBotonSiguiente"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_below="@+id/circuloGris"
+        android:layout_toEndOf="@+id/circuloGris"
+        android:layout_toRightOf="@+id/circuloGris"
+        android:layout_marginLeft="-107dp"
+        android:layout_marginTop="-65dp"
+        android:width="72dp"
+        android:height="72dp"
+        android:background="@drawable/circulo_azul">
+
+        <Button
+            android:id="@+id/botonSiguiente"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:width="72dp"
+            android:height="72dp"
+            android:background="@drawable/boton_siguiente"
+            android:gravity="center_vertical|center_horizontal" />
+
+    </FrameLayout>
+
+
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/etiqueta_aula"
+            android:id="@+id/textView2"
+            android:textAllCaps="true"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/campoAula"
+            android:hint="@string/texto_aula"
+            android:gravity="center_horizontal"
+            android:inputType="textNoSuggestions|textVisiblePassword|textCapCharacters"
+            android:maxLength="5"
+            android:layout_below="@+id/textView2"
+            android:layout_alignRight="@+id/campoNombre"
+            android:layout_alignEnd="@+id/campoNombre"
+            android:layout_alignLeft="@+id/campoNombre"
+            android:layout_alignStart="@+id/campoNombre" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/etiqueta_nombre_usuario"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/campoAula"
+            android:layout_centerHorizontal="true"
+            android:textAllCaps="true"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/campoNombre"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:hint="@string/texto_usuario"
+            android:inputType="textCapWords|textNoSuggestions|textVisiblePassword"
+            android:maxLength="15" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

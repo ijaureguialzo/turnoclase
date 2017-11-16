@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_acerca_de">Acerca de...</string>
+    <string name="etiqueta_titulo_licencia">Licencia</string>
+    <string name="etiqueta_titulo_reconocimientos">Reconocimientos</string>
+</resources>

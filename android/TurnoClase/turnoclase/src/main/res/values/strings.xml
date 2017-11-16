@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name" translatable="false">TurnoClase</string>
+
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="title_activity_profesor" translatable="false">Profesor</string>
+    <string name="title_activity_alumno" translatable="false">Alumno</string>
+    <string name="title_activity_alumno_turno" translatable="false">AlumnoTurno</string>
+    <string name="etiqueta_bienvenido">Welcome to TurnoClase</string>
+    <string name="etiqueta_selecciona_rol">Please choose your role:</string>
+    <string name="boton_alumno">Student</string>
+    <string name="boton_profesor">Teacher</string>
+    <string name="texto_aula" translatable="false">BE131</string>
+    <string name="texto_usuario" translatable="false">a224p05</string>
+    <string name="etiqueta_nombre_usuario">Name</string>
+    <string name="etiqueta_introduce_datos">Insert your information and tap connect.</string>
+    <string name="etiqueta_aula">Class</string>
+    <string name="boton_conectar">Connect</string>
+    <string name="etiqueta_turnos_restantes">Ahead of you in the queue:</string>
+    <string name="botonActualizar">Update</string>
+    <string name="boton_cancelar">Cancel</string>
+    <string name="mensaje_turno">It\'s your turn!</string>
+    <string name="menu_acerca_de">About...</string>
+    <string name="texto_asl" translatable="false">
+        <![CDATA[
+            <p>Copyright 2015 Ion Jaureguialzo Sarasola</p>
+            <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+            <p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+            <p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+       ]]>
+    </string>
+    <string name="texto_licencia_imagenes" translatable="false">
+        <![CDATA[
+            <p><a href="http://www.flaticon.com/free-icon/raise-your-hand-to-ask_65827">flaticon-ask3</a>
+            <br />Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></p>
+            <p><a href="http://www.flaticon.com/free-icon/arrow-right-ios-7-interface-symbol_22200">flaticon-arrow413</a>
+            <br />Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></p>
+            <p><a href="http://www.flaticon.com/free-icon/cross-out-mark_22108">flaticon-cross37</a>
+            <br />Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></p>
+            <p><a href="http://www.flaticon.com/free-icon/arrow-refresh-ios-7-interface-symbol_22181">flaticon-arrow408</a>
+            <br />Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></p>
+        ]]>
+    </string>
+    <string name="etiqueta_titulo_licencia">License</string>
+    <string name="etiqueta_titulo_reconocimientos">Acknowledgements</string>
+    <string name="texto_licencia_victor" translatable="false">
+        <![CDATA[
+            <p><a href="https://github.com/trello/victor">victor - SVG Library</a>
+            <p>Copyright 2015 Trello, Inc</p>
+            <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+            <p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+            <p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+       ]]>
+    </string>
+</resources>
