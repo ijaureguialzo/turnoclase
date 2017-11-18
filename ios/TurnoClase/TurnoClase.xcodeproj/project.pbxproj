@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410088F91FBED8F70058B3F5 /* TurnoClaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410088F81FBED8F70058B3F5 /* TurnoClaseUITests.swift */; };
+		410089011FBEEAB90058B3F5 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410089001FBEEAB90058B3F5 /* SnapshotHelper.swift */; };
 		410D511C1F58365B00401C6C /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D511B1F58365B00401C6C /* Nombres.swift */; };
 		410D71021FA8D634009AC062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 410D71011FA8D633009AC062 /* GoogleService-Info.plist */; };
 		4116087A1B517B88008C9A1E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 411608781B517B88008C9A1E /* Licenses */; };
 		4116087B1B517B88008C9A1E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 411608791B517B88008C9A1E /* Settings.bundle */; };
 		411609241B41B7E700E5BD59 /* TurnoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411609231B41B7E700E5BD59 /* TurnoViewController.swift */; };
+		414C5BF81FBF65E500D88D64 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414EC8641B4C8B1B0002492C /* Localizable.strings */; };
 		414EC8621B4C8B1B0002492C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414EC8641B4C8B1B0002492C /* Localizable.strings */; };
 		414EE62D1FB7B1CB00126C74 /* Aula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EE62C1FB7B1CA00126C74 /* Aula.swift */; };
 		415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BC6471B2F5305004FADE0 /* AppDelegate.swift */; };
@@ -24,8 +27,22 @@
 		AECE5F0A672A15C55191EEE7 /* Pods_TurnoClase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 514134A13F09CC115CE339B4 /* Pods_TurnoClase.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		410088FB1FBED8F70058B3F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 415BC63A1B2F5305004FADE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 415BC6411B2F5305004FADE0;
+			remoteInfo = TurnoClase;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1A5CF5583161E0C351BE0C6E /* Pods-TurnoClase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.release.xcconfig"; sourceTree = "<group>"; };
+		410088F61FBED8F60058B3F5 /* TurnoClaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurnoClaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		410088F81FBED8F70058B3F5 /* TurnoClaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnoClaseUITests.swift; sourceTree = "<group>"; };
+		410088FA1FBED8F70058B3F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		410089001FBEEAB90058B3F5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		410D511B1F58365B00401C6C /* Nombres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nombres.swift; sourceTree = "<group>"; };
 		410D71011FA8D633009AC062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		411608781B517B88008C9A1E /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Licenses; path = TurnoClase/Licenses; sourceTree = "<group>"; };
@@ -54,6 +71,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		410088F31FBED8F60058B3F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		415BC63F1B2F5305004FADE0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,6 +98,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		410088F71FBED8F70058B3F5 /* TurnoClaseUITests */ = {
+			isa = PBXGroup;
+			children = (
+				410089001FBEEAB90058B3F5 /* SnapshotHelper.swift */,
+				410088F81FBED8F70058B3F5 /* TurnoClaseUITests.swift */,
+				410088FA1FBED8F70058B3F5 /* Info.plist */,
+			);
+			path = TurnoClaseUITests;
+			sourceTree = "<group>";
+		};
 		411608771B517B6E008C9A1E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +122,7 @@
 			children = (
 				415BC6441B2F5305004FADE0 /* TurnoClase */,
 				411608771B517B6E008C9A1E /* Resources */,
+				410088F71FBED8F70058B3F5 /* TurnoClaseUITests */,
 				415BC6431B2F5305004FADE0 /* Products */,
 				2CB722A7981E4D494818F997 /* Pods */,
 				F3C9CC95803DC895133DA292 /* Frameworks */,
@@ -98,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				415BC6421B2F5305004FADE0 /* TurnoClase.app */,
+				410088F61FBED8F60058B3F5 /* TurnoClaseUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,6 +186,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		410088F51FBED8F60058B3F5 /* TurnoClaseUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 410088FF1FBED8F70058B3F5 /* Build configuration list for PBXNativeTarget "TurnoClaseUITests" */;
+			buildPhases = (
+				410088F21FBED8F60058B3F5 /* Sources */,
+				410088F31FBED8F60058B3F5 /* Frameworks */,
+				410088F41FBED8F60058B3F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				410088FC1FBED8F70058B3F5 /* PBXTargetDependency */,
+			);
+			name = TurnoClaseUITests;
+			productName = TurnoClaseUITests;
+			productReference = 410088F61FBED8F60058B3F5 /* TurnoClaseUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		415BC6411B2F5305004FADE0 /* TurnoClase */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 415BC6611B2F5305004FADE0 /* Build configuration list for PBXNativeTarget "TurnoClase" */;
@@ -177,10 +231,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Ion Jaureguialzo Sarasola";
 				TargetAttributes = {
+					410088F51FBED8F60058B3F5 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 415BC6411B2F5305004FADE0;
+					};
 					415BC6411B2F5305004FADE0 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = RSEH385M54;
@@ -213,11 +272,20 @@
 			projectRoot = "";
 			targets = (
 				415BC6411B2F5305004FADE0 /* TurnoClase */,
+				410088F51FBED8F60058B3F5 /* TurnoClaseUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		410088F41FBED8F60058B3F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				414C5BF81FBF65E500D88D64 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		415BC6401B2F5305004FADE0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,6 +315,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -262,6 +331,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimulatorStatusMagic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -311,6 +381,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		410088F21FBED8F60058B3F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				410088F91FBED8F70058B3F5 /* TurnoClaseUITests.swift in Sources */,
+				410089011FBEEAB90058B3F5 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		415BC63E1B2F5305004FADE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,6 +405,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		410088FC1FBED8F70058B3F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 415BC6411B2F5305004FADE0 /* TurnoClase */;
+			targetProxy = 410088FB1FBED8F70058B3F5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		414EC8641B4C8B1B0002492C /* Localizable.strings */ = {
@@ -361,6 +448,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		410088FD1FBED8F70058B3F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TurnoClaseUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = con.jaureguialzo.TurnoClaseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TurnoClase;
+			};
+			name = Debug;
+		};
+		410088FE1FBED8F70058B3F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TurnoClaseUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = con.jaureguialzo.TurnoClaseUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TurnoClase;
+			};
+			name = Release;
+		};
 		415BC65F1B2F5305004FADE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -412,7 +551,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
-				PROVISIONING_PROFILE = "73042be8-d400-4bbd-bfa6-16ef08334331";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -461,7 +599,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "73042be8-d400-4bbd-bfa6-16ef08334331";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -521,6 +658,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		410088FF1FBED8F70058B3F5 /* Build configuration list for PBXNativeTarget "TurnoClaseUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				410088FD1FBED8F70058B3F5 /* Debug */,
+				410088FE1FBED8F70058B3F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		415BC63D1B2F5305004FADE0 /* Build configuration list for PBXProject "TurnoClase" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

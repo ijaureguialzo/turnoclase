@@ -29,6 +29,16 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "410088F51FBED8F60058B3F5"
+               BuildableName = "TurnoClaseUITests.xctest"
+               BlueprintName = "TurnoClaseUITests"
+               ReferencedContainer = "container:TurnoClase.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

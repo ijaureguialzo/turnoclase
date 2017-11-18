@@ -40,6 +40,9 @@ class TurnoViewController: UIViewController {
     var pedirTurno = true
     var refAula: DocumentReference!
 
+    // Para simular el interfaz al hacer las capturas
+    var n = 2
+
     @IBOutlet weak var etiquetaAula: UILabel!
     @IBOutlet weak var etiquetaNumero: UILabel!
 
@@ -52,94 +55,101 @@ class TurnoViewController: UIViewController {
 
         //try? Auth.auth().signOut()
 
-        // Registrarse como usuario anónimo
-        Auth.auth().signInAnonymously() { (user, error) in
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            etiquetaAula.text = "BE131"
+            etiquetaNumero.text = "2"
+        } else {
+            // Registrarse como usuario anónimo
+            Auth.auth().signInAnonymously() { (user, error) in
 
-            if let usuario = user {
+                if let usuario = user {
 
-                self.uid = usuario.uid
-                log.info("Registrado como usuario con UID: \(self.uid)")
+                    self.uid = usuario.uid
+                    log.info("Registrado como usuario con UID: \(self.uid)")
 
-                db.collection("alumnos").document(self.uid).setData([
-                    "nombre": self.nombreUsuario
-                ], options: SetOptions.merge()) { error in
-                    if let error = error {
-                        log.error("Error al actualizar el alumno: \(error.localizedDescription)")
-                    } else {
-                        log.info("Alumno actualizado")
-                    }
-                }
-
-                db.collection("aulas").whereField("codigo", isEqualTo: self.codigoAula).limit(to: 1).getDocuments() { (querySnapshot, err) in
-                    if let err = err {
-                        print("Error getting documents: \(err)")
-                    } else {
-                        if querySnapshot!.documents.count > 0 {
-                            for document in querySnapshot!.documents {
-
-                                log.info("Conectado a aula existente")
-
-                                if self.listener == nil {
-                                    self.listener = document.reference
-                                        .addSnapshotListener { documentSnapshot, error in
-
-                                            if (documentSnapshot?.exists)! {
-
-                                                self.refAula = documentSnapshot?.reference
-
-                                                if let aula = documentSnapshot?.data() {
-
-                                                    log.info("Actualizando datos del aula...")
-                                                    let cola = aula["cola"] as? [String] ?? []
-                                                    let codigo = aula["codigo"] as? String ?? "?"
-
-                                                    self.aula = Aula(codigo: codigo, cola: cola)
-
-                                                    // Si el usuario no está en la cola, lo añadimos
-                                                    if self.pedirTurno && !cola.contains(self.uid) {
-
-                                                        self.pedirTurno = false
-                                                        self.aula.cola.append(self.uid)
-
-                                                        documentSnapshot?.reference.setData([
-                                                            "cola": self.aula.cola
-                                                        ], options: SetOptions.merge()) { error in
-                                                            if let error = error {
-                                                                log.error("Error al actualizar el aula: \(error.localizedDescription)")
-                                                            } else {
-                                                                log.info("Cola actualizada")
-                                                            }
-                                                        }
-                                                    }
-
-                                                    log.debug("Aula: \(self.aula)")
-
-                                                    self.actualizarPantalla()
-                                                }
-                                            } else {
-                                                log.info("El aula ha desaparecido")
-
-                                                if self.listener != nil {
-                                                    self.listener.remove()
-                                                    self.listener = nil
-                                                    self.aula = nil
-                                                }
-
-                                                // Volver a la pantalla inicial
-                                                self.dismiss(animated: true, completion: { })
-
-                                            }
-                                    }
-                                }
-                            }
+                    db.collection("alumnos").document(self.uid).setData([
+                        "nombre": self.nombreUsuario
+                    ], options: SetOptions.merge()) { error in
+                        if let error = error {
+                            log.error("Error al actualizar el alumno: \(error.localizedDescription)")
                         } else {
-                            log.info("Aula no encontrada")
-                            self.etiquetaAula.text = "?"
+                            log.info("Alumno actualizado")
                         }
                     }
+
+                    db.collection("aulas").whereField("codigo", isEqualTo: self.codigoAula).limit(to: 1).getDocuments() { (querySnapshot, err) in
+                        if let err = err {
+                            print("Error getting documents: \(err)")
+                        } else {
+                            if querySnapshot!.documents.count > 0 {
+                                for document in querySnapshot!.documents {
+
+                                    log.info("Conectado a aula existente")
+
+                                    if self.listener == nil {
+                                        self.listener = document.reference
+                                            .addSnapshotListener { documentSnapshot, error in
+
+                                                if (documentSnapshot?.exists)! {
+
+                                                    self.refAula = documentSnapshot?.reference
+
+                                                    if let aula = documentSnapshot?.data() {
+
+                                                        log.info("Actualizando datos del aula...")
+                                                        let cola = aula["cola"] as? [String] ?? []
+                                                        let codigo = aula["codigo"] as? String ?? "?"
+
+                                                        self.aula = Aula(codigo: codigo, cola: cola)
+
+                                                        // Si el usuario no está en la cola, lo añadimos
+                                                        if self.pedirTurno && !cola.contains(self.uid) {
+
+                                                            self.pedirTurno = false
+                                                            self.aula.cola.append(self.uid)
+
+                                                            documentSnapshot?.reference.setData([
+                                                                "cola": self.aula.cola
+                                                            ], options: SetOptions.merge()) { error in
+                                                                if let error = error {
+                                                                    log.error("Error al actualizar el aula: \(error.localizedDescription)")
+                                                                } else {
+                                                                    log.info("Cola actualizada")
+                                                                }
+                                                            }
+                                                        }
+
+                                                        log.debug("Aula: \(self.aula)")
+
+                                                        self.actualizarPantalla()
+
+                                                    }
+                                                } else {
+                                                    log.info("El aula ha desaparecido")
+
+                                                    if self.listener != nil {
+                                                        self.listener.remove()
+                                                        self.listener = nil
+                                                        self.aula = nil
+                                                    }
+
+                                                    // Volver a la pantalla inicial
+                                                    self.dismiss(animated: true, completion: { })
+
+                                                }
+                                        }
+                                    }
+                                }
+                            } else {
+                                log.info("Aula no encontrada")
+                                self.etiquetaAula.text = "?"
+                            }
+                        }
+                    }
+
+                } else {
+                    log.error("Error de inicio de sesión: \(error!.localizedDescription)")
                 }
-            } else {
-                log.error("Error de inicio de sesión: \(error!.localizedDescription)")
             }
         }
     }
@@ -211,6 +221,17 @@ class TurnoViewController: UIViewController {
     @IBAction func botonActualizar(_ sender: UIButton) {
         fadeIn(sender)
         log.info("Este botón ya no hace nada :)")
+
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            if(n > 0) {
+                self.etiquetaNumero.text = "\(n)"
+            } else if (n == 0) {
+                self.etiquetaNumero.text = NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno")
+            } else {
+                self.etiquetaNumero.text = ""
+            }
+            n -= 1
+        }
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {
