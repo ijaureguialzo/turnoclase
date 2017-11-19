@@ -30,6 +30,10 @@ android {
     sourceSets {
         main {
             svg.srcDir 'src/main/svg'
+
+
+            manifest.srcFile
+            'src/debug/AndroidManifest.xml'
         }
     }
     productFlavors {
@@ -54,6 +58,8 @@ dependencies {
     compile 'com.google.firebase:firebase-firestore:11.6.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    androidTestCompile 'tools.fastlane:screengrab:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
