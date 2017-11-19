@@ -93,6 +93,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anU-ip-9Dt" userLabel="botonActualizar">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="botonActualizar"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="aep-ea-z2b"/>
                                             <constraint firstAttribute="width" constant="72" id="lcn-3b-ccC"/>
@@ -211,12 +212,12 @@
                                 <exclude reference="UQh-YS-c2B"/>
                                 <exclude reference="hkw-Hi-yju"/>
                                 <exclude reference="v7F-xA-8R5"/>
+                                <exclude reference="1Fr-uI-TXY"/>
+                                <exclude reference="neX-or-DMN"/>
                                 <exclude reference="3UY-Qc-opE"/>
                                 <exclude reference="6by-Px-ijL"/>
                                 <exclude reference="aRr-Ry-4bd"/>
                                 <exclude reference="sBn-6R-ZWr"/>
-                                <exclude reference="1Fr-uI-TXY"/>
-                                <exclude reference="neX-or-DMN"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">

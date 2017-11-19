@@ -13,6 +13,9 @@
 		413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */; };
 		41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BDE1B51643B000E3C8E /* Settings.bundle */; };
 		41A59BE21B516A20000E3C8E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BE11B516A20000E3C8E /* Licenses */; };
+		41B669B21FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */; };
+		41B669BC1FC10D3000DEB965 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669BB1FC10D3000DEB965 /* SnapshotHelper.swift */; };
+		41B669BE1FC1135700DEB965 /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669BD1FC1135700DEB965 /* Nombres.swift */; };
 		41F4C5CF1B34BCD5004AA55E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F4C5CE1B34BCD5004AA55E /* AppDelegate.swift */; };
 		41F4C5D11B34BCD5004AA55E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F4C5D01B34BCD5004AA55E /* ViewController.swift */; };
 		41F4C5D41B34BCD5004AA55E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D21B34BCD5004AA55E /* Main.storyboard */; };
@@ -20,6 +23,16 @@
 		41F4C5D91B34BCD6004AA55E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D71B34BCD6004AA55E /* LaunchScreen.xib */; };
 		E59C55FFAAF5979B02F7B8F6 /* Pods_TurnoClaseProfesor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF221E2F5B6033AE0E708B0D /* Pods_TurnoClaseProfesor.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		41B669B41FC10B7300DEB965 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41F4C5C11B34BCD5004AA55E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41F4C5C81B34BCD5004AA55E;
+			remoteInfo = TurnoClaseProfesor;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		21BAE091D6ABEEF9E1744CE5 /* Pods-TurnoClaseProfesor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.release.xcconfig"; sourceTree = "<group>"; };
@@ -35,6 +48,11 @@
 		4199FF0C1E32F16500F9E42F /* TurnoClaseProfesor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TurnoClaseProfesor.entitlements; sourceTree = "<group>"; };
 		41A59BDE1B51643B000E3C8E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = TurnoClaseProfesor/Settings.bundle; sourceTree = "<group>"; };
 		41A59BE11B516A20000E3C8E /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Licenses; path = TurnoClaseProfesor/Licenses; sourceTree = "<group>"; };
+		41B669AF1FC10B7300DEB965 /* TurnoClaseProfesorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurnoClaseProfesorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnoClaseProfesorUITests.swift; sourceTree = "<group>"; };
+		41B669B31FC10B7300DEB965 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41B669BB1FC10D3000DEB965 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		41B669BD1FC1135700DEB965 /* Nombres.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nombres.swift; sourceTree = "<group>"; };
 		41F4C5C91B34BCD5004AA55E /* TurnoClaseProfesor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurnoClaseProfesor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41F4C5CD1B34BCD5004AA55E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41F4C5CE1B34BCD5004AA55E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +64,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		41B669AC1FC10B7300DEB965 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41F4C5C61B34BCD5004AA55E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -66,6 +91,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		41B669B01FC10B7300DEB965 /* TurnoClaseProfesorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				41B669BB1FC10D3000DEB965 /* SnapshotHelper.swift */,
+				41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */,
+				41B669B31FC10B7300DEB965 /* Info.plist */,
+			);
+			path = TurnoClaseProfesorUITests;
+			sourceTree = "<group>";
+		};
 		41BD61D51FB79575002385FE /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				41F4C5CB1B34BCD5004AA55E /* TurnoClaseProfesor */,
+				41B669B01FC10B7300DEB965 /* TurnoClaseProfesorUITests */,
 				41A59BE01B516444000E3C8E /* Resources */,
 				41F4C5CA1B34BCD5004AA55E /* Products */,
 				D7C54A70A48EDEFC3D4EE91F /* Pods */,
@@ -93,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				41F4C5C91B34BCD5004AA55E /* TurnoClaseProfesor.app */,
+				41B669AF1FC10B7300DEB965 /* TurnoClaseProfesorUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,6 +140,7 @@
 				41F4C5CE1B34BCD5004AA55E /* AppDelegate.swift */,
 				41F4C5D01B34BCD5004AA55E /* ViewController.swift */,
 				410635181FB625E7008D723C /* Aula.swift */,
+				41B669BD1FC1135700DEB965 /* Nombres.swift */,
 				41BD61D51FB79575002385FE /* UI */,
 				41F4C5CC1B34BCD5004AA55E /* Supporting Files */,
 			);
@@ -139,6 +177,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		41B669AE1FC10B7300DEB965 /* TurnoClaseProfesorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41B669B81FC10B7300DEB965 /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorUITests" */;
+			buildPhases = (
+				41B669AB1FC10B7300DEB965 /* Sources */,
+				41B669AC1FC10B7300DEB965 /* Frameworks */,
+				41B669AD1FC10B7300DEB965 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41B669B51FC10B7300DEB965 /* PBXTargetDependency */,
+			);
+			name = TurnoClaseProfesorUITests;
+			productName = TurnoClaseProfesorUITests;
+			productReference = 41B669AF1FC10B7300DEB965 /* TurnoClaseProfesorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		41F4C5C81B34BCD5004AA55E /* TurnoClaseProfesor */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41F4C5E81B34BCD6004AA55E /* Build configuration list for PBXNativeTarget "TurnoClaseProfesor" */;
@@ -166,10 +222,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Ion Jaureguialzo Sarasola";
 				TargetAttributes = {
+					41B669AE1FC10B7300DEB965 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 41F4C5C81B34BCD5004AA55E;
+					};
 					41F4C5C81B34BCD5004AA55E = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = RSEH385M54;
@@ -200,11 +261,19 @@
 			projectRoot = "";
 			targets = (
 				41F4C5C81B34BCD5004AA55E /* TurnoClaseProfesor */,
+				41B669AE1FC10B7300DEB965 /* TurnoClaseProfesorUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		41B669AD1FC10B7300DEB965 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41F4C5C71B34BCD5004AA55E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -299,6 +368,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		41B669AB1FC10B7300DEB965 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41B669B21FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift in Sources */,
+				41B669BC1FC10D3000DEB965 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41F4C5C51B34BCD5004AA55E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,11 +385,20 @@
 				410635191FB625E7008D723C /* Aula.swift in Sources */,
 				413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */,
 				413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */,
+				41B669BE1FC1135700DEB965 /* Nombres.swift in Sources */,
 				41F4C5CF1B34BCD5004AA55E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		41B669B51FC10B7300DEB965 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41F4C5C81B34BCD5004AA55E /* TurnoClaseProfesor */;
+			targetProxy = 41B669B41FC10B7300DEB965 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		41F4C5D21B34BCD5004AA55E /* Main.storyboard */ = {
@@ -337,6 +424,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		41B669B61FC10B7300DEB965 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TurnoClaseProfesorUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = con.jaureguialzo.TurnoClaseProfesorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TurnoClaseProfesor;
+			};
+			name = Debug;
+		};
+		41B669B71FC10B7300DEB965 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TurnoClaseProfesorUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = con.jaureguialzo.TurnoClaseProfesorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TurnoClaseProfesor;
+			};
+			name = Release;
+		};
 		41F4C5E61B34BCD6004AA55E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -496,6 +637,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		41B669B81FC10B7300DEB965 /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41B669B61FC10B7300DEB965 /* Debug */,
+				41B669B71FC10B7300DEB965 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		41F4C5C41B34BCD5004AA55E /* Build configuration list for PBXProject "TurnoClaseProfesor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
