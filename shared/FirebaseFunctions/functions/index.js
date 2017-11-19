@@ -6,12 +6,19 @@ exports.crearAula = firestore
     .document('aulas/{userId}')
     .onCreate(event => {
 
+    var token = "BE131"
+
+    var codigo = event.data.data().codigo;
+
+    if (codigo != "BE131") {
+        
     // REF: https://github.com/sehrope/node-rand-token
     var randtoken = require('rand-token').generator({
         chars: '1234567890ABCDEF'
     });
 
-    var token = randtoken.generate(5);
+    token = randtoken.generate(5);
+    }
 
     return event.data.ref.set({
         codigo: token

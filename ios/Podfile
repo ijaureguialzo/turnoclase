@@ -11,6 +11,8 @@ def turnoclase_pods
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'FirebaseFirestore'
+    
+    pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
 
 target 'TurnoClaseProfesor' do

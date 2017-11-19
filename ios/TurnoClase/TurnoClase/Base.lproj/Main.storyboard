@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -35,6 +35,7 @@
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BE131" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KDG-Yu-H2h" userLabel="textoAula">
                                         <rect key="frame" x="32" y="93" width="221" height="31"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="textoAula"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                                     </textField>
@@ -46,6 +47,7 @@
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ion" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w4Z-4N-Fld" userLabel="textoUsuario">
                                         <rect key="frame" x="32" y="169" width="221" height="31"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="textoUsuario"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
                                     </textField>
@@ -91,6 +93,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRC-dO-aCu" userLabel="botonConectar" customClass="BotonGrafico" customModule="TurnoClase" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="botonConectar"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="q4g-EN-Odw"/>
                                             <constraint firstAttribute="width" constant="72" id="yoy-W6-YmR"/>
@@ -169,6 +172,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="UsV-sj-uaF" userLabel="etiquetaNumero">
                                         <rect key="frame" x="16" y="143" width="253" height="0.0"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="etiquetaNumero"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="102"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -278,6 +282,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-nP-zxH" userLabel="botonActualizar" customClass="BotonGrafico" customModule="TurnoClase" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="botonActualizar"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="84Z-zH-qeZ"/>
                                             <constraint firstAttribute="width" constant="72" id="ppB-ST-jxz"/>

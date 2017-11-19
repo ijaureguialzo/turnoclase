@@ -39,6 +39,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var etiquetaBotonActualizar: UIButton!
     @IBOutlet weak var etiquetaBotonCodigoAula: UIButton!
 
+    // Para simular el interfaz al hacer las capturas
+    var n = 2
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,39 +52,44 @@ class ViewController: UIViewController {
         //try? Auth.auth().signOut()
 
         // Registrarse como usuario anónimo
-        Auth.auth().signInAnonymously() { (user, error) in
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            self.etiquetaBotonCodigoAula.setTitle("BE131", for: UIControlState())
+            self.etiquetaBotonActualizar.setTitle("2", for: UIControlState())
+            self.etiquetaNombreAlumno.text = ""
+        } else {
+            Auth.auth().signInAnonymously() { (user, error) in
 
-            if let usuario = user {
+                if let usuario = user {
 
-                self.uid = usuario.uid
-                log.info("Registrado como usuario con UID: \(self.uid)")
+                    self.uid = usuario.uid
+                    log.info("Registrado como usuario con UID: \(self.uid)")
 
-                db.collection("aulas").document(self.uid).getDocument() { (document, error) in
+                    db.collection("aulas").document(self.uid).getDocument() { (document, error) in
 
-                    if !(document?.exists)! {
-                        log.info("Creando nueva aula...")
+                        if !(document?.exists)! {
+                            log.info("Creando nueva aula...")
 
-                        db.collection("aulas").document(self.uid).setData([
-                            "cola": []
-                        ]) { error in
-                            if let error = error {
-                                log.error("Error al crear el aula: \(error.localizedDescription)")
-                            } else {
-                                log.info("Aula creada")
-                                self.conectarListener()
+                            db.collection("aulas").document(self.uid).setData([
+                                "cola": []
+                            ]) { error in
+                                if let error = error {
+                                    log.error("Error al crear el aula: \(error.localizedDescription)")
+                                } else {
+                                    log.info("Aula creada")
+                                    self.conectarListener()
+                                }
                             }
+                        } else {
+                            log.info("Conectado a aula existente")
+                            self.conectarListener()
                         }
-                    } else {
-                        log.info("Conectado a aula existente")
-                        self.conectarListener()
                     }
-                }
 
-            } else {
-                log.error("Error de inicio de sesión: \(error!.localizedDescription)")
+                } else {
+                    log.error("Error de inicio de sesión: \(error!.localizedDescription)")
+                }
             }
         }
-
     }
 
     func conectarListener() {
@@ -200,6 +208,18 @@ class ViewController: UIViewController {
 
     @IBAction func botonActualizar(_ sender: UIButton) {
         log.info("Este botón ya no hace nada :)")
+
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            n -= 1
+            if(n >= 0) {
+                self.etiquetaBotonActualizar.setTitle("\(n)", for: UIControlState())
+                self.etiquetaNombreAlumno.text = nombreAleatorio()
+            } else {
+                self.etiquetaBotonActualizar.setTitle("0", for: UIControlState())
+                self.etiquetaNombreAlumno.text = ""
+            }
+        }
+
     }
 
     @IBAction func botonSiguiente(_ sender: UIButton) {
