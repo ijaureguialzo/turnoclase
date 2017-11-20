@@ -1,0 +1,18 @@
+{
+  "default": {
+    "title": {
+      "color": "#545454"
+    },
+    "keyword": {
+      "color": "#1076B9", // Azul
+      "padding": 200
+    },
+    "background": "./background.jpg",
+    "padding": 100,
+    "show_complete_frame": false,
+      "stack_title": true
+  },
+
+  "data": [
+  ]
+}

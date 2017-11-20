@@ -1,0 +1,30 @@
+{
+  "default": {
+    "title": {
+      "color": "#545454"
+    },
+    "keyword": {
+      "color": "#1076B9", // Azul
+      "padding": 200
+    },
+    "background": "./background.jpg",
+    "padding": 100,
+    "show_complete_frame": false,
+      "stack_title": true
+  },
+
+  "data": [
+    {
+      "filter": "01-PantallaLogin",
+      "keyword": {
+        "color": "#FEC52E"  // Amarillo
+      }
+    },
+    {
+      "filter": "05-Terminado",
+      "keyword": {
+        "color": "#EC4338"  // Rojo
+      }
+    }
+  ]
+}

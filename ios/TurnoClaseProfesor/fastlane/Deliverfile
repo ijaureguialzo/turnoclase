@@ -8,3 +8,6 @@
 
 app_identifier "com.jaureguialzo.TurnoClaseProfesor" # The bundle identifier of your app
 username "widemos@gmail.com" # your Apple ID user
+
+app_icon "./fastlane/metadata/icono_profesor_1024.png"
+copyright "#{Time.now.year} Ion Jaureguialzo Sarasola"

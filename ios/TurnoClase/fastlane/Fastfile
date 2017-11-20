@@ -27,6 +27,13 @@ platform :ios do
     scan
   end
 
+  desc "Crear y subir capturas"
+  lane :capturas do
+    snapshot(skip_open_summary: true)
+    frameit
+    deliver(force: true)
+  end
+
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
