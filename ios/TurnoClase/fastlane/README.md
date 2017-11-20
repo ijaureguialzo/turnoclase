@@ -30,28 +30,16 @@ xcode-select --install
 
 # Available Actions
 ## iOS
-### ios test
-```
-fastlane ios test
-```
-Runs all the tests
 ### ios capturas
 ```
 fastlane ios capturas
 ```
 Crear y subir capturas
-### ios beta
+### ios publicar
 ```
-fastlane ios beta
+fastlane ios publicar
 ```
-Submit a new Beta Build to Apple TestFlight
-
-This will also make sure the profile is up to date
-### ios release
-```
-fastlane ios release
-```
-Deploy a new version to the App Store
+Subir una nueva versión a la App Store
 
 ----
 
