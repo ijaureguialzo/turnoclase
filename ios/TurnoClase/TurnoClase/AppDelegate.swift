@@ -51,6 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Habilitar Firebase
         FirebaseApp.configure()
 
+        // Desactivar el modo offline de Firestore
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = false
+        db.settings = settings
+
         // Barra de estado a las 9:41
         #if DEBUG
             if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
