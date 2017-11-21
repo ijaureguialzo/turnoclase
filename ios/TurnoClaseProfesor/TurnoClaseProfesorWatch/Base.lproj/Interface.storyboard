@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13507"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="TurnoClaseProfesorWatch" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="left" id="JIS-Tg-Z5g">
+                            <items>
+                                <group alignment="left" id="pDy-fq-biw">
+                                    <items>
+                                        <label alignment="left" text="BE131" id="Wr3-R3-nnb">
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group alignment="right" id="ogo-3V-2p3">
+                                    <items>
+                                        <label alignment="left" text="0" id="CHX-1K-R65">
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                            <color key="backgroundColor" red="1" green="0.7775987982749939" blue="0.0045356974005699158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <edgeInsets key="margins" left="8" right="8" top="8" bottom="8"/>
+                        </group>
+                        <button width="1" alignment="left" title="Siguiente" id="0ai-8C-dd4">
+                            <color key="backgroundColor" red="0.0" green="0.45684128999710083" blue="0.73509865999221802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </button>
+                        <group width="1" alignment="left" id="pLp-Vg-xYf">
+                            <items>
+                                <label width="1" alignment="center" text="María" textAlignment="center" id="Tez-8F-6ri"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="16" bottom="16"/>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+</document>
