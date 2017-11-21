@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
-    <device id="watch38" orientation="portrait">
+    <device id="watch42" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,38 +14,51 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="TurnoClaseProfesorWatch" customModuleProvider="target">
                     <items>
-                        <group width="1" alignment="left" id="JIS-Tg-Z5g">
+                        <group width="1" height="0.20000000000000001" alignment="left" id="JIS-Tg-Z5g">
                             <items>
-                                <group alignment="left" id="pDy-fq-biw">
+                                <group width="0.59999999999999998" height="1" alignment="center" verticalAlignment="center" radius="6" id="pDy-fq-biw">
                                     <items>
-                                        <label alignment="left" text="BE131" id="Wr3-R3-nnb">
+                                        <label width="1" height="1" alignment="center" text="BE131" textAlignment="center" id="Wr3-R3-nnb">
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </label>
                                     </items>
+                                    <color key="backgroundColor" red="0.87404829263687134" green="0.88608193397521973" blue="0.90262514352798462" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <edgeInsets key="margins" left="8" right="8" top="8" bottom="8"/>
                                 </group>
-                                <group alignment="right" id="ogo-3V-2p3">
+                                <group width="0.40000000000000002" height="1" alignment="center" verticalAlignment="center" radius="6" id="ogo-3V-2p3">
                                     <items>
-                                        <label alignment="left" text="0" id="CHX-1K-R65">
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </label>
+                                        <label width="1" height="1" alignment="center" text="999" textAlignment="center" id="CHX-1K-R65"/>
                                     </items>
+                                    <color key="backgroundColor" red="0.93549394607543945" green="0.25596794486045837" blue="0.18848514556884766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <edgeInsets key="margins" left="8" right="8" top="8" bottom="8"/>
                                 </group>
+                            </items>
+                        </group>
+                        <group width="1" height="0.5" alignment="left" id="JSe-e2-IyL">
+                            <items>
+                                <button width="1" alignment="left" verticalAlignment="center" title="Next" id="0ai-8C-dd4">
+                                    <color key="backgroundColor" red="0.0" green="0.45684128999710083" blue="0.73509865999221802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" height="0.29999999999999999" alignment="left" verticalAlignment="bottom" id="pLp-Vg-xYf">
+                            <items>
+                                <label width="1" height="1" alignment="center" verticalAlignment="center" text="María" textAlignment="center" baselineAdjustment="alignCenters" minimumScaleFactor="0.10000000000000001" id="Tez-8F-6ri">
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <fontDescription key="font" type="system" pointSize="28"/>
+                                </label>
                             </items>
                             <color key="backgroundColor" red="1" green="0.7775987982749939" blue="0.0045356974005699158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <edgeInsets key="margins" left="8" right="8" top="8" bottom="8"/>
-                        </group>
-                        <button width="1" alignment="left" title="Siguiente" id="0ai-8C-dd4">
-                            <color key="backgroundColor" red="0.0" green="0.45684128999710083" blue="0.73509865999221802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </button>
-                        <group width="1" alignment="left" id="pLp-Vg-xYf">
-                            <items>
-                                <label width="1" alignment="center" text="María" textAlignment="center" id="Tez-8F-6ri"/>
-                            </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="16" bottom="16"/>
                         </group>
                     </items>
+                    <connections>
+                        <outlet property="etiquetaAula" destination="Wr3-R3-nnb" id="n4i-tz-Z9V"/>
+                        <outlet property="etiquetaNombre" destination="Tez-8F-6ri" id="GGQ-cU-tzU"/>
+                        <outlet property="etiquetaNumero" destination="CHX-1K-R65" id="MhV-Kw-g5w"/>
+                    </connections>
                 </controller>
             </objects>
         </scene>
     </scenes>
+    <color key="tintColor" red="1" green="0.7775987982749939" blue="0.0045356974005699158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -93,6 +93,8 @@
 		410A3E261FC42F1500B3AC3D /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		410A3E281FC42F1500B3AC3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		410A3E2A1FC42F1500B3AC3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		410A3E371FC4463600B3AC3D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Interface.strings; sourceTree = "<group>"; };
+		410A3E391FC4463E00B3AC3D /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Interface.strings; sourceTree = "<group>"; };
 		410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		413BC20A1B5015D500E58F25 /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
 		413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonGrafico.swift; sourceTree = "<group>"; };
@@ -387,6 +389,8 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				eu,
 			);
 			mainGroup = 41F4C5C01B34BCD5004AA55E;
 			productRefGroup = 41F4C5CA1B34BCD5004AA55E /* Products */;
@@ -576,6 +580,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				410A3E161FC42F1500B3AC3D /* Base */,
+				410A3E371FC4463600B3AC3D /* es */,
+				410A3E391FC4463E00B3AC3D /* eu */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -631,7 +637,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.1;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
@@ -661,7 +667,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.1;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
@@ -690,7 +696,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.1;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
@@ -717,7 +723,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.1;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
