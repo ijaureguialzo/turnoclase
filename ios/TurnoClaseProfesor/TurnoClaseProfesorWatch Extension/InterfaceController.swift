@@ -9,12 +9,39 @@
 import WatchKit
 import Foundation
 
+import WatchConnectivity
 
 class InterfaceController: WKInterfaceController {
+
+    var session: WCSession? {
+        didSet {
+            if let session = session {
+                session.delegate = self
+                session.activate()
+            }
+        }
+    }
 
     @IBOutlet var etiquetaAula: WKInterfaceLabel!
     @IBOutlet var etiquetaNumero: WKInterfaceLabel!
     @IBOutlet var etiquetaNombre: WKInterfaceLabel!
+
+    @IBAction func botonSiguiente() {
+
+        if WCSession.isSupported() {
+
+            session = WCSession.default
+
+            session!.sendMessage(["siguiente": "BE131"], replyHandler: { (response) -> Void in
+                print("Enviando petición al iPhone")
+            }, errorHandler: { (error) -> Void in
+                print("Error al enviar petición al iPhone")
+                print(error)
+            })
+
+        }
+
+    }
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -30,6 +57,14 @@ class InterfaceController: WKInterfaceController {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+    }
+
+}
+
+extension InterfaceController: WCSessionDelegate {
+
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("Watch: sesión activa")
     }
 
 }

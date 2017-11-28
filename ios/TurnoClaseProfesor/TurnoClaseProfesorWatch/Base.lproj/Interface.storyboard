@@ -38,6 +38,9 @@
                             <items>
                                 <button width="1" alignment="left" verticalAlignment="center" title="Next" id="0ai-8C-dd4">
                                     <color key="backgroundColor" red="0.0" green="0.45684128999710083" blue="0.73509865999221802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="botonSiguiente" destination="AgC-eL-Hgc" id="B0d-69-Jk5"/>
+                                    </connections>
                                 </button>
                             </items>
                         </group>

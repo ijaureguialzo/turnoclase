@@ -18,6 +18,7 @@
 		410D71001FA8D1B8009AC062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */; };
 		413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20A1B5015D500E58F25 /* FondoCircular.swift */; };
 		413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */; };
+		41527E351FC9CF0900F39E97 /* AnimarBoton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41527E341FC9CF0900F39E97 /* AnimarBoton.swift */; };
 		41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BDE1B51643B000E3C8E /* Settings.bundle */; };
 		41A59BE21B516A20000E3C8E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BE11B516A20000E3C8E /* Licenses */; };
 		41B669B21FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */; };
@@ -98,6 +99,7 @@
 		410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		413BC20A1B5015D500E58F25 /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
 		413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonGrafico.swift; sourceTree = "<group>"; };
+		41527E341FC9CF0900F39E97 /* AnimarBoton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimarBoton.swift; sourceTree = "<group>"; };
 		41675B1E1B553EC1001696CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		41675B1F1B553EC1001696CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		41675B201B553EE9001696CE /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Main.strings; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				41F4C5D21B34BCD5004AA55E /* Main.storyboard */,
 				413BC20A1B5015D500E58F25 /* FondoCircular.swift */,
 				413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */,
+				41527E341FC9CF0900F39E97 /* AnimarBoton.swift */,
 				41F4C5D51B34BCD5004AA55E /* Images.xcassets */,
 				41F4C5D71B34BCD6004AA55E /* LaunchScreen.xib */,
 			);
@@ -547,6 +550,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41F4C5D11B34BCD5004AA55E /* ViewController.swift in Sources */,
+				41527E351FC9CF0900F39E97 /* AnimarBoton.swift in Sources */,
 				410635191FB625E7008D723C /* Aula.swift in Sources */,
 				413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */,
 				413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */,
@@ -828,7 +832,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
@@ -878,7 +882,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "a4a18b86-f33a-409b-8346-b97e7d7928c9";
 				SDKROOT = iphoneos;

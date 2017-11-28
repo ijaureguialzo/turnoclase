@@ -27,6 +27,8 @@ import XCGLogger
 import Firebase
 import FirebaseFirestore
 
+import WatchConnectivity
+
 class ViewController: UIViewController {
 
     // Objeto aula que contiene la cola de alumnos
@@ -45,6 +47,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
+        
         etiquetaBotonCodigoAula.titleLabel?.adjustsFontSizeToFitWidth = true
 
         log.info("Iniciando la aplicación...")
@@ -222,20 +230,17 @@ class ViewController: UIViewController {
 
     }
 
-    @IBAction func botonSiguiente(_ sender: UIButton) {
-
-        fadeIn(sender)
-
+    fileprivate func mostrarSiguiente() {
         log.info("Mostrando el siguiente alumno...")
-
+        
         if self.aula != nil {
-
+            
             if self.aula.cola.count > 0 {
-
+                
                 let siguiente = self.aula.cola.remove(at: 0)
-
+                
                 log.debug("Siguiente: \(siguiente)")
-
+                
                 // Cargar el alumno
                 db.collection("alumnos").document(siguiente).getDocument { (document, error) in
                     if let document = document {
@@ -250,7 +255,7 @@ class ViewController: UIViewController {
                         log.error("Error al leer los datos")
                     }
                 }
-
+                
                 // Actualizar el aula
                 db.collection("aulas").document(self.uid).setData([
                     "cola": self.aula.cola
@@ -262,42 +267,53 @@ class ViewController: UIViewController {
                         self.conectarListener()
                     }
                 }
-
+                
             } else {
                 log.info("El aula está vacía")
                 self.etiquetaNombreAlumno.text = ""
             }
-
+            
         } else {
             log.error("No hay objeto aula")
         }
-
     }
+    
+    @IBAction func botonSiguiente(_ sender: UIButton) {
 
-    @IBAction func fadeOut(_ sender: UIButton) {
+        fadeIn(sender)
 
-        // Difuminar
-        UIView.animate(withDuration: 0.1,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 0.15
-                       }, completion: nil)
-    }
+        mostrarSiguiente()
 
-    @IBAction func fadeIn(_ sender: UIButton) {
-
-        // Restaurar
-        UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 1
-                       }, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+extension ViewController: WCSessionDelegate {
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("iPhone: sesión activa")
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        print("iPhone: sesión inactiva")
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        print("iPhone: sesión desactivada")
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        
+        // http://www.techotopia.com/index.php/A_watchOS_2_WatchConnectivity_Messaging_Tutorial
+        print("¡Hola Watch!")
+        print(message)
+        
+        mostrarSiguiente()
+        
+    }
+    
 }

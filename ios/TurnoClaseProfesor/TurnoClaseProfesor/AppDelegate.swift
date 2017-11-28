@@ -43,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    // https://www.raywenderlich.com/117329/watchos-2-tutorial-part-4-watch-connectivity
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         // Configurar XCGLogger
@@ -65,8 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 SDStatusBarManager.sharedInstance().disableOverrides()
             }
         #endif
-
+        
         return true
     }
 
 }
+
+
