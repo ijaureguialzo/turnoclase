@@ -25,6 +25,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MotionEvent
+import android.widget.Button
 import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
@@ -46,8 +47,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Referencias a los controles
-        campoAula = findViewById(R.id.campoAula) as EditText
-        campoNombre = findViewById(R.id.campoNombre) as EditText
+        campoAula = findViewById(R.id.campoAula)
+        campoNombre = findViewById(R.id.campoNombre)
 
         // Nombre aleatorio
         val nombreAleatorio = Nombres().aleatorio()
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Evento del botón conectar, pasamos a la siguiente actividad
-        findViewById(R.id.botonSiguiente).setOnClickListener {
+        findViewById<Button>(R.id.botonSiguiente).setOnClickListener {
             // Obtenemos los datos del interfaz
             val codigoAula = campoAula!!.text.toString().toUpperCase()
             val nombreUsuario = campoNombre!!.text.toString()
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Animación del botón
-        findViewById(R.id.botonSiguiente).setOnTouchListener { v, event ->
+        findViewById<Button>(R.id.botonSiguiente).setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonSiguiente...")
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
