@@ -31,4 +31,8 @@ TurnoClase está dividida en dos aplicaciones independientes, una para el alumno
 - [Aplicación del profesor](https://play.google.com/store/apps/details?id=com.jaureguialzo.turnoclaseprofesor).
 - [Aplicación del alumno](https://play.google.com/store/apps/details?id=com.jaureguialzo.turnoclase).
 
+### Web
+
+- [Visor web del aula](https://turnoclase.com).
+
 Se admiten sugerencias, críticas y todo tipo de ideas que ayuden a mejorarla.
