@@ -26,6 +26,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
+import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
@@ -66,8 +67,8 @@ class AlumnoTurno : AppCompatActivity() {
         // Cargar el layout
         setContentView(R.layout.activity_alumno_turno)
 
-        etiquetaNumero = findViewById(R.id.etiquetaNumero) as TextView
-        etiquetaAula = findViewById(R.id.etiquetaAula) as TextView
+        etiquetaNumero = findViewById(R.id.etiquetaNumero)
+        etiquetaAula = findViewById(R.id.etiquetaAula)
 
         // Mostrar el número almacenado
         etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
@@ -175,13 +176,13 @@ class AlumnoTurno : AppCompatActivity() {
                 }
 
         // Evento del botón Actualizar
-        findViewById(R.id.botonActualizar).setOnClickListener { actualizar() }
+        findViewById<Button>(R.id.botonActualizar).setOnClickListener { actualizar() }
 
         // Evento del botón Cancelar
-        findViewById(R.id.botonCancelar).setOnClickListener { cancelar() }
+        findViewById<Button>(R.id.botonCancelar).setOnClickListener { cancelar() }
 
         // Animación del botón Actualizar
-        findViewById(R.id.botonActualizar).setOnTouchListener { v, event ->
+        findViewById<Button>(R.id.botonActualizar).setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonActualizar...")
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
@@ -197,7 +198,7 @@ class AlumnoTurno : AppCompatActivity() {
         }
 
         // Animación del botón Cancelar
-        findViewById(R.id.botonCancelar).setOnTouchListener { v, event ->
+        findViewById<Button>(R.id.botonCancelar).setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonActualizar...")
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)

@@ -59,13 +59,13 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        botonCodigoAula = findViewById(R.id.botonCodigoAula) as Button
+        botonCodigoAula = findViewById(R.id.botonCodigoAula)
         botonCodigoAula?.text = "..."
 
-        botonEnCola = findViewById(R.id.botonEnCola) as Button
+        botonEnCola = findViewById(R.id.botonEnCola)
         botonEnCola?.text = "..."
 
-        etiquetaNombreAlumno = findViewById(R.id.etiquetaNumero) as TextView
+        etiquetaNombreAlumno = findViewById(R.id.etiquetaNumero)
         etiquetaNombreAlumno?.text = ""
 
         mAuth = FirebaseAuth.getInstance()
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
         // Evento del botón botonCodigoAula (vaciar el aula)
-        findViewById(R.id.botonCodigoAula).setOnClickListener {
+        findViewById<Button>(R.id.botonCodigoAula).setOnClickListener {
             Log.d(TAG, "Vaciando el aula...")
 
             if (this.aula != null) {
@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Evento del botón botonCodigoAula (crear nueva aula)
-        findViewById(R.id.botonCodigoAula).setOnLongClickListener {
+        findViewById<Button>(R.id.botonCodigoAula).setOnLongClickListener {
 
             Log.d(TAG, "Generando nueva aula...")
 
@@ -181,7 +181,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Evento del botón Siguiente
-        findViewById(R.id.botonSiguiente).setOnClickListener {
+        findViewById<Button>(R.id.botonSiguiente).setOnClickListener {
             Log.d(TAG, "Mostrando el siguiente alumno...")
 
             if (aula != null) {
@@ -204,11 +204,11 @@ class MainActivity : AppCompatActivity() {
                                         val nombre = alumno["nombre"] as? String ?: "?"
 
                                         if (nombre.length >= 10) {
-                                            etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f);
+                                            etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
                                         } else if (nombre.length > 4 && nombre.length < 10) {
-                                            etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f);
+                                            etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
                                         } else
-                                            etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f);
+                                            etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
 
                                         etiquetaNombreAlumno?.text = nombre
 
@@ -244,12 +244,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Evento del botón botonEnCola
-        findViewById(R.id.botonEnCola).setOnClickListener {
+        findViewById<Button>(R.id.botonEnCola).setOnClickListener {
             Log.d("TurnoClase", "Este botón ya no hace nada :)")
         }
 
         // Animación del botón Siguiente
-        findViewById(R.id.botonSiguiente).setOnTouchListener { v, event ->
+        findViewById<Button>(R.id.botonSiguiente).setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonSiguiente...")
 
@@ -269,7 +269,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Animación del botón botonEnCola
-        findViewById(R.id.botonEnCola).setOnTouchListener { v, event ->
+        findViewById<Button>(R.id.botonEnCola).setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonEnCola...")
 
@@ -289,7 +289,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Animación del botón botonCodigoAula
-        findViewById(R.id.botonCodigoAula).setOnTouchListener { v, event ->
+        findViewById<Button>(R.id.botonCodigoAula).setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonCodigoAula...")
 
