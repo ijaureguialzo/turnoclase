@@ -1,33 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-	<meta charset="utf-8" />
-	<title>TurnoClase</title>
-  <style type="text/css">
-    body{
-      background:#fff;
-      color:#000;
-      font-size:medium;
-      font-family:sans-serif
-    }
-    p.vertical{
-      display:table-cell;
-      vertical-align:middle;
-      text-align:center
-      }
-    div.container{
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      position:fixed;
-      display:table
-    }
-  </style>
+    <title>TurnoClase</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- Paleta de colores -->
+    <link rel="stylesheet" href="css/colores.css"/>
+
+    <style>
+        html {
+            background: url(images/icono.svg) no-repeat center center fixed;
+            -webkit-background-size: 30%;
+            -moz-background-size: 30%;
+            -o-background-size: 30%;
+            background-size: 30%;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <p class="vertical"><img src="icono.svg" style="height:256px" alt="" /></p>
-  </div>
+
+<div class="container-fluid col-xs-12 col-sm-6 offset-sm-3 my-5" id="wrapper">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1>TurnoClase</h1>
+        </div>
+        <div class="col-sm-4">
+            <p id="recuento" class="alert text-center rojo blanco">0</p>
+        </div>
+    </div>
+    <div class="row px-3">
+        <div class="col-sm-12 px-0 input-group input-group-lg">
+            <input id="aula-input" type="text" class="form-control gris" placeholder="BE131" aria-label="BE131"
+                   maxlength="5" style="text-transform: uppercase;">
+            <span class="input-group-btn">
+                <button id="aula-boton" class="btn btn-secondary azul blanco" type="button">Ver</button>
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="list-group" id="listaprimero"></ul>
+            <ul class="list-group" id="lista" style="font-size:75%;"></ul>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+<!-- Firebase -->
+<script src="/__/firebase/4.6.0/firebase-app.js"></script>
+<script src="/__/firebase/4.6.0/firebase-auth.js"></script>
+<script src="/__/firebase/4.6.0/firebase.js"></script>
+<script src="/__/firebase/4.6.0/firebase-firestore.js"></script>
+<script src="/__/firebase/init.js"></script>
+
+<!-- La aplicación JavaScript -->
+<script src="js/app.js"></script>
+
 </body>
 </html>
