@@ -15,30 +15,129 @@ fastlane_version "2.64.1"
 
 default_platform :android
 
+# En macOS, con JDK 9 no funciona. Instalar JDK 8 y ejecutar el comando siguiente.
+# export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+aplicaciones = [ "turnoclase", "turnoclaseprofesor" ]
+telefono = true
+tablet7 = true
+tablet10 = true
+localizado = true
+
 platform :android do
   before_all do
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    #sh("export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)") # Debería, pero no funciona
   end
 
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
+  # REF: Error al arrancar el emulador a mano: https://stackoverflow.com/a/43385567/5136913
+  desc "Arranca los emuladores para hacer capturas"
+  lane :emuladores do
+    if telefono
+      sh "./emulador.sh Nexus_5X_API_23 5554"
+    end
+    if tablet10
+      sh "./emulador.sh Nexus_10_API_23 5556"
+    end
+    if tablet7
+      sh "./emulador.sh Nexus_7_API_23 5558"
+    end
   end
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "assembleRelease")
-    crashlytics
+  desc "Hace una captura individual"
+  private_lane :captura do |options|
 
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
+    if localizado
+      idiomas = ["en-US", "es-ES", "eu-ES"]
+    else
+      idiomas = ["es-ES"]
+    end
+
+    capture_android_screenshots(
+      locales: idiomas,
+      clear_previous_screenshots: true,
+      skip_open_summary: !options[:resumen] || false,
+      device_type: options[:tipo],
+      specific_device: options[:emulador],
+      app_apk_path: options[:app]+"/build/outputs/apk/debug/"+options[:app]+"-debug.apk",
+      tests_apk_path: options[:app]+"/build/outputs/apk/androidTest/debug/"+options[:app]+"-debug-androidTest.apk",
+      app_package_name: "com.jaureguialzo."+options[:app],
+      output_directory: "./fastlane/screenshots/"+options[:app]
+      )
+
   end
 
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "assembleRelease")
-    supply
+  desc "Hace capturas en los emuladores seleccionados"
+  lane :capturas do
+
+    gradle(task: "assembleDebug assembleAndroidTest")
+
+    for aplicacion in aplicaciones do
+
+      # REF: Modo demo: https://github.com/FlorianRauscha/fastlane-plugin-demo_mode
+      demo_mode(
+        clock: "0941",
+        wifi: false,
+        wifi_level: 4,
+        mobile: true,
+        mobile_level: 4,
+        plugged: false,
+        battery: 100,
+        notifications: false
+        )
+
+      if telefono
+        captura(
+          app: aplicacion,
+          tipo: "phone",
+          emulador: "emulator-5554"
+          )
+      end
+
+      if tablet10
+        captura(
+          app: aplicacion,
+          tipo: "tenInch",
+          emulador: "emulator-5556"
+          )
+      end
+
+      if tablet7
+        captura(
+          app: aplicacion,
+          tipo: "sevenInch",
+          emulador: "emulator-5558"
+          )
+      end
+
+      demo_mode(deactivate: true)
+
+      upload_to_play_store(
+        skip_upload_apk:true,
+        skip_upload_metadata:true,
+        skip_upload_images:true,
+        package_name: "com.jaureguialzo."+aplicacion,
+        metadata_path: "./fastlane/screenshots/"+aplicacion
+        )
+
+    end
+
   end
+
+  # desc "Submit a new Beta Build to Crashlytics Beta"
+  # lane :beta do
+  #   gradle(task: "assembleRelease")
+  #   crashlytics
+
+  #   # sh "your_script.sh"
+  #   # You can also use other beta testing services here
+  # end
+
+  # desc "Deploy a new version to the Google Play"
+  # lane :deploy do
+  #   gradle(task: "assembleRelease")
+  #   supply
+  # end
 
   # You can define as many lanes as you want
 
