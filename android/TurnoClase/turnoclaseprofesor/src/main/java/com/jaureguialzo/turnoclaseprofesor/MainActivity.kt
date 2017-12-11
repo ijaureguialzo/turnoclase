@@ -48,11 +48,25 @@ class MainActivity : AppCompatActivity() {
     // Activar Firestore
     private val db = FirebaseFirestore.getInstance()
 
+    // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
+    private val isRunningTest: Boolean by lazy {
+        try {
+            Class.forName("android.support.test.espresso.Espresso")
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
+    }
+
+    // Para simular el interfaz al hacer las capturas
+    private var n = 2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Ocultar la barra de título en horizontal
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
+                !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_XLARGE))
             supportActionBar!!.hide()
         else
             supportActionBar!!.show()
@@ -70,46 +84,54 @@ class MainActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        // Iniciar sesión y conectar al aula
-        mAuth!!.signInAnonymously()
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        uid = mAuth?.currentUser?.uid
-                        Log.d(TAG, "Registrado como usuario con UID: " + uid)
+        // Ver si estamos en modo test, haciendo capturas de pantalla
+        if (isRunningTest) {
+            botonCodigoAula?.text = "BE131"
+            botonEnCola?.text = "2"
+            etiquetaNombreAlumno?.text = ""
+        } else {
 
-                        // Cargar el aula y si no, crearla
-                        db.collection("aulas").document(uid!!)
-                                .get()
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        val document = task.result
-                                        if (!document.exists()) {
-                                            Log.d(TAG, "Creando nueva aula")
+            // Iniciar sesión y conectar al aula
+            mAuth!!.signInAnonymously()
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            uid = mAuth?.currentUser?.uid
+                            Log.d(TAG, "Registrado como usuario con UID: " + uid)
 
-                                            // Crear el aula
-                                            val datos = HashMap<String, Any>()
-                                            datos.put("cola", ArrayList<String>())
+                            // Cargar el aula y si no, crearla
+                            db.collection("aulas").document(uid!!)
+                                    .get()
+                                    .addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            val document = task.result
+                                            if (!document.exists()) {
+                                                Log.d(TAG, "Creando nueva aula")
 
-                                            db.collection("aulas").document(uid!!)
-                                                    .set(datos)
-                                                    .addOnSuccessListener {
-                                                        Log.d(TAG, "Aula creada")
-                                                        conectarListener()
-                                                    }
-                                                    .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
+                                                // Crear el aula
+                                                val datos = HashMap<String, Any>()
+                                                datos.put("cola", ArrayList<String>())
 
+                                                db.collection("aulas").document(uid!!)
+                                                        .set(datos)
+                                                        .addOnSuccessListener {
+                                                            Log.d(TAG, "Aula creada")
+                                                            conectarListener()
+                                                        }
+                                                        .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
+
+                                            } else {
+                                                Log.d(TAG, "Conectado a aula existente")
+                                                conectarListener()
+                                            }
                                         } else {
-                                            Log.d(TAG, "Conectado a aula existente")
-                                            conectarListener()
+                                            Log.e(TAG, "Error al recuperar el aula: ", task.exception)
                                         }
-                                    } else {
-                                        Log.e(TAG, "Error al recuperar el aula: ", task.exception)
                                     }
-                                }
-                    } else {
-                        Log.e(TAG, "Error de inicio de sesión", task.exception)
+                        } else {
+                            Log.e(TAG, "Error de inicio de sesión", task.exception)
+                        }
                     }
-                }
+        }
 
         // Evento del botón botonCodigoAula (vaciar el aula)
         findViewById<Button>(R.id.botonCodigoAula).setOnClickListener {
@@ -246,44 +268,71 @@ class MainActivity : AppCompatActivity() {
         // Evento del botón botonEnCola
         findViewById<Button>(R.id.botonEnCola).setOnClickListener {
             Log.d("TurnoClase", "Este botón ya no hace nada :)")
+
+            if (isRunningTest) {
+                n -= 1
+                if (n >= 0) {
+                    botonEnCola?.text = n.toString()
+
+                    val nombre = Nombres().aleatorio()
+
+                    if (nombre.length >= 10) {
+                        etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
+                    } else if (nombre.length > 4 && nombre.length < 10) {
+                        etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
+                    } else
+                        etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
+
+                    etiquetaNombreAlumno?.text = nombre
+
+                } else {
+                    botonEnCola?.text = "0"
+                    etiquetaNombreAlumno?.text = ""
+                }
+            }
+
         }
 
         // Animación del botón Siguiente
         findViewById<Button>(R.id.botonSiguiente).setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón botonSiguiente...")
+            if (!isRunningTest) {
+                if (event.action == MotionEvent.ACTION_DOWN) {
+                    Log.d("TurnoClase", "DOWN del botón botonSiguiente...")
 
-                // Difuminar
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                anim.duration = 100
-                anim.start()
-            } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón botonSiguiente...")
+                    // Difuminar
+                    val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
+                    anim.duration = 100
+                    anim.start()
+                } else if (event.action == MotionEvent.ACTION_UP) {
+                    Log.d("TurnoClase", "UP del botón botonSiguiente...")
 
-                // Restaurar
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                anim.duration = 300
-                anim.start()
+                    // Restaurar
+                    val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
+                    anim.duration = 300
+                    anim.start()
+                }
             }
             false
         }
 
         // Animación del botón botonEnCola
         findViewById<Button>(R.id.botonEnCola).setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón botonEnCola...")
+            if (!isRunningTest) {
+                if (event.action == MotionEvent.ACTION_DOWN) {
+                    Log.d("TurnoClase", "DOWN del botón botonEnCola...")
 
-                // Difuminar
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                anim.duration = 100
-                anim.start()
-            } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón botonEnCola...")
+                    // Difuminar
+                    val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
+                    anim.duration = 100
+                    anim.start()
+                } else if (event.action == MotionEvent.ACTION_UP) {
+                    Log.d("TurnoClase", "UP del botón botonEnCola...")
 
-                // Restaurar
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                anim.duration = 300
-                anim.start()
+                    // Restaurar
+                    val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
+                    anim.duration = 300
+                    anim.start()
+                }
             }
             false
         }
