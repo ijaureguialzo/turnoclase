@@ -55,11 +55,25 @@ class AlumnoTurno : AppCompatActivity() {
     // Activar Firestore
     private val db = FirebaseFirestore.getInstance()
 
+    // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
+    private val isRunningTest: Boolean by lazy {
+        try {
+            Class.forName("android.support.test.espresso.Espresso")
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
+    }
+
+    // Para simular el interfaz al hacer las capturas
+    private var n = 2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Ocultar la barra de título en horizontal
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
+                !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_XLARGE))
             supportActionBar!!.hide()
         else
             supportActionBar!!.show()
@@ -74,109 +88,138 @@ class AlumnoTurno : AppCompatActivity() {
         etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
         etiquetaNumero?.text = numeroTurno
 
-        // Extraer los parámetros desde el Intent
-        val intent = intent
-        codigoAula = intent.getStringExtra("CODIGO_AULA")
-        nombreUsuario = intent.getStringExtra("NOMBRE_USUARIO")
+        // Ver si estamos en modo test, haciendo capturas de pantalla
+        if (isRunningTest) {
+            etiquetaAula?.text = "BE131"
+            etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f);
+            etiquetaNumero?.text = "2"
+        } else {
 
-        mAuth = FirebaseAuth.getInstance()
+            // Extraer los parámetros desde el Intent
+            val intent = intent
+            codigoAula = intent.getStringExtra("CODIGO_AULA")
+            nombreUsuario = intent.getStringExtra("NOMBRE_USUARIO")
 
-        mAuth!!.signInAnonymously()
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        uid = mAuth?.currentUser?.uid
-                        Log.d(TAG, "Registrado como usuario con UID: " + uid)
+            mAuth = FirebaseAuth.getInstance()
 
-                        // Crear el alumno en la colección alumnos
-                        var datos = HashMap<String, Any>()
-                        datos.put("nombre", nombreUsuario!!)
+            mAuth!!.signInAnonymously()
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            uid = mAuth?.currentUser?.uid
+                            Log.d(TAG, "Registrado como usuario con UID: " + uid)
 
-                        db.collection("alumnos").document(uid!!)
-                                .set(datos)
-                                .addOnSuccessListener { Log.d(TAG, "Alumno actualizado") }
-                                .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el alumno", e) }
+                            // Crear el alumno en la colección alumnos
+                            var datos = HashMap<String, Any>()
+                            datos.put("nombre", nombreUsuario!!)
 
-                        // Añadir al alumno a la cola del aula
-                        db.collection("aulas")
-                                .whereEqualTo("codigo", codigoAula)
-                                .limit(1)
-                                .get()
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        if (task.result.count() > 0) {
-                                            for (document in task.result) {
-                                                Log.d(TAG, "Conectado a aula existente")
+                            db.collection("alumnos").document(uid!!)
+                                    .set(datos)
+                                    .addOnSuccessListener { Log.d(TAG, "Alumno actualizado") }
+                                    .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el alumno", e) }
 
-                                                // Añadir el listener
-                                                if (listener == null) {
+                            // Añadir al alumno a la cola del aula
+                            db.collection("aulas")
+                                    .whereEqualTo("codigo", codigoAula)
+                                    .limit(1)
+                                    .get()
+                                    .addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            if (task.result.count() > 0) {
+                                                for (document in task.result) {
+                                                    Log.d(TAG, "Conectado a aula existente")
 
-                                                    listener = document.reference.addSnapshotListener({ snapshot, e ->
-                                                        if (snapshot != null && snapshot.exists()) {
+                                                    // Añadir el listener
+                                                    if (listener == null) {
 
-                                                            refAula = snapshot.reference
+                                                        listener = document.reference.addSnapshotListener({ snapshot, e ->
+                                                            if (snapshot != null && snapshot.exists()) {
 
-                                                            if (snapshot.data != null) {
-                                                                val aula = snapshot.data
-                                                                Log.d(TAG, "Actualizando datos del aula")
+                                                                refAula = snapshot.reference
 
-                                                                val cola = aula["cola"] as? ArrayList<String> ?: ArrayList<String>()
-                                                                val codigo = aula["codigo"] as? String ?: "?"
+                                                                if (snapshot.data != null) {
+                                                                    val aula = snapshot.data
+                                                                    Log.d(TAG, "Actualizando datos del aula")
 
-                                                                this.aula = Aula(codigo, cola)
+                                                                    val cola = aula["cola"] as? ArrayList<String> ?: ArrayList<String>()
+                                                                    val codigo = aula["codigo"] as? String ?: "?"
 
-                                                                // Si el usuario no está en la cola, lo añadimos
+                                                                    this.aula = Aula(codigo, cola)
 
-                                                                if (App.pedirTurno && !cola.contains(uid!!)) {
+                                                                    // Si el usuario no está en la cola, lo añadimos
 
-                                                                    App.pedirTurno = false
-                                                                    this.aula?.cola?.add(uid!!)
+                                                                    if (App.pedirTurno && !cola.contains(uid!!)) {
 
-                                                                    datos = HashMap<String, Any>()
-                                                                    datos.put("cola", this.aula?.cola!!)
+                                                                        App.pedirTurno = false
+                                                                        this.aula?.cola?.add(uid!!)
 
-                                                                    snapshot.reference.update(datos)
-                                                                            .addOnSuccessListener { Log.d(TAG, "Cola actualizada") }
-                                                                            .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
+                                                                        datos = HashMap<String, Any>()
+                                                                        datos.put("cola", this.aula?.cola!!)
 
+                                                                        snapshot.reference.update(datos)
+                                                                                .addOnSuccessListener { Log.d(TAG, "Cola actualizada") }
+                                                                                .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
+
+                                                                    }
+
+                                                                    Log.d(TAG, "Aula: " + this.aula)
+
+                                                                    this.actualizar()
+                                                                }
+                                                            } else {
+                                                                Log.d(TAG, "El aula ha desaparecido")
+
+                                                                if (listener != null) {
+                                                                    listener?.remove()
+                                                                    listener = null
+                                                                    aula = null
+                                                                    numeroTurno = ""
+
+                                                                    App.pedirTurno = true
                                                                 }
 
-                                                                Log.d(TAG, "Aula: " + this.aula)
-
-                                                                this.actualizar()
+                                                                // Volver a la pantalla inicial
+                                                                this.finish()
                                                             }
-                                                        } else {
-                                                            Log.d(TAG, "El aula ha desaparecido")
-
-                                                            if (listener != null) {
-                                                                listener?.remove()
-                                                                listener = null
-                                                                aula = null
-                                                                numeroTurno = ""
-
-                                                                App.pedirTurno = true
-                                                            }
-
-                                                            // Volver a la pantalla inicial
-                                                            this.finish()
-                                                        }
-                                                    })
+                                                        })
+                                                    }
                                                 }
+                                            } else {
+                                                Log.d(TAG, "Aula no encontrada")
+                                                etiquetaAula?.text = "?"
                                             }
                                         } else {
-                                            Log.d(TAG, "Aula no encontrada")
-                                            etiquetaAula?.text = "?"
+                                            Log.d(TAG, "Error getting documents: ", task.exception)
                                         }
-                                    } else {
-                                        Log.d(TAG, "Error getting documents: ", task.exception)
                                     }
-                                }
-                    } else {
-                        Log.e(TAG, "Error de inicio de sesión", task.exception)
+                        } else {
+                            Log.e(TAG, "Error de inicio de sesión", task.exception)
+                        }
                     }
-                }
+        }
 
         // Evento del botón Actualizar
-        findViewById<Button>(R.id.botonActualizar).setOnClickListener { actualizar() }
+        findViewById<Button>(R.id.botonActualizar).setOnClickListener {
+
+            Log.d("TurnoClase", "Este botón ya no hace nada...")
+
+            if (isRunningTest) {
+
+                if (n > 0) {
+                    etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f);
+                    numeroTurno = n.toString();
+                } else if (n == 0) {
+                    etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f);
+                    numeroTurno = getResources().getString(R.string.mensaje_turno);
+                } else {
+                    etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f);
+                    numeroTurno = "";
+                }
+                etiquetaNumero?.setText(numeroTurno);
+
+                n -= 1
+            }
+
+        }
 
         // Evento del botón Cancelar
         findViewById<Button>(R.id.botonCancelar).setOnClickListener { cancelar() }

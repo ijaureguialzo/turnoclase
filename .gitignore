@@ -78,3 +78,7 @@ ios/TurnoClaseProfesor/fastlane/metadata/
 ios/TurnoClase/fastlane/metadata/
 
 android/TurnoClase/fastlane/metadata/
+
+android/TurnoClase/fastlane/report\.xml
+
+android/TurnoClase/fastlane/screenshots/
