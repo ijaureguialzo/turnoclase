@@ -1,9 +1,11 @@
 # TurnoClase
 
-[![Versión de Xcode](https://img.shields.io/badge/Xcode-9.1-blue.svg)](https://developer.apple.com/xcode/)
-[![Versión de Swift](https://img.shields.io/badge/Swift-4.0-darkorange.svg)](https://developer.apple.com/swift/)
-[![Versión de Android Studio](https://img.shields.io/badge/Android%20Studio-3.0-green.svg)](https://developer.android.com/studio/index.html)
-[![Versión de Kotlin](https://img.shields.io/badge/Kotlin-1.1.60-blue.svg)](https://kotlinlang.org/)
+[![Versión de Xcode](https://img.shields.io/badge/Xcode-9.2-3cacfa.svg)](https://developer.apple.com/xcode/)
+[![Versión de Swift](https://img.shields.io/badge/Swift-4.0-f05339.svg)](https://developer.apple.com/swift/)
+[![Versión de Android Studio](https://img.shields.io/badge/Android%20Studio-3.0-a4c639.svg)](https://developer.android.com/studio/index.html)
+[![Versión de Kotlin](https://img.shields.io/badge/Kotlin-1.2.0-ff8802.svg)](https://kotlinlang.org/)
+[![Versión de Bootstrap](https://img.shields.io/badge/Bootstrap-4.0.0-563d7c.svg)](https://getbootstrap.com/)
+[![Versión de fastlane](https://img.shields.io/badge/fastlane-2.68.2-ff0201.svg)](https://fastlane.tools/)
 
 TurnoClase facilita a los profesores organizar la resolución de preguntas durante una clase permitiendo que los alumnos pidan su turno y sean atendidos de uno en uno.
 
@@ -19,7 +21,7 @@ Gestiona automáticamente los turnos y evita que alguien no sea atendido, por ol
 
 ## Versiones publicadas
 
-TurnoClase está dividida en dos aplicaciones independientes, una para el alumno y otra para el profesor.
+TurnoClase se compone de dos aplicaciones móviles independientes (alumno y profesor) y de un visor web del aula.
 
 ### iOS
 
