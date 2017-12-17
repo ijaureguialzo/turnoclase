@@ -24,8 +24,8 @@ android {
         applicationId "com.jaureguialzo.turnoclaseprofesor"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 11
-        versionName "2.0"
+        versionCode 12
+        versionName "2.0.1"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
     signingConfigs {
@@ -45,7 +45,8 @@ android {
     sourceSets {
         main {
             svg.srcDir 'src/main/svg'
-            manifest.srcFile 'src/debug/AndroidManifest.xml'
+            manifest.srcFile
+            'src/debug/AndroidManifest.xml'
         }
     }
     buildToolsVersion '26.0.2'
