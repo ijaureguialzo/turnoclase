@@ -76,15 +76,16 @@ platform :android do
 
       # REF: Modo demo: https://github.com/FlorianRauscha/fastlane-plugin-demo_mode
       demo_mode(
-        clock: "0941",
-        wifi: false,
-        wifi_level: 4,
-        mobile: true,
-        mobile_level: 4,
-        plugged: false,
-        battery: 100,
-        notifications: false
-        )
+      	clock: "0941",
+      	wifi: false,
+      	wifi_level: 4,
+      	mobile: true,
+      	mobile_datatype: "lte",
+      	mobile_level: 4,
+      	plugged: false,
+      	battery: 100,
+      	notifications: false
+      	)
 
       if telefono
         captura(
@@ -113,33 +114,39 @@ platform :android do
       demo_mode(deactivate: true)
 
       upload_to_play_store(
+        package_name: "com.jaureguialzo."+aplicacion,
+
+        skip_upload_screenshots:false,
+        metadata_path: "./fastlane/screenshots/"+aplicacion,
+
         skip_upload_apk:true,
         skip_upload_metadata:true,
-        skip_upload_images:true,
-        package_name: "com.jaureguialzo."+aplicacion,
-        metadata_path: "./fastlane/screenshots/"+aplicacion
+        skip_upload_images:true
         )
 
     end
 
   end
 
-  # desc "Submit a new Beta Build to Crashlytics Beta"
-  # lane :beta do
-  #   gradle(task: "assembleRelease")
-  #   crashlytics
+  desc "Subir el APK firmado a la Play Store"
+  lane :playstore do
+    gradle(
+      task: 'assemble',
+      build_type: 'Release'
+      )
+    for aplicacion in aplicaciones do
+      upload_to_play_store(
+        package_name: "com.jaureguialzo."+aplicacion,
 
-  #   # sh "your_script.sh"
-  #   # You can also use other beta testing services here
-  # end
+        skip_upload_apk:false,
+        apk: aplicacion+"/build/outputs/apk/release/"+aplicacion+"-release.apk",
 
-  # desc "Deploy a new version to the Google Play"
-  # lane :deploy do
-  #   gradle(task: "assembleRelease")
-  #   supply
-  # end
-
-  # You can define as many lanes as you want
+        skip_upload_metadata:true,
+        skip_upload_images:true,
+        skip_upload_screenshots:true
+        )
+    end
+  end
 
   after_all do |lane|
     # This block is called, only if the executed lane was successful

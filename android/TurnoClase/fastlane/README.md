@@ -40,6 +40,11 @@ Arranca los emuladores para hacer capturas
 fastlane android capturas
 ```
 Hace capturas en los emuladores seleccionados
+### android playstore
+```
+fastlane android playstore
+```
+Subir el APK firmado a la Play Store
 
 ----
 

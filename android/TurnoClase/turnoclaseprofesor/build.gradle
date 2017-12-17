@@ -13,25 +13,38 @@ apply plugin: 'kotlin-android'
 // Make sure to apply this plugin *after* the Android plugin
 apply plugin: 'com.trello.victor'
 
+// REF: Firmado automáticamente: https://stackoverflow.com/a/43230396/5136913
+def keystorePropertiesFile = rootProject.file("../../private/android/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.jaureguialzo.turnoclaseprofesor"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 11
-        versionName "2.0"
+        versionCode 12
+        versionName "2.0.1"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
         }
     }
     sourceSets {
         main {
             svg.srcDir 'src/main/svg'
-
             manifest.srcFile
             'src/debug/AndroidManifest.xml'
         }
