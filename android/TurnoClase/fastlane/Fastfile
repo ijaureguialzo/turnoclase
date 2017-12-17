@@ -76,15 +76,16 @@ platform :android do
 
       # REF: Modo demo: https://github.com/FlorianRauscha/fastlane-plugin-demo_mode
       demo_mode(
-        clock: "0941",
-        wifi: false,
-        wifi_level: 4,
-        mobile: true,
-        mobile_level: 4,
-        plugged: false,
-        battery: 100,
-        notifications: false
-        )
+      	clock: "0941",
+      	wifi: false,
+      	wifi_level: 4,
+      	mobile: true,
+      	mobile_datatype: "lte",
+      	mobile_level: 4,
+      	plugged: false,
+      	battery: 100,
+      	notifications: false
+      	)
 
       if telefono
         captura(
