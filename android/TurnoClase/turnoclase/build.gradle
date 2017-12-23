@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.trello:victor:0.3.0'
+        classpath "com.trello:victor:$victor_version"
     }
 }
 
@@ -19,11 +19,11 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.jaureguialzo.turnoclase"
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 12
         versionName "2.0.1"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
@@ -45,11 +45,9 @@ android {
     sourceSets {
         main {
             svg.srcDir 'src/main/svg'
-            manifest.srcFile
-            'src/debug/AndroidManifest.xml'
         }
     }
-    buildToolsVersion '26.0.2'
+    buildToolsVersion rootProject.ext.buildToolsVersion
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -64,14 +62,15 @@ victor {
     excludeDensities = ['ldpi']
 }
 
+// REF: Generar árbol de dependencias: https://stackoverflow.com/a/42374426/5136913
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.google.firebase:firebase-core:11.6.2'
-    compile 'com.google.firebase:firebase-auth:11.6.2'
-    compile 'com.google.firebase:firebase-firestore:11.6.2'
+    compile "com.android.support:appcompat-v7:$support_lib_version"
+    compile "com.google.firebase:firebase-core:$firebase_version"
+    compile "com.google.firebase:firebase-auth:$firebase_version"
+    compile "com.google.firebase:firebase-firestore:$firebase_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    androidTestCompile 'tools.fastlane:screengrab:1.1.0'
+    androidTestCompile "tools.fastlane:screengrab:$fastlane_screengrab_version"
 }
 
 apply plugin: 'com.google.gms.google-services'
