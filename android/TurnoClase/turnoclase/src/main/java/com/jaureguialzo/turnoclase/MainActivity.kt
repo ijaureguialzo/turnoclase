@@ -25,14 +25,9 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MotionEvent
-import android.widget.Button
-import android.widget.EditText
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-    // Referencias a los controles
-    private var campoAula: EditText? = null
-    private var campoNombre: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,22 +42,18 @@ class MainActivity : AppCompatActivity() {
         // Cargar el layout
         setContentView(R.layout.activity_main)
 
-        // Referencias a los controles
-        campoAula = findViewById(R.id.campoAula)
-        campoNombre = findViewById(R.id.campoNombre)
-
         // Nombre aleatorio
         val nombreAleatorio = Nombres().aleatorio()
-        campoNombre!!.hint = nombreAleatorio
+        campoNombre.hint = nombreAleatorio
 
         // Depuración
         if (BuildConfig.DEBUG) {
-            campoAula!!.setText("BE131")
-            campoNombre!!.setText(nombreAleatorio)
+            campoAula.setText("BE131")
+            campoNombre.setText(nombreAleatorio)
         }
 
         // Evento del botón conectar, pasamos a la siguiente actividad
-        findViewById<Button>(R.id.botonSiguiente).setOnClickListener {
+        botonSiguiente.setOnClickListener {
             // Obtenemos los datos del interfaz
             val codigoAula = campoAula!!.text.toString().toUpperCase()
             val nombreUsuario = campoNombre!!.text.toString()
@@ -79,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Animación del botón
-        findViewById<Button>(R.id.botonSiguiente).setOnTouchListener { v, event ->
+        botonSiguiente.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonSiguiente...")
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)

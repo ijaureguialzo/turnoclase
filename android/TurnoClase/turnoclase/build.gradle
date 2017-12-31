@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 // Make sure to apply this plugin *after* the Android plugin
 apply plugin: 'com.trello.victor'

@@ -26,17 +26,12 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
-import android.widget.Button
-import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-    private var botonCodigoAula: Button? = null
-    private var botonEnCola: Button? = null
-    private var etiquetaNombreAlumno: TextView? = null
 
     // Referencias a los objetos
     private var aula: Aula? = null
@@ -73,22 +68,17 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        botonCodigoAula = findViewById(R.id.botonCodigoAula)
-        botonCodigoAula?.text = "..."
-
-        botonEnCola = findViewById(R.id.botonEnCola)
-        botonEnCola?.text = "..."
-
-        etiquetaNombreAlumno = findViewById(R.id.etiquetaNumero)
-        etiquetaNombreAlumno?.text = ""
+        botonCodigoAula.text = "..."
+        botonEnCola.text = "..."
+        etiquetaNombreAlumno.text = ""
 
         mAuth = FirebaseAuth.getInstance()
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
-            botonCodigoAula?.text = "BE131"
-            botonEnCola?.text = "2"
-            etiquetaNombreAlumno?.text = ""
+            botonCodigoAula.text = "BE131"
+            botonEnCola.text = "2"
+            etiquetaNombreAlumno.text = ""
         } else {
 
             // Iniciar sesión y conectar al aula
@@ -134,7 +124,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Evento del botón botonCodigoAula (vaciar el aula)
-        findViewById<Button>(R.id.botonCodigoAula).setOnClickListener {
+        botonCodigoAula.setOnClickListener {
             Log.d(TAG, "Vaciando el aula...")
 
             if (this.aula != null) {
@@ -149,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                         .addOnSuccessListener {
                             Log.d(TAG, "Aula vaciada")
 
-                            etiquetaNombreAlumno?.text = ""
+                            etiquetaNombreAlumno.text = ""
                             conectarListener()
                         }
                         .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
@@ -161,7 +151,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Evento del botón botonCodigoAula (crear nueva aula)
-        findViewById<Button>(R.id.botonCodigoAula).setOnLongClickListener {
+        botonCodigoAula.setOnLongClickListener {
 
             Log.d(TAG, "Generando nueva aula...")
 
@@ -187,7 +177,7 @@ class MainActivity : AppCompatActivity() {
                                     .addOnSuccessListener {
                                         Log.d(TAG, "Aula creada")
 
-                                        etiquetaNombreAlumno?.text = ""
+                                        etiquetaNombreAlumno.text = ""
                                         conectarListener()
                                     }
                                     .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
@@ -203,7 +193,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Evento del botón Siguiente
-        findViewById<Button>(R.id.botonSiguiente).setOnClickListener {
+        botonSiguiente.setOnClickListener {
             Log.d(TAG, "Mostrando el siguiente alumno...")
 
             if (aula != null) {
@@ -226,17 +216,17 @@ class MainActivity : AppCompatActivity() {
                                         val nombre = alumno["nombre"] as? String ?: "?"
 
                                         if (nombre.length >= 10) {
-                                            etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
+                                            etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
                                         } else if (nombre.length > 4 && nombre.length < 10) {
-                                            etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
+                                            etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
                                         } else
-                                            etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
+                                            etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
 
-                                        etiquetaNombreAlumno?.text = nombre
+                                        etiquetaNombreAlumno.text = nombre
 
                                     } else {
                                         Log.d(TAG, "El alumno no existe")
-                                        etiquetaNombreAlumno?.text = ""
+                                        etiquetaNombreAlumno.text = ""
                                     }
                                 } else {
                                     Log.e(TAG, "Error al recuperar el aula: ", task.exception)
@@ -257,7 +247,7 @@ class MainActivity : AppCompatActivity() {
 
                 } else {
                     Log.d(TAG, "El aula está vacía")
-                    etiquetaNombreAlumno?.text = ""
+                    etiquetaNombreAlumno.text = ""
                 }
             } else {
                 Log.e(TAG, "No hay objeto aula")
@@ -266,35 +256,35 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Evento del botón botonEnCola
-        findViewById<Button>(R.id.botonEnCola).setOnClickListener {
+        botonEnCola.setOnClickListener {
             Log.d("TurnoClase", "Este botón ya no hace nada :)")
 
             if (isRunningTest) {
                 n -= 1
                 if (n >= 0) {
-                    botonEnCola?.text = n.toString()
+                    botonEnCola.text = n.toString()
 
                     val nombre = Nombres().aleatorio()
 
                     if (nombre.length >= 10) {
-                        etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
+                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
                     } else if (nombre.length > 4 && nombre.length < 10) {
-                        etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
+                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
                     } else
-                        etiquetaNombreAlumno?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
+                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
 
-                    etiquetaNombreAlumno?.text = nombre
+                    etiquetaNombreAlumno.text = nombre
 
                 } else {
-                    botonEnCola?.text = "0"
-                    etiquetaNombreAlumno?.text = ""
+                    botonEnCola.text = "0"
+                    etiquetaNombreAlumno.text = ""
                 }
             }
 
         }
 
         // Animación del botón Siguiente
-        findViewById<Button>(R.id.botonSiguiente).setOnTouchListener { v, event ->
+        botonSiguiente.setOnTouchListener { v, event ->
             if (!isRunningTest) {
                 if (event.action == MotionEvent.ACTION_DOWN) {
                     Log.d("TurnoClase", "DOWN del botón botonSiguiente...")
@@ -316,7 +306,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Animación del botón botonEnCola
-        findViewById<Button>(R.id.botonEnCola).setOnTouchListener { v, event ->
+        botonEnCola.setOnTouchListener { v, event ->
             if (!isRunningTest) {
                 if (event.action == MotionEvent.ACTION_DOWN) {
                     Log.d("TurnoClase", "DOWN del botón botonEnCola...")
@@ -338,7 +328,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Animación del botón botonCodigoAula
-        findViewById<Button>(R.id.botonCodigoAula).setOnTouchListener { v, event ->
+        botonCodigoAula.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonCodigoAula...")
 
@@ -365,7 +355,7 @@ class MainActivity : AppCompatActivity() {
         if (listener == null) {
 
             listener = db.collection("aulas").document(uid!!)
-                    .addSnapshotListener({ snapshot, e ->
+                    .addSnapshotListener({ snapshot, _ ->
                         if (snapshot != null && snapshot.exists()) {
 
                             val aula = snapshot.data
@@ -397,9 +387,9 @@ class MainActivity : AppCompatActivity() {
             val aula = this.aula!!
 
             // Mostramos el código en la pantalla
-            botonCodigoAula?.text = aula.codigo
+            botonCodigoAula.text = aula.codigo
 
-            botonEnCola?.text = aula.cola.size.toString()
+            botonEnCola.text = aula.cola.size.toString()
             Log.d(TAG, "Alumnos en cola: ${aula.cola.size}")
 
         } else {

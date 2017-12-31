@@ -20,7 +20,7 @@ class Nombres {
 
         val r = Random()
 
-        var nombre = "Ion"
+        var nombre: String
 
         val n: Int
 

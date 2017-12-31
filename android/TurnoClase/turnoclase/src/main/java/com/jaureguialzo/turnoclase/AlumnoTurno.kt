@@ -26,12 +26,11 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
-import android.widget.Button
-import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import kotlinx.android.synthetic.main.activity_alumno_turno.*
 
 class AlumnoTurno : AppCompatActivity() {
 
@@ -45,10 +44,6 @@ class AlumnoTurno : AppCompatActivity() {
     // Parámetros que llegan en el Intent
     private var codigoAula: String? = null
     private var nombreUsuario: String? = null
-
-    // Referencias a los controles
-    private var etiquetaNumero: TextView? = null
-    private var etiquetaAula: TextView? = null
 
     private var mAuth: FirebaseAuth? = null
 
@@ -81,18 +76,15 @@ class AlumnoTurno : AppCompatActivity() {
         // Cargar el layout
         setContentView(R.layout.activity_alumno_turno)
 
-        etiquetaNumero = findViewById(R.id.etiquetaNumero)
-        etiquetaAula = findViewById(R.id.etiquetaAula)
-
         // Mostrar el número almacenado
-        etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
-        etiquetaNumero?.text = numeroTurno
+        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
+        etiquetaNumero.text = numeroTurno
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
-            etiquetaAula?.text = "BE131"
-            etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f);
-            etiquetaNumero?.text = "2"
+            etiquetaAula.text = "BE131"
+            etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+            etiquetaNumero.text = "2"
         } else {
 
             // Extraer los parámetros desde el Intent
@@ -131,40 +123,39 @@ class AlumnoTurno : AppCompatActivity() {
                                                     // Añadir el listener
                                                     if (listener == null) {
 
-                                                        listener = document.reference.addSnapshotListener({ snapshot, e ->
+                                                        listener = document.reference.addSnapshotListener({ snapshot, _ ->
                                                             if (snapshot != null && snapshot.exists()) {
 
                                                                 refAula = snapshot.reference
 
-                                                                if (snapshot.data != null) {
-                                                                    val aula = snapshot.data
-                                                                    Log.d(TAG, "Actualizando datos del aula")
+                                                                val aula = snapshot.data
+                                                                Log.d(TAG, "Actualizando datos del aula")
 
-                                                                    val cola = aula["cola"] as? ArrayList<String> ?: ArrayList<String>()
-                                                                    val codigo = aula["codigo"] as? String ?: "?"
+                                                                val cola = aula["cola"] as? ArrayList<String> ?: ArrayList<String>()
+                                                                val codigo = aula["codigo"] as? String ?: "?"
 
-                                                                    this.aula = Aula(codigo, cola)
+                                                                this.aula = Aula(codigo, cola)
 
-                                                                    // Si el usuario no está en la cola, lo añadimos
+                                                                // Si el usuario no está en la cola, lo añadimos
 
-                                                                    if (App.pedirTurno && !cola.contains(uid!!)) {
+                                                                if (App.pedirTurno && !cola.contains(uid!!)) {
 
-                                                                        App.pedirTurno = false
-                                                                        this.aula?.cola?.add(uid!!)
+                                                                    App.pedirTurno = false
+                                                                    this.aula?.cola?.add(uid!!)
 
-                                                                        datos = HashMap<String, Any>()
-                                                                        datos.put("cola", this.aula?.cola!!)
+                                                                    datos = HashMap<String, Any>()
+                                                                    datos.put("cola", this.aula?.cola!!)
 
-                                                                        snapshot.reference.update(datos)
-                                                                                .addOnSuccessListener { Log.d(TAG, "Cola actualizada") }
-                                                                                .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
+                                                                    snapshot.reference.update(datos)
+                                                                            .addOnSuccessListener { Log.d(TAG, "Cola actualizada") }
+                                                                            .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
 
-                                                                    }
-
-                                                                    Log.d(TAG, "Aula: " + this.aula)
-
-                                                                    this.actualizar()
                                                                 }
+
+                                                                Log.d(TAG, "Aula: " + this.aula)
+
+                                                                this.actualizar()
+
                                                             } else {
                                                                 Log.d(TAG, "El aula ha desaparecido")
 
@@ -185,7 +176,7 @@ class AlumnoTurno : AppCompatActivity() {
                                                 }
                                             } else {
                                                 Log.d(TAG, "Aula no encontrada")
-                                                etiquetaAula?.text = "?"
+                                                etiquetaAula.text = "?"
                                             }
                                         } else {
                                             Log.d(TAG, "Error getting documents: ", task.exception)
@@ -198,23 +189,23 @@ class AlumnoTurno : AppCompatActivity() {
         }
 
         // Evento del botón Actualizar
-        findViewById<Button>(R.id.botonActualizar).setOnClickListener {
+        botonActualizar.setOnClickListener {
 
             Log.d("TurnoClase", "Este botón ya no hace nada...")
 
             if (isRunningTest) {
 
                 if (n > 0) {
-                    etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f);
-                    numeroTurno = n.toString();
+                    etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+                    numeroTurno = n.toString()
                 } else if (n == 0) {
-                    etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f);
-                    numeroTurno = getResources().getString(R.string.mensaje_turno);
+                    etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
+                    numeroTurno = getResources().getString(R.string.mensaje_turno)
                 } else {
-                    etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f);
-                    numeroTurno = "";
+                    etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+                    numeroTurno = ""
                 }
-                etiquetaNumero?.setText(numeroTurno);
+                etiquetaNumero.setText(numeroTurno)
 
                 n -= 1
             }
@@ -222,10 +213,10 @@ class AlumnoTurno : AppCompatActivity() {
         }
 
         // Evento del botón Cancelar
-        findViewById<Button>(R.id.botonCancelar).setOnClickListener { cancelar() }
+        botonCancelar.setOnClickListener { cancelar() }
 
         // Animación del botón Actualizar
-        findViewById<Button>(R.id.botonActualizar).setOnTouchListener { v, event ->
+        botonActualizar.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonActualizar...")
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
@@ -241,7 +232,7 @@ class AlumnoTurno : AppCompatActivity() {
         }
 
         // Animación del botón Cancelar
-        findViewById<Button>(R.id.botonCancelar).setOnTouchListener { v, event ->
+        botonCancelar.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 Log.d("TurnoClase", "DOWN del botón botonActualizar...")
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
@@ -264,21 +255,21 @@ class AlumnoTurno : AppCompatActivity() {
             val aula = this.aula!!
 
             // Mostramos el código en la pantalla
-            etiquetaAula?.text = aula.codigo
+            etiquetaAula.text = aula.codigo
 
-            val posicion = aula.cola.indexOf(uid);
+            val posicion = aula.cola.indexOf(uid)
 
             if (posicion > 0) {
-                etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f);
-                numeroTurno = posicion.toString();
+                etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+                numeroTurno = posicion.toString()
             } else if (posicion == 0) {
-                etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f);
-                numeroTurno = getResources().getString(R.string.mensaje_turno);
+                etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
+                numeroTurno = getResources().getString(R.string.mensaje_turno)
             } else {
-                etiquetaNumero?.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f);
-                numeroTurno = "";
+                etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+                numeroTurno = ""
             }
-            etiquetaNumero?.setText(numeroTurno);
+            etiquetaNumero.setText(numeroTurno)
 
             Log.d(TAG, "Alumnos en cola: ${aula.cola.size}")
 

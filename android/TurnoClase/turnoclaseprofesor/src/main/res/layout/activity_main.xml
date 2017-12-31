@@ -107,17 +107,17 @@
         android:elevation="5dp">
 
         <TextView
+            android:id="@+id/etiquetaNombreAlumno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=""
-            android:id="@+id/etiquetaNumero"
-            android:textSize="16pt"
-            android:gravity="center_vertical|center_horizontal"
             android:layout_centerInParent="true"
-            android:textAlignment="center"
             android:elegantTextHeight="false"
-            android:includeFontPadding="false" />
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:text=""
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="16pt" />
 
     </RelativeLayout>
 
