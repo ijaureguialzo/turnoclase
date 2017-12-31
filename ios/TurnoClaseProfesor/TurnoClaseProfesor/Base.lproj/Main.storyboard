@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -54,7 +54,7 @@
                                 <rect key="frame" x="35" y="299.66666666666669" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfn-8u-Zne" userLabel="botonCodigoAula">
-                                        <rect key="frame" x="4" y="0.0" width="64" height="72"/>
+                                        <rect key="frame" x="21" y="0.0" width="30" height="72"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="···">
@@ -76,11 +76,9 @@
                                     <constraint firstAttribute="centerX" secondItem="Gfn-8u-Zne" secondAttribute="centerX" id="5fZ-su-x8V"/>
                                     <constraint firstAttribute="bottom" secondItem="Gfn-8u-Zne" secondAttribute="bottom" id="7H9-ee-MJK"/>
                                     <constraint firstItem="Gfn-8u-Zne" firstAttribute="top" secondItem="4hc-gA-Oel" secondAttribute="top" id="CNi-hf-6wh"/>
-                                    <constraint firstItem="Gfn-8u-Zne" firstAttribute="leading" secondItem="4hc-gA-Oel" secondAttribute="leading" constant="4" id="Dxw-qV-0wC"/>
                                     <constraint firstAttribute="width" constant="72" id="GfJ-bZ-jGd"/>
                                     <constraint firstAttribute="centerY" secondItem="Gfn-8u-Zne" secondAttribute="centerY" id="omg-vM-MO5"/>
                                     <constraint firstAttribute="centerY" secondItem="Gfn-8u-Zne" secondAttribute="centerY" id="ueq-2f-Si5"/>
-                                    <constraint firstAttribute="trailing" secondItem="Gfn-8u-Zne" secondAttribute="trailing" constant="4" id="yl1-UC-iLB"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="colorCirculo">
@@ -91,31 +89,27 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7k-GT-Ntb" userLabel="contenedorRestantes" customClass="FondoCircular" customModule="TurnoClaseProfesor" customModuleProvider="target">
                                 <rect key="frame" x="230" y="246.66666666666663" width="72" height="72"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anU-ip-9Dt" userLabel="botonActualizar">
-                                        <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="botonActualizar"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="72" id="aep-ea-z2b"/>
-                                            <constraint firstAttribute="width" constant="72" id="lcn-3b-ccC"/>
-                                        </constraints>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anU-ip-9Dt" userLabel="botonEnCola">
+                                        <rect key="frame" x="21" y="0.0" width="30" height="72"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="botonEnCola"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="···">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="botonActualizar:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0Qg-ME-WEa"/>
+                                            <action selector="botonEnCola:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0Qg-ME-WEa"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="72" id="1td-f1-38j"/>
                                     <constraint firstAttribute="width" constant="72" id="S69-2R-1Ln"/>
                                     <constraint firstAttribute="bottom" secondItem="anU-ip-9Dt" secondAttribute="bottom" id="fnv-HB-ivC"/>
                                     <constraint firstItem="anU-ip-9Dt" firstAttribute="top" secondItem="S7k-GT-Ntb" secondAttribute="top" id="kN1-VV-ahU"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="72" id="kPa-ei-BBq"/>
                                     <constraint firstAttribute="centerX" secondItem="anU-ip-9Dt" secondAttribute="centerX" id="p2X-gY-CKc"/>
-                                    <constraint firstAttribute="trailing" secondItem="anU-ip-9Dt" secondAttribute="trailing" id="pXc-0C-o1S"/>
-                                    <constraint firstItem="anU-ip-9Dt" firstAttribute="leading" secondItem="S7k-GT-Ntb" secondAttribute="leading" id="qaI-h8-309"/>
                                     <constraint firstAttribute="centerY" secondItem="anU-ip-9Dt" secondAttribute="centerY" id="s8F-zF-Eo0"/>
                                     <constraint firstAttribute="height" constant="72" id="ui7-DN-Bcc"/>
                                 </constraints>
@@ -234,8 +228,8 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="etiquetaBotonActualizar" destination="anU-ip-9Dt" id="QJg-kS-3kR"/>
                         <outlet property="etiquetaBotonCodigoAula" destination="Gfn-8u-Zne" id="2iV-44-MQY"/>
+                        <outlet property="etiquetaBotonEnCola" destination="anU-ip-9Dt" id="QJg-kS-3kR"/>
                         <outlet property="etiquetaNombreAlumno" destination="bbj-7Q-0e0" id="raP-0p-Xeb"/>
                     </connections>
                 </viewController>

@@ -42,13 +42,13 @@ class TurnoClaseProfesorUITests: XCTestCase {
 
         snapshot("01-Quedan2")
 
-        app.buttons["botonActualizar"].tap()
+        app.buttons["botonEnCola"].tap()
         snapshot("02-Quedan1")
 
-        app.buttons["botonActualizar"].tap()
+        app.buttons["botonEnCola"].tap()
         snapshot("03-Quedan0")
 
-        app.buttons["botonActualizar"].tap()
+        app.buttons["botonEnCola"].tap()
         snapshot("04-Terminado")
 
     }

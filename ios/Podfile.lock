@@ -70,7 +70,7 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - Protobuf (3.5.0)
-  - SimulatorStatusMagic (2.0)
+  - SimulatorStatusMagic (2.1)
   - XCGLogger (6.0.2):
     - XCGLogger/Core (= 6.0.2)
   - XCGLogger/Core (6.0.2):
@@ -101,7 +101,7 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
-  SimulatorStatusMagic: c8e958d70e0e0cd2d7cf33bb95014a222ddecf0a
+  SimulatorStatusMagic: 481558caf2b9ccb2ceba2cc193728d4db3dcac07
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
 
 PODFILE CHECKSUM: fc9f94d3beb0078c7f6a27c4042245b4c995ef05

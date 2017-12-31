@@ -36,7 +36,7 @@ class ViewController: UIViewController {
 
     // Outlets para el interfaz de usuario
     @IBOutlet weak var etiquetaNombreAlumno: UILabel!
-    @IBOutlet weak var etiquetaBotonActualizar: UIButton!
+    @IBOutlet weak var etiquetaBotonEnCola: UIButton!
     @IBOutlet weak var etiquetaBotonCodigoAula: UIButton!
 
     // Para simular el interfaz al hacer las capturas
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         // Registrarse como usuario anónimo
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             self.etiquetaBotonCodigoAula.setTitle("BE131", for: UIControlState())
-            self.etiquetaBotonActualizar.setTitle("2", for: UIControlState())
+            self.etiquetaBotonEnCola.setTitle("2", for: UIControlState())
             self.etiquetaNombreAlumno.text = ""
         } else {
             Auth.auth().signInAnonymously() { (user, error) in
@@ -131,7 +131,7 @@ class ViewController: UIViewController {
             self.etiquetaBotonCodigoAula.setTitle(aula.codigo, for: UIControlState())
 
             // Mostrar el recuento
-            self.etiquetaBotonActualizar.setTitle("\(aula.cola.count)", for: UIControlState())
+            self.etiquetaBotonEnCola.setTitle("\(aula.cola.count)", for: UIControlState())
             log.info("Alumnos en cola: \(aula.cola.count)")
 
         } else {
@@ -206,16 +206,16 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func botonActualizar(_ sender: UIButton) {
+    @IBAction func botonEnCola(_ sender: UIButton) {
         log.info("Este botón ya no hace nada :)")
 
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             n -= 1
             if(n >= 0) {
-                self.etiquetaBotonActualizar.setTitle("\(n)", for: UIControlState())
+                self.etiquetaBotonEnCola.setTitle("\(n)", for: UIControlState())
                 self.etiquetaNombreAlumno.text = nombreAleatorio()
             } else {
-                self.etiquetaBotonActualizar.setTitle("0", for: UIControlState())
+                self.etiquetaBotonEnCola.setTitle("0", for: UIControlState())
                 self.etiquetaNombreAlumno.text = ""
             }
         }
