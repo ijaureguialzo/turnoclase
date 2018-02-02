@@ -240,8 +240,9 @@ class ViewController: UIViewController {
                 db.collection("alumnos").document(siguiente).getDocument { (document, error) in
                     if let document = document {
                         if document.exists {
-                            let alumno = document.data()
-                            self.etiquetaNombreAlumno.text = alumno["nombre"] as? String ?? "?"
+                            if let alumno = document.data() {
+                                self.etiquetaNombreAlumno.text = alumno["nombre"] as? String ?? "?"
+                            }
                         } else {
                             log.error("El alumno no existe")
                             self.etiquetaNombreAlumno.text = "?"
