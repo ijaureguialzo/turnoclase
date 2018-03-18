@@ -5,12 +5,12 @@ PODS:
   - BoringSSL/Implementation (10.0):
     - BoringSSL/Interface (= 10.0)
   - BoringSSL/Interface (10.0)
-  - Firebase/Auth (4.10.0):
+  - Firebase/Auth (4.10.1):
     - Firebase/Core
     - FirebaseAuth (= 4.4.4)
-  - Firebase/Core (4.10.0):
+  - Firebase/Core (4.10.1):
     - FirebaseAnalytics (= 4.1.0)
-    - FirebaseCore (= 4.0.16)
+    - FirebaseCore (= 4.0.17)
   - FirebaseAnalytics (4.1.0):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -20,9 +20,9 @@ PODS:
     - FirebaseAnalytics (~> 4.1)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.16):
+  - FirebaseCore (4.0.17):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseFirestore (0.10.2):
+  - FirebaseFirestore (0.10.3):
     - FirebaseAnalytics (~> 4.1)
     - FirebaseCore (~> 4.0)
     - gRPC-ProtoRPC (~> 1.0)
@@ -85,11 +85,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   BoringSSL: 32764dbaf5f5888cf51fbaa172a010126b41bcd4
-  Firebase: c98c8b1fbcbdccd82539a36c2b17a9b1bb0ee798
+  Firebase: 92c6ba593e32db0defde464a9adc981d5cb49f97
   FirebaseAnalytics: 3dfae28d4a5e06f86c4fae830efc2ad3fadb19bc
   FirebaseAuth: d040bb7a9db6dfc29d0e7ec82d48be51352b2581
-  FirebaseCore: eb9e1a56733ff1094ecf3e28af9069c344b25239
-  FirebaseFirestore: 9423ca756bbf77bfa3cd02fafc8027ae79da625a
+  FirebaseCore: 872307b001bbefda1dfa0dbfffa50a6919023d4a
+  FirebaseFirestore: 41d1ec1f37963b63f8bbbcdb94d8545d4c6c1b42
   FirebaseInstanceID: d2058a35e9bebda1b6dd42486b84917bde552a9d
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   gRPC: f54f0e6d603052b4562447da442ce2ff30bcdacc
