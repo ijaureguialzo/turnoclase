@@ -114,10 +114,10 @@ class AlumnoTurno : AppCompatActivity() {
                                     .whereEqualTo("codigo", codigoAula)
                                     .limit(1)
                                     .get()
-                                    .addOnCompleteListener { task ->
-                                        if (task.isSuccessful) {
-                                            if (task.result.count() > 0) {
-                                                for (document in task.result) {
+                                    .addOnCompleteListener { task2 ->
+                                        if (task2.isSuccessful) {
+                                            if (task2.result.count() > 0) {
+                                                for (document in task2.result) {
                                                     Log.d(TAG, "Conectado a aula existente")
 
                                                     // Añadir el listener
@@ -131,6 +131,7 @@ class AlumnoTurno : AppCompatActivity() {
                                                                 val aula = snapshot.data
                                                                 Log.d(TAG, "Actualizando datos del aula")
 
+                                                                @Suppress("UNCHECKED_CAST")
                                                                 val cola = aula["cola"] as? ArrayList<String> ?: ArrayList<String>()
                                                                 val codigo = aula["codigo"] as? String ?: "?"
 
@@ -179,7 +180,7 @@ class AlumnoTurno : AppCompatActivity() {
                                                 etiquetaAula.text = "?"
                                             }
                                         } else {
-                                            Log.d(TAG, "Error getting documents: ", task.exception)
+                                            Log.d(TAG, "Error getting documents: ", task2.exception)
                                         }
                                     }
                         } else {

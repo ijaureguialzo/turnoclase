@@ -48,11 +48,11 @@ android {
             svg.srcDir 'src/main/svg'
         }
     }
-    buildToolsVersion rootProject.ext.buildToolsVersion
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildToolsVersion '27.0.3'
 }
 
 victor {
@@ -65,15 +65,15 @@ victor {
 
 // REF: Generar árbol de dependencias: https://stackoverflow.com/a/42374426/5136913
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:appcompat-v7:$support_lib_version"
-    compile "com.android.support:support-media-compat:$support_lib_version"
-    compile "com.android.support:support-v4:$support_lib_version"
-    compile "com.google.firebase:firebase-core:$firebase_version"
-    compile "com.google.firebase:firebase-auth:$firebase_version"
-    compile "com.google.firebase:firebase-firestore:$firebase_version"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    androidTestCompile "tools.fastlane:screengrab:$fastlane_screengrab_version"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$support_lib_version"
+    implementation "com.android.support:support-media-compat:$support_lib_version"
+    implementation "com.android.support:support-v4:$support_lib_version"
+    implementation "com.google.firebase:firebase-core:$firebase_version"
+    implementation "com.google.firebase:firebase-auth:$firebase_version"
+    implementation "com.google.firebase:firebase-firestore:$firebase_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    androidTestImplementation "tools.fastlane:screengrab:$fastlane_screengrab_version"
 }
 
 apply plugin: 'com.google.gms.google-services'

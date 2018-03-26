@@ -91,9 +91,9 @@ class MainActivity : AppCompatActivity() {
                             // Cargar el aula y si no, crearla
                             db.collection("aulas").document(uid!!)
                                     .get()
-                                    .addOnCompleteListener { task ->
-                                        if (task.isSuccessful) {
-                                            val document = task.result
+                                    .addOnCompleteListener { task2 ->
+                                        if (task2.isSuccessful) {
+                                            val document = task2.result
                                             if (!document.exists()) {
                                                 Log.d(TAG, "Creando nueva aula")
 
@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                                                 conectarListener()
                                             }
                                         } else {
-                                            Log.e(TAG, "Error al recuperar el aula: ", task.exception)
+                                            Log.e(TAG, "Error al recuperar el aula: ", task2.exception)
                                         }
                                     }
                         } else {
@@ -361,6 +361,7 @@ class MainActivity : AppCompatActivity() {
                             val aula = snapshot.data
                             Log.d(TAG, "Actualizando datos del aula")
 
+                            @Suppress("UNCHECKED_CAST")
                             val cola = aula["cola"] as? ArrayList<String> ?: ArrayList<String>()
                             val codigo = aula["codigo"] as? String ?: "?"
 
