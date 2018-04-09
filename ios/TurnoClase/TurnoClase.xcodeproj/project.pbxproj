@@ -213,7 +213,6 @@
 				415BC63F1B2F5305004FADE0 /* Frameworks */,
 				415BC6401B2F5305004FADE0 /* Resources */,
 				9C4A1177216046EAF577148B /* [CP] Embed Pods Frameworks */,
-				A85A5FC2198F889C43659F04 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -343,21 +342,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A85A5FC2198F889C43659F04 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C90BA8C9451A54300514196E /* [CP] Check Pods Manifest.lock */ = {
