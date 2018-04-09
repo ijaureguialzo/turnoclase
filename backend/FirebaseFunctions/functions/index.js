@@ -8,11 +8,11 @@ var randtoken = require('rand-token').generator({
 
 exports.crearAula = functions.firestore
     .document('aulas/{userId}')
-    .onCreate(event => {
+    .onCreate((snap, context) => {
 
         var token = randtoken.generate(5);
 
-        return event.data.ref.set({
+        return snap.ref.set({
             codigo: token
         }, {merge: true});
     });
