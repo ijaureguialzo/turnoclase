@@ -1,28 +1,28 @@
 PODS:
-  - BoringSSL (10.0):
-    - BoringSSL/Implementation (= 10.0)
-    - BoringSSL/Interface (= 10.0)
-  - BoringSSL/Implementation (10.0):
-    - BoringSSL/Interface (= 10.0)
-  - BoringSSL/Interface (10.0)
-  - Firebase/Auth (4.11.0):
+  - BoringSSL (10.0.2):
+    - BoringSSL/Implementation (= 10.0.2)
+    - BoringSSL/Interface (= 10.0.2)
+  - BoringSSL/Implementation (10.0.2):
+    - BoringSSL/Interface (= 10.0.2)
+  - BoringSSL/Interface (10.0.2)
+  - Firebase/Auth (4.12.0):
     - Firebase/Core
-    - FirebaseAuth (= 4.5.0)
-  - Firebase/Core (4.11.0):
+    - FirebaseAuth (= 4.6.0)
+  - Firebase/Core (4.12.0):
     - FirebaseAnalytics (= 4.1.0)
-    - FirebaseCore (= 4.0.18)
+    - FirebaseCore (= 4.0.19)
   - FirebaseAnalytics (4.1.0):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
-  - FirebaseAuth (4.5.0):
+  - FirebaseAuth (4.6.0):
     - FirebaseAnalytics (~> 4.1)
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.18):
+  - FirebaseCore (4.0.19):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseFirestore (0.10.4):
+  - FirebaseFirestore (0.11.0):
     - FirebaseAnalytics (~> 4.1)
     - FirebaseCore (~> 4.0)
     - gRPC-ProtoRPC (~> 1.0)
@@ -106,12 +106,12 @@ SPEC REPOS:
     - XCGLogger
 
 SPEC CHECKSUMS:
-  BoringSSL: 32764dbaf5f5888cf51fbaa172a010126b41bcd4
-  Firebase: cc13dfab1038c8b45d7903e01fc690451d6d0b24
+  BoringSSL: 60dd24df4af296bf41d78e5841dbb95d75f88c0d
+  Firebase: d7fdf40e4d6c841849c52919f437fd3a0009ded0
   FirebaseAnalytics: 3dfae28d4a5e06f86c4fae830efc2ad3fadb19bc
-  FirebaseAuth: 147bf340a0706b44ca1753d6b41ebafd9687cfe6
-  FirebaseCore: b981f47e5254cbcfdeb483355300d743f6fcab2c
-  FirebaseFirestore: 796df79c29cf8ecf806564f4d347665bdafa6ef0
+  FirebaseAuth: 85a1b118a89838efc6f6ab3f2b1f94747d72a915
+  FirebaseCore: ff49ebb37e0f63a570d78c4f1c1c0befe8659d5c
+  FirebaseFirestore: e92a096ce80c7b4b905d4e9d41dbd944adc9d2a5
   FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   gRPC: f54f0e6d603052b4562447da442ce2ff30bcdacc
