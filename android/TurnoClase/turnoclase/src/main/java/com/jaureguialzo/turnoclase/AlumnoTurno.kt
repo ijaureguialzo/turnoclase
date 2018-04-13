@@ -132,7 +132,7 @@ class AlumnoTurno : AppCompatActivity() {
                                                                 Log.d(TAG, "Actualizando datos del aula")
 
                                                                 @Suppress("UNCHECKED_CAST")
-                                                                val cola = aula["cola"] as? ArrayList<String> ?: ArrayList<String>()
+                                                                val cola = aula!!["cola"] as? ArrayList<String> ?: ArrayList<String>()
                                                                 val codigo = aula["codigo"] as? String ?: "?"
 
                                                                 this.aula = Aula(codigo, cola)

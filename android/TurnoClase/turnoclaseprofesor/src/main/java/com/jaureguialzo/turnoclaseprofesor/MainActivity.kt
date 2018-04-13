@@ -213,7 +213,7 @@ class MainActivity : AppCompatActivity() {
                                     if (document.exists()) {
                                         val alumno = document.data
 
-                                        val nombre = alumno["nombre"] as? String ?: "?"
+                                        val nombre = alumno!!["nombre"] as? String ?: "?"
 
                                         if (nombre.length >= 10) {
                                             etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
@@ -362,7 +362,7 @@ class MainActivity : AppCompatActivity() {
                             Log.d(TAG, "Actualizando datos del aula")
 
                             @Suppress("UNCHECKED_CAST")
-                            val cola = aula["cola"] as? ArrayList<String> ?: ArrayList<String>()
+                            val cola = aula!!["cola"] as? ArrayList<String> ?: ArrayList<String>()
                             val codigo = aula["codigo"] as? String ?: "?"
 
                             this.aula = Aula(codigo, cola)
