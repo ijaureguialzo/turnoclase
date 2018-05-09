@@ -57,11 +57,11 @@ class ViewController: UIViewController {
             self.etiquetaBotonEnCola.setTitle("2", for: UIControlState())
             self.etiquetaNombreAlumno.text = ""
         } else {
-            Auth.auth().signInAnonymously() { (user, error) in
+            Auth.auth().signInAnonymously() { (result, error) in
 
-                if let usuario = user {
+                if let resultado = result {
 
-                    self.uid = usuario.uid
+                    self.uid = resultado.user.uid
                     log.info("Registrado como usuario con UID: \(self.uid)")
 
                     db.collection("aulas").document(self.uid).getDocument() { (document, error) in
@@ -150,7 +150,7 @@ class ViewController: UIViewController {
 
             db.collection("aulas").document(self.uid).setData([
                 "cola": []
-            ], options: SetOptions.merge()) { error in
+            ], merge: true) { error in
                 if let error = error {
                     log.error("Error al actualizar el aula: \(error.localizedDescription)")
                 } else {
@@ -255,7 +255,7 @@ class ViewController: UIViewController {
                 // Actualizar el aula
                 db.collection("aulas").document(self.uid).setData([
                     "cola": self.aula.cola
-                ], options: SetOptions.merge()) { error in
+                ], merge: true) { error in
                     if let error = error {
                         log.error("Error al actualizar el aula: \(error.localizedDescription)")
                     } else {

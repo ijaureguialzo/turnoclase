@@ -5,41 +5,43 @@ PODS:
   - BoringSSL/Implementation (10.0.2):
     - BoringSSL/Interface (= 10.0.2)
   - BoringSSL/Interface (10.0.2)
-  - Firebase/Auth (4.13.0):
-    - Firebase/Core
-    - FirebaseAuth (= 4.6.1)
-  - Firebase/Core (4.13.0):
-    - FirebaseAnalytics (= 4.2.0)
-    - FirebaseCore (= 4.0.20)
-  - FirebaseAnalytics (4.2.0):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
+  - Firebase/Auth (5.0.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (= 5.0.0)
+  - Firebase/Core (5.0.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.0.0)
+  - Firebase/CoreOnly (5.0.0):
+    - FirebaseCore (= 5.0.0)
+  - Firebase/Firestore (5.0.0):
+    - Firebase/CoreOnly
+    - FirebaseFirestore (= 0.12.0)
+  - FirebaseAnalytics (5.0.0):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
-  - FirebaseAuth (4.6.1):
-    - FirebaseAnalytics (~> 4.2)
-    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+  - FirebaseAuth (5.0.0):
+    - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.20):
+  - FirebaseCore (5.0.0):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseFirestore (0.11.0):
-    - FirebaseAnalytics (~> 4.1)
-    - FirebaseCore (~> 4.0)
+  - FirebaseFirestore (0.12.0):
+    - FirebaseCore (~> 5.0)
+    - FirebaseFirestore/abseil-cpp (= 0.12.0)
     - gRPC-ProtoRPC (~> 1.0)
     - leveldb-library (~> 1.18)
-    - Protobuf (~> 3.5)
-  - FirebaseInstanceID (2.0.10):
-    - FirebaseCore (~> 4.0)
-  - GoogleToolboxForMac/DebugUtils (2.1.4):
-    - GoogleToolboxForMac/Defines (= 2.1.4)
+    - Protobuf (~> 3.1)
+  - FirebaseFirestore/abseil-cpp (0.12.0):
+    - FirebaseCore (~> 5.0)
+    - gRPC-ProtoRPC (~> 1.0)
+    - leveldb-library (~> 1.18)
+    - Protobuf (~> 3.1)
+  - FirebaseInstanceID (3.0.0):
+    - FirebaseCore (~> 5.0)
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.4)":
-    - GoogleToolboxForMac/DebugUtils (= 2.1.4)
-    - GoogleToolboxForMac/Defines (= 2.1.4)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.1.4)"
   - gRPC (1.11.0):
     - gRPC-RxLibrary (= 1.11.0)
     - gRPC/Main (= 1.11.0)
@@ -79,7 +81,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
-  - FirebaseFirestore
+  - Firebase/Firestore
   - SimulatorStatusMagic
   - XCGLogger
 
@@ -107,12 +109,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   BoringSSL: 60dd24df4af296bf41d78e5841dbb95d75f88c0d
-  Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
-  FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
-  FirebaseAuth: bf22cacf22c60ab454bf2636f556d8892b10b53f
-  FirebaseCore: 90cb1c53d69b556f112a1bf72b5fcfaad7650790
-  FirebaseFirestore: e92a096ce80c7b4b905d4e9d41dbd944adc9d2a5
-  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
+  Firebase: 4bd804448ab2596794698773d41520a0af101e65
+  FirebaseAnalytics: 19812b49fa5f283dd6b23edf8a14b5d477029ab8
+  FirebaseAuth: acbeef02fe7c3a26624e309849f3fe30c84115af
+  FirebaseCore: e46e4babb9de298fb2f736958edcc6da1dc60d73
+  FirebaseFirestore: c3fd43060679baeaeb0f9b78bc5258904d2e4946
+  FirebaseInstanceID: 83e0040351565df711a5db3d8ebe5ea21aca998a
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   gRPC: 70703dc9ba31c72341fc7f37745cc1c379edee96
   gRPC-Core: 164639cd8ae18ca8b65477fafb2efbaecf4f181a
@@ -126,6 +128,6 @@ SPEC CHECKSUMS:
   SimulatorStatusMagic: 481558caf2b9ccb2ceba2cc193728d4db3dcac07
   XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
 
-PODFILE CHECKSUM: fc9f94d3beb0078c7f6a27c4042245b4c995ef05
+PODFILE CHECKSUM: 1146a4f76cdf23ab6520f6bc8aa8753185b90c18
 
 COCOAPODS: 1.5.0

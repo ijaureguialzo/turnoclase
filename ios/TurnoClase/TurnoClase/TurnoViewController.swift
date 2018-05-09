@@ -60,16 +60,16 @@ class TurnoViewController: UIViewController {
             etiquetaNumero.text = "2"
         } else {
             // Registrarse como usuario anónimo
-            Auth.auth().signInAnonymously() { (user, error) in
+            Auth.auth().signInAnonymously() { (result, error) in
 
-                if let usuario = user {
+                if let resultado = result {
 
-                    self.uid = usuario.uid
+                    self.uid = resultado.user.uid
                     log.info("Registrado como usuario con UID: \(self.uid)")
 
                     db.collection("alumnos").document(self.uid).setData([
                         "nombre": self.nombreUsuario
-                    ], options: SetOptions.merge()) { error in
+                    ], merge: true) { error in
                         if let error = error {
                             log.error("Error al actualizar el alumno: \(error.localizedDescription)")
                         } else {
@@ -110,7 +110,7 @@ class TurnoViewController: UIViewController {
 
                                                             documentSnapshot?.reference.setData([
                                                                 "cola": self.aula.cola
-                                                            ], options: SetOptions.merge()) { error in
+                                                            ], merge: true) { error in
                                                                 if let error = error {
                                                                     log.error("Error al actualizar el aula: \(error.localizedDescription)")
                                                                 } else {
@@ -173,7 +173,7 @@ class TurnoViewController: UIViewController {
 
             refAula.setData([
                 "cola": self.aula.cola
-            ], options: SetOptions.merge()) { error in
+            ], merge: true) { error in
                 if let error = error {
                     log.error("Error al actualizar el aula: \(error.localizedDescription)")
                 } else {
