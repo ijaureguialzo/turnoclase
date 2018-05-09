@@ -2,11 +2,20 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.2.31'
+        gradle_plugin_version = '3.1.2'
+        google_services_version = '3.3.1'
         support_lib_version = '27.1.1'
-        victor_version = '1.0.0'
-        firebase_version = '15.0.0'
+        multidex_support_lib_version = '1.0.3'
+
+        kotlin_version = '1.2.41'
+
+        firebase_core_version = '15.0.0'
+        firebase_auth_version = '15.0.0'
+        firebase_firestore_version = '15.0.0'
+
         fastlane_screengrab_version = '1.1.0'
+
+        victor_version = '1.0.0'
     }
     repositories {
         jcenter()
@@ -17,8 +26,8 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
-        classpath 'com.google.gms:google-services:3.1.0'
+        classpath "com.android.tools.build:gradle:$gradle_plugin_version"
+        classpath "com.google.gms:google-services:$google_services_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

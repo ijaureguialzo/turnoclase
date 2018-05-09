@@ -28,6 +28,7 @@ android {
         versionCode 13
         versionName "2.0.2"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        multiDexEnabled true
     }
     signingConfigs {
         release {
@@ -69,9 +70,10 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_lib_version"
     implementation "com.android.support:support-media-compat:$support_lib_version"
     implementation "com.android.support:support-v4:$support_lib_version"
-    implementation "com.google.firebase:firebase-core:$firebase_version"
-    implementation "com.google.firebase:firebase-auth:$firebase_version"
-    implementation "com.google.firebase:firebase-firestore:$firebase_version"
+    implementation "com.android.support:multidex:$multidex_support_lib_version"
+    implementation "com.google.firebase:firebase-core:$firebase_core_version"
+    implementation "com.google.firebase:firebase-auth:$firebase_auth_version"
+    implementation "com.google.firebase:firebase-firestore:$firebase_firestore_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     androidTestImplementation "tools.fastlane:screengrab:$fastlane_screengrab_version"
 }

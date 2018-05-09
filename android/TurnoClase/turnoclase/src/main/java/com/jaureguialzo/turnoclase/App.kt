@@ -17,12 +17,12 @@
 
 package com.jaureguialzo.turnoclase
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 
 /**
  * Created by widemos on 19/6/15.
  */
-class App : Application() {
+class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
