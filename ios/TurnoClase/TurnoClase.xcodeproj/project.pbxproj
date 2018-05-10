@@ -24,7 +24,7 @@
 		415BC6521B2F5305004FADE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415BC6501B2F5305004FADE0 /* LaunchScreen.xib */; };
 		416796721B50461C00DCF09B /* BotonGrafico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416796701B50461C00DCF09B /* BotonGrafico.swift */; };
 		416796731B50461C00DCF09B /* FondoCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416796711B50461C00DCF09B /* FondoCircular.swift */; };
-		AECE5F0A672A15C55191EEE7 /* Pods_TurnoClase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 514134A13F09CC115CE339B4 /* Pods_TurnoClase.framework */; };
+		49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A5CF5583161E0C351BE0C6E /* Pods-TurnoClase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.release.xcconfig"; sourceTree = "<group>"; };
 		410088F61FBED8F60058B3F5 /* TurnoClaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurnoClaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		410088F81FBED8F70058B3F5 /* TurnoClaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnoClaseUITests.swift; sourceTree = "<group>"; };
 		410088FA1FBED8F70058B3F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,8 +65,9 @@
 		416796701B50461C00DCF09B /* BotonGrafico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonGrafico.swift; sourceTree = "<group>"; };
 		416796711B50461C00DCF09B /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
 		4199FF0B1E32EF9500F9E42F /* TurnoClase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TurnoClase.entitlements; sourceTree = "<group>"; };
-		514134A13F09CC115CE339B4 /* Pods_TurnoClase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C9EE04D4D010E3B35A683FC /* Pods-TurnoClase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.debug.xcconfig"; sourceTree = "<group>"; };
+		A58F32411CFA55EA494330C8 /* Pods-TurnoClase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.debug.xcconfig"; sourceTree = "<group>"; };
+		CF984E0ACB82BD169BB892C2 /* Pods-TurnoClase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.release.xcconfig"; sourceTree = "<group>"; };
+		D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,22 +82,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AECE5F0A672A15C55191EEE7 /* Pods_TurnoClase.framework in Frameworks */,
+				49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2CB722A7981E4D494818F997 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8C9EE04D4D010E3B35A683FC /* Pods-TurnoClase.debug.xcconfig */,
-				1A5CF5583161E0C351BE0C6E /* Pods-TurnoClase.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		410088F71FBED8F70058B3F5 /* TurnoClaseUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,8 +115,8 @@
 				411608771B517B6E008C9A1E /* Resources */,
 				410088F71FBED8F70058B3F5 /* TurnoClaseUITests */,
 				415BC6431B2F5305004FADE0 /* Products */,
-				2CB722A7981E4D494818F997 /* Pods */,
-				F3C9CC95803DC895133DA292 /* Frameworks */,
+				B0948F3D7E593A26302C6559 /* Pods */,
+				DF45B9DA60FC384B1AA2D15F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,10 +166,19 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		F3C9CC95803DC895133DA292 /* Frameworks */ = {
+		B0948F3D7E593A26302C6559 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				514134A13F09CC115CE339B4 /* Pods_TurnoClase.framework */,
+				A58F32411CFA55EA494330C8 /* Pods-TurnoClase.debug.xcconfig */,
+				CF984E0ACB82BD169BB892C2 /* Pods-TurnoClase.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DF45B9DA60FC384B1AA2D15F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -208,11 +208,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 415BC6611B2F5305004FADE0 /* Build configuration list for PBXNativeTarget "TurnoClase" */;
 			buildPhases = (
-				C90BA8C9451A54300514196E /* [CP] Check Pods Manifest.lock */,
+				FDA9A6751056FF140DDB2260 /* [CP] Check Pods Manifest.lock */,
 				415BC63E1B2F5305004FADE0 /* Sources */,
 				415BC63F1B2F5305004FADE0 /* Frameworks */,
 				415BC6401B2F5305004FADE0 /* Resources */,
-				9C4A1177216046EAF577148B /* [CP] Embed Pods Frameworks */,
+				26437CE5268AF2C04A0D4E3D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -302,7 +302,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9C4A1177216046EAF577148B /* [CP] Embed Pods Frameworks */ = {
+		26437CE5268AF2C04A0D4E3D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -344,7 +344,7 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C90BA8C9451A54300514196E /* [CP] Check Pods Manifest.lock */ = {
+		FDA9A6751056FF140DDB2260 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -591,7 +591,7 @@
 		};
 		415BC6621B2F5305004FADE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C9EE04D4D010E3B35A683FC /* Pods-TurnoClase.debug.xcconfig */;
+			baseConfigurationReference = A58F32411CFA55EA494330C8 /* Pods-TurnoClase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ion Jaureguialzo Sarasola (CN85Y9YK74)";
@@ -616,7 +616,7 @@
 		};
 		415BC6631B2F5305004FADE0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A5CF5583161E0C351BE0C6E /* Pods-TurnoClase.release.xcconfig */;
+			baseConfigurationReference = CF984E0ACB82BD169BB892C2 /* Pods-TurnoClase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ion Jaureguialzo Sarasola (RSEH385M54)";

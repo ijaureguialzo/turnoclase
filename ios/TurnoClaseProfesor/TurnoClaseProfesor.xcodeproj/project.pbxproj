@@ -21,7 +21,7 @@
 		41F4C5D41B34BCD5004AA55E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D21B34BCD5004AA55E /* Main.storyboard */; };
 		41F4C5D61B34BCD5004AA55E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D51B34BCD5004AA55E /* Images.xcassets */; };
 		41F4C5D91B34BCD6004AA55E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D71B34BCD6004AA55E /* LaunchScreen.xib */; };
-		E59C55FFAAF5979B02F7B8F6 /* Pods_TurnoClaseProfesor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF221E2F5B6033AE0E708B0D /* Pods_TurnoClaseProfesor.framework */; };
+		D701C6065AB83DE19666FC5F /* Pods_TurnoClaseProfesor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD076638CC1F27DC86333D7 /* Pods_TurnoClaseProfesor.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,8 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		21BAE091D6ABEEF9E1744CE5 /* Pods-TurnoClaseProfesor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.release.xcconfig"; sourceTree = "<group>"; };
-		3CAD02C63CEE44B7863120D3 /* Pods-TurnoClaseProfesor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.debug.xcconfig"; sourceTree = "<group>"; };
+		0FD076638CC1F27DC86333D7 /* Pods_TurnoClaseProfesor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		410635181FB625E7008D723C /* Aula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aula.swift; sourceTree = "<group>"; };
 		410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		413BC20A1B5015D500E58F25 /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
@@ -60,7 +59,8 @@
 		41F4C5D31B34BCD5004AA55E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		41F4C5D51B34BCD5004AA55E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		41F4C5D81B34BCD6004AA55E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		EF221E2F5B6033AE0E708B0D /* Pods_TurnoClaseProfesor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63E67A3F426E090070BE462B /* Pods-TurnoClaseProfesor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.debug.xcconfig"; sourceTree = "<group>"; };
+		9EEA0A44053B58DE7CAA9482 /* Pods-TurnoClaseProfesor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E59C55FFAAF5979B02F7B8F6 /* Pods_TurnoClaseProfesor.framework in Frameworks */,
+				D701C6065AB83DE19666FC5F /* Pods_TurnoClaseProfesor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,8 +120,8 @@
 				41B669B01FC10B7300DEB965 /* TurnoClaseProfesorUITests */,
 				41A59BE01B516444000E3C8E /* Resources */,
 				41F4C5CA1B34BCD5004AA55E /* Products */,
-				D7C54A70A48EDEFC3D4EE91F /* Pods */,
-				85BA3C0368273F5A2922A060 /* Frameworks */,
+				F7A91AD7491067EF15642691 /* Pods */,
+				AC811C938802DD331C620029 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -157,19 +157,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		85BA3C0368273F5A2922A060 /* Frameworks */ = {
+		AC811C938802DD331C620029 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EF221E2F5B6033AE0E708B0D /* Pods_TurnoClaseProfesor.framework */,
+				0FD076638CC1F27DC86333D7 /* Pods_TurnoClaseProfesor.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D7C54A70A48EDEFC3D4EE91F /* Pods */ = {
+		F7A91AD7491067EF15642691 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3CAD02C63CEE44B7863120D3 /* Pods-TurnoClaseProfesor.debug.xcconfig */,
-				21BAE091D6ABEEF9E1744CE5 /* Pods-TurnoClaseProfesor.release.xcconfig */,
+				63E67A3F426E090070BE462B /* Pods-TurnoClaseProfesor.debug.xcconfig */,
+				9EEA0A44053B58DE7CAA9482 /* Pods-TurnoClaseProfesor.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -199,11 +199,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41F4C5E81B34BCD6004AA55E /* Build configuration list for PBXNativeTarget "TurnoClaseProfesor" */;
 			buildPhases = (
-				B3ED998C3A345EAD511D8806 /* [CP] Check Pods Manifest.lock */,
+				6BF8114C8ECB7CD1717563D8 /* [CP] Check Pods Manifest.lock */,
 				41F4C5C51B34BCD5004AA55E /* Sources */,
 				41F4C5C61B34BCD5004AA55E /* Frameworks */,
 				41F4C5C71B34BCD5004AA55E /* Resources */,
-				4D1FC8DF15FDC950F8BAD7F9 /* [CP] Embed Pods Frameworks */,
+				E11506942027563C22955673 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -289,7 +289,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4D1FC8DF15FDC950F8BAD7F9 /* [CP] Embed Pods Frameworks */ = {
+		6BF8114C8ECB7CD1717563D8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TurnoClaseProfesor-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E11506942027563C22955673 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -329,24 +347,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B3ED998C3A345EAD511D8806 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TurnoClaseProfesor-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -570,7 +570,7 @@
 		};
 		41F4C5E91B34BCD6004AA55E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CAD02C63CEE44B7863120D3 /* Pods-TurnoClaseProfesor.debug.xcconfig */;
+			baseConfigurationReference = 63E67A3F426E090070BE462B /* Pods-TurnoClaseProfesor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Ion Jaureguialzo Sarasola (CN85Y9YK74)";
@@ -595,7 +595,7 @@
 		};
 		41F4C5EA1B34BCD6004AA55E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21BAE091D6ABEEF9E1744CE5 /* Pods-TurnoClaseProfesor.release.xcconfig */;
+			baseConfigurationReference = 9EEA0A44053B58DE7CAA9482 /* Pods-TurnoClaseProfesor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ion Jaureguialzo Sarasola (RSEH385M54)";

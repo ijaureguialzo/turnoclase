@@ -86,7 +86,7 @@ DEPENDENCIES:
   - XCGLogger
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - BoringSSL
     - Firebase
     - FirebaseAnalytics
@@ -130,4 +130,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1146a4f76cdf23ab6520f6bc8aa8753185b90c18
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2
