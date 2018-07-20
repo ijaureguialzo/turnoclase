@@ -62,7 +62,7 @@ class ViewController: UIViewController {
                 if let resultado = result {
 
                     self.uid = resultado.user.uid
-                    log.info("Registrado como usuario con UID: \(String(describing: self.uid))")
+                    log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
                     db.collection("aulas").document(self.uid).getDocument() { (document, error) in
 
@@ -108,7 +108,7 @@ class ViewController: UIViewController {
 
                             self.aula = Aula(codigo: codigo, cola: cola)
 
-                            log.debug("Aula: \(String(describing: self.aula))")
+                            log.debug("Aula: \(self.aula ??? "[Desconocida]")")
 
                             self.actualizarPantalla()
                         }

@@ -49,7 +49,7 @@ class TurnoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        log.debug("Valores recibidos: \(String(describing: codigoAula)) - \(String(describing: nombreUsuario))")
+        log.debug("Valores recibidos: \(codigoAula ??? "[Aula desconocida]") - \(nombreUsuario ??? "[Usuario desconocido]")")
 
         log.info("Iniciando la aplicación...")
 
@@ -65,7 +65,7 @@ class TurnoViewController: UIViewController {
                 if let resultado = result {
 
                     self.uid = resultado.user.uid
-                    log.info("Registrado como usuario con UID: \(String(describing: self.uid))")
+                    log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
                     db.collection("alumnos").document(self.uid).setData([
                         "nombre": self.nombreUsuario
@@ -119,7 +119,7 @@ class TurnoViewController: UIViewController {
                                                             }
                                                         }
 
-                                                        log.debug("Aula: \(String(describing: self.aula))")
+                                                        log.debug("Aula: \(self.aula ??? "[Desconocida]")")
 
                                                         self.actualizarPantalla()
 

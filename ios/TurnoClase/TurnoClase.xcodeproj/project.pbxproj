@@ -14,6 +14,7 @@
 		4116087A1B517B88008C9A1E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 411608781B517B88008C9A1E /* Licenses */; };
 		4116087B1B517B88008C9A1E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 411608791B517B88008C9A1E /* Settings.bundle */; };
 		411609241B41B7E700E5BD59 /* TurnoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411609231B41B7E700E5BD59 /* TurnoViewController.swift */; };
+		4120B87D21024D940000EA79 /* OperadorOpcional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4120B87C21024D940000EA79 /* OperadorOpcional.swift */; };
 		414C5BF81FBF65E500D88D64 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414EC8641B4C8B1B0002492C /* Localizable.strings */; };
 		414EC8621B4C8B1B0002492C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414EC8641B4C8B1B0002492C /* Localizable.strings */; };
 		414EE62D1FB7B1CB00126C74 /* Aula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EE62C1FB7B1CA00126C74 /* Aula.swift */; };
@@ -47,6 +48,7 @@
 		411608781B517B88008C9A1E /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Licenses; path = TurnoClase/Licenses; sourceTree = "<group>"; };
 		411608791B517B88008C9A1E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = TurnoClase/Settings.bundle; sourceTree = "<group>"; };
 		411609231B41B7E700E5BD59 /* TurnoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnoViewController.swift; sourceTree = "<group>"; };
+		4120B87C21024D940000EA79 /* OperadorOpcional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperadorOpcional.swift; sourceTree = "<group>"; };
 		414EC8541B4C83CB0002492C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		414EC8551B4C83CB0002492C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		414EC8561B4C85260002492C /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Main.strings; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				411609231B41B7E700E5BD59 /* TurnoViewController.swift */,
 				414EE62C1FB7B1CA00126C74 /* Aula.swift */,
 				410D511B1F58365B00401C6C /* Nombres.swift */,
+				4120B87C21024D940000EA79 /* OperadorOpcional.swift */,
 				41BD61D41FB79521002385FE /* UI */,
 				415BC6451B2F5305004FADE0 /* Supporting Files */,
 			);
@@ -381,6 +384,7 @@
 			files = (
 				416796721B50461C00DCF09B /* BotonGrafico.swift in Sources */,
 				415BC64A1B2F5305004FADE0 /* ViewController.swift in Sources */,
+				4120B87D21024D940000EA79 /* OperadorOpcional.swift in Sources */,
 				415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */,
 				416796731B50461C00DCF09B /* FondoCircular.swift in Sources */,
 				411609241B41B7E700E5BD59 /* TurnoViewController.swift in Sources */,
