@@ -123,22 +123,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         // Difuminar
         UIView.animate(withDuration: 0.1,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 0.15
-                       }, completion: nil)
+            delay: 0,
+            options: UIView.AnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
+            animations: {
+                sender.alpha = 0.15
+            }, completion: nil)
     }
 
     @IBAction func fadeIn(_ sender: UIButton) {
 
         // Restaurar
         UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 1
-                       }, completion: nil)
+            delay: 0,
+            options: UIView.AnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
+            animations: {
+                sender.alpha = 1
+            }, completion: nil)
     }
 }
 

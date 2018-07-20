@@ -49,7 +49,7 @@ class TurnoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        log.debug("Valores recibidos: \(codigoAula) - \(nombreUsuario)")
+        log.debug("Valores recibidos: \(String(describing: codigoAula)) - \(String(describing: nombreUsuario))")
 
         log.info("Iniciando la aplicación...")
 
@@ -65,11 +65,11 @@ class TurnoViewController: UIViewController {
                 if let resultado = result {
 
                     self.uid = resultado.user.uid
-                    log.info("Registrado como usuario con UID: \(self.uid)")
+                    log.info("Registrado como usuario con UID: \(String(describing: self.uid))")
 
                     db.collection("alumnos").document(self.uid).setData([
                         "nombre": self.nombreUsuario
-                    ], merge: true) { error in
+                        ], merge: true) { error in
                         if let error = error {
                             log.error("Error al actualizar el alumno: \(error.localizedDescription)")
                         } else {
@@ -110,7 +110,7 @@ class TurnoViewController: UIViewController {
 
                                                             documentSnapshot?.reference.setData([
                                                                 "cola": self.aula.cola
-                                                            ], merge: true) { error in
+                                                                ], merge: true) { error in
                                                                 if let error = error {
                                                                     log.error("Error al actualizar el aula: \(error.localizedDescription)")
                                                                 } else {
@@ -119,7 +119,7 @@ class TurnoViewController: UIViewController {
                                                             }
                                                         }
 
-                                                        log.debug("Aula: \(self.aula)")
+                                                        log.debug("Aula: \(String(describing: self.aula))")
 
                                                         self.actualizarPantalla()
 
@@ -173,7 +173,7 @@ class TurnoViewController: UIViewController {
 
             refAula.setData([
                 "cola": self.aula.cola
-            ], merge: true) { error in
+                ], merge: true) { error in
                 if let error = error {
                     log.error("Error al actualizar el aula: \(error.localizedDescription)")
                 } else {
@@ -238,21 +238,21 @@ class TurnoViewController: UIViewController {
 
         // Difuminar
         UIView.animate(withDuration: 0.1,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 0.15
-                       }, completion: nil)
+            delay: 0,
+            options: UIView.AnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
+            animations: {
+                sender.alpha = 0.15
+            }, completion: nil)
     }
 
     @IBAction func fadeIn(_ sender: UIButton) {
 
         // Restaurar
         UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 1
-                       }, completion: nil)
+            delay: 0,
+            options: UIView.AnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
+            animations: {
+                sender.alpha = 1
+            }, completion: nil)
     }
 }

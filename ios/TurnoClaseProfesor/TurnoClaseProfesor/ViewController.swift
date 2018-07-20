@@ -53,8 +53,8 @@ class ViewController: UIViewController {
 
         // Registrarse como usuario anónimo
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            self.etiquetaBotonCodigoAula.setTitle("BE131", for: UIControlState())
-            self.etiquetaBotonEnCola.setTitle("2", for: UIControlState())
+            self.etiquetaBotonCodigoAula.setTitle("BE131", for: UIControl.State())
+            self.etiquetaBotonEnCola.setTitle("2", for: UIControl.State())
             self.etiquetaNombreAlumno.text = ""
         } else {
             Auth.auth().signInAnonymously() { (result, error) in
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
                 if let resultado = result {
 
                     self.uid = resultado.user.uid
-                    log.info("Registrado como usuario con UID: \(self.uid)")
+                    log.info("Registrado como usuario con UID: \(String(describing: self.uid))")
 
                     db.collection("aulas").document(self.uid).getDocument() { (document, error) in
 
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
 
                             db.collection("aulas").document(self.uid).setData([
                                 "cola": []
-                            ]) { error in
+                                ]) { error in
                                 if let error = error {
                                     log.error("Error al crear el aula: \(error.localizedDescription)")
                                 } else {
@@ -108,7 +108,7 @@ class ViewController: UIViewController {
 
                             self.aula = Aula(codigo: codigo, cola: cola)
 
-                            log.debug("Aula: \(self.aula)")
+                            log.debug("Aula: \(String(describing: self.aula))")
 
                             self.actualizarPantalla()
                         }
@@ -128,10 +128,10 @@ class ViewController: UIViewController {
         if let aula = self.aula {
 
             // Mostramos el código en la pantalla
-            self.etiquetaBotonCodigoAula.setTitle(aula.codigo, for: UIControlState())
+            self.etiquetaBotonCodigoAula.setTitle(aula.codigo, for: UIControl.State())
 
             // Mostrar el recuento
-            self.etiquetaBotonEnCola.setTitle("\(aula.cola.count)", for: UIControlState())
+            self.etiquetaBotonEnCola.setTitle("\(aula.cola.count)", for: UIControl.State())
             log.info("Alumnos en cola: \(aula.cola.count)")
 
         } else {
@@ -150,7 +150,7 @@ class ViewController: UIViewController {
 
             db.collection("aulas").document(self.uid).setData([
                 "cola": []
-            ], merge: true) { error in
+                ], merge: true) { error in
                 if let error = error {
                     log.error("Error al actualizar el aula: \(error.localizedDescription)")
                 } else {
@@ -168,7 +168,7 @@ class ViewController: UIViewController {
 
     @IBAction func botonCodigoAulaLargo(_ sender: UILongPressGestureRecognizer) {
 
-        if (sender.state == UIGestureRecognizerState.ended) {
+        if (sender.state == UIGestureRecognizer.State.ended) {
 
             log.info("Generando nueva aula...")
 
@@ -187,7 +187,7 @@ class ViewController: UIViewController {
 
                         db.collection("aulas").document(self.uid).setData([
                             "cola": []
-                        ]) { error in
+                            ]) { error in
                             if let error = error {
                                 log.error("Error al crear el aula: \(error.localizedDescription)")
                             } else {
@@ -212,10 +212,10 @@ class ViewController: UIViewController {
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             n -= 1
             if(n >= 0) {
-                self.etiquetaBotonEnCola.setTitle("\(n)", for: UIControlState())
+                self.etiquetaBotonEnCola.setTitle("\(n)", for: UIControl.State())
                 self.etiquetaNombreAlumno.text = nombreAleatorio()
             } else {
-                self.etiquetaBotonEnCola.setTitle("0", for: UIControlState())
+                self.etiquetaBotonEnCola.setTitle("0", for: UIControl.State())
                 self.etiquetaNombreAlumno.text = ""
             }
         }
@@ -255,7 +255,7 @@ class ViewController: UIViewController {
                 // Actualizar el aula
                 db.collection("aulas").document(self.uid).setData([
                     "cola": self.aula.cola
-                ], merge: true) { error in
+                    ], merge: true) { error in
                     if let error = error {
                         log.error("Error al actualizar el aula: \(error.localizedDescription)")
                     } else {
@@ -279,22 +279,22 @@ class ViewController: UIViewController {
 
         // Difuminar
         UIView.animate(withDuration: 0.1,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 0.15
-                       }, completion: nil)
+            delay: 0,
+            options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+            animations: {
+                sender.alpha = 0.15
+            }, completion: nil)
     }
 
     @IBAction func fadeIn(_ sender: UIButton) {
 
         // Restaurar
         UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 1
-                       }, completion: nil)
+            delay: 0,
+            options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+            animations: {
+                sender.alpha = 1
+            }, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
