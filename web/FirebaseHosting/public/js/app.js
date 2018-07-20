@@ -28,14 +28,17 @@ firebase.auth().onAuthStateChanged(function (user) {
 // TODO: Si se pulsa dos veces en el botón Ver, el listener se lanza dos veces
 $('#aula-boton').on("click", function () {
 
-    db.collection("aulas").where("codigo", "==", $('#aula-input').val())
-        .onSnapshot(function (querySnapshot) {
+    console.log("Botón pulsado");
+    console.log("Aula: " + $('#aula-input').val());
+
+    db.collection("aulas").where("codigo", "==", $('#aula-input').val().toUpperCase())
+        .onSnapshot(querySnapshot => {
 
             // Limpiar las listas
             $("#listaprimero").empty();
             $("#lista").empty();
 
-            querySnapshot.forEach(function (doc) {
+            querySnapshot.forEach(doc => {
 
                 var aula = doc.data();
                 console.log(aula["codigo"] + ": " + aula["cola"].length);
@@ -46,26 +49,26 @@ $('#aula-boton').on("click", function () {
                 if (aula["cola"].length > 0) {
 
                     // Mostrar el primero
-                    db.collection("alumnos").doc(aula["cola"][0]).get().then(function (doc) {
+                    db.collection("alumnos").doc(aula["cola"][0]).get().then(doc => {
                         if (doc.exists) {
                             $("#listaprimero").append('<li class="list-group-item amarillo my-3">' + doc.data()["nombre"] + '</li>');
                         } else {
                             console.log("No such document!");
                         }
-                    }).catch(function (error) {
+                    }).catch(error => {
                         console.log("Error getting document:", error);
                     });
 
                     // Si hay más, mostrarlos
                     for (var i = 1, len = aula["cola"].length; i < len; i++) {
 
-                        db.collection("alumnos").doc(aula["cola"][i]).get().then(function (doc) {
+                        db.collection("alumnos").doc(aula["cola"][i]).get().then(doc => {
                             if (doc.exists) {
                                 $("#lista").append('<li class="list-group-item">' + doc.data()["nombre"] + '</li>');
                             } else {
                                 console.log("No such document!");
                             }
-                        }).catch(function (error) {
+                        }).catch(error => {
                             console.log("Error getting document:", error);
                         });
 
@@ -75,8 +78,9 @@ $('#aula-boton').on("click", function () {
 
             });
 
+        }, err => {
+            console.log(`Error: ${err}`);
         });
-
 });
 
 // REF: Quitar el foco del botón: https://stackoverflow.com/a/23444942/5136913
