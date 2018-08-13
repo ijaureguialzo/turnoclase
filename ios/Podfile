@@ -5,7 +5,8 @@ workspace 'TurnoClase'
 
 def turnoclase_pods
     # REF: Librería para mostrar mensajes de depuración: https://github.com/DaveWoodCom/XCGLogger
-    pod 'XCGLogger'
+    #pod 'XCGLogger'
+    pod 'XCGLogger', :git => 'https://github.com/ijaureguialzo/XCGLogger.git'
 
     # REF: Google Firebase: https://firebase.google.com/docs/ios
     pod 'Firebase/Core'
