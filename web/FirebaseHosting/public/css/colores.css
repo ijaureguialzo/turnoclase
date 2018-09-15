@@ -21,3 +21,7 @@
 .blanco {
     color: white;
 }
+
+.enlace a:link, .enlace a:visited, .enlace a:hover, .enlace a:active {
+    color: #1076B9;
+}
