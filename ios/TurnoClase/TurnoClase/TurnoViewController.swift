@@ -46,6 +46,97 @@ class TurnoViewController: UIViewController {
     @IBOutlet weak var etiquetaAula: UILabel!
     @IBOutlet weak var etiquetaNumero: UILabel!
 
+    fileprivate func actualizarAlumno() {
+
+        // Guarda el nombre en el UID de este usuario. Si existe, lo sobreescribe.
+
+        db.collection("alumnos").document(self.uid).setData([
+            "nombre": self.nombreUsuario
+            ], merge: true) { error in
+            if let error = error {
+                log.error("Error al actualizar el alumno: \(error.localizedDescription)")
+            } else {
+                log.info("Alumno actualizado")
+            }
+        }
+    }
+
+    fileprivate func encolarAlumno() {
+
+        // Buscar el aula
+        db.collection("aulas").whereField("codigo", isEqualTo: self.codigoAula).limit(to: 1).getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print("Error al recuperar datos: \(error.localizedDescription)")
+            } else {
+
+                // Comprobar que se han recuperado registros
+                if querySnapshot!.documents.count > 0 {
+
+                    // Accedemos al primer documento
+                    let document = querySnapshot!.documents[0]
+                    log.info("Conectado a aula existente")
+
+                    if self.listener == nil {
+                        self.listener = document.reference.addSnapshotListener { documentSnapshot, error in
+
+                            if (documentSnapshot?.exists)! {
+
+                                self.refAula = documentSnapshot?.reference
+
+                                if let aula = documentSnapshot?.data() {
+
+                                    log.info("Actualizando datos del aula...")
+                                    let cola = aula["cola"] as? [String] ?? []
+                                    let codigo = aula["codigo"] as? String ?? "?"
+
+                                    self.aula = Aula(codigo: codigo, cola: cola)
+
+                                    // Si el usuario no está en la cola, lo añadimos
+                                    if self.pedirTurno && !cola.contains(self.uid) {
+
+                                        self.pedirTurno = false
+                                        self.aula.cola.append(self.uid)
+
+                                        documentSnapshot?.reference.setData([
+                                            "cola": self.aula.cola
+                                            ], merge: true) { error in
+                                            if let error = error {
+                                                log.error("Error al actualizar el aula: \(error.localizedDescription)")
+                                            } else {
+                                                log.info("Cola actualizada")
+                                            }
+                                        }
+                                    }
+
+                                    log.debug("Aula: \(self.aula ??? "[Desconocida]")")
+
+                                    self.actualizarPantalla()
+
+                                }
+                            } else {
+                                log.info("El aula ha desaparecido")
+
+                                if self.listener != nil {
+                                    self.listener.remove()
+                                    self.listener = nil
+                                    self.aula = nil
+                                }
+
+                                // Volver a la pantalla inicial
+                                self.dismiss(animated: true, completion: { })
+
+                            }
+                        }
+
+                    }
+                } else {
+                    log.info("Aula no encontrada")
+                    self.etiquetaAula.text = "?"
+                }
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,8 +144,7 @@ class TurnoViewController: UIViewController {
 
         log.info("Iniciando la aplicación...")
 
-        //try? Auth.auth().signOut()
-
+        // Detectar si estamos haciendo capturas de pantalla para la App Store
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             etiquetaAula.text = "BE131"
             etiquetaNumero.text = "2"
@@ -67,85 +157,9 @@ class TurnoViewController: UIViewController {
                     self.uid = resultado.user.uid
                     log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
-                    db.collection("alumnos").document(self.uid).setData([
-                        "nombre": self.nombreUsuario
-                        ], merge: true) { error in
-                        if let error = error {
-                            log.error("Error al actualizar el alumno: \(error.localizedDescription)")
-                        } else {
-                            log.info("Alumno actualizado")
-                        }
-                    }
+                    self.actualizarAlumno()
 
-                    db.collection("aulas").whereField("codigo", isEqualTo: self.codigoAula).limit(to: 1).getDocuments() { (querySnapshot, err) in
-                        if let err = err {
-                            print("Error getting documents: \(err)")
-                        } else {
-                            if querySnapshot!.documents.count > 0 {
-                                for document in querySnapshot!.documents {
-
-                                    log.info("Conectado a aula existente")
-
-                                    if self.listener == nil {
-                                        self.listener = document.reference
-                                            .addSnapshotListener { documentSnapshot, error in
-
-                                                if (documentSnapshot?.exists)! {
-
-                                                    self.refAula = documentSnapshot?.reference
-
-                                                    if let aula = documentSnapshot?.data() {
-
-                                                        log.info("Actualizando datos del aula...")
-                                                        let cola = aula["cola"] as? [String] ?? []
-                                                        let codigo = aula["codigo"] as? String ?? "?"
-
-                                                        self.aula = Aula(codigo: codigo, cola: cola)
-
-                                                        // Si el usuario no está en la cola, lo añadimos
-                                                        if self.pedirTurno && !cola.contains(self.uid) {
-
-                                                            self.pedirTurno = false
-                                                            self.aula.cola.append(self.uid)
-
-                                                            documentSnapshot?.reference.setData([
-                                                                "cola": self.aula.cola
-                                                                ], merge: true) { error in
-                                                                if let error = error {
-                                                                    log.error("Error al actualizar el aula: \(error.localizedDescription)")
-                                                                } else {
-                                                                    log.info("Cola actualizada")
-                                                                }
-                                                            }
-                                                        }
-
-                                                        log.debug("Aula: \(self.aula ??? "[Desconocida]")")
-
-                                                        self.actualizarPantalla()
-
-                                                    }
-                                                } else {
-                                                    log.info("El aula ha desaparecido")
-
-                                                    if self.listener != nil {
-                                                        self.listener.remove()
-                                                        self.listener = nil
-                                                        self.aula = nil
-                                                    }
-
-                                                    // Volver a la pantalla inicial
-                                                    self.dismiss(animated: true, completion: { })
-
-                                                }
-                                        }
-                                    }
-                                }
-                            } else {
-                                log.info("Aula no encontrada")
-                                self.etiquetaAula.text = "?"
-                            }
-                        }
-                    }
+                    self.encolarAlumno()
 
                 } else {
                     log.error("Error de inicio de sesión: \(error!.localizedDescription)")
