@@ -115,9 +115,11 @@ class TurnoViewController: UIViewController {
                                                 if let error = error {
                                                     log.error("Error al recuperar datos: \(error.localizedDescription)")
                                                 } else {
+
                                                     if self.pedirTurno && querySnapshot!.documents.count == 0 {
-                                                        log.info("Alumno no encontrado, lo añadimos")
                                                         self.pedirTurno = false
+
+                                                        log.info("Alumno no encontrado, lo añadimos")
 
                                                         self.refPosicion = self.refAula.collection("cola").addDocument(data: [
                                                             "alumno": self.uid,
@@ -132,8 +134,13 @@ class TurnoViewController: UIViewController {
 
                                                     } else if querySnapshot!.documents.count > 0 {
                                                         log.error("Alumno encontrado, ya está en la cola")
+                                                        self.pedirTurno = false
                                                         self.refPosicion = querySnapshot!.documents[0].reference
                                                         self.actualizarPantalla()
+
+                                                    } else if querySnapshot!.documents.count == 0 {
+                                                        log.info("La cola se ha vaciado")
+                                                        self.etiquetaNumero.text = ""
                                                     }
                                                 }
                                             }
