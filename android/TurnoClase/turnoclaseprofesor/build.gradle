@@ -48,6 +48,7 @@ android {
         main {
             svg.srcDir 'src/main/svg'
         }
+        main.java.srcDirs += 'src/main/kotlin'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -74,7 +75,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
     implementation "com.google.firebase:firebase-auth:$firebase_auth_version"
     implementation "com.google.firebase:firebase-firestore:$firebase_firestore_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     androidTestImplementation "tools.fastlane:screengrab:$fastlane_screengrab_version"
 }
 
