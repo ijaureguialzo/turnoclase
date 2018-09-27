@@ -17,7 +17,6 @@
 		4120B87D21024D940000EA79 /* OperadorOpcional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4120B87C21024D940000EA79 /* OperadorOpcional.swift */; };
 		414C5BF81FBF65E500D88D64 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414EC8641B4C8B1B0002492C /* Localizable.strings */; };
 		414EC8621B4C8B1B0002492C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414EC8641B4C8B1B0002492C /* Localizable.strings */; };
-		414EE62D1FB7B1CB00126C74 /* Aula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EE62C1FB7B1CA00126C74 /* Aula.swift */; };
 		415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BC6471B2F5305004FADE0 /* AppDelegate.swift */; };
 		415BC64A1B2F5305004FADE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BC6491B2F5305004FADE0 /* ViewController.swift */; };
 		415BC64D1B2F5305004FADE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BC64B1B2F5305004FADE0 /* Main.storyboard */; };
@@ -56,7 +55,6 @@
 		414EC8631B4C8B1B0002492C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		414EC8651B4C8B570002492C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		414EC8661B4C8B580002492C /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Localizable.strings; sourceTree = "<group>"; };
-		414EE62C1FB7B1CA00126C74 /* Aula.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aula.swift; sourceTree = "<group>"; };
 		415BC6421B2F5305004FADE0 /* TurnoClase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurnoClase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		415BC6461B2F5305004FADE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		415BC6471B2F5305004FADE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				415BC6471B2F5305004FADE0 /* AppDelegate.swift */,
 				415BC6491B2F5305004FADE0 /* ViewController.swift */,
 				411609231B41B7E700E5BD59 /* TurnoViewController.swift */,
-				414EE62C1FB7B1CA00126C74 /* Aula.swift */,
 				410D511B1F58365B00401C6C /* Nombres.swift */,
 				4120B87C21024D940000EA79 /* OperadorOpcional.swift */,
 				41BD61D41FB79521002385FE /* UI */,
@@ -390,7 +387,6 @@
 				415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */,
 				416796731B50461C00DCF09B /* FondoCircular.swift in Sources */,
 				411609241B41B7E700E5BD59 /* TurnoViewController.swift in Sources */,
-				414EE62D1FB7B1CB00126C74 /* Aula.swift in Sources */,
 				410D511C1F58365B00401C6C /* Nombres.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
