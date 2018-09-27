@@ -29,10 +29,15 @@ import FirebaseFirestore
 
 class ViewController: UIViewController {
 
-    // Objeto aula que contiene la cola de alumnos
-    var aula: Aula!
+    // ID de usuario único generado por Firebase
     var uid: String!
-    var listener: ListenerRegistration!
+
+    // Listeners para recibir las actualizaciones
+    var listenerAula: ListenerRegistration!
+    var listenerCola: ListenerRegistration!
+
+    // Referencias al documento del aula y la posición en la cola
+    var refAula: DocumentReference!
 
     // Outlets para el interfaz de usuario
     @IBOutlet weak var etiquetaNombreAlumno: UILabel!
@@ -42,14 +47,27 @@ class ViewController: UIViewController {
     // Para simular el interfaz al hacer las capturas
     var n = 2
 
+    fileprivate func crearAula() {
+        self.refAula = db.collection("aulas").document(self.uid)
+
+        self.refAula.setData([
+            "timestamp": FieldValue.serverTimestamp()
+            ]) { error in
+            if let error = error {
+                log.error("Error al crear el aula: \(error.localizedDescription)")
+            } else {
+                log.info("Aula creada")
+                self.conectarListener()
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         etiquetaBotonCodigoAula.titleLabel?.adjustsFontSizeToFitWidth = true
 
         log.info("Iniciando la aplicación...")
-
-        //try? Auth.auth().signOut()
 
         // Registrarse como usuario anónimo
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
@@ -68,19 +86,10 @@ class ViewController: UIViewController {
 
                         if !(document?.exists)! {
                             log.info("Creando nueva aula...")
-
-                            db.collection("aulas").document(self.uid).setData([
-                                "cola": []
-                                ]) { error in
-                                if let error = error {
-                                    log.error("Error al crear el aula: \(error.localizedDescription)")
-                                } else {
-                                    log.info("Aula creada")
-                                    self.conectarListener()
-                                }
-                            }
+                            self.crearAula()
                         } else {
                             log.info("Conectado a aula existente")
+                            self.refAula = document?.reference
                             self.conectarListener()
                         }
                     }
@@ -94,8 +103,8 @@ class ViewController: UIViewController {
 
     func conectarListener() {
 
-        if listener == nil {
-            listener = db.collection("aulas").document(self.uid)
+        if self.listenerAula == nil && self.refAula != nil {
+            self.listenerAula = self.refAula
                 .addSnapshotListener { documentSnapshot, error in
 
                     if (documentSnapshot?.exists)! {
@@ -103,67 +112,54 @@ class ViewController: UIViewController {
                         if let aula = documentSnapshot?.data() {
 
                             log.info("Actualizando datos del aula...")
-                            let cola = aula["cola"] as? [String] ?? []
-                            let codigo = aula["codigo"] as? String ?? "?"
 
-                            self.aula = Aula(codigo: codigo, cola: cola)
+                            let codigoAula = aula["codigo"] as? String ?? "?"
+                            log.debug("Aula: \(codigoAula ??? "[Desconocida]")")
 
-                            log.debug("Aula: \(self.aula ??? "[Desconocida]")")
+                            self.actualizarCodigo(codigoAula)
 
-                            self.actualizarPantalla()
+                            if self.listenerCola == nil {
+                                self.listenerCola = db.collection("aulas").document(self.uid)
+                                    .collection("cola").addSnapshotListener { querySnapshot, error in
+
+                                        if let error = error {
+                                            log.error("Error al recuperar datos: \(error.localizedDescription)")
+                                        } else {
+                                            self.actualizarRecuento(querySnapshot!.documents.count)
+                                        }
+                                }
+                            }
                         }
                     } else {
                         log.info("El aula ha desaparecido")
-                        self.aula = Aula(codigo: "?", cola: [])
-                        self.actualizarPantalla()
+                        self.actualizarPantalla("?", recuento: 0)
                     }
-
             }
         }
-
     }
 
-    func actualizarPantalla() {
+    fileprivate func actualizarCodigo(_ codigo: String) {
+        // Mostramos el código en la pantalla
+        self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
+    }
 
-        if let aula = self.aula {
+    fileprivate func actualizarRecuento(_ recuento: Int) {
+        // Mostrar el recuento
+        self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
+        log.info("Alumnos en cola: \(recuento)")
+    }
 
-            // Mostramos el código en la pantalla
-            self.etiquetaBotonCodigoAula.setTitle(aula.codigo, for: UIControl.State())
-
-            // Mostrar el recuento
-            self.etiquetaBotonEnCola.setTitle("\(aula.cola.count)", for: UIControl.State())
-            log.info("Alumnos en cola: \(aula.cola.count)")
-
-        } else {
-            log.error("No hay objeto aula")
-        }
-
+    func actualizarPantalla(_ codigo: String, recuento: Int) {
+        actualizarCodigo(codigo)
+        actualizarRecuento(recuento)
     }
 
     @IBAction func botonCodigoAulaCorto(_ sender: UIButton) {
 
         log.info("Vaciando el aula...")
 
-        if self.aula != nil {
-
-            self.aula.cola = []
-
-            db.collection("aulas").document(self.uid).setData([
-                "cola": []
-                ], merge: true) { error in
-                if let error = error {
-                    log.error("Error al actualizar el aula: \(error.localizedDescription)")
-                } else {
-                    log.info("Aula vaciada")
-                    self.etiquetaNombreAlumno.text = ""
-                    self.conectarListener()
-                }
-            }
-
-        } else {
-            log.error("No hay objeto aula")
-        }
-
+        // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
+        // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
     }
 
     @IBAction func botonCodigoAulaLargo(_ sender: UILongPressGestureRecognizer) {
@@ -172,30 +168,20 @@ class ViewController: UIViewController {
 
             log.info("Generando nueva aula...")
 
-            if self.aula != nil {
+            if self.listenerAula != nil {
 
-                self.aula = Aula(codigo: "?", cola: [])
+                listenerAula.remove()
+                listenerAula = nil
 
-                listener.remove()
-                listener = nil
+                // Llamar a la función de vaciar la cola porque no se borra la subcolección
 
                 db.collection("aulas").document(self.uid).delete() { error in
                     if let error = error {
                         log.error("Error al borrar el aula: \(error.localizedDescription)")
                     } else {
                         log.info("Aula borrada")
-
-                        db.collection("aulas").document(self.uid).setData([
-                            "cola": []
-                            ]) { error in
-                            if let error = error {
-                                log.error("Error al crear el aula: \(error.localizedDescription)")
-                            } else {
-                                log.info("Aula creada")
-                                self.etiquetaNombreAlumno.text = ""
-                                self.conectarListener()
-                            }
-                        }
+                        log.info("Creando nueva aula...")
+                        self.crearAula()
                     }
                 }
 
@@ -228,51 +214,50 @@ class ViewController: UIViewController {
 
         log.info("Mostrando el siguiente alumno...")
 
-        if self.aula != nil {
+        if self.refAula != nil {
 
-            if self.aula.cola.count > 0 {
+            self.refAula.collection("cola").order(by: "timestamp").limit(to: 1).getDocuments() { (querySnapshot, error) in
 
-                let siguiente = self.aula.cola.remove(at: 0)
+                if let error = error {
+                    log.error("Error al recuperar datos: \(error.localizedDescription)")
+                } else {
 
-                log.debug("Siguiente: \(siguiente)")
+                    if querySnapshot!.documents.count > 0 {
+                        let refPosicion = querySnapshot!.documents[0].reference
 
-                // Cargar el alumno
-                db.collection("alumnos").document(siguiente).getDocument { (document, error) in
-                    if let document = document {
-                        if document.exists {
-                            if let alumno = document.data() {
-                                self.etiquetaNombreAlumno.text = alumno["nombre"] as? String ?? "?"
+                        refPosicion.getDocument { (document, error) in
+
+                            if let posicion = document?.data() {
+
+                                // Cargar el alumno
+                                db.collection("alumnos").document(posicion["alumno"] as! String).getDocument { (document, error) in
+                                    if let document = document {
+                                        if document.exists {
+                                            if let alumno = document.data() {
+
+                                                // Mostrar el nombre
+                                                self.etiquetaNombreAlumno.text = alumno["nombre"] as? String ?? "?"
+
+                                                // Borrar la entrada de la cola
+                                                refPosicion.delete()
+                                            }
+                                        } else {
+                                            log.error("El alumno no existe")
+                                            self.etiquetaNombreAlumno.text = "?"
+                                        }
+                                    } else {
+                                        log.error("Error al leer los datos")
+                                    }
+                                }
                             }
-                        } else {
-                            log.error("El alumno no existe")
-                            self.etiquetaNombreAlumno.text = "?"
                         }
                     } else {
-                        log.error("Error al leer los datos")
+                        log.info("Cola vacía")
+                        self.etiquetaNombreAlumno.text = ""
                     }
                 }
-
-                // Actualizar el aula
-                db.collection("aulas").document(self.uid).setData([
-                    "cola": self.aula.cola
-                    ], merge: true) { error in
-                    if let error = error {
-                        log.error("Error al actualizar el aula: \(error.localizedDescription)")
-                    } else {
-                        log.info("Cola actualizada")
-                        self.conectarListener()
-                    }
-                }
-
-            } else {
-                log.info("El aula está vacía")
-                self.etiquetaNombreAlumno.text = ""
             }
-
-        } else {
-            log.error("No hay objeto aula")
         }
-
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {
