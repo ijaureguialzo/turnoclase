@@ -32,7 +32,14 @@ class ViewController: UIViewController {
     // Objeto aula que contiene la cola de alumnos
     var aula: Aula!
     var uid: String!
-    var listener: ListenerRegistration!
+
+    // Listeners para recibir las actualizaciones
+    var listenerAula: ListenerRegistration!
+    var listenerCola: ListenerRegistration!
+
+    // Referencias al documento del aula y la posición en la cola
+    var refAula: DocumentReference!
+    var refCola: DocumentReference!
 
     // Outlets para el interfaz de usuario
     @IBOutlet weak var etiquetaNombreAlumno: UILabel!
@@ -69,7 +76,9 @@ class ViewController: UIViewController {
                         if !(document?.exists)! {
                             log.info("Creando nueva aula...")
 
-                            db.collection("aulas").document(self.uid).setData([
+                            self.refAula = db.collection("aulas").document(self.uid)
+
+                            self.refAula.setData([
                                 "timestamp": FieldValue.serverTimestamp()
                                 ]) { error in
                                 if let error = error {
@@ -81,6 +90,7 @@ class ViewController: UIViewController {
                             }
                         } else {
                             log.info("Conectado a aula existente")
+                            self.refAula = document?.reference
                             self.conectarListener()
                         }
                     }
@@ -94,8 +104,8 @@ class ViewController: UIViewController {
 
     func conectarListener() {
 
-        if listener == nil {
-            listener = db.collection("aulas").document(self.uid)
+        if self.listenerAula == nil && self.refAula != nil {
+            self.listenerAula = self.refAula
                 .addSnapshotListener { documentSnapshot, error in
 
                     if (documentSnapshot?.exists)! {
@@ -103,41 +113,46 @@ class ViewController: UIViewController {
                         if let aula = documentSnapshot?.data() {
 
                             log.info("Actualizando datos del aula...")
-                            let cola = aula["cola"] as? [String] ?? []
-                            let codigo = aula["codigo"] as? String ?? "?"
 
-                            self.aula = Aula(codigo: codigo, cola: cola)
+                            let codigoAula = aula["codigo"] as? String ?? "?"
+                            log.debug("Aula: \(codigoAula ??? "[Desconocida]")")
 
-                            log.debug("Aula: \(self.aula ??? "[Desconocida]")")
+                            self.actualizarCodigo(codigoAula)
 
-                            self.actualizarPantalla()
+                            if self.listenerCola == nil {
+                                self.listenerCola = db.collection("aulas").document(self.uid)
+                                    .collection("cola").addSnapshotListener { querySnapshot, error in
+
+                                        if let error = error {
+                                            log.error("Error al recuperar datos: \(error.localizedDescription)")
+                                        } else {
+                                            self.actualizarRecuento(querySnapshot!.documents.count)
+                                        }
+                                }
+                            }
                         }
                     } else {
                         log.info("El aula ha desaparecido")
-                        self.aula = Aula(codigo: "?", cola: [])
-                        self.actualizarPantalla()
+                        self.actualizarPantalla("?", recuento: 0)
                     }
-
             }
         }
-
     }
 
-    func actualizarPantalla() {
+    fileprivate func actualizarCodigo(_ codigo: String) {
+        // Mostramos el código en la pantalla
+        self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
+    }
 
-        if let aula = self.aula {
+    fileprivate func actualizarRecuento(_ recuento: Int) {
+        // Mostrar el recuento
+        self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
+        log.info("Alumnos en cola: \(recuento)")
+    }
 
-            // Mostramos el código en la pantalla
-            self.etiquetaBotonCodigoAula.setTitle(aula.codigo, for: UIControl.State())
-
-            // Mostrar el recuento
-            self.etiquetaBotonEnCola.setTitle("\(aula.cola.count)", for: UIControl.State())
-            log.info("Alumnos en cola: \(aula.cola.count)")
-
-        } else {
-            log.error("No hay objeto aula")
-        }
-
+    func actualizarPantalla(_ codigo: String, recuento: Int) {
+        actualizarCodigo(codigo)
+        actualizarRecuento(recuento)
     }
 
     @IBAction func botonCodigoAulaCorto(_ sender: UIButton) {
@@ -176,8 +191,8 @@ class ViewController: UIViewController {
 
                 self.aula = Aula(codigo: "?", cola: [])
 
-                listener.remove()
-                listener = nil
+                listenerAula.remove()
+                listenerAula = nil
 
                 db.collection("aulas").document(self.uid).delete() { error in
                     if let error = error {
