@@ -70,7 +70,7 @@ class ViewController: UIViewController {
                             log.info("Creando nueva aula...")
 
                             db.collection("aulas").document(self.uid).setData([
-                                "cola": []
+                                "timestamp": FieldValue.serverTimestamp()
                                 ]) { error in
                                 if let error = error {
                                     log.error("Error al crear el aula: \(error.localizedDescription)")
