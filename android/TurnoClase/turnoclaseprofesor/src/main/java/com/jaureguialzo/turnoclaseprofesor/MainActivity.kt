@@ -28,6 +28,7 @@ import android.view.Menu
 import android.view.MotionEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -57,6 +58,14 @@ class MainActivity : AppCompatActivity() {
     private var n = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // Configurar las opciones de Firebase
+        val settings = FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(false)
+                .setTimestampsInSnapshotsEnabled(true)
+                .build()
+        db.firestoreSettings = settings
+
         super.onCreate(savedInstanceState)
 
         // Ocultar la barra de título en horizontal
