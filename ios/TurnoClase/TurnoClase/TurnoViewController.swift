@@ -148,7 +148,7 @@ class TurnoViewController: UIViewController {
                 } else {
                     log.info("El aula ha desaparecido")
                     self.desconectarListeners()
-                    self.cerrarViewController()
+                    self.cerrarPantalla()
                 }
             }
         }
@@ -217,8 +217,6 @@ class TurnoViewController: UIViewController {
             // Mostramos el código en la pantalla
             self.etiquetaAula.text = self.codigoAula
 
-            var posicion = 0
-
             self.refPosicion.getDocument { (document, error) in
 
                 if let alumno = document?.data() {
@@ -228,7 +226,7 @@ class TurnoViewController: UIViewController {
                             log.error("Error al recuperar datos: \(error.localizedDescription)")
                         } else {
 
-                            posicion = querySnapshot!.documents.count
+                            let posicion = querySnapshot!.documents.count
                             log.info("Posicion en la cola: \(posicion)")
 
                             if posicion > 1 {
@@ -250,7 +248,7 @@ class TurnoViewController: UIViewController {
         }
     }
 
-    fileprivate func cerrarViewController() {
+    fileprivate func cerrarPantalla() {
         // Volver a la pantalla inicial
         self.dismiss(animated: true, completion: { })
     }
@@ -266,7 +264,7 @@ class TurnoViewController: UIViewController {
         }
 
         desconectarListeners()
-        cerrarViewController()
+        cerrarPantalla()
     }
 
     @IBAction func botonActualizar(_ sender: UIButton) {
