@@ -30,7 +30,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_alumno_turno.*
 
-
 class AlumnoTurno : AppCompatActivity() {
 
     // Parámetros que llegan en el Intent
@@ -43,12 +42,6 @@ class AlumnoTurno : AppCompatActivity() {
     // Listeners para recibir las actualizaciones
     private var listenerAula: ListenerRegistration? = null
     private var listenerCola: ListenerRegistration? = null
-
-    // Pedir turno una sola vez
-    private var pedirTurno = true
-
-    // Referencias a los objetos
-    private var aula: Aula? = null
 
     // Referencias al documento del aula y la posición en la cola
     private var refAula: DocumentReference? = null
@@ -124,17 +117,21 @@ class AlumnoTurno : AppCompatActivity() {
 
             if (isRunningTest) {
 
-                if (n > 0) {
-                    etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-                    numeroTurno = n.toString()
-                } else if (n == 0) {
-                    etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
-                    numeroTurno = getResources().getString(R.string.mensaje_turno)
-                } else {
-                    etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-                    numeroTurno = ""
+                numeroTurno = when {
+                    n > 0 -> {
+                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+                        n.toString()
+                    }
+                    n == 0 -> {
+                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
+                        resources.getString(R.string.mensaje_turno)
+                    }
+                    else -> {
+                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+                        ""
+                    }
                 }
-                etiquetaNumero.setText(numeroTurno)
+                etiquetaNumero.text = numeroTurno
 
                 n -= 1
             }
@@ -178,39 +175,19 @@ class AlumnoTurno : AppCompatActivity() {
 
     }
 
+    private fun actualizarAlumno() {
+
+        // Crear el alumno en la colección alumnos
+        val datos = HashMap<String, Any>()
+        datos["nombre"] = nombreUsuario!!
+
+        db.collection("alumnos").document(uid!!)
+                .set(datos)
+                .addOnSuccessListener { Log.d(TAG, "Alumno actualizado") }
+                .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el alumno", e) }
+    }
+
     private fun encolarAlumno() {
-
-/*
-                                        val aula = snapshot.data
-                                        Log.d(TAG, "Actualizando datos del aula")
-
-                                        @Suppress("UNCHECKED_CAST")
-                                        val cola = aula!!["cola"] as? ArrayList<String>
-                                                ?: ArrayList<String>()
-                                        val codigo = aula["codigo"] as? String
-                                                ?: "?"
-
-                                        this.aula = Aula(codigo, cola)
-
-                                        // Si el usuario no está en la cola, lo añadimos
-
-                                        if (App.pedirTurno && !cola.contains(uid!!)) {
-
-                                            App.pedirTurno = false
-                                            this.aula?.cola?.add(uid!!)
-
-                                            var datos = HashMap<String, Any>()
-                                            datos.put("cola", this.aula?.cola!!)
-
-                                            snapshot.reference.update(datos)
-                                                    .addOnSuccessListener { Log.d(TAG, "Cola actualizada") }
-                                                    .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
-
-                                        }
-
-                                        Log.d(TAG, "Aula: " + this.aula)
-*/
-
 
         // Buscar el aula
         db.collection("aulas")
@@ -238,10 +215,28 @@ class AlumnoTurno : AppCompatActivity() {
                 }
     }
 
+    private fun conectarListenerAula(document: DocumentSnapshot) {
+
+        // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
+        if (listenerAula == null) {
+            listenerAula = document.reference.addSnapshotListener { snapshot, _ ->
+
+                if (snapshot != null && snapshot.exists() && snapshot.data!!["codigo"] as? String == codigoAula) {
+                    refAula = snapshot.reference
+                    conectarListenerCola()
+                } else {
+                    Log.d(TAG, "El aula ha desaparecido")
+                    desconectarListeners()
+                    cerrarPantalla()
+                }
+            }
+        }
+    }
+
     private fun conectarListenerCola() {
 
         if (listenerCola == null) {
-            listenerCola = refAula!!.addSnapshotListener { _, error ->
+            listenerCola = refAula!!.collection("cola").addSnapshotListener { _, error ->
 
                 if (error != null) {
                     Log.e(TAG, "Error al recuperar datos: ", error)
@@ -264,30 +259,82 @@ class AlumnoTurno : AppCompatActivity() {
                 }
     }
 
-    private fun pedirTurno(result: QuerySnapshot) {
-        Log.e(TAG, "Pendiente de implementar")
-    }
+    private fun pedirTurno(querySnapshot: QuerySnapshot) {
 
-    private fun conectarListenerAula(document: DocumentSnapshot) {
+        if (App.pedirTurno && querySnapshot.documents.count() == 0) {
+            App.pedirTurno = false
 
-        // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
-        if (listenerAula == null) {
-            listenerAula = document.reference.addSnapshotListener { snapshot, _ ->
+            Log.d(TAG, "Alumno no encontrado, lo añadimos")
 
-                if (snapshot != null && snapshot.exists() && snapshot.data!!["codigo"] as? String == codigoAula) {
-                    refAula = snapshot.reference
-                    conectarListenerCola()
-                } else {
-                    Log.d(TAG, "El aula ha desaparecido")
-                    desconectarListeners()
-                    cerrarActividad()
-                }
-            }
+            val datos = HashMap<String, Any>()
+            datos["alumno"] = uid!!
+            datos["timestamp"] = FieldValue.serverTimestamp()
+
+            refAula!!.collection("cola").add(datos)
+                    .addOnSuccessListener { documentReference ->
+                        refPosicion = documentReference
+                        actualizarPantalla()
+                    }
+                    .addOnFailureListener { e -> Log.e(TAG, "Error al añadir el documento", e) }
+
+        } else if (querySnapshot.documents.count() > 0) {
+            Log.e(TAG, "Alumno encontrado, ya está en la cola")
+            App.pedirTurno = false
+            refPosicion = querySnapshot.documents[0].reference
+            actualizarPantalla()
+
+        } else if (querySnapshot.documents.count() == 0) {
+            Log.d(TAG, "La cola se ha vaciado")
+            etiquetaNumero.text = ""
         }
     }
 
-    private fun cerrarActividad() {
-        aula = null
+    private fun actualizarPantalla() {
+
+        if (refAula != null && refPosicion != null) {
+
+            // Mostramos el código en la pantalla
+            etiquetaAula.text = codigoAula
+
+            refPosicion!!.get().addOnCompleteListener { document ->
+
+                val alumno = document.result
+
+                refAula!!.collection("cola").whereLessThanOrEqualTo("timestamp", alumno["timestamp"] as Any).get()
+                        .addOnCompleteListener {
+                            if (!it.isSuccessful) {
+                                Log.e(TAG, "Error al recuperar datos: ", it.exception)
+                            } else {
+
+                                val posicion = it.result.count()
+                                Log.d(TAG, "Posicion en la cola: $posicion")
+
+                                numeroTurno = when {
+                                    posicion > 1 -> {
+                                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+                                        (posicion - 1).toString()
+                                    }
+                                    posicion == 1 -> {
+                                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
+                                        resources.getString(R.string.mensaje_turno)
+                                    }
+                                    else -> {
+                                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+                                        ""
+                                    }
+                                }
+                                etiquetaNumero.text = numeroTurno
+
+                            }
+                        }
+            }
+        } else {
+            etiquetaAula.text = ""
+            Log.e(TAG, "No hay referencia al aula")
+        }
+    }
+
+    private fun cerrarPantalla() {
         numeroTurno = ""
         App.pedirTurno = true
 
@@ -296,53 +343,16 @@ class AlumnoTurno : AppCompatActivity() {
     }
 
     private fun desconectarListeners() {
+
         if (listenerAula != null) {
             listenerAula?.remove()
             listenerAula = null
-
-        }
-    }
-
-    private fun actualizarAlumno() {
-
-        // Crear el alumno en la colección alumnos
-        var datos = HashMap<String, Any>()
-        datos.put("nombre", nombreUsuario!!)
-
-        db.collection("alumnos").document(uid!!)
-                .set(datos)
-                .addOnSuccessListener { Log.d(TAG, "Alumno actualizado") }
-                .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el alumno", e) }
-    }
-
-    private fun actualizarPantalla() {
-
-        if (this.aula != null) {
-            val aula = this.aula!!
-
-            // Mostramos el código en la pantalla
-            etiquetaAula.text = aula.codigo
-
-            val posicion = aula.cola.indexOf(uid)
-
-            if (posicion > 0) {
-                etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-                numeroTurno = posicion.toString()
-            } else if (posicion == 0) {
-                etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
-                numeroTurno = getResources().getString(R.string.mensaje_turno)
-            } else {
-                etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-                numeroTurno = ""
-            }
-            etiquetaNumero.setText(numeroTurno)
-
-            Log.d(TAG, "Alumnos en cola: ${aula.cola.size}")
-
-        } else {
-            Log.e(TAG, "No hay objeto aula")
         }
 
+        if (listenerCola != null) {
+            listenerCola?.remove()
+            listenerCola = null
+        }
     }
 
     // Detectamos el botón de retorno del teléfono y quitamos al usuario de la cola
@@ -354,30 +364,15 @@ class AlumnoTurno : AppCompatActivity() {
     // Quitamos al usuario de la cola
     private fun cancelar() {
 
-        if (this.aula != null && this.aula?.cola!!.contains(uid)) {
+        Log.d(TAG, "Cancelando...")
 
-            this.aula?.cola?.remove(uid)
-
-            val datos = HashMap<String, Any>()
-            datos.put("cola", this.aula?.cola!!)
-
-            refAula!!.update(datos)
-                    .addOnSuccessListener { Log.d(TAG, "Cola actualizada") }
-                    .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
-
+        // Nos borramos de la cola
+        if (refAula != null && refPosicion != null) {
+            refPosicion!!.delete()
         }
 
-        if (listenerAula != null) {
-            listenerAula?.remove()
-            listenerAula = null
-            aula = null
-            numeroTurno = ""
-
-            App.pedirTurno = true
-        }
-
-        // Cerramos la actividad
-        this.finish()
+        desconectarListeners()
+        cerrarPantalla()
     }
 
     // Crear el menú "Acerca de..."
@@ -401,7 +396,7 @@ class AlumnoTurno : AppCompatActivity() {
         // Valor para mostrar en la etiqueta.
         // Es estático para que sobreviva cuando rota la pantalla y se destruye la actividad
         private var numeroTurno = ""
-        private val TAG = "AlumnoTurno"
+        private const val TAG = "AlumnoTurno"
 
     }
 
