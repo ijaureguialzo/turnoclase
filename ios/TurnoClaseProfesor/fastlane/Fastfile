@@ -28,6 +28,9 @@ platform :ios do
 
   desc "Subir una nueva versión a la App Store"
   lane :publicar do
+    get_certificates(output_path:"../../private/ios/certificados/")
+    get_provisioning_profile(output_path:"../../private/ios/certificados/")
+
     gym(scheme: "TurnoClaseProfesor",
       workspace: "../TurnoClase.xcworkspace",
       include_bitcode: true)
