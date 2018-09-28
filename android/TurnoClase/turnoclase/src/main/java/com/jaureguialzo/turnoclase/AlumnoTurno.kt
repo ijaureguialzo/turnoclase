@@ -27,11 +27,9 @@ import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_alumno_turno.*
+
 
 class AlumnoTurno : AppCompatActivity() {
 
@@ -213,6 +211,7 @@ class AlumnoTurno : AppCompatActivity() {
                                         Log.d(TAG, "Aula: " + this.aula)
 */
 
+
         // Buscar el aula
         db.collection("aulas")
                 .whereEqualTo("codigo", codigoAula)
@@ -230,9 +229,7 @@ class AlumnoTurno : AppCompatActivity() {
                             val document = it.result.documents[0]
                             Log.d(TAG, "Conectado a aula existente")
 
-                            // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
                             conectarListenerAula(document)
-
                         } else {
                             Log.d(TAG, "Aula no encontrada")
                             etiquetaAula.text = "?"
@@ -241,10 +238,10 @@ class AlumnoTurno : AppCompatActivity() {
                 }
     }
 
-    private fun conectarListenerAula(document: DocumentSnapshot) {
+    private fun conectarListenerCola() {
 
-        if (listenerAula == null) {
-            listenerAula = document.reference.addSnapshotListener { _, error ->
+        if (listenerCola == null) {
+            listenerCola = refAula!!.addSnapshotListener { _, error ->
 
                 if (error != null) {
                     Log.e(TAG, "Error al recuperar datos: ", error)
@@ -256,19 +253,30 @@ class AlumnoTurno : AppCompatActivity() {
     }
 
     private fun buscarAlumnoEnCola() {
+
+        refAula!!.collection("cola").whereEqualTo("alumno", uid).limit(1).get()
+                .addOnCompleteListener {
+                    if (!it.isSuccessful) {
+                        Log.e(TAG, "Error al recuperar datos: ", it.exception)
+                    } else {
+                        pedirTurno(it.result)
+                    }
+                }
+    }
+
+    private fun pedirTurno(result: QuerySnapshot) {
         Log.e(TAG, "Pendiente de implementar")
     }
 
-    private fun conectarListenerCola() {
-        if (listenerCola == null) {
-            listenerCola = refAula!!.addSnapshotListener { snapshot, _ ->
+    private fun conectarListenerAula(document: DocumentSnapshot) {
+
+        // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
+        if (listenerAula == null) {
+            listenerAula = document.reference.addSnapshotListener { snapshot, _ ->
 
                 if (snapshot != null && snapshot.exists() && snapshot.data!!["codigo"] as? String == codigoAula) {
-
                     refAula = snapshot.reference
-
                     conectarListenerCola()
-
                 } else {
                     Log.d(TAG, "El aula ha desaparecido")
                     desconectarListeners()
