@@ -81,10 +81,84 @@ class TurnoViewController: UIViewController {
         }
     }
 
+    fileprivate func pedirTurno(_ querySnapshot: QuerySnapshot?) {
+        if self.pedirTurno && querySnapshot!.documents.count == 0 {
+            self.pedirTurno = false
+
+            log.info("Alumno no encontrado, lo añadimos")
+
+            self.refPosicion = self.refAula.collection("cola").addDocument(data: [
+                "alumno": self.uid,
+                "timestamp": FieldValue.serverTimestamp()
+                ]) { error in
+                if let error = error {
+                    log.error("Error al añadir el documento: \(error.localizedDescription)")
+                } else {
+                    self.actualizarPantalla()
+                }
+            }
+
+        } else if querySnapshot!.documents.count > 0 {
+            log.error("Alumno encontrado, ya está en la cola")
+            self.pedirTurno = false
+            self.refPosicion = querySnapshot!.documents[0].reference
+            self.actualizarPantalla()
+
+        } else if querySnapshot!.documents.count == 0 {
+            log.info("La cola se ha vaciado")
+            self.etiquetaNumero.text = ""
+        }
+    }
+
+    fileprivate func buscarAlumnoEnCola() {
+
+        self.refAula.collection("cola").whereField("alumno", isEqualTo: self.uid).limit(to: 1).getDocuments() { (resultados, error) in
+
+            if let error = error {
+                log.error("Error al recuperar datos: \(error.localizedDescription)")
+            } else {
+                self.pedirTurno(resultados)
+            }
+        }
+    }
+
+    fileprivate func conectarListenerCola() {
+
+        if self.listenerCola == nil {
+            self.listenerCola = self.refAula.collection("cola").addSnapshotListener { querySnapshot, error in
+
+                if let error = error {
+                    log.error("Error al recuperar datos: \(error.localizedDescription)")
+                } else {
+                    self.buscarAlumnoEnCola()
+                }
+            }
+        }
+    }
+
+    fileprivate func conectarListenerAula(_ document: QueryDocumentSnapshot) {
+
+        // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
+        if self.listenerAula == nil {
+            self.listenerAula = document.reference.addSnapshotListener { documentSnapshot, error in
+
+                if (documentSnapshot?.exists)! && documentSnapshot?.data()?["codigo"] as? String == self.codigoAula {
+                    self.refAula = documentSnapshot?.reference
+                    self.conectarListenerCola()
+                } else {
+                    log.info("El aula ha desaparecido")
+                    self.desconectarListeners()
+                    self.cerrarViewController()
+                }
+            }
+        }
+    }
+
     fileprivate func encolarAlumno() {
 
         // Buscar el aula
         db.collection("aulas").whereField("codigo", isEqualTo: self.codigoAula).limit(to: 1).getDocuments() { (querySnapshot, error) in
+
             if let error = error {
                 log.error("Error al recuperar datos: \(error.localizedDescription)")
             } else {
@@ -96,64 +170,7 @@ class TurnoViewController: UIViewController {
                     let document = querySnapshot!.documents[0]
                     log.info("Conectado a aula existente")
 
-                    // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
-                    if self.listenerAula == nil {
-                        self.listenerAula = document.reference.addSnapshotListener { documentSnapshot, error in
-
-                            if (documentSnapshot?.exists)! && documentSnapshot?.data()?["codigo"] as? String == self.codigoAula {
-
-                                self.refAula = documentSnapshot?.reference
-
-                                if self.listenerCola == nil {
-                                    self.listenerCola = self.refAula.collection("cola").addSnapshotListener { querySnapshot, error in
-
-                                        if let error = error {
-                                            log.error("Error al recuperar datos: \(error.localizedDescription)")
-                                        } else {
-
-                                            self.refAula.collection("cola").whereField("alumno", isEqualTo: self.uid).limit(to: 1).getDocuments() { (querySnapshot, error) in
-                                                if let error = error {
-                                                    log.error("Error al recuperar datos: \(error.localizedDescription)")
-                                                } else {
-
-                                                    if self.pedirTurno && querySnapshot!.documents.count == 0 {
-                                                        self.pedirTurno = false
-
-                                                        log.info("Alumno no encontrado, lo añadimos")
-
-                                                        self.refPosicion = self.refAula.collection("cola").addDocument(data: [
-                                                            "alumno": self.uid,
-                                                            "timestamp": FieldValue.serverTimestamp()
-                                                            ]) { error in
-                                                            if let error = error {
-                                                                log.error("Error al añadir el documento: \(error.localizedDescription)")
-                                                            } else {
-                                                                self.actualizarPantalla()
-                                                            }
-                                                        }
-
-                                                    } else if querySnapshot!.documents.count > 0 {
-                                                        log.error("Alumno encontrado, ya está en la cola")
-                                                        self.pedirTurno = false
-                                                        self.refPosicion = querySnapshot!.documents[0].reference
-                                                        self.actualizarPantalla()
-
-                                                    } else if querySnapshot!.documents.count == 0 {
-                                                        log.info("La cola se ha vaciado")
-                                                        self.etiquetaNumero.text = ""
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            } else {
-                                log.info("El aula ha desaparecido")
-                                self.desconectarListeners()
-                                self.cerrarViewController()
-                            }
-                        }
-                    }
+                    self.conectarListenerAula(document)
                 } else {
                     log.info("Aula no encontrada")
                     self.etiquetaAula.text = "?"
