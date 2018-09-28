@@ -29,6 +29,10 @@ import android.view.MotionEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_alumno_turno.*
+import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.FirebaseFirestore
+
+
 
 class AlumnoTurno : AppCompatActivity() {
 
@@ -66,6 +70,13 @@ class AlumnoTurno : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Configurar las opciones de Firebase
+        val settings = FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(false)
+                .setTimestampsInSnapshotsEnabled(true)
+                .build()
+        db.firestoreSettings = settings
 
         // Ocultar la barra de título en horizontal
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
