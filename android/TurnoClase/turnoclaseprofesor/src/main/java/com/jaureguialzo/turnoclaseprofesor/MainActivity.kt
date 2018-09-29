@@ -27,22 +27,31 @@ import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    // Referencias a los objetos
-    private var aula: Aula? = null
+    // ID de usuario único generado por Firebase
     private var uid: String? = null
-    private var listener: ListenerRegistration? = null
 
-    private var mAuth: FirebaseAuth? = null
+    // Listeners para recibir las actualizaciones
+    private var listenerAula: ListenerRegistration? = null
+    private var listenerCola: ListenerRegistration? = null
+
+    // Referencias al documento del aula y la posición en la cola
+    private var refAula: DocumentReference? = null
+
+    // Para simular el interfaz al hacer las capturas
+    private var n = 2
 
     // Activar Firestore
     private val db = FirebaseFirestore.getInstance()
+    private var mAuth: FirebaseAuth? = null
+
+    // Referencias a los objetos (borrar)
+    private var aula: Aula? = null
+    private var listener: ListenerRegistration? = null
 
     // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
     private val isRunningTest: Boolean by lazy {
@@ -54,10 +63,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Para simular el interfaz al hacer las capturas
-    private var n = 2
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         // Configurar las opciones de Firebase
         val settings = FirebaseFirestoreSettings.Builder()
@@ -66,8 +73,6 @@ class MainActivity : AppCompatActivity() {
                 .build()
         db.firestoreSettings = settings
 
-        super.onCreate(savedInstanceState)
-
         // Ocultar la barra de título en horizontal
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
                 !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_XLARGE))
@@ -75,55 +80,43 @@ class MainActivity : AppCompatActivity() {
         else
             supportActionBar!!.show()
 
+        // Cargar el layout
         setContentView(R.layout.activity_main)
 
-        botonCodigoAula.text = "..."
-        botonEnCola.text = "..."
-        etiquetaNombreAlumno.text = ""
-
-        mAuth = FirebaseAuth.getInstance()
+        // Limpiar el UI
+        actualizarAula("...")
+        actualizarMensaje("")
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
-            botonCodigoAula.text = "BE131"
-            botonEnCola.text = "2"
-            etiquetaNombreAlumno.text = ""
+            actualizarAula("BE131", 2)
+            actualizarMensaje("")
         } else {
 
             // Iniciar sesión y conectar al aula
+            mAuth = FirebaseAuth.getInstance()
+
             mAuth!!.signInAnonymously()
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             uid = mAuth?.currentUser?.uid
-                            Log.d(TAG, "Registrado como usuario con UID: " + uid)
+                            Log.d(TAG, "Registrado como usuario con UID: $uid")
 
                             // Cargar el aula y si no, crearla
                             db.collection("aulas").document(uid!!)
                                     .get()
-                                    .addOnCompleteListener { task2 ->
-                                        if (task2.isSuccessful) {
-                                            val document = task2.result
+                                    .addOnCompleteListener {
+                                        if (it.isSuccessful) {
+
+                                            val document = it.result
                                             if (!document.exists()) {
                                                 Log.d(TAG, "Creando nueva aula")
-
-                                                // Crear el aula
-                                                val datos = HashMap<String, Any>()
-                                                datos.put("cola", ArrayList<String>())
-
-                                                db.collection("aulas").document(uid!!)
-                                                        .set(datos)
-                                                        .addOnSuccessListener {
-                                                            Log.d(TAG, "Aula creada")
-                                                            conectarListener()
-                                                        }
-                                                        .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
-
+                                                crearAula()
                                             } else {
                                                 Log.d(TAG, "Conectado a aula existente")
+                                                refAula = document.reference
                                                 conectarListener()
                                             }
-                                        } else {
-                                            Log.e(TAG, "Error al recuperar el aula: ", task2.exception)
                                         }
                                     }
                         } else {
@@ -358,40 +351,81 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun conectarListener() {
+    private fun crearAula() {
 
-        // Añadir el listener
-        if (listener == null) {
+        // Almacenar la referencia a la nueva aula
+        refAula = db.collection("aulas").document(uid!!)
 
-            listener = db.collection("aulas").document(uid!!)
-                    .addSnapshotListener({ snapshot, _ ->
-                        if (snapshot != null && snapshot.exists()) {
+        val datos = HashMap<String, Any>()
+        datos["timestamp"] = FieldValue.serverTimestamp()
 
-                            val aula = snapshot.data
-                            Log.d(TAG, "Actualizando datos del aula")
-
-                            @Suppress("UNCHECKED_CAST")
-                            val cola = aula!!["cola"] as? ArrayList<String> ?: ArrayList<String>()
-                            val codigo = aula["codigo"] as? String ?: "?"
-
-                            this.aula = Aula(codigo, cola)
-
-                            Log.d(TAG, "Aula: " + this.aula)
-
-                            this.actualizar()
-
-                        } else {
-                            Log.d(TAG, "El aula ha desaparecido")
-
-                            this.aula = Aula("?", ArrayList<String>())
-                            this.actualizar()
-                        }
-                    })
-        }
-
+        // Guardar el documento con un Timestamp, para que se genere el código
+        refAula!!.set(datos)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Aula creada")
+                    conectarListener()
+                }
+                .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
     }
 
-    private fun actualizar() {
+    private fun actualizarAula(codigoAula: String = "?", enCola: Int = -1) {
+        actualizarAula(codigoAula)
+        actualizarAula(enCola)
+    }
+
+    private fun actualizarAula(codigoAula: String) {
+        botonCodigoAula.text = codigoAula
+    }
+
+    private fun actualizarAula(enCola: Int) {
+        if (enCola != -1)
+            botonEnCola.text = enCola.toString()
+        else
+            botonEnCola.text = "..."
+    }
+
+    private fun actualizarMensaje(texto: String = "?") {
+        etiquetaNombreAlumno.text = texto
+    }
+
+    private fun conectarListener() {
+
+        // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
+        if (listenerAula == null) {
+            listenerAula = refAula!!.addSnapshotListener { snapshot, _ ->
+
+                if (snapshot != null && snapshot.exists()) {
+                    refAula = snapshot.reference
+
+                    val aula = snapshot.data
+                    Log.d(TAG, "Actualizando datos del aula")
+
+                    val codigoAula = aula!!["codigo"] as? String ?: "?"
+                    Log.d(TAG, "Aula: $codigoAula")
+
+                    actualizarAula(codigoAula)
+
+                    // Listener de la cola
+                    if (listenerCola == null) {
+                        listenerCola = refAula!!.collection("cola").addSnapshotListener { querySnapshot, error ->
+
+                            if (error != null) {
+                                Log.e(TAG, "Error al recuperar datos: ", error)
+                            } else {
+                                actualizarAula(querySnapshot!!.documents.count())
+                            }
+                        }
+                    }
+
+                } else {
+                    Log.d(TAG, "El aula ha desaparecido")
+                    actualizarAula("?", 0)
+                }
+            }
+        }
+    }
+
+    private fun actualizarPantalla() {
 
         if (this.aula != null) {
             val aula = this.aula!!
