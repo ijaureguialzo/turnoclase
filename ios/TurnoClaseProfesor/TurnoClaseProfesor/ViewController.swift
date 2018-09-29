@@ -72,19 +72,21 @@ class ViewController: UIViewController {
 
         log.info("Iniciando la aplicación...")
 
-        // Registrarse como usuario anónimo
+        // Ver si estamos en modo test, haciendo capturas de pantalla
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             self.etiquetaBotonCodigoAula.setTitle("BE131", for: UIControl.State())
             self.etiquetaBotonEnCola.setTitle("2", for: UIControl.State())
             self.etiquetaNombreAlumno.text = ""
         } else {
-            Auth.auth().signInAnonymously() { (result, error) in
 
+            // Iniciar sesión y conectar al aula
+            Auth.auth().signInAnonymously() { (result, error) in
                 if let resultado = result {
 
                     self.uid = resultado.user.uid
                     log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
+                    // Cargar el aula y si no, crearla
                     db.collection("aulas").document(self.uid).getDocument() { (document, error) in
 
                         if !(document?.exists)! {
@@ -106,6 +108,7 @@ class ViewController: UIViewController {
 
     func conectarListener() {
 
+        // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
         if self.listenerAula == nil && self.refAula != nil {
             self.listenerAula = self.refAula
                 .addSnapshotListener { documentSnapshot, error in

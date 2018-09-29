@@ -26,6 +26,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_alumno_turno.*
@@ -150,33 +151,13 @@ class AlumnoTurno : AppCompatActivity() {
 
         // Animación del botón Actualizar
         botonActualizar.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón botonActualizar...")
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                anim.duration = 100
-                anim.start()
-            } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón botonActualizar...")
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                anim.duration = 300
-                anim.start()
-            }
+            animarBoton(event, v, "botonActualizar")
             false
         }
 
         // Animación del botón Cancelar
         botonCancelar.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón botonActualizar...")
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                anim.duration = 100
-                anim.start()
-            } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón botonActualizar...")
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                anim.duration = 300
-                anim.start()
-            }
+            animarBoton(event, v, "botonCancelar")
             false
         }
 
@@ -359,6 +340,27 @@ class AlumnoTurno : AppCompatActivity() {
         if (listenerCola != null) {
             listenerCola?.remove()
             listenerCola = null
+        }
+    }
+
+    private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
+
+        if (!isRunningTest) {
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                Log.d("TurnoClase", "DOWN del botón $nombre...")
+
+                // Difuminar
+                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
+                anim.duration = 100
+                anim.start()
+            } else if (event.action == MotionEvent.ACTION_UP) {
+                Log.d("TurnoClase", "UP del botón $nombre...")
+
+                // Restaurar
+                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
+                anim.duration = 300
+                anim.start()
+            }
         }
     }
 

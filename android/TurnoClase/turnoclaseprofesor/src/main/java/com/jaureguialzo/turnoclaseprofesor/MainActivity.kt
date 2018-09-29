@@ -26,6 +26,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
             mAuth!!.signInAnonymously()
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+
                             uid = mAuth?.currentUser?.uid
                             Log.d(TAG, "Registrado como usuario con UID: $uid")
 
@@ -127,228 +129,218 @@ class MainActivity : AppCompatActivity() {
 
         // Evento del botón botonCodigoAula (vaciar el aula)
         botonCodigoAula.setOnClickListener {
-            Log.d(TAG, "Vaciando el aula...")
-
-            if (this.aula != null) {
-                this.aula?.cola = ArrayList<String>()
-
-                // Actualizar el aula
-                val datos = HashMap<String, Any>()
-                datos.put("cola", ArrayList<String>())
-
-                db.collection("aulas").document(uid!!)
-                        .update(datos)
-                        .addOnSuccessListener {
-                            Log.d(TAG, "Aula vaciada")
-
-                            etiquetaNombreAlumno.text = ""
-                            conectarListener()
-                        }
-                        .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
-
-            } else {
-                Log.e(TAG, "No hay objeto aula")
-            }
-
+            botonCodigoAulaCorto()
         }
 
         // Evento del botón botonCodigoAula (crear nueva aula)
         botonCodigoAula.setOnLongClickListener {
-
-            Log.d(TAG, "Generando nueva aula...")
-
-            if (this.aula != null) {
-
-                this.aula = Aula("?", ArrayList<String>())
-
-                listener?.remove()
-                listener = null
-
-                // Borrar el aula
-                db.collection("aulas").document(uid!!)
-                        .delete()
-                        .addOnSuccessListener {
-                            Log.d(TAG, "Aula borrada")
-
-                            // Crear el aula
-                            val datos = HashMap<String, Any>()
-                            datos.put("cola", ArrayList<String>())
-
-                            db.collection("aulas").document(uid!!)
-                                    .set(datos)
-                                    .addOnSuccessListener {
-                                        Log.d(TAG, "Aula creada")
-
-                                        etiquetaNombreAlumno.text = ""
-                                        conectarListener()
-                                    }
-                                    .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
-
-                        }
-                        .addOnFailureListener { e -> Log.e(TAG, "Error al borrar el aula", e) }
-
-            } else {
-                Log.e(TAG, "No hay objeto aula")
-            }
-
+            botonCodigoAulaLargo()
             true
         }
 
         // Evento del botón Siguiente
         botonSiguiente.setOnClickListener {
-            Log.d(TAG, "Mostrando el siguiente alumno...")
-
-            if (aula != null) {
-
-                if (aula?.cola?.size!! > 0) {
-
-                    val siguiente = aula?.cola?.removeAt(0)
-
-                    Log.d(TAG, "Siguiente: ${siguiente}")
-
-                    // Cargar el alumno
-                    db.collection("alumnos").document(siguiente!!)
-                            .get()
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    val document = task.result
-                                    if (document.exists()) {
-                                        val alumno = document.data
-
-                                        val nombre = alumno!!["nombre"] as? String ?: "?"
-
-                                        if (nombre.length >= 10) {
-                                            etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
-                                        } else if (nombre.length > 4 && nombre.length < 10) {
-                                            etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
-                                        } else
-                                            etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
-
-                                        etiquetaNombreAlumno.text = nombre
-
-                                    } else {
-                                        Log.d(TAG, "El alumno no existe")
-                                        etiquetaNombreAlumno.text = ""
-                                    }
-                                } else {
-                                    Log.e(TAG, "Error al recuperar el aula: ", task.exception)
-                                }
-                            }
-
-                    // Actualizar el aula
-                    val datos = HashMap<String, Any>()
-                    datos.put("cola", aula?.cola!!)
-
-                    db.collection("aulas").document(uid!!)
-                            .update(datos)
-                            .addOnSuccessListener {
-                                Log.d(TAG, "Cola actualizada")
-                                conectarListener()
-                            }
-                            .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
-
-                } else {
-                    Log.d(TAG, "El aula está vacía")
-                    etiquetaNombreAlumno.text = ""
-                }
-            } else {
-                Log.e(TAG, "No hay objeto aula")
-            }
-
+            botonSiguiente()
         }
 
         // Evento del botón botonEnCola
         botonEnCola.setOnClickListener {
-            Log.d("TurnoClase", "Este botón ya no hace nada :)")
-
-            if (isRunningTest) {
-                n -= 1
-                if (n >= 0) {
-                    botonEnCola.text = n.toString()
-
-                    val nombre = Nombres().aleatorio()
-
-                    if (nombre.length >= 10) {
-                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
-                    } else if (nombre.length > 4 && nombre.length < 10) {
-                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
-                    } else
-                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
-
-                    etiquetaNombreAlumno.text = nombre
-
-                } else {
-                    botonEnCola.text = "0"
-                    etiquetaNombreAlumno.text = ""
-                }
-            }
-
+            botonEnCola()
         }
 
         // Animación del botón Siguiente
         botonSiguiente.setOnTouchListener { v, event ->
-            if (!isRunningTest) {
-                if (event.action == MotionEvent.ACTION_DOWN) {
-                    Log.d("TurnoClase", "DOWN del botón botonSiguiente...")
-
-                    // Difuminar
-                    val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                    anim.duration = 100
-                    anim.start()
-                } else if (event.action == MotionEvent.ACTION_UP) {
-                    Log.d("TurnoClase", "UP del botón botonSiguiente...")
-
-                    // Restaurar
-                    val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                    anim.duration = 300
-                    anim.start()
-                }
-            }
+            animarBoton(event, v, "botonSiguiente")
             false
         }
 
         // Animación del botón botonEnCola
         botonEnCola.setOnTouchListener { v, event ->
-            if (!isRunningTest) {
-                if (event.action == MotionEvent.ACTION_DOWN) {
-                    Log.d("TurnoClase", "DOWN del botón botonEnCola...")
-
-                    // Difuminar
-                    val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                    anim.duration = 100
-                    anim.start()
-                } else if (event.action == MotionEvent.ACTION_UP) {
-                    Log.d("TurnoClase", "UP del botón botonEnCola...")
-
-                    // Restaurar
-                    val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                    anim.duration = 300
-                    anim.start()
-                }
-            }
+            animarBoton(event, v, "botonEnCola")
             false
         }
 
         // Animación del botón botonCodigoAula
         botonCodigoAula.setOnTouchListener { v, event ->
+            animarBoton(event, v, "botonCodigoAula")
+            false
+        }
+
+    }
+
+    private fun botonCodigoAulaLargo() {
+
+        Log.d(TAG, "Generando nueva aula...")
+
+        if (this.aula != null) {
+
+            this.aula = Aula("?", ArrayList<String>())
+
+            listener?.remove()
+            listener = null
+
+            // Borrar el aula
+            db.collection("aulas").document(uid!!)
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Aula borrada")
+
+                        // Crear el aula
+                        val datos = HashMap<String, Any>()
+                        datos.put("cola", ArrayList<String>())
+
+                        db.collection("aulas").document(uid!!)
+                                .set(datos)
+                                .addOnSuccessListener {
+                                    Log.d(TAG, "Aula creada")
+
+                                    etiquetaNombreAlumno.text = ""
+                                    conectarListener()
+                                }
+                                .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
+
+                    }
+                    .addOnFailureListener { e -> Log.e(TAG, "Error al borrar el aula", e) }
+
+        } else {
+            Log.e(TAG, "No hay objeto aula")
+        }
+    }
+
+    private fun botonCodigoAulaCorto() {
+
+        Log.d(TAG, "Vaciando el aula...")
+
+        if (this.aula != null) {
+            this.aula?.cola = ArrayList<String>()
+
+            // Actualizar el aula
+            val datos = HashMap<String, Any>()
+            datos.put("cola", ArrayList<String>())
+
+            db.collection("aulas").document(uid!!)
+                    .update(datos)
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Aula vaciada")
+
+                        etiquetaNombreAlumno.text = ""
+                        conectarListener()
+                    }
+                    .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
+
+        } else {
+            Log.e(TAG, "No hay objeto aula")
+        }
+    }
+
+    private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
+
+        if (!isRunningTest) {
             if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón botonCodigoAula...")
+                Log.d("TurnoClase", "DOWN del botón $nombre...")
 
                 // Difuminar
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
                 anim.duration = 100
                 anim.start()
             } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón botonCodigoAula...")
+                Log.d("TurnoClase", "UP del botón $nombre...")
 
                 // Restaurar
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
                 anim.duration = 300
                 anim.start()
             }
-            false
         }
+    }
 
+    private fun botonEnCola() {
+
+        Log.d("TurnoClase", "Este botón ya no hace nada :)")
+
+        if (isRunningTest) {
+            n -= 1
+            if (n >= 0) {
+                botonEnCola.text = n.toString()
+
+                val nombre = Nombres().aleatorio()
+
+                if (nombre.length >= 10) {
+                    etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
+                } else if (nombre.length > 4 && nombre.length < 10) {
+                    etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
+                } else
+                    etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
+
+                etiquetaNombreAlumno.text = nombre
+
+            } else {
+                botonEnCola.text = "0"
+                etiquetaNombreAlumno.text = ""
+            }
+        }
+    }
+
+    private fun botonSiguiente() {
+
+        Log.d(TAG, "Mostrando el siguiente alumno...")
+
+        if (aula != null) {
+
+            if (aula?.cola?.size!! > 0) {
+
+                val siguiente = aula?.cola?.removeAt(0)
+
+                Log.d(TAG, "Siguiente: ${siguiente}")
+
+                // Cargar el alumno
+                db.collection("alumnos").document(siguiente!!)
+                        .get()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val document = task.result
+                                if (document.exists()) {
+                                    val alumno = document.data
+
+                                    val nombre = alumno!!["nombre"] as? String ?: "?"
+
+                                    if (nombre.length >= 10) {
+                                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
+                                    } else if (nombre.length > 4 && nombre.length < 10) {
+                                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
+                                    } else
+                                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
+
+                                    etiquetaNombreAlumno.text = nombre
+
+                                } else {
+                                    Log.d(TAG, "El alumno no existe")
+                                    etiquetaNombreAlumno.text = ""
+                                }
+                            } else {
+                                Log.e(TAG, "Error al recuperar el aula: ", task.exception)
+                            }
+                        }
+
+                // Actualizar el aula
+                val datos = HashMap<String, Any>()
+                datos.put("cola", aula?.cola!!)
+
+                db.collection("aulas").document(uid!!)
+                        .update(datos)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "Cola actualizada")
+                            conectarListener()
+                        }
+                        .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
+
+            } else {
+                Log.d(TAG, "El aula está vacía")
+                etiquetaNombreAlumno.text = ""
+            }
+        } else {
+            Log.e(TAG, "No hay objeto aula")
+        }
     }
 
     private fun crearAula() {
