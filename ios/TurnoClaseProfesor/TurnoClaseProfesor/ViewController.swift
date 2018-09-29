@@ -48,8 +48,11 @@ class ViewController: UIViewController {
     var n = 2
 
     fileprivate func crearAula() {
+
+        // Almacenar la referencia a la nueva aula
         self.refAula = db.collection("aulas").document(self.uid)
 
+        // Guardar el documento con un Timestamp, para que se genere el código
         self.refAula.setData([
             "timestamp": FieldValue.serverTimestamp()
             ]) { error in
@@ -118,6 +121,7 @@ class ViewController: UIViewController {
 
                             self.actualizarCodigo(codigoAula)
 
+                            // Listener de la cola
                             if self.listenerCola == nil {
                                 self.listenerCola = db.collection("aulas").document(self.uid)
                                     .collection("cola").addSnapshotListener { querySnapshot, error in
