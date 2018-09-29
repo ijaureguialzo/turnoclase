@@ -29,10 +29,6 @@ import android.view.MotionEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_alumno_turno.*
-import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.google.firebase.firestore.FirebaseFirestore
-
-
 
 class AlumnoTurno : AppCompatActivity() {
 
@@ -107,8 +103,8 @@ class AlumnoTurno : AppCompatActivity() {
             mAuth = FirebaseAuth.getInstance()
 
             mAuth!!.signInAnonymously()
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
+                    .addOnCompleteListener(this) {
+                        if (it.isSuccessful) {
                             uid = mAuth?.currentUser?.uid
                             Log.d(TAG, "Registrado como usuario con UID: $uid")
 
@@ -116,7 +112,7 @@ class AlumnoTurno : AppCompatActivity() {
 
                             encolarAlumno()
                         } else {
-                            Log.e(TAG, "Error de inicio de sesión", task.exception)
+                            Log.e(TAG, "Error de inicio de sesión", it.exception)
                         }
                     }
         }
