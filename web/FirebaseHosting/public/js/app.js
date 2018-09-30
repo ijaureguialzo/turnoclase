@@ -1,85 +1,89 @@
-// Initialize Cloud Firestore through Firebase
-var db = firebase.firestore();
+// Configurar Firestores
+const db = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+db.settings(settings);
 
 // Iniciar sesión anónima
 firebase.auth().signInAnonymously().catch(function (error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-
-    console.log("Error de conexión: " + errorMessage);
+    console.log("Error de conexión: " + error.message);
 });
 
 // Comprobar si ha tenido éxito
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-
-        // User is signed in.
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-
-        console.log("Sesión iniciada: " + uid);
-
+        console.log("Sesión iniciada: " + user.uid);
     } else {
-        // User is signed out.
+        console.log("No hay sesión de usuario")
     }
 });
 
-// TODO: Si se pulsa dos veces en el botón Ver, el listener se lanza dos veces
+var actualizando = false;
+
+// Responder al click del botón y conectar el listener a la cola para obtener actualizaciones
 $('#aula-boton').on("click", function () {
 
     console.log("Botón pulsado");
+
+    // Desactivar los botones para que el listener no se cargue dos veces
+    $('#aula-boton').prop('disabled', true);
+    $('#aula-input').prop('disabled', true);
+
     console.log("Aula: " + $('#aula-input').val());
 
-    db.collection("aulas").where("codigo", "==", $('#aula-input').val().toUpperCase())
-        .onSnapshot(querySnapshot => {
+    // Recuperar el aula
+    db.collection("aulas").where("codigo", "==", $('#aula-input').val().toUpperCase()).limit(1).get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
 
-            // Limpiar las listas
-            $("#listaprimero").empty();
-            $("#lista").empty();
+                // Obtener la cola ordenada
+                db.collection("aulas").doc(doc.id)
+                    .collection("cola")
+                    .orderBy("timestamp")
+                    .onSnapshot(querySnapshot => {
 
-            querySnapshot.forEach(doc => {
+                        if (!this.actualizando) {
+                            this.actualizando = true;
 
-                var aula = doc.data();
-                console.log(aula["codigo"] + ": " + aula["cola"].length);
+                            // Actualizar el recuento
+                            let recuento = querySnapshot.size;
+                            $("#recuento").text(recuento);
 
-                // Actualizar el recuento
-                $("#recuento").text(aula["cola"].length);
+                            console.log("Recuento: " + recuento);
 
-                if (aula["cola"].length > 0) {
+                            // El primero se visualiza en amarillo
+                            var primero = true;
 
-                    // Mostrar el primero
-                    db.collection("alumnos").doc(aula["cola"][0]).get().then(doc => {
-                        if (doc.exists) {
-                            $("#listaprimero").append('<li class="list-group-item amarillo my-3">' + doc.data()["nombre"] + '</li>');
-                        } else {
-                            console.log("No such document!");
+                            $("#listaprimero").empty()
+                            $("#lista").empty();
+
+                            querySnapshot.forEach(doc => {
+
+                                // Cargar los datos de cada alumno
+                                db.collection("alumnos").doc(doc.data()["alumno"]).get().then(doc => {
+
+                                    if (doc.exists && primero === true) {
+                                        primero = false;
+                                        $("#listaprimero").empty().append('<li class="list-group-item amarillo my-3">' + doc.data()["nombre"] + '</li>');
+                                    } else if (doc.exists) {
+                                        $("#lista").append('<li class="list-group-item">' + doc.data()["nombre"] + '</li>');
+                                    } else {
+                                        console.log("El alumno no existe");
+                                    }
+
+                                }).catch(error => {
+                                    console.log("Error al recuperar datos:", error);
+                                });
+                            });
+
+                            this.actualizando = false;
                         }
-                    }).catch(error => {
-                        console.log("Error getting document:", error);
+                    }, err => {
+                        console.log(`Error: ${err}`);
                     });
-
-                    // Si hay más, mostrarlos
-                    for (var i = 1, len = aula["cola"].length; i < len; i++) {
-
-                        db.collection("alumnos").doc(aula["cola"][i]).get().then(doc => {
-                            if (doc.exists) {
-                                $("#lista").append('<li class="list-group-item">' + doc.data()["nombre"] + '</li>');
-                            } else {
-                                console.log("No such document!");
-                            }
-                        }).catch(error => {
-                            console.log("Error getting document:", error);
-                        });
-
-                    }
-
-                }
-
             });
-
-        }, err => {
-            console.log(`Error: ${err}`);
+        })
+        .catch(err => {
+            console.log('Error al recuperar datos', err);
         });
 });
 
