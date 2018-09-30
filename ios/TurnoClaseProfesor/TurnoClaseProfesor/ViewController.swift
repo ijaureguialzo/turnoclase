@@ -215,10 +215,11 @@ class ViewController: UIViewController {
 
     @IBAction func botonCodigoAulaCorto(_ sender: UIButton) {
 
-        log.info("Vaciando el aula...")
-
+        //log.info("Vaciando el aula...")
         // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
         // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
+
+        mostrarAcciones()
 
     }
 
@@ -270,6 +271,31 @@ class ViewController: UIViewController {
 
     fileprivate func actualizarMensaje(texto: String) {
         self.etiquetaNombreAlumno.text = texto
+    }
+
+    fileprivate func mostrarAcciones() {
+
+        // REF: iOS Action Sheet: http://swiftdeveloperblog.com/actionsheet-example-in-swift/
+
+        let alertController = UIAlertController(title: "Aula \(etiquetaBotonCodigoAula.titleLabel?.text ?? "?")", message: "PIN del aula: 1234", preferredStyle: .actionSheet)
+
+        let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula", style: .default, handler: { (action) -> Void in
+            log.info("Conectar a otra aula")
+        })
+
+        let accionDesconectarAula = UIAlertAction(title: "Desconectar del aula", style: .destructive, handler: { (action) -> Void in
+            log.info("Desconectar del aula")
+        })
+
+        let accionCancelar = UIAlertAction(title: "Cancelar", style: .cancel, handler: { (action) -> Void in
+            log.info("Cancelar")
+        })
+
+        alertController.addAction(accionConectarOtraAula)
+        alertController.addAction(accionDesconectarAula)
+        alertController.addAction(accionCancelar)
+
+        self.present(alertController, animated: true, completion: nil)
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {
