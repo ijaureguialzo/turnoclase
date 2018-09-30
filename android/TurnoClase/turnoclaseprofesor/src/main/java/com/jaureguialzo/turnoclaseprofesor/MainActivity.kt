@@ -50,10 +50,6 @@ class MainActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private var mAuth: FirebaseAuth? = null
 
-    // Referencias a los objetos (borrar)
-    private var aula: Aula? = null
-    private var listener: ListenerRegistration? = null
-
     // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
     private val isRunningTest: Boolean by lazy {
         try {
@@ -168,181 +164,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun botonCodigoAulaLargo() {
-
-        Log.d(TAG, "Generando nueva aula...")
-
-        if (this.aula != null) {
-
-            this.aula = Aula("?", ArrayList<String>())
-
-            listener?.remove()
-            listener = null
-
-            // Borrar el aula
-            db.collection("aulas").document(uid!!)
-                    .delete()
-                    .addOnSuccessListener {
-                        Log.d(TAG, "Aula borrada")
-
-                        // Crear el aula
-                        val datos = HashMap<String, Any>()
-                        datos.put("cola", ArrayList<String>())
-
-                        db.collection("aulas").document(uid!!)
-                                .set(datos)
-                                .addOnSuccessListener {
-                                    Log.d(TAG, "Aula creada")
-
-                                    etiquetaNombreAlumno.text = ""
-                                    conectarListener()
-                                }
-                                .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
-
-                    }
-                    .addOnFailureListener { e -> Log.e(TAG, "Error al borrar el aula", e) }
-
-        } else {
-            Log.e(TAG, "No hay objeto aula")
-        }
-    }
-
-    private fun botonCodigoAulaCorto() {
-
-        Log.d(TAG, "Vaciando el aula...")
-
-        if (this.aula != null) {
-            this.aula?.cola = ArrayList<String>()
-
-            // Actualizar el aula
-            val datos = HashMap<String, Any>()
-            datos.put("cola", ArrayList<String>())
-
-            db.collection("aulas").document(uid!!)
-                    .update(datos)
-                    .addOnSuccessListener {
-                        Log.d(TAG, "Aula vaciada")
-
-                        etiquetaNombreAlumno.text = ""
-                        conectarListener()
-                    }
-                    .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
-
-        } else {
-            Log.e(TAG, "No hay objeto aula")
-        }
-    }
-
-    private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
-
-        if (!isRunningTest) {
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón $nombre...")
-
-                // Difuminar
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                anim.duration = 100
-                anim.start()
-            } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón $nombre...")
-
-                // Restaurar
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                anim.duration = 300
-                anim.start()
-            }
-        }
-    }
-
-    private fun botonEnCola() {
-
-        Log.d("TurnoClase", "Este botón ya no hace nada :)")
-
-        if (isRunningTest) {
-            n -= 1
-            if (n >= 0) {
-                botonEnCola.text = n.toString()
-
-                val nombre = Nombres().aleatorio()
-
-                if (nombre.length >= 10) {
-                    etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
-                } else if (nombre.length > 4 && nombre.length < 10) {
-                    etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
-                } else
-                    etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
-
-                etiquetaNombreAlumno.text = nombre
-
-            } else {
-                botonEnCola.text = "0"
-                etiquetaNombreAlumno.text = ""
-            }
-        }
-    }
-
-    private fun botonSiguiente() {
-
-        Log.d(TAG, "Mostrando el siguiente alumno...")
-
-        if (aula != null) {
-
-            if (aula?.cola?.size!! > 0) {
-
-                val siguiente = aula?.cola?.removeAt(0)
-
-                Log.d(TAG, "Siguiente: ${siguiente}")
-
-                // Cargar el alumno
-                db.collection("alumnos").document(siguiente!!)
-                        .get()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val document = task.result
-                                if (document.exists()) {
-                                    val alumno = document.data
-
-                                    val nombre = alumno!!["nombre"] as? String ?: "?"
-
-                                    if (nombre.length >= 10) {
-                                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
-                                    } else if (nombre.length > 4 && nombre.length < 10) {
-                                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
-                                    } else
-                                        etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
-
-                                    etiquetaNombreAlumno.text = nombre
-
-                                } else {
-                                    Log.d(TAG, "El alumno no existe")
-                                    etiquetaNombreAlumno.text = ""
-                                }
-                            } else {
-                                Log.e(TAG, "Error al recuperar el aula: ", task.exception)
-                            }
-                        }
-
-                // Actualizar el aula
-                val datos = HashMap<String, Any>()
-                datos.put("cola", aula?.cola!!)
-
-                db.collection("aulas").document(uid!!)
-                        .update(datos)
-                        .addOnSuccessListener {
-                            Log.d(TAG, "Cola actualizada")
-                            conectarListener()
-                        }
-                        .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
-
-            } else {
-                Log.d(TAG, "El aula está vacía")
-                etiquetaNombreAlumno.text = ""
-            }
-        } else {
-            Log.e(TAG, "No hay objeto aula")
-        }
-    }
-
     private fun crearAula() {
 
         // Almacenar la referencia a la nueva aula
@@ -358,26 +179,6 @@ class MainActivity : AppCompatActivity() {
                     conectarListener()
                 }
                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
-    }
-
-    private fun actualizarAula(codigoAula: String = "?", enCola: Int = -1) {
-        actualizarAula(codigoAula)
-        actualizarAula(enCola)
-    }
-
-    private fun actualizarAula(codigoAula: String) {
-        botonCodigoAula.text = codigoAula
-    }
-
-    private fun actualizarAula(enCola: Int) {
-        if (enCola != -1)
-            botonEnCola.text = enCola.toString()
-        else
-            botonEnCola.text = "..."
-    }
-
-    private fun actualizarMensaje(texto: String = "?") {
-        etiquetaNombreAlumno.text = texto
     }
 
     private fun conectarListener() {
@@ -417,21 +218,152 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun actualizarPantalla() {
+    private fun botonSiguiente() {
 
-        if (this.aula != null) {
-            val aula = this.aula!!
+        Log.d(TAG, "Mostrando el siguiente alumno...")
 
-            // Mostramos el código en la pantalla
-            botonCodigoAula.text = aula.codigo
+        if (refAula != null) {
 
-            botonEnCola.text = aula.cola.size.toString()
-            Log.d(TAG, "Alumnos en cola: ${aula.cola.size}")
+            refAula!!.collection("cola").orderBy("timestamp").limit(1).get()
+                    .addOnCompleteListener { querySnapshot ->
+                        if (!querySnapshot.isSuccessful) {
+                            Log.e(TAG, "Error al recuperar datos: ", querySnapshot.exception)
+                        } else {
+                            if (querySnapshot.result.count() > 0) {
+                                val refPosicion = querySnapshot.result.documents[0].reference
+
+                                refPosicion.get().addOnCompleteListener {
+                                    val posicion = it.result
+
+                                    // Cargar el alumno
+                                    db.collection("alumnos").document(posicion["alumno"] as String)
+                                            .get()
+                                            .addOnCompleteListener { document ->
+                                                if (document.isSuccessful) {
+                                                    if (document.result.exists()) {
+                                                        val alumno = document.result
+
+                                                        // Mostrar el nombre
+                                                        actualizarMensaje(alumno["nombre"] as String)
+
+                                                        // Borrar la entrada de la cola
+                                                        refPosicion.delete()
+                                                    } else {
+                                                        Log.e(TAG, "El alumno no existe")
+                                                        actualizarMensaje("?")
+                                                    }
+                                                } else {
+                                                    Log.e(TAG, "Error al recuperar datos: ", it.exception)
+                                                }
+                                            }
+                                }
+                            } else {
+                                Log.d(TAG, "Cola vacía")
+                                actualizarMensaje("")
+                            }
+                        }
+                    }
+        }
+    }
+
+    private fun botonEnCola() {
+
+        Log.d("TurnoClase", "Este botón ya no hace nada :)")
+
+        if (isRunningTest) {
+            n -= 1
+            if (n >= 0) {
+                actualizarAula(n)
+                actualizarMensaje(Nombres().aleatorio())
+            } else {
+                actualizarAula(0)
+                actualizarMensaje("")
+            }
+        }
+    }
+
+    private fun botonCodigoAulaCorto() {
+
+        Log.d(TAG, "Vaciando el aula...")
+
+        // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
+        // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
+
+    }
+
+    private fun botonCodigoAulaLargo() {
+
+        Log.d(TAG, "Generando nueva aula...")
+
+        if (listenerAula != null) {
+
+            listenerAula!!.remove()
+            listenerAula = null
+
+            // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+
+            db.collection("aulas").document(uid!!).delete().addOnCompleteListener {
+                if (!it.isSuccessful) {
+                    Log.e(TAG, "Error al borrar el aula: ", it.exception)
+                } else {
+                    Log.d(TAG, "Aula borrada")
+                    Log.d(TAG, "Creando nueva aula")
+                    crearAula()
+                }
+            }
 
         } else {
-            Log.e(TAG, "No hay objeto aula")
+            Log.e(TAG, "El listener no está conectado")
         }
 
+    }
+
+    private fun actualizarAula(codigoAula: String = "?", enCola: Int = -1) {
+        actualizarAula(codigoAula)
+        actualizarAula(enCola)
+    }
+
+    private fun actualizarAula(codigoAula: String) {
+        botonCodigoAula.text = codigoAula
+    }
+
+    private fun actualizarAula(enCola: Int) {
+        if (enCola != -1)
+            botonEnCola.text = enCola.toString()
+        else
+            botonEnCola.text = "..."
+    }
+
+    private fun actualizarMensaje(texto: String = "?") {
+
+        when {
+            texto.length >= 10 -> etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
+            texto.length in 5..9 -> etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
+            else -> etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
+        }
+
+        etiquetaNombreAlumno.text = texto
+    }
+
+    private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
+
+        if (!isRunningTest) {
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                Log.d("TurnoClase", "DOWN del botón $nombre...")
+
+                // Difuminar
+                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
+                anim.duration = 100
+                anim.start()
+            } else if (event.action == MotionEvent.ACTION_UP) {
+                Log.d("TurnoClase", "UP del botón $nombre...")
+
+                // Restaurar
+                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
+                anim.duration = 300
+                anim.start()
+            }
+        }
     }
 
     // Crear el menú "Acerca de..."
