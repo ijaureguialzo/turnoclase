@@ -47,6 +47,10 @@ class ViewController: UIViewController {
     // Para simular el interfaz al hacer las capturas
     var n = 2
 
+    // Datos del aula
+    var codigoAula = "..."
+    var PIN = "..."
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -93,9 +97,14 @@ class ViewController: UIViewController {
         // Almacenar la referencia a la nueva aula
         self.refAula = db.collection("aulas").document(self.uid)
 
+        // Generar el PIN del aula
+        // REF: Números aleatorios en Swift 4.2: https://www.hackingwithswift.com/articles/102/how-to-generate-random-numbers-in-swift
+        // REF: Formatear un número con 0s a la izquierda: https://stackoverflow.com/a/25566860
+
         // Guardar el documento con un Timestamp, para que se genere el código
         self.refAula.setData([
-            "timestamp": FieldValue.serverTimestamp()
+            "timestamp": FieldValue.serverTimestamp(),
+            "pin": String(format: "%04d", Int.random(in: 0...9999))
             ]) { error in
             if let error = error {
                 log.error("Error al crear el aula: \(error.localizedDescription)")
@@ -119,10 +128,8 @@ class ViewController: UIViewController {
 
                             log.info("Actualizando datos del aula...")
 
-                            let codigoAula = aula["codigo"] as? String ?? "?"
-                            log.debug("Aula: \(codigoAula ??? "[Desconocida]")")
-
-                            self.actualizarAula(codigo: codigoAula)
+                            self.actualizarAula(codigo: aula["codigo"] ??? "?")
+                            self.actualizarPIN(aula["pin"] ??? "?")
 
                             // Listener de la cola
                             if self.listenerCola == nil {
@@ -259,12 +266,12 @@ class ViewController: UIViewController {
     }
 
     fileprivate func actualizarAula(codigo: String) {
-        // Mostramos el código en la pantalla
         self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
+        self.codigoAula = codigo
+        log.info("Código de aula: \(codigo)")
     }
 
     fileprivate func actualizarAula(enCola recuento: Int) {
-        // Mostrar el recuento
         self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
         log.info("Alumnos en cola: \(recuento)")
     }
@@ -273,28 +280,85 @@ class ViewController: UIViewController {
         self.etiquetaNombreAlumno.text = texto
     }
 
+    fileprivate func actualizarPIN(_ pin: String) {
+        self.PIN = pin
+    }
+
     fileprivate func mostrarAcciones() {
 
         // REF: iOS Action Sheet: http://swiftdeveloperblog.com/actionsheet-example-in-swift/
 
-        let alertController = UIAlertController(title: "Aula \(etiquetaBotonCodigoAula.titleLabel?.text ?? "?")", message: "PIN del aula: 1234", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Aula \(codigoAula)", message: "PIN del aula: \(PIN)", preferredStyle: .actionSheet)
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula", style: .default, handler: { (action) -> Void in
             log.info("Conectar a otra aula")
+            self.dialogoConexion()
         })
 
         let accionDesconectarAula = UIAlertAction(title: "Desconectar del aula", style: .destructive, handler: { (action) -> Void in
             log.info("Desconectar del aula")
+
+            // Simulado
+            self.conectado = false
         })
 
         let accionCancelar = UIAlertAction(title: "Cancelar", style: .cancel, handler: { (action) -> Void in
             log.info("Cancelar")
         })
 
-        alertController.addAction(accionConectarOtraAula)
-        alertController.addAction(accionDesconectarAula)
+        if(!conectado) {
+            alertController.addAction(accionConectarOtraAula)
+        } else {
+            alertController.addAction(accionDesconectarAula)
+        }
+
         alertController.addAction(accionCancelar)
 
+        self.present(alertController, animated: true, completion: nil)
+    }
+
+    // Temporal, para simular el UI
+    var conectado = false
+
+    fileprivate func dialogoConexion() {
+
+        // REF: Crear un cuadro de diálogo modal
+
+        //Creating UIAlertController and
+        //Setting title and message for the alert dialog
+        let alertController = UIAlertController(title: "Conectar a otra aula", message: "Introduce los datos del aula a la que quieres conectar.", preferredStyle: .alert)
+
+        //the confirm action taking the inputs
+        let confirmAction = UIAlertAction(title: "Conectar", style: .default) { (_) in
+
+            //getting the input values from user
+            //let name = alertController.textFields?[0].text
+            //let email = alertController.textFields?[1].text
+
+            // Simulado
+            self.conectado = true
+
+            //self.labelMessage.text = "Name: " + name! + "Email: " + email!
+            log.info("Confirmar")
+        }
+
+        //the cancel action doing nothing
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { (_) in }
+
+        //adding textfields to our dialog box
+        alertController.addTextField { (textField) in
+            textField.placeholder = "AULA"
+            // Fijar lo que se puede escribir o no con una expresión regular?
+        }
+        alertController.addTextField { (textField) in
+            textField.placeholder = "PIN"
+        }
+
+        //adding the action to dialogbox
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+        //finally presenting the dialog box
         self.present(alertController, animated: true, completion: nil)
     }
 
