@@ -288,8 +288,10 @@ class AlumnoTurno : AppCompatActivity() {
 
                 val alumno = document.result
 
-                refAula!!.collection("cola").whereLessThanOrEqualTo("timestamp", alumno["timestamp"] as Any).get()
-                        .addOnCompleteListener {
+                refAula?.collection("cola")
+                        ?.whereLessThanOrEqualTo("timestamp", alumno["timestamp"] as Any)
+                        ?.get()
+                        ?.addOnCompleteListener {
                             if (!it.isSuccessful) {
                                 Log.e(TAG, "Error al recuperar datos: ", it.exception)
                             } else {
@@ -375,14 +377,15 @@ class AlumnoTurno : AppCompatActivity() {
 
         Log.d(TAG, "Cancelando...")
 
+        desconectarListeners()
+
         // Nos borramos de la cola
-        if (refAula != null && refPosicion != null) {
-
-            desconectarListeners()
-
+        if (refPosicion != null) {
             refPosicion!!.delete().addOnCompleteListener {
                 cerrarPantalla()
             }
+        } else {
+            cerrarPantalla()
         }
 
     }

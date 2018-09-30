@@ -258,14 +258,15 @@ class TurnoViewController: UIViewController {
         fadeIn(sender)
         log.info("Cancelando...")
 
+        desconectarListeners()
+
         // Nos borramos de la cola
-        if self.refAula != nil && self.refPosicion != nil {
-
-            desconectarListeners()
-
+        if self.refPosicion != nil {
             self.refPosicion.delete() { _ in
                 self.cerrarPantalla()
             }
+        } else {
+            self.cerrarPantalla()
         }
 
     }
