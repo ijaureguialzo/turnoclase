@@ -18,29 +18,25 @@ default_platform :android
 # En macOS, con JDK 9 no funciona. Instalar JDK 8 y ejecutar el comando siguiente.
 # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
-aplicaciones = [ "turnoclase", "turnoclaseprofesor" ]
-telefono = true
+aplicaciones = [ "turnoclaseprofesor", "turnoclase" ]
+telefono5 = true
 tablet7 = true
 tablet10 = true
 localizado = true
 
 platform :android do
-  before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
-    #sh("export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)") # Debería, pero no funciona
-  end
 
   # REF: Error al arrancar el emulador a mano: https://stackoverflow.com/a/43385567/5136913
   desc "Arranca los emuladores para hacer capturas"
   lane :emuladores do
-    if telefono
-      sh "./emulador.sh Nexus_5X_API_23 5554"
+    if telefono5
+      sh "./emulador.sh Telefono5 5554"
     end
     if tablet10
-      sh "./emulador.sh Nexus_10_API_23 5556"
+      sh "./emulador.sh Tablet10 5556"
     end
     if tablet7
-      sh "./emulador.sh Nexus_7_API_23 5558"
+      sh "./emulador.sh Tablet7 5558"
     end
   end
 
@@ -87,7 +83,7 @@ platform :android do
       	notifications: false
       	)
 
-      if telefono
+      if telefono5
         captura(
           app: aplicacion,
           tipo: "phone",
