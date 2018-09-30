@@ -260,11 +260,14 @@ class TurnoViewController: UIViewController {
 
         // Nos borramos de la cola
         if self.refAula != nil && self.refPosicion != nil {
-            self.refPosicion.delete()
+
+            desconectarListeners()
+
+            self.refPosicion.delete() { _ in
+                self.cerrarPantalla()
+            }
         }
 
-        desconectarListeners()
-        cerrarPantalla()
     }
 
     @IBAction func botonActualizar(_ sender: UIButton) {
@@ -285,24 +288,32 @@ class TurnoViewController: UIViewController {
 
     @IBAction func fadeOut(_ sender: UIButton) {
 
-        // Difuminar
-        UIView.animate(withDuration: 0.1,
-            delay: 0,
-            options: UIView.AnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-            animations: {
-                sender.alpha = 0.15
-            }, completion: nil)
+        // Ver si estamos en modo test, haciendo capturas de pantalla
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+
+            // Difuminar
+            UIView.animate(withDuration: 0.1,
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 0.15
+                }, completion: nil)
+        }
     }
 
     @IBAction func fadeIn(_ sender: UIButton) {
 
-        // Restaurar
-        UIView.animate(withDuration: 0.3,
-            delay: 0,
-            options: UIView.AnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-            animations: {
-                sender.alpha = 1
-            }, completion: nil)
+        // Ver si estamos en modo test, haciendo capturas de pantalla
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+
+            // Restaurar
+            UIView.animate(withDuration: 0.3,
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 1
+                }, completion: nil)
+        }
     }
 
 }
