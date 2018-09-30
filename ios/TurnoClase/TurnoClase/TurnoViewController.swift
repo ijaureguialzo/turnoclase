@@ -260,11 +260,14 @@ class TurnoViewController: UIViewController {
 
         // Nos borramos de la cola
         if self.refAula != nil && self.refPosicion != nil {
-            self.refPosicion.delete()
+
+            desconectarListeners()
+
+            self.refPosicion.delete() { _ in
+                self.cerrarPantalla()
+            }
         }
 
-        desconectarListeners()
-        cerrarPantalla()
     }
 
     @IBAction func botonActualizar(_ sender: UIButton) {

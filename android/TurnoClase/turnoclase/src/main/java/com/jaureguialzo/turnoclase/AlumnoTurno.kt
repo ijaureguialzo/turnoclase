@@ -377,11 +377,14 @@ class AlumnoTurno : AppCompatActivity() {
 
         // Nos borramos de la cola
         if (refAula != null && refPosicion != null) {
-            refPosicion!!.delete()
+
+            desconectarListeners()
+
+            refPosicion!!.delete().addOnCompleteListener {
+                cerrarPantalla()
+            }
         }
 
-        desconectarListeners()
-        cerrarPantalla()
     }
 
     // Crear el menú "Acerca de..."
