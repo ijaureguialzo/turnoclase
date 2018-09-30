@@ -47,36 +47,18 @@ class ViewController: UIViewController {
     // Para simular el interfaz al hacer las capturas
     var n = 2
 
-    fileprivate func crearAula() {
-
-        // Almacenar la referencia a la nueva aula
-        self.refAula = db.collection("aulas").document(self.uid)
-
-        // Guardar el documento con un Timestamp, para que se genere el código
-        self.refAula.setData([
-            "timestamp": FieldValue.serverTimestamp()
-            ]) { error in
-            if let error = error {
-                log.error("Error al crear el aula: \(error.localizedDescription)")
-            } else {
-                log.info("Aula creada")
-                self.conectarListener()
-            }
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // El texto encoge a medida que hay más caracteres
         etiquetaBotonCodigoAula.titleLabel?.adjustsFontSizeToFitWidth = true
 
         log.info("Iniciando la aplicación...")
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            self.etiquetaBotonCodigoAula.setTitle("BE131", for: UIControl.State())
-            self.etiquetaBotonEnCola.setTitle("2", for: UIControl.State())
-            self.etiquetaNombreAlumno.text = ""
+            self.actualizarAula(codigo: "BE131", enCola: 2)
+            self.actualizarMensaje(texto: "")
         } else {
 
             // Iniciar sesión y conectar al aula
@@ -106,7 +88,25 @@ class ViewController: UIViewController {
         }
     }
 
-    func conectarListener() {
+    fileprivate func crearAula() {
+
+        // Almacenar la referencia a la nueva aula
+        self.refAula = db.collection("aulas").document(self.uid)
+
+        // Guardar el documento con un Timestamp, para que se genere el código
+        self.refAula.setData([
+            "timestamp": FieldValue.serverTimestamp()
+            ]) { error in
+            if let error = error {
+                log.error("Error al crear el aula: \(error.localizedDescription)")
+            } else {
+                log.info("Aula creada")
+                self.conectarListener()
+            }
+        }
+    }
+
+    fileprivate func conectarListener() {
 
         // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
         if self.listenerAula == nil && self.refAula != nil {
@@ -122,7 +122,7 @@ class ViewController: UIViewController {
                             let codigoAula = aula["codigo"] as? String ?? "?"
                             log.debug("Aula: \(codigoAula ??? "[Desconocida]")")
 
-                            self.actualizarCodigo(codigoAula)
+                            self.actualizarAula(codigo: codigoAula)
 
                             // Listener de la cola
                             if self.listenerCola == nil {
@@ -132,87 +132,17 @@ class ViewController: UIViewController {
                                         if let error = error {
                                             log.error("Error al recuperar datos: \(error.localizedDescription)")
                                         } else {
-                                            self.actualizarRecuento(querySnapshot!.documents.count)
+                                            self.actualizarAula(enCola: querySnapshot!.documents.count)
                                         }
                                 }
                             }
                         }
                     } else {
                         log.info("El aula ha desaparecido")
-                        self.actualizarPantalla("?", recuento: 0)
+                        self.actualizarAula(codigo: "?", enCola: 0)
                     }
             }
         }
-    }
-
-    fileprivate func actualizarCodigo(_ codigo: String) {
-        // Mostramos el código en la pantalla
-        self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
-    }
-
-    fileprivate func actualizarRecuento(_ recuento: Int) {
-        // Mostrar el recuento
-        self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
-        log.info("Alumnos en cola: \(recuento)")
-    }
-
-    func actualizarPantalla(_ codigo: String, recuento: Int) {
-        actualizarCodigo(codigo)
-        actualizarRecuento(recuento)
-    }
-
-    @IBAction func botonCodigoAulaCorto(_ sender: UIButton) {
-
-        log.info("Vaciando el aula...")
-
-        // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
-        // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
-    }
-
-    @IBAction func botonCodigoAulaLargo(_ sender: UILongPressGestureRecognizer) {
-
-        if (sender.state == UIGestureRecognizer.State.ended) {
-
-            log.info("Generando nueva aula...")
-
-            if self.listenerAula != nil {
-
-                listenerAula.remove()
-                listenerAula = nil
-
-                // Llamar a la función de vaciar la cola porque no se borra la subcolección
-
-                db.collection("aulas").document(self.uid).delete() { error in
-                    if let error = error {
-                        log.error("Error al borrar el aula: \(error.localizedDescription)")
-                    } else {
-                        log.info("Aula borrada")
-                        log.info("Creando nueva aula...")
-                        self.crearAula()
-                    }
-                }
-
-            } else {
-                log.error("No hay objeto aula")
-            }
-
-        }
-    }
-
-    @IBAction func botonEnCola(_ sender: UIButton) {
-        log.info("Este botón ya no hace nada :)")
-
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            n -= 1
-            if(n >= 0) {
-                self.etiquetaBotonEnCola.setTitle("\(n)", for: UIControl.State())
-                self.etiquetaNombreAlumno.text = nombreAleatorio()
-            } else {
-                self.etiquetaBotonEnCola.setTitle("0", for: UIControl.State())
-                self.etiquetaNombreAlumno.text = ""
-            }
-        }
-
     }
 
     @IBAction func botonSiguiente(_ sender: UIButton) {
@@ -243,14 +173,14 @@ class ViewController: UIViewController {
                                             if let alumno = document.data() {
 
                                                 // Mostrar el nombre
-                                                self.etiquetaNombreAlumno.text = alumno["nombre"] as? String ?? "?"
+                                                self.actualizarMensaje(texto: alumno["nombre"] as! String)
 
                                                 // Borrar la entrada de la cola
                                                 refPosicion.delete()
                                             }
                                         } else {
                                             log.error("El alumno no existe")
-                                            self.etiquetaNombreAlumno.text = "?"
+                                            self.actualizarMensaje(texto: "?")
                                         }
                                     } else {
                                         log.error("Error al leer los datos")
@@ -260,37 +190,116 @@ class ViewController: UIViewController {
                         }
                     } else {
                         log.info("Cola vacía")
-                        self.etiquetaNombreAlumno.text = ""
+                        self.actualizarMensaje(texto: "")
                     }
                 }
             }
         }
     }
 
+    @IBAction func botonEnCola(_ sender: UIButton) {
+        log.info("Este botón ya no hace nada :)")
+
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            n -= 1
+            if(n >= 0) {
+                self.actualizarAula(enCola: n)
+                self.actualizarMensaje(texto: nombreAleatorio())
+            } else {
+                self.actualizarAula(enCola: 0)
+                self.actualizarMensaje(texto: "")
+            }
+        }
+
+    }
+
+    @IBAction func botonCodigoAulaCorto(_ sender: UIButton) {
+
+        log.info("Vaciando el aula...")
+
+        // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
+        // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
+
+    }
+
+    @IBAction func botonCodigoAulaLargo(_ sender: UILongPressGestureRecognizer) {
+
+        if (sender.state == UIGestureRecognizer.State.ended) {
+
+            log.info("Generando nueva aula...")
+
+            if self.listenerAula != nil {
+
+                listenerAula.remove()
+                listenerAula = nil
+
+                // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+
+                db.collection("aulas").document(self.uid).delete() { error in
+                    if let error = error {
+                        log.error("Error al borrar el aula: \(error.localizedDescription)")
+                    } else {
+                        log.info("Aula borrada")
+                        log.info("Creando nueva aula...")
+                        self.crearAula()
+                    }
+                }
+
+            } else {
+                log.error("El listener no está conectado")
+            }
+
+        }
+    }
+
+    fileprivate func actualizarAula(codigo codigoAula: String, enCola recuento: Int) {
+        actualizarAula(codigo: codigoAula)
+        actualizarAula(enCola: recuento)
+    }
+
+    fileprivate func actualizarAula(codigo: String) {
+        // Mostramos el código en la pantalla
+        self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
+    }
+
+    fileprivate func actualizarAula(enCola recuento: Int) {
+        // Mostrar el recuento
+        self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
+        log.info("Alumnos en cola: \(recuento)")
+    }
+
+    fileprivate func actualizarMensaje(texto: String) {
+        self.etiquetaNombreAlumno.text = texto
+    }
+
     @IBAction func fadeOut(_ sender: UIButton) {
 
-        // Difuminar
-        UIView.animate(withDuration: 0.1,
-            delay: 0,
-            options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-            animations: {
-                sender.alpha = 0.15
-            }, completion: nil)
+        // Ver si estamos en modo test, haciendo capturas de pantalla
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+
+            // Difuminar
+            UIView.animate(withDuration: 0.1,
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 0.15
+                }, completion: nil)
+        }
     }
 
     @IBAction func fadeIn(_ sender: UIButton) {
 
-        // Restaurar
-        UIView.animate(withDuration: 0.3,
-            delay: 0,
-            options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-            animations: {
-                sender.alpha = 1
-            }, completion: nil)
+        // Ver si estamos en modo test, haciendo capturas de pantalla
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+
+            // Restaurar
+            UIView.animate(withDuration: 0.3,
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 1
+                }, completion: nil)
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
