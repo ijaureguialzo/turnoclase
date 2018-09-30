@@ -25,9 +25,20 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MotionEvent
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
+    private val isRunningTest: Boolean by lazy {
+        try {
+            Class.forName("android.support.test.espresso.Espresso")
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,20 +82,31 @@ class MainActivity : AppCompatActivity() {
 
         // Animación del botón
         botonSiguiente.setOnTouchListener { v, event ->
+            animarBoton(event, v, "botonSiguiente")
+            false
+        }
+
+    }
+
+    private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
+
+        if (!isRunningTest) {
             if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón botonSiguiente...")
+                Log.d("TurnoClase", "DOWN del botón $nombre...")
+
+                // Difuminar
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
                 anim.duration = 100
                 anim.start()
             } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón botonSiguiente...")
+                Log.d("TurnoClase", "UP del botón $nombre...")
+
+                // Restaurar
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
                 anim.duration = 300
                 anim.start()
             }
-            false
         }
-
     }
 
     // Crear el menú "Acerca de..."
