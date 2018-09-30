@@ -1,13 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="turnoclaseprofesor" type="AndroidRunConfigurationType" factoryName="Android App">
+  <configuration default="false" name="turnoclaseprofesor-uitest" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
     <module name="turnoclaseprofesor" />
-    <option name="DEPLOY" value="true" />
-    <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
-    <option name="ARTIFACT_NAME" value="" />
-    <option name="PM_INSTALL_OPTIONS" value="" />
-    <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
-    <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-    <option name="MODE" value="default_activity" />
+    <option name="TESTING_TYPE" value="2" />
+    <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="CLASS_NAME" value="com.jaureguialzo.turnoclaseprofesor.MainActivityTest" />
+    <option name="PACKAGE_NAME" value="" />
+    <option name="EXTRA_OPTIONS" value="" />
     <option name="CLEAR_LOGCAT" value="false" />
     <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
     <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
@@ -45,8 +44,6 @@
       <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
       <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
     </Profilers>
-    <option name="DEEP_LINK" value="" />
-    <option name="ACTIVITY_CLASS" value="" />
     <method />
   </configuration>
 </component>
