@@ -26,13 +26,10 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
+import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_alumno_turno.*
-import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.google.firebase.firestore.FirebaseFirestore
-
-
 
 class AlumnoTurno : AppCompatActivity() {
 
@@ -107,8 +104,8 @@ class AlumnoTurno : AppCompatActivity() {
             mAuth = FirebaseAuth.getInstance()
 
             mAuth!!.signInAnonymously()
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
+                    .addOnCompleteListener(this) {
+                        if (it.isSuccessful) {
                             uid = mAuth?.currentUser?.uid
                             Log.d(TAG, "Registrado como usuario con UID: $uid")
 
@@ -116,7 +113,7 @@ class AlumnoTurno : AppCompatActivity() {
 
                             encolarAlumno()
                         } else {
-                            Log.e(TAG, "Error de inicio de sesión", task.exception)
+                            Log.e(TAG, "Error de inicio de sesión", it.exception)
                         }
                     }
         }
@@ -154,33 +151,13 @@ class AlumnoTurno : AppCompatActivity() {
 
         // Animación del botón Actualizar
         botonActualizar.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón botonActualizar...")
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                anim.duration = 100
-                anim.start()
-            } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón botonActualizar...")
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                anim.duration = 300
-                anim.start()
-            }
+            animarBoton(event, v, "botonActualizar")
             false
         }
 
         // Animación del botón Cancelar
         botonCancelar.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón botonActualizar...")
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                anim.duration = 100
-                anim.start()
-            } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón botonActualizar...")
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                anim.duration = 300
-                anim.start()
-            }
+            animarBoton(event, v, "botonCancelar")
             false
         }
 
@@ -366,6 +343,27 @@ class AlumnoTurno : AppCompatActivity() {
         }
     }
 
+    private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
+
+        if (!isRunningTest) {
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                Log.d("TurnoClase", "DOWN del botón $nombre...")
+
+                // Difuminar
+                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
+                anim.duration = 100
+                anim.start()
+            } else if (event.action == MotionEvent.ACTION_UP) {
+                Log.d("TurnoClase", "UP del botón $nombre...")
+
+                // Restaurar
+                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
+                anim.duration = 300
+                anim.start()
+            }
+        }
+    }
+
     // Detectamos el botón de retorno del teléfono y quitamos al usuario de la cola
     override fun onBackPressed() {
         cancelar()
@@ -379,11 +377,14 @@ class AlumnoTurno : AppCompatActivity() {
 
         // Nos borramos de la cola
         if (refAula != null && refPosicion != null) {
-            refPosicion!!.delete()
+
+            desconectarListeners()
+
+            refPosicion!!.delete().addOnCompleteListener {
+                cerrarPantalla()
+            }
         }
 
-        desconectarListeners()
-        cerrarPantalla()
     }
 
     // Crear el menú "Acerca de..."
