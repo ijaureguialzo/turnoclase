@@ -1,11 +1,11 @@
 # TurnoClase
 
-[![Versión de Xcode](https://img.shields.io/badge/Xcode-9.3-3cacfa.svg)](https://developer.apple.com/xcode/)
-[![Versión de Swift](https://img.shields.io/badge/Swift-4.1-f05339.svg)](https://developer.apple.com/swift/)
-[![Versión de Android Studio](https://img.shields.io/badge/Android%20Studio-3.1.1-a4c639.svg)](https://developer.android.com/studio/index.html)
-[![Versión de Kotlin](https://img.shields.io/badge/Kotlin-1.2.31-ff8802.svg)](https://kotlinlang.org/)
-[![Versión de Bootstrap](https://img.shields.io/badge/Bootstrap-4.0.0-563d7c.svg)](https://getbootstrap.com/)
-[![Versión de fastlane](https://img.shields.io/badge/fastlane-2.91.0-ff0201.svg)](https://fastlane.tools/)
+[![Versión de Xcode](https://img.shields.io/badge/Xcode-10.0-3cacfa.svg?label=Xcode&longCache=true)](https://developer.apple.com/xcode/)
+[![Versión de Swift](https://img.shields.io/badge/Swift-4.2-f05339.svg?label=Swift&longCache=true)](https://developer.apple.com/swift/)
+[![Versión de Android Studio](https://img.shields.io/badge/Android%20Studio-3.2-a4c639.svg?label=Android%20Studio&longCache=true)](https://developer.android.com/studio/index.html)
+[![Versión de Kotlin](https://img.shields.io/badge/Kotlin-1.2.71-ff8802.svg?label=Kotlin&longCache=true)](https://kotlinlang.org/)
+[![Versión de Bootstrap](https://img.shields.io/badge/Bootstrap-4.1.3-563d7c.svg?label=Bootstrap&longCache=true)](https://getbootstrap.com/)
+[![Versión de fastlane](https://img.shields.io/badge/fastlane-2.105.2-ff0201.svg?label=fastlane&longCache=true)](https://fastlane.tools/)
 
 TurnoClase facilita a los profesores organizar la resolución de preguntas durante una clase permitiendo que los alumnos pidan su turno y sean atendidos de uno en uno.
 
