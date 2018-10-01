@@ -24,67 +24,72 @@ $('#aula-boton').on("click", function () {
 
     console.log("Botón pulsado");
 
-    // Desactivar los botones para que el listener no se cargue dos veces
-    $('#aula-boton').prop('disabled', true);
-    $('#aula-input').prop('disabled', true);
+    let codigoAula = $('#aula-input').val();
+    console.log("Aula: " + codigoAula);
 
-    console.log("Aula: " + $('#aula-input').val());
+    // Si no hay 5 caracteres, no seguimos adelante
+    if (codigoAula.length === 5) {
 
-    // Recuperar el aula
-    db.collection("aulas").where("codigo", "==", $('#aula-input').val().toUpperCase()).limit(1).get()
-        .then(snapshot => {
-            snapshot.forEach(doc => {
+        // Recuperar el aula
+        db.collection("aulas").where("codigo", "==", $('#aula-input').val().toUpperCase()).limit(1).get()
+            .then(snapshot => {
+                snapshot.forEach(doc => {
 
-                // Obtener la cola ordenada
-                db.collection("aulas").doc(doc.id)
-                    .collection("cola")
-                    .orderBy("timestamp")
-                    .onSnapshot(querySnapshot => {
+                    // Desactivar los controles para que el listener no se cargue dos veces
+                    $('#aula-boton').prop('disabled', true);
+                    $('#aula-input').prop('disabled', true);
 
-                        if (!this.actualizando) {
-                            this.actualizando = true;
+                    // Obtener la cola ordenada
+                    db.collection("aulas").doc(doc.id)
+                        .collection("cola")
+                        .orderBy("timestamp")
+                        .onSnapshot(querySnapshot => {
 
-                            // Actualizar el recuento
-                            let recuento = querySnapshot.size;
-                            $("#recuento").text(recuento);
+                            if (!this.actualizando) {
+                                this.actualizando = true;
 
-                            console.log("Recuento: " + recuento);
+                                // Actualizar el recuento
+                                let recuento = querySnapshot.size;
+                                $("#recuento").text(recuento);
 
-                            // El primero se visualiza en amarillo
-                            var primero = true;
+                                console.log("Recuento: " + recuento);
 
-                            $("#listaprimero").empty()
-                            $("#lista").empty();
+                                // El primero se visualiza en amarillo
+                                var primero = true;
 
-                            querySnapshot.forEach(doc => {
+                                $("#listaprimero").empty()
+                                $("#lista").empty();
 
-                                // Cargar los datos de cada alumno
-                                db.collection("alumnos").doc(doc.data()["alumno"]).get().then(doc => {
+                                querySnapshot.forEach(doc => {
 
-                                    if (doc.exists && primero === true) {
-                                        primero = false;
-                                        $("#listaprimero").empty().append('<li class="list-group-item amarillo my-3">' + doc.data()["nombre"] + '</li>');
-                                    } else if (doc.exists) {
-                                        $("#lista").append('<li class="list-group-item">' + doc.data()["nombre"] + '</li>');
-                                    } else {
-                                        console.log("El alumno no existe");
-                                    }
+                                    // Cargar los datos de cada alumno
+                                    db.collection("alumnos").doc(doc.data()["alumno"]).get().then(doc => {
 
-                                }).catch(error => {
-                                    console.log("Error al recuperar datos:", error);
+                                        if (doc.exists && primero === true) {
+                                            primero = false;
+                                            $("#listaprimero").empty().append('<li class="list-group-item amarillo my-3">' + doc.data()["nombre"] + '</li>');
+                                        } else if (doc.exists) {
+                                            $("#lista").append('<li class="list-group-item">' + doc.data()["nombre"] + '</li>');
+                                        } else {
+                                            console.log("El alumno no existe");
+                                        }
+
+                                    }).catch(error => {
+                                        console.log("Error al recuperar datos:", error);
+                                    });
                                 });
-                            });
 
-                            this.actualizando = false;
-                        }
-                    }, err => {
-                        console.log(`Error: ${err}`);
-                    });
+                                this.actualizando = false;
+                            }
+                        }, err => {
+                            console.log(`Error: ${err}`);
+                        });
+                });
+            })
+            .catch(err => {
+                console.log('Error al recuperar datos', err);
             });
-        })
-        .catch(err => {
-            console.log('Error al recuperar datos', err);
-        });
+    }
 });
 
 // REF: Quitar el foco del botón: https://stackoverflow.com/a/23444942/5136913
