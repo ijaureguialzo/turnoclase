@@ -25,3 +25,8 @@
 .enlace a:link, .enlace a:visited, .enlace a:hover, .enlace a:active {
     color: #1076B9;
 }
+
+.titular a:link, .titular a:visited, .titular a:hover, .titular a:active {
+    color: black;
+    text-decoration: none;
+}
