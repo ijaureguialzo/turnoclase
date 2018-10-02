@@ -140,6 +140,12 @@ class ViewController: UIViewController {
                                             log.error("Error al recuperar datos: \(error.localizedDescription)")
                                         } else {
                                             self.actualizarAula(enCola: querySnapshot!.documents.count)
+
+                                            // REF: Feedback tactil: https://www.hackingwithswift.com/example-code/uikit/how-to-generate-haptic-feedback-with-uifeedbackgenerator
+                                            if #available(iOS 10, *) {
+                                                let generator = UINotificationFeedbackGenerator()
+                                                generator.notificationOccurred(.warning)
+                                            }
                                         }
                                 }
                             }
@@ -155,6 +161,11 @@ class ViewController: UIViewController {
     @IBAction func botonSiguiente(_ sender: UIButton) {
 
         fadeIn(sender)
+
+        if #available(iOS 10, *) {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+        }
 
         log.info("Mostrando el siguiente alumno...")
 
