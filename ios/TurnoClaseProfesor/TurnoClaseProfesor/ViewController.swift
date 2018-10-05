@@ -140,6 +140,7 @@ class ViewController: UIViewController {
                                             log.error("Error al recuperar datos: \(error.localizedDescription)")
                                         } else {
                                             self.actualizarAula(enCola: querySnapshot!.documents.count)
+                                            self.mostrarSiguiente()
                                         }
                                 }
                             }
@@ -152,10 +153,7 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func botonSiguiente(_ sender: UIButton) {
-
-        fadeIn(sender)
-
+    fileprivate func mostrarSiguiente(avanzarCola: Bool = false) {
         log.info("Mostrando el siguiente alumno...")
 
         if self.refAula != nil {
@@ -183,7 +181,9 @@ class ViewController: UIViewController {
                                                 self.actualizarMensaje(texto: alumno["nombre"] as! String)
 
                                                 // Borrar la entrada de la cola
-                                                refPosicion.delete()
+                                                if avanzarCola {
+                                                    refPosicion.delete()
+                                                }
                                             }
                                         } else {
                                             log.error("El alumno no existe")
@@ -202,6 +202,11 @@ class ViewController: UIViewController {
                 }
             }
         }
+    }
+
+    @IBAction func botonSiguiente(_ sender: UIButton) {
+        fadeIn(sender)
+        mostrarSiguiente(avanzarCola: true)
     }
 
     @IBAction func botonEnCola(_ sender: UIButton) {

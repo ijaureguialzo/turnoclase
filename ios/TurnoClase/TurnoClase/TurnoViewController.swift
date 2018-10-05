@@ -39,9 +39,13 @@ class TurnoViewController: UIViewController {
     // Listeners para recibir las actualizaciones
     var listenerAula: ListenerRegistration!
     var listenerCola: ListenerRegistration!
+    var listenerPosicion: ListenerRegistration!
 
     // Pedir turno una sola vez
     var pedirTurno = true
+
+    // Controlar si ya hemos sido atendidos para poder mostrar el mensaje
+    var atendido = false
 
     // Referencias al documento del aula y la posición en la cola
     var refAula: DocumentReference!
@@ -63,8 +67,7 @@ class TurnoViewController: UIViewController {
 
         // Detectar si estamos haciendo capturas de pantalla para la App Store
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            etiquetaAula.text = "BE131"
-            etiquetaNumero.text = "2"
+            self.actualizarAula(codigo: "BE131", mensaje: "2")
         } else {
             // Registrarse como usuario anónimo
             Auth.auth().signInAnonymously() { (result, error) in
@@ -118,7 +121,7 @@ class TurnoViewController: UIViewController {
                     self.conectarListenerAula(document)
                 } else {
                     log.info("Aula no encontrada")
-                    self.etiquetaAula.text = "?"
+                    self.actualizarAula(codigo: "?", mensaje: "")
                 }
             }
         }
@@ -156,6 +159,19 @@ class TurnoViewController: UIViewController {
         }
     }
 
+    fileprivate func conectarListenerPosicion(_ refPosicion: DocumentReference) {
+
+        if self.listenerPosicion == nil {
+            self.listenerPosicion = refPosicion.addSnapshotListener { documentSnapshot, error in
+
+                if !(documentSnapshot?.exists)! {
+                    self.atendido = true
+                    log.info("Nos han borrado de la cola")
+                }
+            }
+        }
+    }
+
     fileprivate func buscarAlumnoEnCola() {
 
         self.refAula.collection("cola").whereField("alumno", isEqualTo: self.uid).limit(to: 1).getDocuments() { (resultados, error) in
@@ -181,20 +197,37 @@ class TurnoViewController: UIViewController {
                 if let error = error {
                     log.error("Error al añadir el documento: \(error.localizedDescription)")
                 } else {
+                    self.conectarListenerPosicion(self.refPosicion)
                     self.actualizarPantalla()
                 }
             }
-
         } else if querySnapshot!.documents.count > 0 {
             log.error("Alumno encontrado, ya está en la cola")
-            self.pedirTurno = false
             self.refPosicion = querySnapshot!.documents[0].reference
+            self.conectarListenerPosicion(self.refPosicion)
             self.actualizarPantalla()
-
         } else if querySnapshot!.documents.count == 0 {
             log.info("La cola se ha vaciado")
-            self.etiquetaNumero.text = ""
+
+            if self.atendido {
+                self.actualizarAula(mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
+            }
         }
+    }
+
+    fileprivate func actualizarAula(codigo codigoAula: String, mensaje textoMensaje: String) {
+        actualizarAula(codigo: codigoAula)
+        actualizarAula(mensaje: textoMensaje)
+    }
+
+    fileprivate func actualizarAula(codigo: String) {
+        self.etiquetaAula.text = codigo
+        log.info("Código de aula: \(codigo)")
+    }
+
+    fileprivate func actualizarAula(mensaje: String) {
+        self.etiquetaNumero.text = mensaje
+        log.info("Mensaje: \(mensaje)")
     }
 
     fileprivate func actualizarPantalla() {
@@ -202,7 +235,7 @@ class TurnoViewController: UIViewController {
         if self.refAula != nil && self.refPosicion != nil {
 
             // Mostramos el código en la pantalla
-            self.etiquetaAula.text = self.codigoAula
+            self.actualizarAula(codigo: self.codigoAula)
 
             self.refPosicion.getDocument { (document, error) in
 
@@ -217,11 +250,9 @@ class TurnoViewController: UIViewController {
                             log.info("Posicion en la cola: \(posicion)")
 
                             if posicion > 1 {
-                                self.etiquetaNumero.text = String(posicion - 1)
+                                self.actualizarAula(mensaje: String(posicion - 1))
                             } else if posicion == 1 {
-                                self.etiquetaNumero.text = NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno")
-                            } else {
-                                self.etiquetaNumero.text = ""
+                                self.actualizarAula(mensaje: NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno"))
                             }
 
                         }
@@ -230,7 +261,7 @@ class TurnoViewController: UIViewController {
             }
 
         } else {
-            self.etiquetaAula.text = "?"
+            self.actualizarAula(codigo: "?", mensaje: "")
             log.error("No hay referencia al aula")
         }
     }
@@ -251,6 +282,12 @@ class TurnoViewController: UIViewController {
             self.listenerCola.remove()
             self.listenerCola = nil
         }
+
+        if self.listenerPosicion != nil {
+            self.listenerPosicion.remove()
+            self.listenerPosicion = nil
+        }
+
     }
 
     @IBAction func botonCancelar(_ sender: UIButton) {
@@ -277,11 +314,11 @@ class TurnoViewController: UIViewController {
 
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             if(n > 0) {
-                self.etiquetaNumero.text = "\(n)"
+                actualizarAula(mensaje: String(n))
             } else if (n == 0) {
-                self.etiquetaNumero.text = NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno")
+                actualizarAula(mensaje: NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno"))
             } else {
-                self.etiquetaNumero.text = ""
+                actualizarAula(mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
             }
             n -= 1
         }
