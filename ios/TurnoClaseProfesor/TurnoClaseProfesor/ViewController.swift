@@ -141,6 +141,7 @@ class ViewController: UIViewController {
                                         } else {
                                             self.actualizarAula(enCola: querySnapshot!.documents.count)
                                             self.mostrarSiguiente()
+                                            self.feedBack(alerta: true)
                                         }
                                 }
                             }
@@ -153,7 +154,20 @@ class ViewController: UIViewController {
         }
     }
 
+    fileprivate func feedBack(alerta: Bool = false) {
+
+        // REF: Feedback tactil: https://www.hackingwithswift.com/example-code/uikit/how-to-generate-haptic-feedback-with-uifeedbackgenerator
+        if #available(iOS 10, *) {
+            if !alerta {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            } else {
+                UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            }
+        }
+    }
+
     fileprivate func mostrarSiguiente(avanzarCola: Bool = false) {
+
         log.info("Mostrando el siguiente alumno...")
 
         if self.refAula != nil {
@@ -207,6 +221,7 @@ class ViewController: UIViewController {
     @IBAction func botonSiguiente(_ sender: UIButton) {
         fadeIn(sender)
         mostrarSiguiente(avanzarCola: true)
+        feedBack()
     }
 
     @IBAction func botonEnCola(_ sender: UIButton) {
