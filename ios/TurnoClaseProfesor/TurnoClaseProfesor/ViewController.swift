@@ -61,7 +61,7 @@ class ViewController: UIViewController {
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            self.actualizarAula(codigo: "BE131", enCola: 2)
+            self.actualizarAula(codigo: "BE131", enCola: 0)
             self.actualizarMensaje(texto: "")
         } else {
 
@@ -228,16 +228,16 @@ class ViewController: UIViewController {
         log.info("Este botón ya no hace nada :)")
 
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            n -= 1
-            if(n >= 0) {
+            if n >= 0 {
                 self.actualizarAula(enCola: n)
                 self.actualizarMensaje(texto: nombreAleatorio())
             } else {
                 self.actualizarAula(enCola: 0)
                 self.actualizarMensaje(texto: "")
             }
-        }
 
+            n -= 1
+        }
     }
 
     @IBAction func botonCodigoAulaCorto(_ sender: UIButton) {
