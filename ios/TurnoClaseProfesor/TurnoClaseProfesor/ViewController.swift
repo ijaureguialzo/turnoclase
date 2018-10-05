@@ -140,12 +140,7 @@ class ViewController: UIViewController {
                                             log.error("Error al recuperar datos: \(error.localizedDescription)")
                                         } else {
                                             self.actualizarAula(enCola: querySnapshot!.documents.count)
-
-                                            // REF: Feedback tactil: https://www.hackingwithswift.com/example-code/uikit/how-to-generate-haptic-feedback-with-uifeedbackgenerator
-                                            if #available(iOS 10, *) {
-                                                let generator = UINotificationFeedbackGenerator()
-                                                generator.notificationOccurred(.warning)
-                                            }
+                                            self.feedBack(alerta: true)
                                         }
                                 }
                             }
@@ -158,14 +153,23 @@ class ViewController: UIViewController {
         }
     }
 
+    fileprivate func feedBack(alerta: Bool = false) {
+
+        // REF: Feedback tactil: https://www.hackingwithswift.com/example-code/uikit/how-to-generate-haptic-feedback-with-uifeedbackgenerator
+        if #available(iOS 10, *) {
+            if !alerta {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            } else {
+                UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            }
+        }
+    }
+
     @IBAction func botonSiguiente(_ sender: UIButton) {
 
         fadeIn(sender)
 
-        if #available(iOS 10, *) {
-            let generator = UIImpactFeedbackGenerator(style: .light)
-            generator.impactOccurred()
-        }
+        feedBack()
 
         log.info("Mostrando el siguiente alumno...")
 
