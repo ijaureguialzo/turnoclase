@@ -43,6 +43,9 @@ class TurnoViewController: UIViewController {
     // Pedir turno una sola vez
     var pedirTurno = true
 
+    // Controlar si ya hemos sido atendidos para poder mostrar el mensaje
+    var atendido = false
+
     // Referencias al documento del aula y la posición en la cola
     var refAula: DocumentReference!
     var refPosicion: DocumentReference!
@@ -193,7 +196,10 @@ class TurnoViewController: UIViewController {
 
         } else if querySnapshot!.documents.count == 0 {
             log.info("La cola se ha vaciado")
-            self.etiquetaNumero.text = ""
+
+            if atendido {
+                self.etiquetaNumero.text = NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido")
+            }
         }
     }
 
@@ -220,6 +226,7 @@ class TurnoViewController: UIViewController {
                                 self.etiquetaNumero.text = String(posicion - 1)
                             } else if posicion == 1 {
                                 self.etiquetaNumero.text = NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno")
+                                self.atendido = true
                             } else {
                                 self.etiquetaNumero.text = ""
                             }
