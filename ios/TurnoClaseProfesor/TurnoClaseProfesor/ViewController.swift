@@ -231,7 +231,7 @@ class ViewController: UIViewController {
         // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
         // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
 
-        mostrarAcciones()
+        //mostrarAcciones()
 
     }
 
