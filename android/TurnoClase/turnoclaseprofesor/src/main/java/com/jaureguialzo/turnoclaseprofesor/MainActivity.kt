@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     private val isRunningTest: Boolean by lazy {
         try {
             Class.forName("android.support.test.espresso.Espresso")
+            Log.d(TAG, "Estamos en modo test")
             true
         } catch (e: ClassNotFoundException) {
             false
@@ -80,15 +81,15 @@ class MainActivity : AppCompatActivity() {
         // Cargar el layout
         setContentView(R.layout.activity_main)
 
-        // Limpiar el UI
-        actualizarAula("...")
-        actualizarMensaje("")
-
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
-            actualizarAula("BE131", 2)
+            actualizarAula("BE131", 0)
             actualizarMensaje("")
         } else {
+
+            // Limpiar el UI
+            actualizarAula("...", 0)
+            actualizarMensaje("")
 
             // Iniciar sesión y conectar al aula
             mAuth = FirebaseAuth.getInstance()

@@ -65,6 +65,10 @@ class ViewController: UIViewController {
             self.actualizarMensaje(texto: "")
         } else {
 
+            // Limpiar el UI
+            self.actualizarAula(codigo: "...", enCola: 0)
+            self.actualizarMensaje(texto: "")
+
             // Iniciar sesión y conectar al aula
             Auth.auth().signInAnonymously() { (result, error) in
                 if let resultado = result {
