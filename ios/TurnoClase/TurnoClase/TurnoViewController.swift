@@ -56,7 +56,7 @@ class TurnoViewController: UIViewController {
 
     // UI
     @IBOutlet weak var etiquetaAula: UILabel!
-    @IBOutlet weak var etiquetaNumero: UILabel!
+    @IBOutlet weak var etiquetaMensaje: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -221,12 +221,12 @@ class TurnoViewController: UIViewController {
     }
 
     fileprivate func actualizarAula(codigo: String) {
-        self.etiquetaAula.text = codigo
+        etiquetaAula.text = codigo
         log.info("Código de aula: \(codigo)")
     }
 
     fileprivate func actualizarAula(mensaje: String) {
-        self.etiquetaNumero.text = mensaje
+        etiquetaMensaje.text = mensaje
         log.info("Mensaje: \(mensaje)")
     }
 
