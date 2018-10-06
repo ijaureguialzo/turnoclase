@@ -37,6 +37,9 @@ public class MainActivityTest {
 
         ViewInteraction botonSiguiente = onView(allOf(withId(R.id.botonEnCola), isDisplayed()));
 
+        Screengrab.screenshot("00-NuevaAula");
+        botonSiguiente.perform(click());
+
         Screengrab.screenshot("01-Quedan2");
         botonSiguiente.perform(click());
 
