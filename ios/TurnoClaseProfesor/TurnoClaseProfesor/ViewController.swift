@@ -164,7 +164,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         }
                     } else {
                         log.info("El aula ha desaparecido")
-                        self.actualizarAula(codigo: "?", enCola: 0)
+
+                        // Detectar si el aula desaparece y si somos invitados, desconectar
+                        if !self.invitado {
+                            self.actualizarAula(codigo: "?", enCola: 0)
+                        } else {
+                            self.desconectarAula()
+                        }
                     }
             }
         }
@@ -247,50 +253,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func botonCodigoAulaCorto(_ sender: UIButton) {
 
-        //log.info("Vaciando el aula...")
-        // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
-        // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
-
         // Menú de acciones para gestionar múltiples profesores
         mostrarAcciones()
-
         feedBack()
+    }
 
+    fileprivate func borrarAula() {
+
+        // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+
+        db.collection("aulas").document(self.uid).delete() { error in
+            if let error = error {
+                log.error("Error al borrar el aula: \(error.localizedDescription)")
+            } else {
+                log.info("Aula borrada")
+                log.info("Creando nueva aula...")
+                self.crearAula()
+            }
+        }
     }
 
     @IBAction func botonCodigoAulaLargo(_ sender: UILongPressGestureRecognizer) {
-
-        if !invitado {
-
-            feedBack(alerta: true)
-
-            if (sender.state == UIGestureRecognizer.State.ended) {
-
-                log.info("Generando nueva aula...")
-
-                if self.listenerAula != nil {
-
-                    listenerAula.remove()
-                    listenerAula = nil
-
-                    // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
-
-                    db.collection("aulas").document(self.uid).delete() { error in
-                        if let error = error {
-                            log.error("Error al borrar el aula: \(error.localizedDescription)")
-                        } else {
-                            log.info("Aula borrada")
-                            log.info("Creando nueva aula...")
-                            self.crearAula()
-                        }
-                    }
-
-                } else {
-                    log.error("El listener no está conectado")
-                }
-
-            }
-        }
+        // Anulado
     }
 
     fileprivate func actualizarAula(codigo codigoAula: String, enCola recuento: Int) {
@@ -331,6 +315,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     }
 
+    fileprivate func desconectarAula() {
+        self.invitado = false
+        self.uid = self.uidPropio
+        self.desconectarListeners()
+        self.conectarAula()
+    }
+
     fileprivate func mostrarAcciones() {
 
         // REF: iOS Action Sheet: http://swiftdeveloperblog.com/actionsheet-example-in-swift/
@@ -343,6 +334,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }()
 
+        let accionGenerarNuevoCodigo = UIAlertAction(title: "Generar nueva aula", style: .destructive, handler: { (action) -> Void in
+            log.info("Generar nueva aula")
+            self.desconectarListeners()
+            self.borrarAula()
+        })
+
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula", style: .default, handler: { (action) -> Void in
             log.info("Conectar a otra aula")
             self.dialogoConexion()
@@ -350,11 +347,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         let accionDesconectarAula = UIAlertAction(title: "Desconectar del aula", style: .destructive, handler: { (action) -> Void in
             log.info("Desconectar del aula")
-
-            self.invitado = false
-            self.desconectarListeners()
-            self.uid = self.uidPropio
-            self.conectarAula()
+            self.desconectarAula()
         })
 
         let accionCancelar = UIAlertAction(title: "Cancelar", style: .cancel, handler: { (action) -> Void in
@@ -362,6 +355,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         })
 
         if(!invitado) {
+            alertController.addAction(accionGenerarNuevoCodigo)
             alertController.addAction(accionConectarOtraAula)
         } else {
             alertController.addAction(accionDesconectarAula)
@@ -370,6 +364,52 @@ class ViewController: UIViewController, UITextFieldDelegate {
         alertController.addAction(accionCancelar)
 
         self.present(alertController, animated: true, completion: nil)
+    }
+
+    fileprivate func buscarAula(codigo: String?, pin: String?) {
+
+        if let codigo = codigo, let pin = pin {
+            log.debug("Buscando UID del aula: \(codigo):\(pin)")
+
+            // Buscar el aula
+            db.collection("aulas")
+                .whereField("codigo", isEqualTo: codigo.uppercased())
+                .whereField("pin", isEqualTo: pin)
+                .limit(to: 1)
+                .getDocuments() { (querySnapshot, error) in
+
+                    if let error = error {
+                        log.error("Error al recuperar datos: \(error.localizedDescription)")
+                    } else {
+
+                        // Comprobar que se han recuperado registros
+                        if querySnapshot!.documents.count > 0 {
+
+                            // Accedemos al primer documento
+                            let document = querySnapshot!.documents[0]
+
+                            let uid = document.reference.documentID
+                            log.info("Aula encontrada: \(uid)")
+
+                            self.invitado = true
+                            self.desconectarListeners()
+                            self.uid = uid
+                            self.conectarAula()
+
+                        } else {
+                            log.error("Aula no encontrada")
+                            self.dialogoError()
+                        }
+                    }
+            }
+        }
+    }
+
+    fileprivate func dialogoError() {
+        self.alertController = UIAlertController(title: "Error de conexión", message: "No se ha podido acceder al aula con los datos proporcionados.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .default) { (_) in }
+        alertController.addAction(cancelAction)
+        self.present(self.alertController, animated: true, completion: nil)
     }
 
     fileprivate func dialogoConexion() {
@@ -383,10 +423,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             log.info("Conectando a otra aula")
 
-            self.invitado = true
-            self.desconectarListeners()
-            self.uid = "DhBl96qQeIUTVvInsTnve5giHSu2"
-            self.conectarAula()
+            let codigoAula = self.alertController.textFields?[0].text
+            let PIN = self.alertController.textFields?[1].text
+
+            self.buscarAula(codigo: codigoAula, pin: PIN)
+
         }
 
         // Desactivar el botón de confirmar por defecto
@@ -422,6 +463,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     }
 
+    // Para gestionar si se activa el botón de conectar
+    fileprivate var loginAulaOk = false
+    fileprivate var loginPinOk = false
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         // REF: Gestionar la longitud máxima: https://stackoverflow.com/a/31363255/5136913
@@ -434,18 +479,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // REF: Habilitar el control: https://stackoverflow.com/a/39542428/5136913
         switch textField.tag {
         case 10:
-            if newLength >= 5 {
-                self.alertController.actions[0].isEnabled = true
-            } else {
-                self.alertController.actions[0].isEnabled = false
-            }
+            loginAulaOk = newLength >= 5
+            self.alertController.actions[0].isEnabled = loginAulaOk && loginPinOk
             return newLength <= 5
         case 20:
-            if newLength >= 4 {
-                self.alertController.actions[0].isEnabled = true
-            } else {
-                self.alertController.actions[0].isEnabled = false
-            }
+            loginPinOk = newLength >= 4
+            self.alertController.actions[0].isEnabled = loginAulaOk && loginPinOk
             return newLength <= 4
         default:
             return newLength <= 0
