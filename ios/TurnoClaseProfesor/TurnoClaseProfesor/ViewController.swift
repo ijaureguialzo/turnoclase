@@ -27,7 +27,7 @@ import XCGLogger
 import Firebase
 import FirebaseFirestore
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     // ID de usuario único generado por Firebase
     var uid: String!
@@ -35,6 +35,9 @@ class ViewController: UIViewController {
     // Conectar a otro aula
     var invitado = false
     var uidPropio: String!
+
+    // Para visualizar el diálogo de login
+    var alertController: UIAlertController!
 
     // Listeners para recibir las actualizaciones
     var listenerAula: ListenerRegistration!
@@ -373,7 +376,7 @@ class ViewController: UIViewController {
 
         // REF: Crear un cuadro de diálogo modal: https://www.simplifiedios.net/ios-dialog-box-with-input/
 
-        let alertController = UIAlertController(title: "Conectar a otra aula", message: "Introduce los datos del aula a la que quieres conectar.", preferredStyle: .alert)
+        alertController = UIAlertController(title: "Conectar a otra aula", message: "Introduce los datos del aula a la que quieres conectar.", preferredStyle: .alert)
 
         // Conectar
         let confirmAction = UIAlertAction(title: "Conectar", style: .default) { (_) in
@@ -386,16 +389,28 @@ class ViewController: UIViewController {
             self.conectarAula()
         }
 
+        // Desactivar el botón de confirmar por defecto
+        confirmAction.isEnabled = false
+
         // Cancelar
         let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { (_) in }
 
-        // Crear el UI
+        // Cuadros de texto
         alertController.addTextField { (textField) in
-            textField.placeholder = "AULA"
-            // TODO: Fijar lo que se puede escribir o no con una expresión regular?
+            textField.placeholder = "Código de aula"
+            textField.tag = 10
+            textField.autocapitalizationType = .allCharacters
+            textField.keyboardType = .asciiCapable
+            textField.autocorrectionType = .no
+            textField.enablesReturnKeyAutomatically = true
+            textField.delegate = self
         }
         alertController.addTextField { (textField) in
             textField.placeholder = "PIN"
+            textField.tag = 20
+            textField.keyboardType = .numberPad
+            textField.autocorrectionType = .no
+            textField.delegate = self
         }
 
         // Añadir los controles al cuadro de diálogo
@@ -405,6 +420,36 @@ class ViewController: UIViewController {
         // Presentarlo asociado a este ViewController
         self.present(alertController, animated: true, completion: nil)
 
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        // REF: Gestionar la longitud máxima: https://stackoverflow.com/a/31363255/5136913
+        if (range.length + range.location > textField.text!.count) {
+            return false
+        }
+
+        let newLength = textField.text!.count + string.count - range.length
+
+        // REF: Habilitar el control: https://stackoverflow.com/a/39542428/5136913
+        switch textField.tag {
+        case 10:
+            if newLength >= 5 {
+                self.alertController.actions[0].isEnabled = true
+            } else {
+                self.alertController.actions[0].isEnabled = false
+            }
+            return newLength <= 5
+        case 20:
+            if newLength >= 4 {
+                self.alertController.actions[0].isEnabled = true
+            } else {
+                self.alertController.actions[0].isEnabled = false
+            }
+            return newLength <= 4
+        default:
+            return newLength <= 0
+        }
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {
