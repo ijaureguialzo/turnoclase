@@ -376,24 +376,12 @@ class ViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
-    fileprivate func feedBack(alerta: Bool = false) {
-
-        // REF: Feedback tactil: https://www.hackingwithswift.com/example-code/uikit/how-to-generate-haptic-feedback-with-uifeedbackgenerator
-        if #available(iOS 10, *) {
-            if !alerta {
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            } else {
-                UINotificationFeedbackGenerator().notificationOccurred(.warning)
-            }
-        }
-    }
-
     @IBAction func fadeOut(_ sender: UIButton) {
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
 
-            // Difuminar
+            // Difuminar un botón
             UIView.animate(withDuration: 0.1,
                 delay: 0,
                 options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
@@ -408,7 +396,7 @@ class ViewController: UIViewController {
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
 
-            // Restaurar
+            // Restaurar el botón
             UIView.animate(withDuration: 0.3,
                 delay: 0,
                 options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),

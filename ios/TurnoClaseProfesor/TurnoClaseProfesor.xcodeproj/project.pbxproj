@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4102AB512169A1E800AEC36D /* Efectos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4102AB502169A1E800AEC36D /* Efectos.swift */; };
 		410D71001FA8D1B8009AC062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */; };
 		4120B87F21024F790000EA79 /* OperadorOpcional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4120B87E21024F790000EA79 /* OperadorOpcional.swift */; };
 		413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20A1B5015D500E58F25 /* FondoCircular.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		0FD076638CC1F27DC86333D7 /* Pods_TurnoClaseProfesor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4102AB502169A1E800AEC36D /* Efectos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Efectos.swift; sourceTree = "<group>"; };
 		410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4120B87E21024F790000EA79 /* OperadorOpcional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperadorOpcional.swift; sourceTree = "<group>"; };
 		413BC20A1B5015D500E58F25 /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				41F4C5D01B34BCD5004AA55E /* ViewController.swift */,
 				41B669BD1FC1135700DEB965 /* Nombres.swift */,
 				4120B87E21024F790000EA79 /* OperadorOpcional.swift */,
+				4102AB502169A1E800AEC36D /* Efectos.swift */,
 				41BD61D51FB79575002385FE /* UI */,
 				41F4C5CC1B34BCD5004AA55E /* Supporting Files */,
 			);
@@ -370,6 +373,7 @@
 			files = (
 				41F4C5D11B34BCD5004AA55E /* ViewController.swift in Sources */,
 				4120B87F21024F790000EA79 /* OperadorOpcional.swift in Sources */,
+				4102AB512169A1E800AEC36D /* Efectos.swift in Sources */,
 				413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */,
 				413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */,
 				41B669BE1FC1135700DEB965 /* Nombres.swift in Sources */,

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		410088F91FBED8F70058B3F5 /* TurnoClaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410088F81FBED8F70058B3F5 /* TurnoClaseUITests.swift */; };
 		410089011FBEEAB90058B3F5 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410089001FBEEAB90058B3F5 /* SnapshotHelper.swift */; };
+		4102AB4F2169A00200AEC36D /* Efectos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4102AB4E2169A00200AEC36D /* Efectos.swift */; };
 		410D511C1F58365B00401C6C /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D511B1F58365B00401C6C /* Nombres.swift */; };
 		410D71021FA8D634009AC062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 410D71011FA8D633009AC062 /* GoogleService-Info.plist */; };
 		4116087A1B517B88008C9A1E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 411608781B517B88008C9A1E /* Licenses */; };
@@ -42,6 +43,7 @@
 		410088F81FBED8F70058B3F5 /* TurnoClaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnoClaseUITests.swift; sourceTree = "<group>"; };
 		410088FA1FBED8F70058B3F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		410089001FBEEAB90058B3F5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		4102AB4E2169A00200AEC36D /* Efectos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Efectos.swift; sourceTree = "<group>"; };
 		410D511B1F58365B00401C6C /* Nombres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nombres.swift; sourceTree = "<group>"; };
 		410D71011FA8D633009AC062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		411608781B517B88008C9A1E /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Licenses; path = TurnoClase/Licenses; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				411609231B41B7E700E5BD59 /* TurnoViewController.swift */,
 				410D511B1F58365B00401C6C /* Nombres.swift */,
 				4120B87C21024D940000EA79 /* OperadorOpcional.swift */,
+				4102AB4E2169A00200AEC36D /* Efectos.swift */,
 				41BD61D41FB79521002385FE /* UI */,
 				415BC6451B2F5305004FADE0 /* Supporting Files */,
 			);
@@ -382,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				416796721B50461C00DCF09B /* BotonGrafico.swift in Sources */,
+				4102AB4F2169A00200AEC36D /* Efectos.swift in Sources */,
 				415BC64A1B2F5305004FADE0 /* ViewController.swift in Sources */,
 				4120B87D21024D940000EA79 /* OperadorOpcional.swift in Sources */,
 				415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */,

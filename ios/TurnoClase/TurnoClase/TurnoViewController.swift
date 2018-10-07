@@ -230,6 +230,7 @@ class TurnoViewController: UIViewController {
     fileprivate func actualizarAula(mensaje: String) {
         etiquetaMensaje.text = mensaje
         log.info("Mensaje: \(mensaje)")
+        feedBack(alerta: true)
     }
 
     fileprivate func actualizarPantalla() {
@@ -295,6 +296,7 @@ class TurnoViewController: UIViewController {
     @IBAction func botonCancelar(_ sender: UIButton) {
 
         fadeIn(sender)
+        feedBack()
         log.info("Cancelando...")
 
         desconectarListeners()
@@ -323,6 +325,8 @@ class TurnoViewController: UIViewController {
                 actualizarAula(mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
             }
             n -= 1
+        } else {
+            fadeIn(sender)
         }
     }
 
@@ -331,7 +335,7 @@ class TurnoViewController: UIViewController {
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
 
-            // Difuminar
+            // Difuminar un botón
             UIView.animate(withDuration: 0.1,
                 delay: 0,
                 options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
@@ -346,7 +350,7 @@ class TurnoViewController: UIViewController {
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
 
-            // Restaurar
+            // Restaurar el botón
             UIView.animate(withDuration: 0.3,
                 delay: 0,
                 options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
