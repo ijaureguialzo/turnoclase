@@ -27,10 +27,17 @@ import XCGLogger
 import Firebase
 import FirebaseFirestore
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     // ID de usuario único generado por Firebase
     var uid: String!
+
+    // Conectar a otro aula
+    var invitado = false
+    var uidPropio: String!
+
+    // Para visualizar el diálogo de login
+    var alertController: UIAlertController!
 
     // Listeners para recibir las actualizaciones
     var listenerAula: ListenerRegistration!
@@ -50,6 +57,21 @@ class ViewController: UIViewController {
     // Datos del aula
     var codigoAula = "..."
     var PIN = "..."
+
+    fileprivate func conectarAula() {
+        // Cargar el aula y si no, crearla
+        db.collection("aulas").document(self.uid).getDocument() { (document, error) in
+
+            if !(document?.exists)! {
+                log.info("Creando nueva aula...")
+                self.crearAula()
+            } else {
+                log.info("Conectado a aula existente")
+                self.refAula = document?.reference
+                self.conectarListener()
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,20 +96,10 @@ class ViewController: UIViewController {
                 if let resultado = result {
 
                     self.uid = resultado.user.uid
+                    self.uidPropio = self.uid
                     log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
-                    // Cargar el aula y si no, crearla
-                    db.collection("aulas").document(self.uid).getDocument() { (document, error) in
-
-                        if !(document?.exists)! {
-                            log.info("Creando nueva aula...")
-                            self.crearAula()
-                        } else {
-                            log.info("Conectado a aula existente")
-                            self.refAula = document?.reference
-                            self.conectarListener()
-                        }
-                    }
+                    self.conectarAula()
 
                 } else {
                     log.error("Error de inicio de sesión: \(error!.localizedDescription)")
@@ -152,7 +164,13 @@ class ViewController: UIViewController {
                         }
                     } else {
                         log.info("El aula ha desaparecido")
-                        self.actualizarAula(codigo: "?", enCola: 0)
+
+                        // Detectar si el aula desaparece y si somos invitados, desconectar
+                        if !self.invitado {
+                            self.actualizarAula(codigo: "?", enCola: 0)
+                        } else {
+                            self.desconectarAula()
+                        }
                     }
             }
         }
@@ -235,47 +253,28 @@ class ViewController: UIViewController {
 
     @IBAction func botonCodigoAulaCorto(_ sender: UIButton) {
 
-        //log.info("Vaciando el aula...")
-        // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
-        // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
-
         // Menú de acciones para gestionar múltiples profesores
-        //mostrarAcciones()
-
+        mostrarAcciones()
         feedBack()
+    }
 
+    fileprivate func borrarAula() {
+
+        // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+
+        db.collection("aulas").document(self.uid).delete() { error in
+            if let error = error {
+                log.error("Error al borrar el aula: \(error.localizedDescription)")
+            } else {
+                log.info("Aula borrada")
+                log.info("Creando nueva aula...")
+                self.crearAula()
+            }
+        }
     }
 
     @IBAction func botonCodigoAulaLargo(_ sender: UILongPressGestureRecognizer) {
-
-        feedBack(alerta: true)
-
-        if (sender.state == UIGestureRecognizer.State.ended) {
-
-            log.info("Generando nueva aula...")
-
-            if self.listenerAula != nil {
-
-                listenerAula.remove()
-                listenerAula = nil
-
-                // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
-
-                db.collection("aulas").document(self.uid).delete() { error in
-                    if let error = error {
-                        log.error("Error al borrar el aula: \(error.localizedDescription)")
-                    } else {
-                        log.info("Aula borrada")
-                        log.info("Creando nueva aula...")
-                        self.crearAula()
-                    }
-                }
-
-            } else {
-                log.error("El listener no está conectado")
-            }
-
-        }
+        // Anulado
     }
 
     fileprivate func actualizarAula(codigo codigoAula: String, enCola recuento: Int) {
@@ -302,11 +301,44 @@ class ViewController: UIViewController {
         self.PIN = pin
     }
 
+    fileprivate func desconectarListeners() {
+
+        if self.listenerAula != nil {
+            self.listenerAula.remove()
+            self.listenerAula = nil
+        }
+
+        if self.listenerCola != nil {
+            self.listenerCola.remove()
+            self.listenerCola = nil
+        }
+
+    }
+
+    fileprivate func desconectarAula() {
+        self.invitado = false
+        self.uid = self.uidPropio
+        self.desconectarListeners()
+        self.conectarAula()
+    }
+
     fileprivate func mostrarAcciones() {
 
         // REF: iOS Action Sheet: http://swiftdeveloperblog.com/actionsheet-example-in-swift/
 
-        let alertController = UIAlertController(title: "Aula \(codigoAula)", message: "PIN del aula: \(PIN)", preferredStyle: .actionSheet)
+        let alertController: UIAlertController = {
+            if !invitado {
+                return UIAlertController(title: "Aula \(codigoAula)", message: "PIN del aula: \(PIN)", preferredStyle: .actionSheet)
+            } else {
+                return UIAlertController(title: "Aula \(codigoAula)", message: "Invitado", preferredStyle: .actionSheet)
+            }
+        }()
+
+        let accionGenerarNuevoCodigo = UIAlertAction(title: "Generar nueva aula", style: .destructive, handler: { (action) -> Void in
+            log.info("Generar nueva aula")
+            self.desconectarListeners()
+            self.borrarAula()
+        })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula", style: .default, handler: { (action) -> Void in
             log.info("Conectar a otra aula")
@@ -315,16 +347,15 @@ class ViewController: UIViewController {
 
         let accionDesconectarAula = UIAlertAction(title: "Desconectar del aula", style: .destructive, handler: { (action) -> Void in
             log.info("Desconectar del aula")
-
-            // Simulado
-            self.conectado = false
+            self.desconectarAula()
         })
 
         let accionCancelar = UIAlertAction(title: "Cancelar", style: .cancel, handler: { (action) -> Void in
             log.info("Cancelar")
         })
 
-        if(!conectado) {
+        if(!invitado) {
+            alertController.addAction(accionGenerarNuevoCodigo)
             alertController.addAction(accionConectarOtraAula)
         } else {
             alertController.addAction(accionDesconectarAula)
@@ -335,49 +366,129 @@ class ViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
-    // Temporal, para simular el UI
-    var conectado = false
+    fileprivate func buscarAula(codigo: String?, pin: String?) {
+
+        if let codigo = codigo, let pin = pin {
+            log.debug("Buscando UID del aula: \(codigo):\(pin)")
+
+            // Buscar el aula
+            db.collection("aulas")
+                .whereField("codigo", isEqualTo: codigo.uppercased())
+                .whereField("pin", isEqualTo: pin)
+                .limit(to: 1)
+                .getDocuments() { (querySnapshot, error) in
+
+                    if let error = error {
+                        log.error("Error al recuperar datos: \(error.localizedDescription)")
+                    } else {
+
+                        // Comprobar que se han recuperado registros
+                        if querySnapshot!.documents.count > 0 {
+
+                            // Accedemos al primer documento
+                            let document = querySnapshot!.documents[0]
+
+                            let uid = document.reference.documentID
+                            log.info("Aula encontrada: \(uid)")
+
+                            self.invitado = true
+                            self.desconectarListeners()
+                            self.uid = uid
+                            self.conectarAula()
+
+                        } else {
+                            log.error("Aula no encontrada")
+                            self.dialogoError()
+                        }
+                    }
+            }
+        }
+    }
+
+    fileprivate func dialogoError() {
+        self.alertController = UIAlertController(title: "Error de conexión", message: "No se ha podido acceder al aula con los datos proporcionados.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .default) { (_) in }
+        alertController.addAction(cancelAction)
+        self.present(self.alertController, animated: true, completion: nil)
+    }
 
     fileprivate func dialogoConexion() {
 
-        // REF: Crear un cuadro de diálogo modal
+        // REF: Crear un cuadro de diálogo modal: https://www.simplifiedios.net/ios-dialog-box-with-input/
 
-        //Creating UIAlertController and
-        //Setting title and message for the alert dialog
-        let alertController = UIAlertController(title: "Conectar a otra aula", message: "Introduce los datos del aula a la que quieres conectar.", preferredStyle: .alert)
+        alertController = UIAlertController(title: "Conectar a otra aula", message: "Introduce los datos del aula a la que quieres conectar.", preferredStyle: .alert)
 
-        //the confirm action taking the inputs
+        // Conectar
         let confirmAction = UIAlertAction(title: "Conectar", style: .default) { (_) in
 
-            //getting the input values from user
-            //let name = alertController.textFields?[0].text
-            //let email = alertController.textFields?[1].text
+            log.info("Conectando a otra aula")
 
-            // Simulado
-            self.conectado = true
+            let codigoAula = self.alertController.textFields?[0].text
+            let PIN = self.alertController.textFields?[1].text
 
-            //self.labelMessage.text = "Name: " + name! + "Email: " + email!
-            log.info("Confirmar")
+            self.buscarAula(codigo: codigoAula, pin: PIN)
+
         }
 
-        //the cancel action doing nothing
+        // Desactivar el botón de confirmar por defecto
+        confirmAction.isEnabled = false
+
+        // Cancelar
         let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { (_) in }
 
-        //adding textfields to our dialog box
+        // Cuadros de texto
         alertController.addTextField { (textField) in
-            textField.placeholder = "AULA"
-            // Fijar lo que se puede escribir o no con una expresión regular?
+            textField.placeholder = "Código de aula"
+            textField.tag = 10
+            textField.autocapitalizationType = .allCharacters
+            textField.keyboardType = .asciiCapable
+            textField.autocorrectionType = .no
+            textField.enablesReturnKeyAutomatically = true
+            textField.delegate = self
         }
         alertController.addTextField { (textField) in
             textField.placeholder = "PIN"
+            textField.tag = 20
+            textField.keyboardType = .numberPad
+            textField.autocorrectionType = .no
+            textField.delegate = self
         }
 
-        //adding the action to dialogbox
+        // Añadir los controles al cuadro de diálogo
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
 
-        //finally presenting the dialog box
+        // Presentarlo asociado a este ViewController
         self.present(alertController, animated: true, completion: nil)
+
+    }
+
+    // Para gestionar si se activa el botón de conectar
+    fileprivate var loginAulaOk = false
+    fileprivate var loginPinOk = false
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        // REF: Gestionar la longitud máxima: https://stackoverflow.com/a/31363255/5136913
+        if (range.length + range.location > textField.text!.count) {
+            return false
+        }
+
+        let newLength = textField.text!.count + string.count - range.length
+
+        // REF: Habilitar el control: https://stackoverflow.com/a/39542428/5136913
+        switch textField.tag {
+        case 10:
+            loginAulaOk = newLength >= 5
+            self.alertController.actions[0].isEnabled = loginAulaOk && loginPinOk
+            return newLength <= 5
+        case 20:
+            loginPinOk = newLength >= 4
+            self.alertController.actions[0].isEnabled = loginAulaOk && loginPinOk
+            return newLength <= 4
+        default:
+            return newLength <= 0
+        }
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {

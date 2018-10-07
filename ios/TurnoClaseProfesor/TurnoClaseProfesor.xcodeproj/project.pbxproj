@@ -22,6 +22,7 @@
 		41F4C5D41B34BCD5004AA55E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D21B34BCD5004AA55E /* Main.storyboard */; };
 		41F4C5D61B34BCD5004AA55E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D51B34BCD5004AA55E /* Images.xcassets */; };
 		41F4C5D91B34BCD6004AA55E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D71B34BCD6004AA55E /* LaunchScreen.xib */; };
+		41F8B927216A156D006EBBAC /* Teclado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8B926216A156D006EBBAC /* Teclado.swift */; };
 		D701C6065AB83DE19666FC5F /* Pods_TurnoClaseProfesor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD076638CC1F27DC86333D7 /* Pods_TurnoClaseProfesor.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		41F4C5D31B34BCD5004AA55E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		41F4C5D51B34BCD5004AA55E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		41F4C5D81B34BCD6004AA55E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		41F8B926216A156D006EBBAC /* Teclado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teclado.swift; sourceTree = "<group>"; };
 		63E67A3F426E090070BE462B /* Pods-TurnoClaseProfesor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.debug.xcconfig"; sourceTree = "<group>"; };
 		9EEA0A44053B58DE7CAA9482 /* Pods-TurnoClaseProfesor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +146,7 @@
 				41B669BD1FC1135700DEB965 /* Nombres.swift */,
 				4120B87E21024F790000EA79 /* OperadorOpcional.swift */,
 				4102AB502169A1E800AEC36D /* Efectos.swift */,
+				41F8B926216A156D006EBBAC /* Teclado.swift */,
 				41BD61D51FB79575002385FE /* UI */,
 				41F4C5CC1B34BCD5004AA55E /* Supporting Files */,
 			);
@@ -375,6 +378,7 @@
 				4120B87F21024F790000EA79 /* OperadorOpcional.swift in Sources */,
 				4102AB512169A1E800AEC36D /* Efectos.swift in Sources */,
 				413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */,
+				41F8B927216A156D006EBBAC /* Teclado.swift in Sources */,
 				413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */,
 				41B669BE1FC1135700DEB965 /* Nombres.swift in Sources */,
 				41F4C5CF1B34BCD5004AA55E /* AppDelegate.swift in Sources */,
