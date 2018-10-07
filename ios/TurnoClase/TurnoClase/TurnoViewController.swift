@@ -140,7 +140,7 @@ class TurnoViewController: UIViewController {
                 } else {
                     log.info("El aula ha desaparecido")
                     self.desconectarListeners()
-                    self.cerrarPantalla()
+                    self.abandonarCola()
                 }
             }
         }
@@ -292,13 +292,7 @@ class TurnoViewController: UIViewController {
 
     }
 
-    @IBAction func botonCancelar(_ sender: UIButton) {
-
-        fadeIn(sender)
-        feedBack()
-        log.info("Cancelando...")
-
-        desconectarListeners()
+    fileprivate func abandonarCola() {
 
         // Nos borramos de la cola
         if self.refPosicion != nil {
@@ -308,26 +302,53 @@ class TurnoViewController: UIViewController {
         } else {
             self.cerrarPantalla()
         }
+    }
+
+    @IBAction func botonCancelar(_ sender: UIButton) {
+
+        fadeIn(sender)
+        feedBack()
+        log.info("Cancelando...")
+
+        desconectarListeners()
+        abandonarCola()
 
     }
 
     @IBAction func botonActualizar(_ sender: UIButton) {
 
-        feedBack()
-        log.info("Este botón sólo se usa para los test de UI")
-
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            if(n > 0) {
+
+            // Simulamos el interfaz en modo test
+            if n > 0 {
                 actualizarAula(mensaje: String(n))
-            } else if (n == 0) {
+            } else if n == 0 {
                 actualizarAula(mensaje: NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno"))
             } else {
                 actualizarAula(mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
             }
             n -= 1
-        } else {
+
+        } else if self.atendido {
+
+            // Volvemos a pedir turno
             fadeIn(sender)
+            feedBack()
+
+            log.info("Pidiendo nuevo turno")
+
+            self.desconectarListeners()
+            self.atendido = false
+            self.pedirTurno = true
+            self.encolarAlumno()
+
+        } else {
+
+            // Ya tenemos turno
+            fadeIn(sender)
+            feedBack()
         }
+
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {
