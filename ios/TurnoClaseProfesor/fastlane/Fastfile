@@ -35,6 +35,7 @@ platform :ios do
       workspace: "../TurnoClase.xcworkspace",
       include_bitcode: true)
     deliver(force: true,
+      automatic_release:true,
       skip_screenshots:true)
   end
 
