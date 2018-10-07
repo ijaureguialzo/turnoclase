@@ -51,12 +51,12 @@ public class MainActivityTest {
         ViewInteraction botonActualizar = onView(allOf(withId(R.id.botonActualizar), isDisplayed()));
 
         botonActualizar.perform(click());
-        ViewInteraction etiquetaNumero = onView(allOf(withId(R.id.etiquetaNumero), withText("2"), isDisplayed()));
+        ViewInteraction etiquetaNumero = onView(allOf(withId(R.id.etiquetaMensaje), withText("2"), isDisplayed()));
         etiquetaNumero.check(matches(withText("2")));
         Screengrab.screenshot("02-Faltan2");
 
         botonActualizar.perform(click());
-        etiquetaNumero = onView(allOf(withId(R.id.etiquetaNumero), withText("1"), isDisplayed()));
+        etiquetaNumero = onView(allOf(withId(R.id.etiquetaMensaje), withText("1"), isDisplayed()));
         etiquetaNumero.check(matches(withText("1")));
         Screengrab.screenshot("03-Faltan1");
 

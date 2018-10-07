@@ -69,6 +69,7 @@ class TurnoViewController: UIViewController {
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             self.actualizarAula(codigo: "BE131", mensaje: "2")
         } else {
+
             // Registrarse como usuario anónimo
             Auth.auth().signInAnonymously() { (result, error) in
 
@@ -185,6 +186,7 @@ class TurnoViewController: UIViewController {
     }
 
     fileprivate func pedirTurno(_ querySnapshot: QuerySnapshot?) {
+
         if self.pedirTurno && querySnapshot!.documents.count == 0 {
             self.pedirTurno = false
 
@@ -201,11 +203,13 @@ class TurnoViewController: UIViewController {
                     self.actualizarPantalla()
                 }
             }
+
         } else if querySnapshot!.documents.count > 0 {
             log.error("Alumno encontrado, ya está en la cola")
             self.refPosicion = querySnapshot!.documents[0].reference
             self.conectarListenerPosicion(self.refPosicion)
             self.actualizarPantalla()
+
         } else if querySnapshot!.documents.count == 0 {
             log.info("La cola se ha vaciado")
 
@@ -215,14 +219,12 @@ class TurnoViewController: UIViewController {
         }
     }
 
-    fileprivate func actualizarAula(codigo codigoAula: String, mensaje textoMensaje: String) {
-        actualizarAula(codigo: codigoAula)
-        actualizarAula(mensaje: textoMensaje)
-    }
-
-    fileprivate func actualizarAula(codigo: String) {
-        etiquetaAula.text = codigo
-        log.info("Código de aula: \(codigo)")
+    fileprivate func actualizarAula(codigo codigoAula: String, mensaje textoMensaje: String? = nil) {
+        etiquetaAula.text = codigoAula
+        log.info("Código de aula: \(codigoAula)")
+        if textoMensaje != nil {
+            actualizarAula(mensaje: textoMensaje!)
+        }
     }
 
     fileprivate func actualizarAula(mensaje: String) {
@@ -309,8 +311,8 @@ class TurnoViewController: UIViewController {
     }
 
     @IBAction func botonActualizar(_ sender: UIButton) {
-        fadeIn(sender)
-        log.info("Este botón ya no hace nada :)")
+
+        log.info("Este botón sólo se usa para los test de UI")
 
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             if(n > 0) {

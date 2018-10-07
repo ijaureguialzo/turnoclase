@@ -43,6 +43,13 @@ class AlumnoTurno : AppCompatActivity() {
     // Listeners para recibir las actualizaciones
     private var listenerAula: ListenerRegistration? = null
     private var listenerCola: ListenerRegistration? = null
+    private var listenerPosicion: ListenerRegistration? = null
+
+    // Pedir turno una sola vez
+    private var pedirTurno = true
+
+    // Controlar si ya hemos sido atendidos para poder mostrar el mensaje
+    private var atendido = false
 
     // Referencias al documento del aula y la posición en la cola
     private var refAula: DocumentReference? = null
@@ -59,6 +66,7 @@ class AlumnoTurno : AppCompatActivity() {
     private val isRunningTest: Boolean by lazy {
         try {
             Class.forName("android.support.test.espresso.Espresso")
+            Log.d(TAG, "Estamos en modo test")
             true
         } catch (e: ClassNotFoundException) {
             false
@@ -85,25 +93,24 @@ class AlumnoTurno : AppCompatActivity() {
         // Cargar el layout
         setContentView(R.layout.activity_alumno_turno)
 
-        // Mostrar el número almacenado
-        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
-        etiquetaNumero.text = numeroTurno
+        Log.d(TAG, "Iniciando la aplicación...")
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
-            etiquetaAula.text = "BE131"
-            etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-            etiquetaNumero.text = "2"
+            // No usar la llamada a la función actualizar, no vuelve a tiempo para el test
+            this.etiquetaAula.text = "BE131"
+            this.etiquetaMensaje.text = "2"
         } else {
 
             // Extraer los parámetros desde el Intent
             val intent = intent
-            codigoAula = intent.getStringExtra("CODIGO_AULA")
-            nombreUsuario = intent.getStringExtra("NOMBRE_USUARIO")
+            this.codigoAula = intent.getStringExtra("CODIGO_AULA")
+            this.nombreUsuario = intent.getStringExtra("NOMBRE_USUARIO")
 
-            mAuth = FirebaseAuth.getInstance()
+            // Registrarse como usuario anónimo
+            this.mAuth = FirebaseAuth.getInstance()
 
-            mAuth!!.signInAnonymously()
+            this.mAuth!!.signInAnonymously()
                     .addOnCompleteListener(this) {
                         if (it.isSuccessful) {
                             uid = mAuth?.currentUser?.uid
@@ -120,34 +127,11 @@ class AlumnoTurno : AppCompatActivity() {
 
         // Evento del botón Actualizar
         botonActualizar.setOnClickListener {
-
-            Log.d("TurnoClase", "Este botón ya no hace nada...")
-
-            if (isRunningTest) {
-
-                numeroTurno = when {
-                    n > 0 -> {
-                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-                        n.toString()
-                    }
-                    n == 0 -> {
-                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
-                        resources.getString(R.string.mensaje_turno)
-                    }
-                    else -> {
-                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-                        ""
-                    }
-                }
-                etiquetaNumero.text = numeroTurno
-
-                n -= 1
-            }
-
+            botonActualizar()
         }
 
         // Evento del botón Cancelar
-        botonCancelar.setOnClickListener { cancelar() }
+        botonCancelar.setOnClickListener { botonCancelar() }
 
         // Animación del botón Actualizar
         botonActualizar.setOnTouchListener { v, event ->
@@ -197,7 +181,7 @@ class AlumnoTurno : AppCompatActivity() {
                             conectarListenerAula(document)
                         } else {
                             Log.d(TAG, "Aula no encontrada")
-                            etiquetaAula.text = "?"
+                            actualizarAula("?", "")
                         }
                     }
                 }
@@ -235,6 +219,19 @@ class AlumnoTurno : AppCompatActivity() {
         }
     }
 
+    private fun conectarListenerPosicion(refPosicion: DocumentReference) {
+
+        if (listenerPosicion == null) {
+            listenerPosicion = refPosicion.addSnapshotListener { snapshot, _ ->
+
+                if (snapshot != null && !snapshot.exists()) {
+                    atendido = true
+                    Log.d(TAG, "Nos han borrado de la cola")
+                }
+            }
+        }
+    }
+
     private fun buscarAlumnoEnCola() {
 
         refAula!!.collection("cola").whereEqualTo("alumno", uid).limit(1).get()
@@ -267,14 +264,35 @@ class AlumnoTurno : AppCompatActivity() {
 
         } else if (querySnapshot.documents.count() > 0) {
             Log.e(TAG, "Alumno encontrado, ya está en la cola")
-            App.pedirTurno = false
             refPosicion = querySnapshot.documents[0].reference
+            conectarListenerPosicion(refPosicion!!)
             actualizarPantalla()
 
         } else if (querySnapshot.documents.count() == 0) {
             Log.d(TAG, "La cola se ha vaciado")
-            etiquetaNumero.text = ""
+
+            if (atendido) {
+                actualizarAula(resources.getString(R.string.VOLVER_A_EMPEZAR))
+            }
         }
+    }
+
+    private fun actualizarAula(codigo: String, mensaje: String? = null) {
+        etiquetaAula.text = codigo
+        Log.d(TAG, "Código de aula: $codigo")
+        if (mensaje != null) {
+            actualizarAula(mensaje)
+        }
+    }
+
+    private fun actualizarAula(mensaje: String) {
+        when {
+            mensaje.length >= 10 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
+            mensaje.length in 5..9 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
+            else -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
+        }
+        etiquetaMensaje.text = mensaje
+        Log.d(TAG, "Mensaje: $mensaje")
     }
 
     private fun actualizarPantalla() {
@@ -282,7 +300,7 @@ class AlumnoTurno : AppCompatActivity() {
         if (refAula != null && refPosicion != null) {
 
             // Mostramos el código en la pantalla
-            etiquetaAula.text = codigoAula
+            actualizarAula(codigo = codigoAula!!)
 
             refPosicion!!.get().addOnCompleteListener { document ->
 
@@ -299,27 +317,16 @@ class AlumnoTurno : AppCompatActivity() {
                                 val posicion = it.result.count()
                                 Log.d(TAG, "Posicion en la cola: $posicion")
 
-                                numeroTurno = when {
-                                    posicion > 1 -> {
-                                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-                                        (posicion - 1).toString()
-                                    }
-                                    posicion == 1 -> {
-                                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
-                                        resources.getString(R.string.mensaje_turno)
-                                    }
-                                    else -> {
-                                        etiquetaNumero.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-                                        ""
-                                    }
+                                when {
+                                    posicion > 1 -> actualizarAula((posicion - 1).toString())
+                                    posicion == 1 -> actualizarAula(resources.getString(R.string.ES_TU_TURNO))
                                 }
-                                etiquetaNumero.text = numeroTurno
 
                             }
                         }
             }
         } else {
-            etiquetaAula.text = ""
+            actualizarAula("?", "")
             Log.e(TAG, "No hay referencia al aula")
         }
     }
@@ -343,6 +350,50 @@ class AlumnoTurno : AppCompatActivity() {
             listenerCola?.remove()
             listenerCola = null
         }
+
+        if (listenerPosicion != null) {
+            listenerPosicion?.remove()
+            listenerPosicion = null
+        }
+
+    }
+
+    // Quitamos al usuario de la cola
+    private fun botonCancelar() {
+
+        Log.d(TAG, "Cancelando...")
+
+        desconectarListeners()
+
+        // Nos borramos de la cola
+        if (refPosicion != null) {
+            refPosicion!!.delete().addOnCompleteListener {
+                cerrarPantalla()
+            }
+        } else {
+            cerrarPantalla()
+        }
+
+    }
+
+    private fun botonActualizar() {
+
+        Log.d("TurnoClase", "Este botón sólo se usa para los test de UI")
+
+        if (isRunningTest) {
+            when {
+                n > 0 -> actualizarAula(n.toString())
+                n == 0 -> actualizarAula(resources.getString(R.string.ES_TU_TURNO))
+                else -> actualizarAula(resources.getString(R.string.VOLVER_A_EMPEZAR))
+            }
+            n -= 1
+        }
+    }
+
+    // Detectamos el botón de retorno del teléfono y quitamos al usuario de la cola
+    override fun onBackPressed() {
+        botonCancelar()
+        super.onBackPressed()
     }
 
     private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
@@ -364,30 +415,6 @@ class AlumnoTurno : AppCompatActivity() {
                 anim.start()
             }
         }
-    }
-
-    // Detectamos el botón de retorno del teléfono y quitamos al usuario de la cola
-    override fun onBackPressed() {
-        cancelar()
-        super.onBackPressed()
-    }
-
-    // Quitamos al usuario de la cola
-    private fun cancelar() {
-
-        Log.d(TAG, "Cancelando...")
-
-        desconectarListeners()
-
-        // Nos borramos de la cola
-        if (refPosicion != null) {
-            refPosicion!!.delete().addOnCompleteListener {
-                cerrarPantalla()
-            }
-        } else {
-            cerrarPantalla()
-        }
-
     }
 
     // Crear el menú "Acerca de..."

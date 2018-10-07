@@ -11,8 +11,9 @@
     <string name="botonActualizar">Actualizar</string>
     <string name="etiqueta_turnos_restantes">Por delante en la cola:</string>
     <string name="boton_cancelar">Cancelar</string>
-    <string name="mensaje_turno">¡Es tu turno!</string>
+    <string name="ES_TU_TURNO">¡Es tu turno!</string>
     <string name="menu_acerca_de">Acerca de...</string>
     <string name="etiqueta_titulo_licencia">Licencia</string>
     <string name="etiqueta_titulo_reconocimientos">Reconocimientos</string>
+    <string name="VOLVER_A_EMPEZAR">Pulsa X para volver a empezar</string>
 </resources>

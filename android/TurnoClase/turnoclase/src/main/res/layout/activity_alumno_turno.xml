@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text=""
-            android:id="@+id/etiquetaNumero"
+            android:id="@+id/etiquetaMensaje"
             android:textSize="16pt"
             android:gravity="center_vertical|center_horizontal"
             android:layout_centerInParent="true"
