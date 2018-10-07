@@ -98,8 +98,9 @@ class AlumnoTurno : AppCompatActivity() {
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
             // No usar la llamada a la función actualizar, no vuelve a tiempo para el test
-            this.etiquetaAula.text = "BE131"
-            this.etiquetaMensaje.text = "2"
+            etiquetaAula.text = "BE131"
+            etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
+            etiquetaMensaje.text = "2"
         } else {
 
             // Extraer los parámetros desde el Intent
@@ -288,7 +289,7 @@ class AlumnoTurno : AppCompatActivity() {
     private fun actualizarAula(mensaje: String) {
         when {
             mensaje.length >= 25 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 8f)
-            mensaje.length in 20..25 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 11f)
+            mensaje.length in 20..25 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 10f)
             mensaje.length in 10..20 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
             mensaje.length in 1..3 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
             else -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
