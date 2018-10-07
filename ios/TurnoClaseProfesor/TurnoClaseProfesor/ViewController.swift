@@ -242,9 +242,13 @@ class ViewController: UIViewController {
         // Menú de acciones para gestionar múltiples profesores
         //mostrarAcciones()
 
+        feedBack()
+
     }
 
     @IBAction func botonCodigoAulaLargo(_ sender: UILongPressGestureRecognizer) {
+
+        feedBack(alerta: true)
 
         if (sender.state == UIGestureRecognizer.State.ended) {
 

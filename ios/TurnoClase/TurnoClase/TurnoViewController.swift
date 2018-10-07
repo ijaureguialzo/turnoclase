@@ -230,7 +230,6 @@ class TurnoViewController: UIViewController {
     fileprivate func actualizarAula(mensaje: String) {
         etiquetaMensaje.text = mensaje
         log.info("Mensaje: \(mensaje)")
-        feedBack(alerta: true)
     }
 
     fileprivate func actualizarPantalla() {
@@ -314,6 +313,7 @@ class TurnoViewController: UIViewController {
 
     @IBAction func botonActualizar(_ sender: UIButton) {
 
+        feedBack()
         log.info("Este botón sólo se usa para los test de UI")
 
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
