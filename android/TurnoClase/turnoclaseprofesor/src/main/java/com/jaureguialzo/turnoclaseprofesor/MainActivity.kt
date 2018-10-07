@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     private val isRunningTest: Boolean by lazy {
         try {
             Class.forName("android.support.test.espresso.Espresso")
+            Log.d(TAG, "Estamos en modo test")
             true
         } catch (e: ClassNotFoundException) {
             false
@@ -80,15 +81,15 @@ class MainActivity : AppCompatActivity() {
         // Cargar el layout
         setContentView(R.layout.activity_main)
 
-        // Limpiar el UI
-        actualizarAula("...")
-        actualizarMensaje("")
-
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
-            actualizarAula("BE131", 2)
+            actualizarAula("BE131", 0)
             actualizarMensaje("")
         } else {
+
+            // Limpiar el UI
+            actualizarAula("...", 0)
+            actualizarMensaje("")
 
             // Iniciar sesión y conectar al aula
             mAuth = FirebaseAuth.getInstance()
@@ -206,6 +207,7 @@ class MainActivity : AppCompatActivity() {
                                 Log.e(TAG, "Error al recuperar datos: ", error)
                             } else {
                                 actualizarAula(querySnapshot!!.documents.count())
+                                mostrarSiguiente()
                             }
                         }
                     }
@@ -218,7 +220,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun botonSiguiente() {
+    private fun mostrarSiguiente(avanzarCola: Boolean = false) {
 
         Log.d(TAG, "Mostrando el siguiente alumno...")
 
@@ -247,7 +249,9 @@ class MainActivity : AppCompatActivity() {
                                                         actualizarMensaje(alumno["nombre"] as String)
 
                                                         // Borrar la entrada de la cola
-                                                        refPosicion.delete()
+                                                        if (avanzarCola) {
+                                                            refPosicion.delete()
+                                                        }
                                                     } else {
                                                         Log.e(TAG, "El alumno no existe")
                                                         actualizarMensaje("?")
@@ -266,12 +270,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun botonSiguiente() {
+        mostrarSiguiente(true)
+    }
+
     private fun botonEnCola() {
 
-        Log.d("TurnoClase", "Este botón ya no hace nada :)")
+        Log.d("TurnoClase", "Este botón sólo se usa para los test de UI")
 
         if (isRunningTest) {
-            n -= 1
             if (n >= 0) {
                 actualizarAula(n)
                 actualizarMensaje(Nombres().aleatorio())
@@ -279,15 +286,19 @@ class MainActivity : AppCompatActivity() {
                 actualizarAula(0)
                 actualizarMensaje("")
             }
+
+            n -= 1
         }
     }
 
     private fun botonCodigoAulaCorto() {
 
-        Log.d(TAG, "Vaciando el aula...")
-
+        //Log.d(TAG, "Vaciando el aula...")
         // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
         // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
+
+        // Menú de acciones para gestionar múltiples profesores
+        //mostrarAcciones()
 
     }
 
@@ -318,13 +329,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun actualizarAula(codigoAula: String = "?", enCola: Int = -1) {
-        actualizarAula(codigoAula)
+    private fun actualizarAula(codigo: String = "?", enCola: Int = -1) {
+        actualizarAula(codigo)
         actualizarAula(enCola)
     }
 
-    private fun actualizarAula(codigoAula: String) {
-        botonCodigoAula.text = codigoAula
+    private fun actualizarAula(codigo: String) {
+        botonCodigoAula.text = codigo
     }
 
     private fun actualizarAula(enCola: Int) {

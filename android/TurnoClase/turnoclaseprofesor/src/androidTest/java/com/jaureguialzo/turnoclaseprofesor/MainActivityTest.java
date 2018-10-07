@@ -10,8 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import tools.fastlane.screengrab.FalconScreenshotStrategy;
 import tools.fastlane.screengrab.Screengrab;
-import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy;
 import tools.fastlane.screengrab.locale.LocaleTestRule;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -33,9 +33,12 @@ public class MainActivityTest {
     @Test
     public void mainActivityTest() {
 
-        Screengrab.setDefaultScreenshotStrategy(new UiAutomatorScreenshotStrategy());
+        Screengrab.setDefaultScreenshotStrategy(new FalconScreenshotStrategy(mActivityTestRule.getActivity()));
 
         ViewInteraction botonSiguiente = onView(allOf(withId(R.id.botonEnCola), isDisplayed()));
+
+        Screengrab.screenshot("00-NuevaAula");
+        botonSiguiente.perform(click());
 
         Screengrab.screenshot("01-Quedan2");
         botonSiguiente.perform(click());

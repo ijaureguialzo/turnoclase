@@ -16,11 +16,11 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## Android
-### android emuladores
+### android emulador
 ```
-fastlane android emuladores
+fastlane android emulador
 ```
-Arranca los emuladores para hacer capturas
+Iniciar el emulador
 ### android capturas
 ```
 fastlane android capturas

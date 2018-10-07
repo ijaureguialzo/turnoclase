@@ -65,6 +65,10 @@ class ViewController: UIViewController {
             self.actualizarMensaje(texto: "")
         } else {
 
+            // Limpiar el UI
+            self.actualizarAula(codigo: "...", enCola: 0)
+            self.actualizarMensaje(texto: "")
+
             // Iniciar sesión y conectar al aula
             Auth.auth().signInAnonymously() { (result, error) in
                 if let resultado = result {
@@ -154,18 +158,6 @@ class ViewController: UIViewController {
         }
     }
 
-    fileprivate func feedBack(alerta: Bool = false) {
-
-        // REF: Feedback tactil: https://www.hackingwithswift.com/example-code/uikit/how-to-generate-haptic-feedback-with-uifeedbackgenerator
-        if #available(iOS 10, *) {
-            if !alerta {
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            } else {
-                UINotificationFeedbackGenerator().notificationOccurred(.warning)
-            }
-        }
-    }
-
     fileprivate func mostrarSiguiente(avanzarCola: Bool = false) {
 
         log.info("Mostrando el siguiente alumno...")
@@ -225,7 +217,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func botonEnCola(_ sender: UIButton) {
-        log.info("Este botón ya no hace nada :)")
+
+        log.info("Este botón sólo se usa para los test de UI")
 
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             if n >= 0 {
@@ -246,6 +239,7 @@ class ViewController: UIViewController {
         // Pendiente de implementar en el servidor, no se puede borrar una colección desde el cliente
         // REF: https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es-419
 
+        // Menú de acciones para gestionar múltiples profesores
         //mostrarAcciones()
 
     }
@@ -380,6 +374,18 @@ class ViewController: UIViewController {
 
         //finally presenting the dialog box
         self.present(alertController, animated: true, completion: nil)
+    }
+
+    fileprivate func feedBack(alerta: Bool = false) {
+
+        // REF: Feedback tactil: https://www.hackingwithswift.com/example-code/uikit/how-to-generate-haptic-feedback-with-uifeedbackgenerator
+        if #available(iOS 10, *) {
+            if !alerta {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            } else {
+                UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            }
+        }
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {

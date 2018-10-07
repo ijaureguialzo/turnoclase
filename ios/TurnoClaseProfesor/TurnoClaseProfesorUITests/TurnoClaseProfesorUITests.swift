@@ -41,17 +41,17 @@ class TurnoClaseProfesorUITests: XCTestCase {
         let app = XCUIApplication()
 
         snapshot("00-NuevaAula")
-
         app.buttons["botonEnCola"].tap()
+
         snapshot("01-Quedan2")
-
         app.buttons["botonEnCola"].tap()
+
         snapshot("02-Quedan1")
-
         app.buttons["botonEnCola"].tap()
+
         snapshot("03-Quedan0")
-
         app.buttons["botonEnCola"].tap()
+
         snapshot("04-Terminado")
 
     }

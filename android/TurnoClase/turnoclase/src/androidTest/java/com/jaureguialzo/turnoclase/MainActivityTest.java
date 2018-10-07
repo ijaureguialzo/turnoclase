@@ -10,8 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import tools.fastlane.screengrab.FalconScreenshotStrategy;
 import tools.fastlane.screengrab.Screengrab;
-import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy;
 import tools.fastlane.screengrab.locale.LocaleTestRule;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -35,7 +35,7 @@ public class MainActivityTest {
     @Test
     public void mainActivityTest() {
 
-        Screengrab.setDefaultScreenshotStrategy(new UiAutomatorScreenshotStrategy());
+        Screengrab.setDefaultScreenshotStrategy(new FalconScreenshotStrategy(mActivityTestRule.getActivity()));
 
         ViewInteraction editText = onView(allOf(withId(R.id.campoAula), withText("BE131"), isDisplayed()));
         editText.check(matches(withText("BE131")));
@@ -51,12 +51,12 @@ public class MainActivityTest {
         ViewInteraction botonActualizar = onView(allOf(withId(R.id.botonActualizar), isDisplayed()));
 
         botonActualizar.perform(click());
-        ViewInteraction etiquetaNumero = onView(allOf(withId(R.id.etiquetaNumero), withText("2"), isDisplayed()));
+        ViewInteraction etiquetaNumero = onView(allOf(withId(R.id.etiquetaMensaje), withText("2"), isDisplayed()));
         etiquetaNumero.check(matches(withText("2")));
         Screengrab.screenshot("02-Faltan2");
 
         botonActualizar.perform(click());
-        etiquetaNumero = onView(allOf(withId(R.id.etiquetaNumero), withText("1"), isDisplayed()));
+        etiquetaNumero = onView(allOf(withId(R.id.etiquetaMensaje), withText("1"), isDisplayed()));
         etiquetaNumero.check(matches(withText("1")));
         Screengrab.screenshot("03-Faltan1");
 
