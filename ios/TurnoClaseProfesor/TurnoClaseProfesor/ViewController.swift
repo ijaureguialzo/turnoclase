@@ -412,9 +412,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.present(self.alertController, animated: true, completion: nil)
     }
 
+    // Para gestionar si se activa el botón de conectar
+    fileprivate var loginAulaOk = false
+    fileprivate var loginPinOk = false
+
     fileprivate func dialogoConexion() {
 
         // REF: Crear un cuadro de diálogo modal: https://www.simplifiedios.net/ios-dialog-box-with-input/
+
+        // Cada vez que se vuelva a mostrar el cuadro hay que reiniciarlos
+        loginAulaOk = false
+        loginPinOk = false
 
         alertController = UIAlertController(title: "Conectar a otra aula", message: "Introduce los datos del aula a la que quieres conectar.", preferredStyle: .alert)
 
@@ -462,10 +470,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
 
     }
-
-    // Para gestionar si se activa el botón de conectar
-    fileprivate var loginAulaOk = false
-    fileprivate var loginPinOk = false
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
