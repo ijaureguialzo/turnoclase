@@ -288,14 +288,6 @@ class AlumnoTurno : AppCompatActivity() {
     }
 
     private fun actualizarAula(mensaje: String) {
-        // TODO: https://developer.android.com/guide/topics/ui/look-and-feel/autosizing-textview
-        when {
-            mensaje.length >= 25 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 8f)
-            mensaje.length in 20..25 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 10f)
-            mensaje.length in 10..20 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
-            mensaje.length in 1..3 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-            else -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
-        }
         etiquetaMensaje.text = mensaje
         Log.d(TAG, "Mensaje: $mensaje")
     }
