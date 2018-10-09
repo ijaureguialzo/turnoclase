@@ -39,8 +39,6 @@ platform :android do
   end
 
   idiomas = []
-  aplicaciones = []
-  subir_appstore = false
 
   desc "Hace una captura individual"
   private_lane :captura do |options|
