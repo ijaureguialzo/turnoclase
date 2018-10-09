@@ -346,13 +346,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun actualizarMensaje(texto: String = "?") {
-
-        when {
-            texto.length >= 10 -> etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 9f)
-            texto.length in 5..9 -> etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 14f)
-            else -> etiquetaNombreAlumno.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
-        }
-
         etiquetaNombreAlumno.text = texto
     }
 

@@ -1,9 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
-    tools:context="com.jaureguialzo.turnoclase.MainActivity">
+    tools:context="com.jaureguialzo.turnoclaseprofesor.MainActivity">
 
     <TextView
         android:id="@+id/circuloAmarillo"
@@ -19,18 +20,17 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="18pt" />
 
-
     <FrameLayout
         android:id="@+id/contenedorBotonAula"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_above="@+id/circuloAmarillo"
+        android:layout_marginRight="-65dp"
+        android:layout_marginBottom="-107dp"
+        android:layout_toStartOf="@+id/circuloAmarillo"
+        android:layout_toLeftOf="@+id/circuloAmarillo"
         android:width="72dp"
         android:height="72dp"
-        android:layout_above="@+id/circuloAmarillo"
-        android:layout_toLeftOf="@+id/circuloAmarillo"
-        android:layout_toStartOf="@+id/circuloAmarillo"
-        android:layout_marginBottom="-107dp"
-        android:layout_marginRight="-65dp"
         android:background="@drawable/circulo_gris">
 
         <Button
@@ -46,18 +46,17 @@
             android:textColor="@android:color/black" />
     </FrameLayout>
 
-
     <FrameLayout
         android:id="@+id/contenedorBotonSiguiente"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:width="72dp"
-        android:height="72dp"
         android:layout_below="@+id/circuloAmarillo"
-        android:layout_toEndOf="@+id/circuloAmarillo"
-        android:layout_toRightOf="@+id/circuloAmarillo"
         android:layout_marginLeft="-107dp"
         android:layout_marginTop="-65dp"
+        android:layout_toEndOf="@+id/circuloAmarillo"
+        android:layout_toRightOf="@+id/circuloAmarillo"
+        android:width="72dp"
+        android:height="72dp"
         android:background="@drawable/circulo_azul">
 
         <Button
@@ -75,13 +74,13 @@
         android:id="@+id/contenedorRestantes"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:width="72dp"
-        android:height="72dp"
         android:layout_above="@+id/circuloAmarillo"
+        android:layout_marginLeft="-107dp"
+        android:layout_marginBottom="-65dp"
         android:layout_toEndOf="@+id/circuloAmarillo"
         android:layout_toRightOf="@+id/circuloAmarillo"
-        android:layout_marginBottom="-65dp"
-        android:layout_marginLeft="-107dp"
+        android:width="72dp"
+        android:height="72dp"
         android:background="@drawable/circulo_rojo">
 
         <Button
@@ -101,25 +100,29 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:elevation="5dp">
 
         <TextView
             android:id="@+id/etiquetaNombreAlumno"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="253dp"
+            android:layout_height="253dp"
             android:layout_centerInParent="true"
             android:elegantTextHeight="false"
             android:gravity="center_vertical|center_horizontal"
             android:includeFontPadding="false"
+            android:maxLines="1"
             android:text=""
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="16pt" />
+            android:textSize="51pt"
+            app:autoSizeMaxTextSize="51pt"
+            app:autoSizeMinTextSize="6pt"
+            app:autoSizeStepGranularity="2pt"
+            app:autoSizeTextType="uniform" />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

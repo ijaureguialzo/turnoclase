@@ -99,7 +99,6 @@ class AlumnoTurno : AppCompatActivity() {
         if (isRunningTest) {
             // No usar la llamada a la función actualizar, no vuelve a tiempo para el test
             etiquetaAula.text = "BE131"
-            etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
             etiquetaMensaje.text = "2"
         } else {
 
