@@ -19,24 +19,32 @@ platform :ios do
 
   desc "Crear y subir capturas"
   lane :capturas do
+
+    respuesta = prompt(text: "Subirlas a la App Store (s|n): ")
+    subir_appstore = respuesta.downcase == "s"
+
     snapshot(skip_open_summary: true)
     frameit
-    deliver(force: true,
-      skip_binary_upload:true
-      )
+    deliver(
+        force: true,
+        skip_binary_upload: true,
+        skip_screenshots: !subir_appstore
+    )
   end
 
   desc "Subir una nueva versión a la App Store"
   lane :publicar do
-    get_certificates(output_path:"../../private/ios/certificados/")
-    get_provisioning_profile(output_path:"../../private/ios/certificados/")
-    
-    gym(scheme: "TurnoClase",
-      workspace: "../TurnoClase.xcworkspace",
-      include_bitcode: true)
-    deliver(force: true,
-      automatic_release:true,
-      skip_screenshots:true)
+    get_certificates(output_path: "../../private/ios/certificados/")
+    get_provisioning_profile(output_path: "../../private/ios/certificados/")
+
+    gym(
+        scheme: "TurnoClase",
+        workspace: "../TurnoClase.xcworkspace",
+        include_bitcode: true)
+    deliver(
+        force: true,
+        automatic_release: true,
+        skip_screenshots: true)
   end
 
 end
