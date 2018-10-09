@@ -117,8 +117,8 @@
             android:text=""
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="51pt"
-            app:autoSizeMaxTextSize="51pt"
+            android:textSize="24pt"
+            app:autoSizeMaxTextSize="24pt"
             app:autoSizeMinTextSize="6pt"
             app:autoSizeStepGranularity="2pt"
             app:autoSizeTextType="uniform" />
