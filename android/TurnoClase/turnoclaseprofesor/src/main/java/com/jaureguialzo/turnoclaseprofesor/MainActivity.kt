@@ -356,6 +356,7 @@ class MainActivity : AppCompatActivity() {
         etiquetaNombreAlumno.text = texto
     }
 
+    //region Funciones exclusivas de la versión Android
     private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
 
         if (!isRunningTest) {
@@ -398,5 +399,6 @@ class MainActivity : AppCompatActivity() {
         private val TAG = "MainActivity"
 
     }
+    //endregion
 
 }
