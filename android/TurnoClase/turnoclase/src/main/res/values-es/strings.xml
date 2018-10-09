@@ -15,5 +15,5 @@
     <string name="menu_acerca_de">Acerca de...</string>
     <string name="etiqueta_titulo_licencia">Licencia</string>
     <string name="etiqueta_titulo_reconocimientos">Reconocimientos</string>
-    <string name="VOLVER_A_EMPEZAR">Pulsa X para volver a empezar</string>
+    <string name="VOLVER_A_EMPEZAR">Pulsa ⟳ para pedir turno</string>
 </resources>
