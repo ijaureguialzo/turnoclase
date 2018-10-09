@@ -2,27 +2,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jaureguialzo.turnoclase.MainActivity"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    tools:context="com.jaureguialzo.turnoclase.MainActivity">
 
     <TextView
         android:id="@+id/circuloGris"
         android:layout_width="285dp"
         android:layout_height="285dp"
-        android:background="@drawable/fondo_gris"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
+        android:background="@drawable/fondo_gris" />
 
     <FrameLayout
         android:id="@+id/contenedorBotonSiguiente"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_below="@+id/circuloGris"
-        android:layout_toEndOf="@+id/circuloGris"
-        android:layout_toRightOf="@+id/circuloGris"
         android:layout_marginLeft="-107dp"
         android:layout_marginTop="-65dp"
+        android:layout_toEndOf="@+id/circuloGris"
+        android:layout_toRightOf="@+id/circuloGris"
         android:width="72dp"
         android:height="72dp"
         android:background="@drawable/circulo_azul">
@@ -38,50 +37,47 @@
 
     </FrameLayout>
 
-
-
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:elevation="5dp">
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_centerHorizontal="true"
             android:text="@string/etiqueta_aula"
-            android:id="@+id/textView2"
             android:textAllCaps="true"
-            android:layout_centerHorizontal="true" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
+            android:id="@+id/campoAula"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
-            android:id="@+id/campoAula"
-            android:hint="@string/texto_aula"
-            android:gravity="center_horizontal"
-            android:inputType="textNoSuggestions|textVisiblePassword|textCapCharacters"
-            android:maxLength="5"
             android:layout_below="@+id/textView2"
-            android:layout_alignRight="@+id/campoNombre"
-            android:layout_alignEnd="@+id/campoNombre"
+            android:layout_alignStart="@+id/campoNombre"
             android:layout_alignLeft="@+id/campoNombre"
-            android:layout_alignStart="@+id/campoNombre" />
+            android:layout_alignEnd="@+id/campoNombre"
+            android:layout_alignRight="@+id/campoNombre"
+            android:gravity="center_horizontal"
+            android:hint="@string/texto_aula"
+            android:inputType="textNoSuggestions|textVisiblePassword|textCapCharacters"
+            android:maxLength="5" />
 
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/etiqueta_nombre_usuario"
-            android:id="@+id/textView3"
             android:layout_below="@+id/campoAula"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="@string/etiqueta_nombre_usuario"
             android:textAllCaps="true"
-            android:layout_marginTop="8dp" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
             android:id="@+id/campoNombre"

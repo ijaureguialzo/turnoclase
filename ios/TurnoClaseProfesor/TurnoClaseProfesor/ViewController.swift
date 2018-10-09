@@ -157,7 +157,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                         } else {
                                             self.actualizarAula(enCola: querySnapshot!.documents.count)
                                             self.mostrarSiguiente()
-                                            self.feedBack(alerta: true)
+                                            self.feedbackTactil(alerta: true)
                                         }
                                 }
                             }
@@ -229,9 +229,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func botonSiguiente(_ sender: UIButton) {
-        fadeIn(sender)
+        efectoBoton(sender)
         mostrarSiguiente(avanzarCola: true)
-        feedBack()
     }
 
     @IBAction func botonEnCola(_ sender: UIButton) {
@@ -255,7 +254,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         // Menú de acciones para gestionar múltiples profesores
         mostrarAcciones()
-        feedBack()
+        feedbackTactil()
     }
 
     fileprivate func borrarAula() {
@@ -493,6 +492,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         default:
             return newLength <= 0
         }
+    }
+
+    // MARK: Funciones exclusivas de la versión iOS
+
+    fileprivate func efectoBoton(_ sender: UIButton) {
+        fadeIn(sender)
+        feedbackTactil()
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {

@@ -9,9 +9,9 @@
 import UIKit
 
 extension UIViewController {
-    
-    func feedBack(alerta: Bool = false) {
-        
+
+    func feedbackTactil(alerta: Bool = false) {
+
         // REF: Feedback tactil: https://www.hackingwithswift.com/example-code/uikit/how-to-generate-haptic-feedback-with-uifeedbackgenerator
         if #available(iOS 10, *) {
             if !alerta {
@@ -21,5 +21,5 @@ extension UIViewController {
             }
         }
     }
-    
+
 }

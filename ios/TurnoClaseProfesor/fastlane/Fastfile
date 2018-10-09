@@ -15,28 +15,68 @@ fastlane_version "2.64.1"
 
 default_platform :ios
 
+app = "TurnoClaseProfesor"
+
 platform :ios do
 
   desc "Crear y subir capturas"
   lane :capturas do
-    snapshot(skip_open_summary: true)
-    frameit
-    deliver(force: true,
-      skip_binary_upload:true
-      )
+
+    if prompt(text: "Modo prueba (sólo un iPhone) (s|n): ").downcase == "s"
+      dispositivos = ["iPhone XS"]
+    else
+      dispositivos = [
+          "iPhone SE",
+          "iPhone 8",
+          "iPhone 8 Plus",
+          "iPhone XS",
+          #"iPhone XS Max",
+          "iPad Pro (12.9-inch)",
+          "iPad Pro (9.7-inch)"
+      ]
+    end
+
+    if prompt(text: "Localizado (s|n): ").downcase == "s"
+      idiomas = ["en-US", "es-ES"]
+    else
+      idiomas = ["es-ES"]
+    end
+
+    subir_appstore = prompt(text: "Subirlas a la App Store (s|n): ").downcase == "s"
+
+    snapshot(
+        skip_open_summary: true,
+        devices: dispositivos,
+        languages: idiomas,
+        scheme: app,
+        output_directory: "./fastlane/screenshots/",
+        clear_previous_screenshots: true,
+        workspace: "../TurnoClase.xcworkspace"
+    )
+
+    frame_screenshots
+
+    deliver(
+        force: true,
+        skip_binary_upload: true,
+        overwrite_screenshots: true,
+        skip_screenshots: !subir_appstore
+    )
   end
 
   desc "Subir una nueva versión a la App Store"
   lane :publicar do
-    get_certificates(output_path:"../../private/ios/certificados/")
-    get_provisioning_profile(output_path:"../../private/ios/certificados/")
+    get_certificates(output_path: "../../private/ios/certificados/")
+    get_provisioning_profile(output_path: "../../private/ios/certificados/")
 
-    gym(scheme: "TurnoClaseProfesor",
-      workspace: "../TurnoClase.xcworkspace",
-      include_bitcode: true)
-    deliver(force: true,
-      automatic_release:true,
-      skip_screenshots:true)
+    gym(
+        scheme: app,
+        workspace: "../TurnoClase.xcworkspace",
+        include_bitcode: true)
+    deliver(
+        force: true,
+        automatic_release: true,
+        skip_screenshots: true)
   end
 
 end

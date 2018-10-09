@@ -214,7 +214,7 @@ class TurnoViewController: UIViewController {
             log.info("La cola se ha vaciado")
 
             if self.atendido {
-                self.actualizarAula(mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
+                self.actualizarAula(codigo: codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
             }
         }
     }
@@ -306,8 +306,8 @@ class TurnoViewController: UIViewController {
 
     @IBAction func botonCancelar(_ sender: UIButton) {
 
-        fadeIn(sender)
-        feedBack()
+        efectoBoton(sender)
+
         log.info("Cancelando...")
 
         desconectarListeners()
@@ -331,10 +331,9 @@ class TurnoViewController: UIViewController {
 
         } else if self.atendido {
 
-            // Volvemos a pedir turno
-            fadeIn(sender)
-            feedBack()
+            efectoBoton(sender)
 
+            // Volvemos a pedir turno
             log.info("Pidiendo nuevo turno")
 
             self.desconectarListeners()
@@ -344,11 +343,19 @@ class TurnoViewController: UIViewController {
 
         } else {
 
-            // Ya tenemos turno
-            fadeIn(sender)
-            feedBack()
+            efectoBoton(sender)
+
+            // No hay que hacer nada
+            log.info("Ya tenemos turno")
         }
 
+    }
+
+    // MARK: Funciones exclusivas de la versión iOS
+
+    fileprivate func efectoBoton(_ sender: UIButton) {
+        fadeIn(sender)
+        feedbackTactil()
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {

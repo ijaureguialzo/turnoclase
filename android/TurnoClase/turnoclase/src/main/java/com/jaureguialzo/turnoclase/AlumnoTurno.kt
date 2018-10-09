@@ -46,10 +46,10 @@ class AlumnoTurno : AppCompatActivity() {
     private var listenerPosicion: ListenerRegistration? = null
 
     // Pedir turno una sola vez
-    private var pedirTurno = true
+    // App.pedirTurno = true
 
     // Controlar si ya hemos sido atendidos para poder mostrar el mensaje
-    private var atendido = false
+    // App.atendido = false
 
     // Referencias al documento del aula y la posición en la cola
     private var refAula: DocumentReference? = null
@@ -99,7 +99,6 @@ class AlumnoTurno : AppCompatActivity() {
         if (isRunningTest) {
             // No usar la llamada a la función actualizar, no vuelve a tiempo para el test
             etiquetaAula.text = "BE131"
-            etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
             etiquetaMensaje.text = "2"
         } else {
 
@@ -200,7 +199,7 @@ class AlumnoTurno : AppCompatActivity() {
                 } else {
                     Log.d(TAG, "El aula ha desaparecido")
                     desconectarListeners()
-                    cerrarPantalla()
+                    abandonarCola()
                 }
             }
         }
@@ -226,7 +225,7 @@ class AlumnoTurno : AppCompatActivity() {
             listenerPosicion = refPosicion.addSnapshotListener { snapshot, _ ->
 
                 if (snapshot != null && !snapshot.exists()) {
-                    atendido = true
+                    App.atendido = true
                     Log.d(TAG, "Nos han borrado de la cola")
                 }
             }
@@ -259,6 +258,7 @@ class AlumnoTurno : AppCompatActivity() {
             refAula!!.collection("cola").add(datos)
                     .addOnSuccessListener { documentReference ->
                         refPosicion = documentReference
+                        conectarListenerPosicion(refPosicion!!)
                         actualizarPantalla()
                     }
                     .addOnFailureListener { e -> Log.e(TAG, "Error al añadir el documento", e) }
@@ -272,8 +272,8 @@ class AlumnoTurno : AppCompatActivity() {
         } else if (querySnapshot.documents.count() == 0) {
             Log.d(TAG, "La cola se ha vaciado")
 
-            if (atendido) {
-                actualizarAula(resources.getString(R.string.VOLVER_A_EMPEZAR))
+            if (App.atendido) {
+                actualizarAula(codigoAula!!, resources.getString(R.string.VOLVER_A_EMPEZAR))
             }
         }
     }
@@ -287,13 +287,6 @@ class AlumnoTurno : AppCompatActivity() {
     }
 
     private fun actualizarAula(mensaje: String) {
-        when {
-            mensaje.length >= 25 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 8f)
-            mensaje.length in 20..25 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 10f)
-            mensaje.length in 10..20 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 16f)
-            mensaje.length in 1..3 -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 48f)
-            else -> etiquetaMensaje.setTextSize(TypedValue.COMPLEX_UNIT_PT, 20f)
-        }
         etiquetaMensaje.text = mensaje
         Log.d(TAG, "Mensaje: $mensaje")
     }
@@ -337,6 +330,7 @@ class AlumnoTurno : AppCompatActivity() {
     private fun cerrarPantalla() {
         numeroTurno = ""
         App.pedirTurno = true
+        App.atendido = false
 
         // Volver a la pantalla inicial
         this.finish()
@@ -361,12 +355,7 @@ class AlumnoTurno : AppCompatActivity() {
 
     }
 
-    // Quitamos al usuario de la cola
-    private fun botonCancelar() {
-
-        Log.d(TAG, "Cancelando...")
-
-        desconectarListeners()
+    private fun abandonarCola() {
 
         // Nos borramos de la cola
         if (refPosicion != null) {
@@ -376,22 +365,47 @@ class AlumnoTurno : AppCompatActivity() {
         } else {
             cerrarPantalla()
         }
+    }
+
+    private fun botonCancelar() {
+
+        Log.d(TAG, "Cancelando...")
+
+        desconectarListeners()
+        abandonarCola()
 
     }
 
     private fun botonActualizar() {
 
-        Log.d("TurnoClase", "Este botón sólo se usa para los test de UI")
-
         if (isRunningTest) {
+
+            // Simulamos el interfaz en modo test
             when {
                 n > 0 -> actualizarAula(n.toString())
                 n == 0 -> actualizarAula(resources.getString(R.string.ES_TU_TURNO))
                 else -> actualizarAula(resources.getString(R.string.VOLVER_A_EMPEZAR))
             }
             n -= 1
+
+        } else if (App.atendido) {
+
+            // Volvemos a pedir turno
+            Log.d(TAG, "Pidiendo nuevo turno")
+
+            desconectarListeners()
+            App.atendido = false
+            App.pedirTurno = true
+            encolarAlumno()
+
+        } else {
+
+            // No hay que hacer nada
+            Log.d(TAG, "Ya tenemos turno")
         }
     }
+
+    //region Funciones exclusivas de la versión Android
 
     // Detectamos el botón de retorno del teléfono y quitamos al usuario de la cola
     override fun onBackPressed() {
@@ -403,14 +417,14 @@ class AlumnoTurno : AppCompatActivity() {
 
         if (!isRunningTest) {
             if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón $nombre...")
+                Log.v("TurnoClase", "DOWN del botón $nombre...")
 
                 // Difuminar
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
                 anim.duration = 100
                 anim.start()
             } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón $nombre...")
+                Log.v("TurnoClase", "UP del botón $nombre...")
 
                 // Restaurar
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
@@ -444,5 +458,6 @@ class AlumnoTurno : AppCompatActivity() {
         private const val TAG = "AlumnoTurno"
 
     }
+    //endregion
 
 }

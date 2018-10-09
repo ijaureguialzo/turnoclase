@@ -39,7 +39,6 @@ platform :android do
   end
 
   idiomas = []
-  aplicaciones = []
 
   desc "Hace una captura individual"
   private_lane :captura do |options|
@@ -102,14 +101,15 @@ platform :android do
       aplicaciones = ["turnoclaseprofesor", "turnoclase"]
     end
 
-    respuesta = prompt(text: "Localizado (s|n): ")
-
-    case respuesta.downcase
+    case prompt(text: "Localizado (s|n): ").downcase
     when "s"
       idiomas = ["en-US", "es-ES", "eu-ES"]
     else
       idiomas = ["es-ES"]
     end
+
+    respuesta = prompt(text: "Subirlas a Google Play (s|n): ")
+    subir_appstore = respuesta.downcase == "s"
 
     gradle(task: "assembleDebug assembleAndroidTest")
 
@@ -144,7 +144,7 @@ platform :android do
     upload_to_play_store(
         package_name: "com.jaureguialzo." + aplicacion,
 
-        skip_upload_screenshots: false,
+        skip_upload_screenshots: !subir_appstore,
         metadata_path: "./fastlane/screenshots/" + aplicacion,
 
         skip_upload_apk: true,

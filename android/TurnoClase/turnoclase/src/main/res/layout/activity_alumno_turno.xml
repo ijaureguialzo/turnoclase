@@ -1,29 +1,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jaureguialzo.turnoclase.MainActivity"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    tools:context="com.jaureguialzo.turnoclase.MainActivity">
 
     <TextView
         android:id="@+id/circuloGris"
         android:layout_width="285dp"
         android:layout_height="285dp"
-        android:background="@drawable/fondo_gris"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:background="@drawable/fondo_gris" />
 
     <FrameLayout
         android:id="@+id/contenedorBotonCancelar"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_above="@+id/circuloGris"
+        android:layout_marginRight="-65dp"
+        android:layout_marginBottom="-107dp"
+        android:layout_toStartOf="@+id/circuloGris"
+        android:layout_toLeftOf="@+id/circuloGris"
         android:width="72dp"
         android:height="72dp"
-        android:layout_above="@+id/circuloGris"
-        android:layout_toLeftOf="@+id/circuloGris"
-        android:layout_toStartOf="@+id/circuloGris"
-        android:layout_marginBottom="-107dp"
-        android:layout_marginRight="-65dp"
         android:background="@drawable/circulo_rojo">
 
         <Button
@@ -36,17 +37,15 @@
             android:gravity="center_vertical|center_horizontal" />
     </FrameLayout>
 
-
-
     <FrameLayout
         android:id="@+id/contenedorBotonActualizar"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_below="@+id/circuloGris"
-        android:layout_toEndOf="@+id/circuloGris"
-        android:layout_toRightOf="@+id/circuloGris"
         android:layout_marginLeft="-107dp"
         android:layout_marginTop="-65dp"
+        android:layout_toEndOf="@+id/circuloGris"
+        android:layout_toRightOf="@+id/circuloGris"
         android:width="72dp"
         android:height="72dp"
         android:background="@drawable/circulo_azul">
@@ -66,40 +65,44 @@
         android:id="@+id/etiquetaAula"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:height="72dp"
-        android:width="72dp"
-        android:background="@drawable/circulo_amarillo"
         android:layout_above="@+id/circuloGris"
-        android:layout_toRightOf="@+id/circuloGris"
-        android:layout_toEndOf="@+id/circuloGris"
         android:layout_marginLeft="-107dp"
+        android:layout_marginBottom="-65dp"
+        android:layout_toEndOf="@+id/circuloGris"
+        android:layout_toRightOf="@+id/circuloGris"
+        android:width="72dp"
+        android:height="72dp"
+        android:background="@drawable/circulo_amarillo"
+        android:gravity="center_vertical|center_horizontal"
         android:text="\?"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginBottom="-65dp"
-        android:gravity="center_vertical|center_horizontal"
         android:textColor="@android:color/black" />
-
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:elevation="5dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=""
             android:id="@+id/etiquetaMensaje"
-            android:textSize="16pt"
-            android:gravity="center_vertical|center_horizontal"
+            android:layout_width="253dp"
+            android:layout_height="253dp"
             android:layout_centerInParent="true"
-            android:textAlignment="center"
             android:elegantTextHeight="false"
-            android:includeFontPadding="false" />
+            android:gravity="center_vertical|center_horizontal"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="51pt"
+            app:autoSizeMaxTextSize="51pt"
+            app:autoSizeMinTextSize="6pt"
+            app:autoSizeStepGranularity="2pt"
+            app:autoSizeTextType="uniform" />
 
     </RelativeLayout>
 

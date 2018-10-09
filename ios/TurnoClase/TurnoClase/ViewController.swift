@@ -108,11 +108,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func botonConectar(_ sender: UIButton) {
 
-        fadeIn(sender)
-        feedBack()
+        efectoBoton(sender)
 
         codigoAula = textoAula.text!.uppercased()
         nombreUsuario = textoUsuario.text
+    }
+
+    // MARK: Funciones exclusivas de la versión iOS
+
+    fileprivate func efectoBoton(_ sender: UIButton) {
+        fadeIn(sender)
+        feedbackTactil()
     }
 
     @IBAction func fadeOut(_ sender: UIButton) {
