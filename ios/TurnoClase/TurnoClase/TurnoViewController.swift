@@ -214,7 +214,7 @@ class TurnoViewController: UIViewController {
             log.info("La cola se ha vaciado")
 
             if self.atendido {
-                self.actualizarAula(mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
+                self.actualizarAula(codigo: codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
             }
         }
     }
