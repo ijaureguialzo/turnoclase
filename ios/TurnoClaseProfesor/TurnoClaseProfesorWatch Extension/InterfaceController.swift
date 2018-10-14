@@ -39,6 +39,8 @@ class InterfaceController: WKInterfaceController {
 
     }
 
+    var watch: WKInterfaceDevice!
+
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
@@ -49,6 +51,7 @@ class InterfaceController: WKInterfaceController {
         self.etiquetaNumero.setText("0")
         self.etiquetaNombre.setText("")
 
+        watch = WKInterfaceDevice.current()
     }
 
     override func willActivate() {
@@ -81,5 +84,8 @@ extension InterfaceController: WCSessionDelegate {
             self.etiquetaNombre.setText(mensaje)
         }
 
+        // Feedback tactil
+        watch.play(.click)
     }
+
 }
