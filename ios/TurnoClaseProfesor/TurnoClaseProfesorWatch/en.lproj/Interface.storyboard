@@ -16,7 +16,7 @@
                     <items>
                         <group width="1" height="0.20000000000000001" alignment="center" id="JIS-Tg-Z5g" userLabel="Superior">
                             <items>
-                                <group width="0.45000000000000001" alignment="center" verticalAlignment="center" radius="12" id="pDy-fq-biw" userLabel="Codigo">
+                                <group width="0.45000000000000001" alignment="center" verticalAlignment="center" radius="16" id="pDy-fq-biw" userLabel="Codigo">
                                     <items>
                                         <label width="1" height="1" alignment="center" text="BE131" textAlignment="center" id="Wr3-R3-nnb">
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -26,7 +26,7 @@
                                     <edgeInsets key="margins" left="4" right="4" top="4" bottom="4"/>
                                 </group>
                                 <group width="0.14999999999999999" alignment="center" spacing="4" id="f5p-QE-gSp" userLabel="Espaciador"/>
-                                <group width="0.29999999999999999" alignment="center" verticalAlignment="center" radius="12" id="ogo-3V-2p3" userLabel="Cola">
+                                <group width="0.29999999999999999" alignment="center" verticalAlignment="center" radius="16" id="ogo-3V-2p3" userLabel="Cola">
                                     <items>
                                         <label width="1" height="1" alignment="center" text="999" textAlignment="center" id="CHX-1K-R65"/>
                                     </items>

@@ -25,6 +25,7 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var etiquetaAula: WKInterfaceLabel!
     @IBOutlet var etiquetaNumero: WKInterfaceLabel!
     @IBOutlet var etiquetaNombre: WKInterfaceLabel!
+    @IBOutlet var etiquetaBotonSiguiente: WKInterfaceButton!
 
     @IBAction func botonSiguiente() {
 
@@ -44,13 +45,15 @@ class InterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
-        // Configure interface objects here.
-        session = WCSession.default
-
+        self.etiquetaBotonSiguiente.setTitle(NSLocalizedString("NEXT", comment: "Siguiente"))
         self.etiquetaAula.setText("...")
         self.etiquetaNumero.setText("0")
         self.etiquetaNombre.setText("")
 
+        // Configure interface objects here.
+        session = WCSession.default
+
+        // Acceso al dispositivo
         watch = WKInterfaceDevice.current()
     }
 

@@ -1,4 +1,12 @@
 
-/* Class = "WKInterfaceButton"; title = "Siguiente"; ObjectID = "0ai-8C-dd4"; */
+/* Class = "WKInterfaceButton"; title = "Next"; ObjectID = "0ai-8C-dd4"; */
 "0ai-8C-dd4.title" = "Hurrengoa";
 
+/* Class = "WKInterfaceLabel"; text = "999"; ObjectID = "CHX-1K-R65"; */
+"CHX-1K-R65.text" = "999";
+
+/* Class = "WKInterfaceLabel"; text = "María"; ObjectID = "Tez-8F-6ri"; */
+"Tez-8F-6ri.text" = "María";
+
+/* Class = "WKInterfaceLabel"; text = "BE131"; ObjectID = "Wr3-R3-nnb"; */
+"Wr3-R3-nnb.text" = "BE131";
