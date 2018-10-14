@@ -30,15 +30,11 @@ class InterfaceController: WKInterfaceController {
 
         if WCSession.isSupported() {
 
-            session = WCSession.default
-
-            session!.sendMessage(["siguiente": "BE131"], replyHandler: { (response) -> Void in
-                print("Enviando petición al iPhone")
-            }, errorHandler: { (error) -> Void in
-                print("Error al enviar petición al iPhone")
-                print(error)
-            })
-
+            session!.sendMessage(["comando": "siguiente"], replyHandler: { (response) -> Void in
+                    print("Comando: Siguiente")
+                }, errorHandler: { (error) -> Void in
+                    print("Error al enviar petición al iPhone \(error)")
+                })
         }
 
     }
@@ -47,6 +43,12 @@ class InterfaceController: WKInterfaceController {
         super.awake(withContext: context)
 
         // Configure interface objects here.
+        session = WCSession.default
+
+        self.etiquetaAula.setText("...")
+        self.etiquetaNumero.setText("...")
+        self.etiquetaNombre.setText("")
+
     }
 
     override func willActivate() {
@@ -67,4 +69,17 @@ extension InterfaceController: WCSessionDelegate {
         print("Watch: sesión activa")
     }
 
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+
+        if let codigoAula = message["codigoAula"] as? String {
+            self.etiquetaAula.setText(codigoAula)
+        }
+        if let enCola = message["enCola"] as? String {
+            self.etiquetaNumero.setText(enCola)
+        }
+        if let mensaje = message["mensaje"] as? String {
+            self.etiquetaNombre.setText(mensaje)
+        }
+
+    }
 }

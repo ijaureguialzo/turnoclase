@@ -44,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // https://www.raywenderlich.com/117329/watchos-2-tutorial-part-4-watch-connectivity
 
         // Configurar XCGLogger
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
@@ -69,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 SDStatusBarManager.sharedInstance().disableOverrides()
             }
         #endif
-        
+
         return true
     }
 

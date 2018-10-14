@@ -75,15 +75,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
+    var session: WCSession?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // REF: Tutorial sobre el Watch: https://www.raywenderlich.com/117329/watchos-2-tutorial-part-4-watch-connectivity
+        // REF: Tutorial sobre conectividad iPhone<->Watch: http://www.techotopia.com/index.php/A_watchOS_2_WatchConnectivity_Messaging_Tutorial
+
         if WCSession.isSupported() {
-            let session = WCSession.default
-            session.delegate = self
-            session.activate()
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
         }
-        
+
         // El texto encoge a medida que hay más caracteres
         etiquetaBotonCodigoAula.titleLabel?.adjustsFontSizeToFitWidth = true
 
@@ -289,19 +294,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
         actualizarAula(enCola: recuento)
     }
 
+    fileprivate func enviarWatch(campo: String, _ dato: String) {
+        if WCSession.isSupported() {
+            self.session!.sendMessage([campo: dato], replyHandler: { (response) -> Void in
+                    log.info("Enviado al Watch")
+                }, errorHandler: { (error) -> Void in
+                    log.error("Error al enviar datos al Watch \(error)")
+                })
+        }
+    }
+
     fileprivate func actualizarAula(codigo: String) {
         self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
         self.codigoAula = codigo
         log.info("Código de aula: \(codigo)")
+        enviarWatch(campo: "codigoAula", codigo)
     }
 
     fileprivate func actualizarAula(enCola recuento: Int) {
         self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
         log.info("Alumnos en cola: \(recuento)")
+        enviarWatch(campo: "enCola", String(recuento))
     }
 
     fileprivate func actualizarMensaje(texto: String) {
         self.etiquetaNombreAlumno.text = texto
+        enviarWatch(campo: "mensaje", texto)
     }
 
     fileprivate func actualizarPIN(_ pin: String) {
@@ -477,8 +495,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
 
     }
-    
-    @IBAction func botonSiguiente(_ sender: UIButton) {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
@@ -544,27 +560,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
 }
 
 extension ViewController: WCSessionDelegate {
-    
+
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         print("iPhone: sesión activa")
     }
-    
+
     func sessionDidBecomeInactive(_ session: WCSession) {
         print("iPhone: sesión inactiva")
     }
-    
+
     func sessionDidDeactivate(_ session: WCSession) {
         print("iPhone: sesión desactivada")
     }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-        
-        // http://www.techotopia.com/index.php/A_watchOS_2_WatchConnectivity_Messaging_Tutorial
-        print("¡Hola Watch!")
-        print(message)
-        
-        mostrarSiguiente()
-        
+
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+
+        switch message["comando"] as! String {
+        case "siguiente":
+            mostrarSiguiente(avanzarCola: true)
+        default:
+            break
+        }
+
+        // No se si es necesario enviar una respuesta vacía
+        replyHandler([String: String]())
     }
-    
+
 }
