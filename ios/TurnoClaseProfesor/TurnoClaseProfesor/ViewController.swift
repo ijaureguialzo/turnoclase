@@ -297,9 +297,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     fileprivate func enviarWatch(campo: String, _ dato: String) {
         if WCSession.isSupported() {
             self.session!.sendMessage([campo: dato], replyHandler: { (response) -> Void in
-                    log.info("Enviado al Watch")
+                    log.info("Enviado al Watch")
                 }, errorHandler: { (error) -> Void in
-                    log.error("Error al enviar datos al Watch \(error)")
+                    log.error("Error al enviar datos al Watch \(error)")
                 })
         }
     }
