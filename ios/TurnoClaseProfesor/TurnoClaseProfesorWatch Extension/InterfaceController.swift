@@ -46,7 +46,7 @@ class InterfaceController: WKInterfaceController {
         session = WCSession.default
 
         self.etiquetaAula.setText("...")
-        self.etiquetaNumero.setText("...")
+        self.etiquetaNumero.setText("0")
         self.etiquetaNombre.setText("")
 
     }
