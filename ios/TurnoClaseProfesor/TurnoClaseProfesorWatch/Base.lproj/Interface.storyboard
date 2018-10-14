@@ -16,7 +16,7 @@
                     <items>
                         <group width="1" height="0.20000000000000001" alignment="left" id="JIS-Tg-Z5g">
                             <items>
-                                <group width="0.59999999999999998" height="1" alignment="center" verticalAlignment="center" radius="6" id="pDy-fq-biw">
+                                <group width="0.59999999999999998" alignment="center" verticalAlignment="center" radius="6" id="pDy-fq-biw">
                                     <items>
                                         <label width="1" height="1" alignment="center" text="BE131" textAlignment="center" id="Wr3-R3-nnb">
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -25,7 +25,7 @@
                                     <color key="backgroundColor" red="0.87404829263687134" green="0.88608193397521973" blue="0.90262514352798462" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <edgeInsets key="margins" left="8" right="8" top="8" bottom="8"/>
                                 </group>
-                                <group width="0.40000000000000002" height="1" alignment="center" verticalAlignment="center" radius="6" id="ogo-3V-2p3">
+                                <group width="0.40000000000000002" alignment="center" verticalAlignment="center" radius="6" id="ogo-3V-2p3">
                                     <items>
                                         <label width="1" height="1" alignment="center" text="999" textAlignment="center" id="CHX-1K-R65"/>
                                     </items>
@@ -34,7 +34,16 @@
                                 </group>
                             </items>
                         </group>
-                        <group width="1" height="0.5" alignment="left" id="JSe-e2-IyL">
+                        <group width="1" height="0.5" alignment="left" verticalAlignment="center" id="pLp-Vg-xYf">
+                            <items>
+                                <label width="1" height="1" alignment="center" verticalAlignment="center" text="María" textAlignment="center" baselineAdjustment="alignCenters" minimumScaleFactor="0.10000000000000001" id="Tez-8F-6ri">
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <fontDescription key="font" type="system" pointSize="28"/>
+                                </label>
+                            </items>
+                            <color key="backgroundColor" red="1" green="0.7775987982749939" blue="0.0045356974005699158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </group>
+                        <group width="1" height="0.20000000000000001" alignment="left" verticalAlignment="bottom" id="JSe-e2-IyL">
                             <items>
                                 <button width="1" alignment="left" verticalAlignment="center" title="Next" id="0ai-8C-dd4">
                                     <color key="backgroundColor" red="0.0" green="0.45684128999710083" blue="0.73509865999221802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -43,15 +52,6 @@
                                     </connections>
                                 </button>
                             </items>
-                        </group>
-                        <group width="1" height="0.29999999999999999" alignment="left" verticalAlignment="bottom" id="pLp-Vg-xYf">
-                            <items>
-                                <label width="1" height="1" alignment="center" verticalAlignment="center" text="María" textAlignment="center" baselineAdjustment="alignCenters" minimumScaleFactor="0.10000000000000001" id="Tez-8F-6ri">
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <fontDescription key="font" type="system" pointSize="28"/>
-                                </label>
-                            </items>
-                            <color key="backgroundColor" red="1" green="0.7775987982749939" blue="0.0045356974005699158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </group>
                     </items>
                     <connections>
