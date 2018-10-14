@@ -27,6 +27,8 @@ import XCGLogger
 import Firebase
 import FirebaseFirestore
 
+import WatchConnectivity
+
 class ViewController: UIViewController, UITextFieldDelegate {
 
     // ID de usuario único generado por Firebase
@@ -73,8 +75,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
+    var session: WCSession?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // REF: Tutorial sobre el Watch: https://www.raywenderlich.com/117329/watchos-2-tutorial-part-4-watch-connectivity
+        // REF: Tutorial sobre conectividad iPhone<->Watch: http://www.techotopia.com/index.php/A_watchOS_2_WatchConnectivity_Messaging_Tutorial
+
+        if WCSession.isSupported() {
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
+        }
 
         // El texto encoge a medida que hay más caracteres
         etiquetaBotonCodigoAula.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -155,7 +168,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                         if let error = error {
                                             log.error("Error al recuperar datos: \(error.localizedDescription)")
                                         } else {
-                                            self.actualizarAula(enCola: querySnapshot!.documents.count)
+                                            self.actualizarAula(codigo: self.codigoAula, enCola: querySnapshot!.documents.count)
                                             self.mostrarSiguiente()
                                             self.feedbackTactil(alerta: true)
                                         }
@@ -281,19 +294,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
         actualizarAula(enCola: recuento)
     }
 
+    fileprivate func enviarWatch(campo: String, _ dato: String) {
+
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && session != nil {
+            self.session!.sendMessage([campo: dato], replyHandler: { (response) -> Void in
+                    log.info("Enviado al Watch")
+                }, errorHandler: { (error) -> Void in
+                    log.error("Error al enviar datos al Watch \(error)")
+                })
+        }
+    }
+
     fileprivate func actualizarAula(codigo: String) {
         self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
         self.codigoAula = codigo
         log.info("Código de aula: \(codigo)")
+        enviarWatch(campo: "codigoAula", codigo)
     }
 
     fileprivate func actualizarAula(enCola recuento: Int) {
         self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
         log.info("Alumnos en cola: \(recuento)")
+        enviarWatch(campo: "enCola", String(recuento))
     }
 
     fileprivate func actualizarMensaje(texto: String) {
         self.etiquetaNombreAlumno.text = texto
+        enviarWatch(campo: "mensaje", texto)
     }
 
     fileprivate func actualizarPIN(_ pin: String) {
@@ -529,6 +556,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     sender.alpha = 1
                 }, completion: nil)
         }
+    }
+
+}
+
+extension ViewController: WCSessionDelegate {
+
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("iPhone: sesión activa")
+    }
+
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        print("iPhone: sesión inactiva")
+    }
+
+    func sessionDidDeactivate(_ session: WCSession) {
+        print("iPhone: sesión desactivada")
+    }
+
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+
+        switch message["comando"] as! String {
+        case "siguiente":
+            mostrarSiguiente(avanzarCola: true)
+        default:
+            break
+        }
+
+        // No se si es necesario enviar una respuesta vacía
+        replyHandler([String: String]())
     }
 
 }

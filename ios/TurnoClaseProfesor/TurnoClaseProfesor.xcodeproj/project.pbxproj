@@ -8,7 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		4102AB512169A1E800AEC36D /* Efectos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4102AB502169A1E800AEC36D /* Efectos.swift */; };
+		410A3E171FC42F1500B3AC3D /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 410A3E151FC42F1500B3AC3D /* Interface.storyboard */; };
+		410A3E191FC42F1500B3AC3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410A3E181FC42F1500B3AC3D /* Assets.xcassets */; };
+		410A3E201FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 410A3E1F1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		410A3E251FC42F1500B3AC3D /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A3E241FC42F1500B3AC3D /* InterfaceController.swift */; };
+		410A3E271FC42F1500B3AC3D /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A3E261FC42F1500B3AC3D /* ExtensionDelegate.swift */; };
+		410A3E291FC42F1500B3AC3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410A3E281FC42F1500B3AC3D /* Assets.xcassets */; };
+		410A3E2D1FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */; };
 		410D71001FA8D1B8009AC062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */; };
+		411081552173FDF900ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
+		4110815C2173FF4700ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
+		4110815E217402BA00ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
 		4120B87F21024F790000EA79 /* OperadorOpcional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4120B87E21024F790000EA79 /* OperadorOpcional.swift */; };
 		413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20A1B5015D500E58F25 /* FondoCircular.swift */; };
 		413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */; };
@@ -27,6 +37,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		410A3E211FC42F1500B3AC3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41F4C5C11B34BCD5004AA55E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 410A3E1E1FC42F1500B3AC3D;
+			remoteInfo = "TurnoClaseProfesorWatch Extension";
+		};
+		410A3E2B1FC42F1500B3AC3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41F4C5C11B34BCD5004AA55E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 410A3E121FC42F1500B3AC3D;
+			remoteInfo = TurnoClaseProfesorWatch;
+		};
 		41B669B41FC10B7300DEB965 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 41F4C5C11B34BCD5004AA55E /* Project object */;
@@ -36,10 +60,47 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		410A3E331FC42F1500B3AC3D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				410A3E201FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		410A3E351FC42F1500B3AC3D /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				410A3E2D1FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0FD076638CC1F27DC86333D7 /* Pods_TurnoClaseProfesor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4102AB502169A1E800AEC36D /* Efectos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Efectos.swift; sourceTree = "<group>"; };
+		410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurnoClaseProfesorWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		410A3E181FC42F1500B3AC3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		410A3E1A1FC42F1500B3AC3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		410A3E1F1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TurnoClaseProfesorWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		410A3E241FC42F1500B3AC3D /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		410A3E261FC42F1500B3AC3D /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		410A3E281FC42F1500B3AC3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		410A3E2A1FC42F1500B3AC3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		411081562173FDF900ADD784 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		411081582173FDFF00ADD784 /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Localizable.strings; sourceTree = "<group>"; };
+		411081592173FE0300ADD784 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4110815B2173FEF600ADD784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		4120B87E21024F790000EA79 /* OperadorOpcional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperadorOpcional.swift; sourceTree = "<group>"; };
 		413BC20A1B5015D500E58F25 /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
 		413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonGrafico.swift; sourceTree = "<group>"; };
@@ -68,6 +129,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		410A3E1C1FC42F1500B3AC3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41B669AC1FC10B7300DEB965 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -83,9 +151,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F4F5865541D07C3C50CAB478 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		410A3E141FC42F1500B3AC3D /* TurnoClaseProfesorWatch */ = {
+			isa = PBXGroup;
+			children = (
+				410A3E151FC42F1500B3AC3D /* Interface.storyboard */,
+				410A3E181FC42F1500B3AC3D /* Assets.xcassets */,
+				410A3E1A1FC42F1500B3AC3D /* Info.plist */,
+			);
+			path = TurnoClaseProfesorWatch;
+			sourceTree = "<group>";
+		};
+		410A3E231FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				410A3E241FC42F1500B3AC3D /* InterfaceController.swift */,
+				410A3E261FC42F1500B3AC3D /* ExtensionDelegate.swift */,
+				410A3E281FC42F1500B3AC3D /* Assets.xcassets */,
+				410A3E2A1FC42F1500B3AC3D /* Info.plist */,
+			);
+			path = "TurnoClaseProfesorWatch Extension";
+			sourceTree = "<group>";
+		};
 		41A59BE01B516444000E3C8E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +209,7 @@
 				413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */,
 				41F4C5D51B34BCD5004AA55E /* Images.xcassets */,
 				41F4C5D71B34BCD6004AA55E /* LaunchScreen.xib */,
+				411081572173FDF900ADD784 /* Localizable.strings */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -123,6 +220,8 @@
 				41F4C5CB1B34BCD5004AA55E /* TurnoClaseProfesor */,
 				41B669B01FC10B7300DEB965 /* TurnoClaseProfesorUITests */,
 				41A59BE01B516444000E3C8E /* Resources */,
+				410A3E141FC42F1500B3AC3D /* TurnoClaseProfesorWatch */,
+				410A3E231FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension */,
 				41F4C5CA1B34BCD5004AA55E /* Products */,
 				F7A91AD7491067EF15642691 /* Pods */,
 				AC811C938802DD331C620029 /* Frameworks */,
@@ -134,6 +233,8 @@
 			children = (
 				41F4C5C91B34BCD5004AA55E /* TurnoClaseProfesor.app */,
 				41B669AF1FC10B7300DEB965 /* TurnoClaseProfesorUITests.xctest */,
+				410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */,
+				410A3E1F1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,6 +284,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		410A3E121FC42F1500B3AC3D /* TurnoClaseProfesorWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 410A3E341FC42F1500B3AC3D /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorWatch" */;
+			buildPhases = (
+				410A3E111FC42F1500B3AC3D /* Resources */,
+				410A3E331FC42F1500B3AC3D /* Embed App Extensions */,
+				F4F5865541D07C3C50CAB478 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				410A3E221FC42F1500B3AC3D /* PBXTargetDependency */,
+			);
+			name = TurnoClaseProfesorWatch;
+			productName = TurnoClaseProfesorWatch;
+			productReference = 410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		410A3E1E1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 410A3E321FC42F1500B3AC3D /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorWatch Extension" */;
+			buildPhases = (
+				410A3E1B1FC42F1500B3AC3D /* Sources */,
+				410A3E1C1FC42F1500B3AC3D /* Frameworks */,
+				410A3E1D1FC42F1500B3AC3D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TurnoClaseProfesorWatch Extension";
+			productName = "TurnoClaseProfesorWatch Extension";
+			productReference = 410A3E1F1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		41B669AE1FC10B7300DEB965 /* TurnoClaseProfesorUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41B669B81FC10B7300DEB965 /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorUITests" */;
@@ -210,10 +346,12 @@
 				41F4C5C61B34BCD5004AA55E /* Frameworks */,
 				41F4C5C71B34BCD5004AA55E /* Resources */,
 				E11506942027563C22955673 /* [CP] Embed Pods Frameworks */,
+				410A3E351FC42F1500B3AC3D /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				410A3E2C1FC42F1500B3AC3D /* PBXTargetDependency */,
 			);
 			name = TurnoClaseProfesor;
 			productName = TurnoClaseProfesor;
@@ -231,6 +369,17 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Ion Jaureguialzo Sarasola";
 				TargetAttributes = {
+					410A3E121FC42F1500B3AC3D = {
+						CreatedOnToolsVersion = 9.1;
+						DevelopmentTeam = RSEH385M54;
+						ProvisioningStyle = Automatic;
+					};
+					410A3E1E1FC42F1500B3AC3D = {
+						CreatedOnToolsVersion = 9.1;
+						DevelopmentTeam = RSEH385M54;
+						LastSwiftMigration = 1000;
+						ProvisioningStyle = Automatic;
+					};
 					41B669AE1FC10B7300DEB965 = {
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 1000;
@@ -260,6 +409,8 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				eu,
 			);
 			mainGroup = 41F4C5C01B34BCD5004AA55E;
 			productRefGroup = 41F4C5CA1B34BCD5004AA55E /* Products */;
@@ -268,11 +419,32 @@
 			targets = (
 				41F4C5C81B34BCD5004AA55E /* TurnoClaseProfesor */,
 				41B669AE1FC10B7300DEB965 /* TurnoClaseProfesorUITests */,
+				410A3E121FC42F1500B3AC3D /* TurnoClaseProfesorWatch */,
+				410A3E1E1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		410A3E111FC42F1500B3AC3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				410A3E191FC42F1500B3AC3D /* Assets.xcassets in Resources */,
+				4110815C2173FF4700ADD784 /* Localizable.strings in Resources */,
+				410A3E171FC42F1500B3AC3D /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		410A3E1D1FC42F1500B3AC3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				410A3E291FC42F1500B3AC3D /* Assets.xcassets in Resources */,
+				4110815E217402BA00ADD784 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41B669AD1FC10B7300DEB965 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -287,6 +459,7 @@
 				410D71001FA8D1B8009AC062 /* GoogleService-Info.plist in Resources */,
 				41F4C5D41B34BCD5004AA55E /* Main.storyboard in Resources */,
 				41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */,
+				411081552173FDF900ADD784 /* Localizable.strings in Resources */,
 				41F4C5D91B34BCD6004AA55E /* LaunchScreen.xib in Resources */,
 				41A59BE21B516A20000E3C8E /* Licenses in Resources */,
 				41F4C5D61B34BCD5004AA55E /* Images.xcassets in Resources */,
@@ -361,6 +534,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		410A3E1B1FC42F1500B3AC3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				410A3E271FC42F1500B3AC3D /* ExtensionDelegate.swift in Sources */,
+				410A3E251FC42F1500B3AC3D /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41B669AB1FC10B7300DEB965 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,6 +570,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		410A3E221FC42F1500B3AC3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 410A3E1E1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension */;
+			targetProxy = 410A3E211FC42F1500B3AC3D /* PBXContainerItemProxy */;
+		};
+		410A3E2C1FC42F1500B3AC3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 410A3E121FC42F1500B3AC3D /* TurnoClaseProfesorWatch */;
+			targetProxy = 410A3E2B1FC42F1500B3AC3D /* PBXContainerItemProxy */;
+		};
 		41B669B51FC10B7300DEB965 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 41F4C5C81B34BCD5004AA55E /* TurnoClaseProfesor */;
@@ -396,6 +588,24 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		410A3E151FC42F1500B3AC3D /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4110815B2173FEF600ADD784 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		411081572173FDF900ADD784 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				411081562173FDF900ADD784 /* es */,
+				411081582173FDFF00ADD784 /* eu */,
+				411081592173FE0300ADD784 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		41F4C5D21B34BCD5004AA55E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -419,6 +629,124 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		410A3E2E1FC42F1500B3AC3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ion Jaureguialzo Sarasola (CN85Y9YK74)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = RSEH385M54;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = TurnoClaseProfesorWatch_Extension;
+				INFOPLIST_FILE = TurnoClaseProfesorWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		410A3E2F1FC42F1500B3AC3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ion Jaureguialzo Sarasola (RSEH385M54)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RSEH385M54;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = TurnoClaseProfesorWatch_Extension;
+				INFOPLIST_FILE = TurnoClaseProfesorWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
+		410A3E301FC42F1500B3AC3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = RSEH385M54;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "TurnoClaseProfesorWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		410A3E311FC42F1500B3AC3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RSEH385M54;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "TurnoClaseProfesorWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
 		41B669B61FC10B7300DEB965 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -638,6 +966,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		410A3E321FC42F1500B3AC3D /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				410A3E301FC42F1500B3AC3D /* Debug */,
+				410A3E311FC42F1500B3AC3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		410A3E341FC42F1500B3AC3D /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				410A3E2E1FC42F1500B3AC3D /* Debug */,
+				410A3E2F1FC42F1500B3AC3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		41B669B81FC10B7300DEB965 /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
