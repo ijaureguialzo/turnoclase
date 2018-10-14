@@ -168,7 +168,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                         if let error = error {
                                             log.error("Error al recuperar datos: \(error.localizedDescription)")
                                         } else {
-                                            self.actualizarAula(enCola: querySnapshot!.documents.count)
+                                            self.actualizarAula(codigo: self.codigoAula, enCola: querySnapshot!.documents.count)
                                             self.mostrarSiguiente()
                                             self.feedbackTactil(alerta: true)
                                         }
@@ -295,7 +295,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     fileprivate func enviarWatch(campo: String, _ dato: String) {
-        if WCSession.isSupported() {
+
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && session != nil {
             self.session!.sendMessage([campo: dato], replyHandler: { (response) -> Void in
                     log.info("Enviado al Watch")
                 }, errorHandler: { (error) -> Void in
