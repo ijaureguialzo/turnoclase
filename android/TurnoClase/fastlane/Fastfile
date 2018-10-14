@@ -1,0 +1,196 @@
+# Customize this file, documentation can be found here:
+# https://docs.fastlane.tools/actions/
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.64.1"
+
+default_platform :android
+
+# En macOS, con JDK 9 no funciona. Instalar JDK 8 y ejecutar el comando siguiente.
+# export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+platform :android do
+
+  # REF: Error al arrancar el emulador a mano: https://stackoverflow.com/a/43385567/5136913
+  desc "Iniciar el emulador"
+  lane :emulador do
+    respuesta = prompt(text: "Dispositivo (5|7|10): ")
+
+    case respuesta.downcase
+    when "5"
+      sh "./emulador.sh Telefono5 5554"
+    when "10"
+      sh "./emulador.sh Tablet10 5556"
+    when "7"
+      sh "./emulador.sh Tablet7 5558"
+    else
+      UI.user_error!("No se puede iniciar el emulador")
+      exit(1)
+    end
+  end
+
+  idiomas = []
+
+  desc "Hace una captura individual"
+  private_lane :captura do |options|
+
+    # REF: Modo demo: https://github.com/FlorianRauscha/fastlane-plugin-demo_mode
+    demo_mode(
+        deactivate: false,
+        clock: "0941",
+        wifi: false,
+        wifi_level: 4,
+        mobile: true,
+        mobile_datatype: "lte",
+        mobile_level: 4,
+        plugged: false,
+        battery: 100,
+        notifications: false
+    )
+
+    capture_android_screenshots(
+        locales: idiomas,
+        clear_previous_screenshots: true,
+        skip_open_summary: !options[:resumen] || false,
+        device_type: options[:tipo],
+        specific_device: options[:emulador],
+        app_apk_path: options[:app] + "/build/outputs/apk/debug/" + options[:app] + "-debug.apk",
+        tests_apk_path: options[:app] + "/build/outputs/apk/androidTest/debug/" + options[:app] + "-debug-androidTest.apk",
+        app_package_name: "com.jaureguialzo." + options[:app],
+        output_directory: "./fastlane/screenshots/" + options[:app]
+    )
+
+    demo_mode(deactivate: true)
+
+  end
+
+  desc "Hace capturas en los emuladores seleccionados"
+  lane :capturas do
+
+    respuesta = prompt(text: "Dispositivo (5|7|10): ")
+
+    case respuesta.downcase
+    when "5"
+      tipo = "telefono5"
+    when "10"
+      tipo = "tablet10"
+    when "7"
+      tipo = "tablet7"
+    else
+      UI.user_error!("Dispositivo equivocado")
+      exit(1)
+    end
+
+    respuesta = prompt(text: "Aplicación (P|A|Todas): ")
+
+    case respuesta.downcase
+    when "p"
+      aplicaciones = ["turnoclaseprofesor"]
+    when "a"
+      aplicaciones = ["turnoclase"]
+    else
+      aplicaciones = ["turnoclaseprofesor", "turnoclase"]
+    end
+
+    case prompt(text: "Localizado (s|n): ").downcase
+    when "s"
+      idiomas = ["en-US", "es-ES", "eu-ES"]
+    else
+      idiomas = ["es-ES"]
+    end
+
+    respuesta = prompt(text: "Subirlas a Google Play (s|n): ")
+    subir_appstore = respuesta.downcase == "s"
+
+    gradle(task: "assembleDebug assembleAndroidTest")
+
+    for aplicacion in aplicaciones do
+
+      case tipo.downcase
+      when "telefono5"
+        captura(
+            app: aplicacion,
+            tipo: "phone",
+            emulador: "emulator-5554"
+        )
+      when "tablet10"
+        captura(
+            app: aplicacion,
+            tipo: "tenInch",
+            emulador: "emulator-5556"
+        )
+      when "tablet7"
+        captura(
+            app: aplicacion,
+            tipo: "sevenInch",
+            emulador: "emulator-5558"
+        )
+      else
+        UI.user_error!("Dispositivo equivocado")
+        exit(1)
+      end
+
+    end
+
+    upload_to_play_store(
+        package_name: "com.jaureguialzo." + aplicacion,
+
+        skip_upload_screenshots: !subir_appstore,
+        metadata_path: "./fastlane/screenshots/" + aplicacion,
+
+        skip_upload_apk: true,
+        skip_upload_metadata: true,
+        skip_upload_images: true
+    )
+
+  end
+
+  desc "Subir el APK firmado a la Play Store"
+  lane :playstore do
+
+    respuesta = prompt(text: "Aplicación (P|A|Todas): ")
+
+    case respuesta.downcase
+    when "p"
+      aplicaciones = ["turnoclaseprofesor"]
+    when "a"
+      aplicaciones = ["turnoclase"]
+    else
+      aplicaciones = ["turnoclaseprofesor", "turnoclase"]
+    end
+
+    gradle(
+        task: 'assemble',
+        build_type: 'Release'
+    )
+
+    for aplicacion in aplicaciones do
+      upload_to_play_store(
+          package_name: "com.jaureguialzo." + aplicacion,
+
+          skip_upload_apk: false,
+          apk: aplicacion + "/build/outputs/apk/release/" + aplicacion + "-release.apk",
+
+          skip_upload_metadata: true,
+          skip_upload_images: true,
+          skip_upload_screenshots: true
+      )
+    end
+  end
+
+end
+
+# More information about multiple platforms in fastlane: https://docs.fastlane.tools/advanced/#control-configuration-by-lane-and-by-platform
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used. No personal data is recorded.
+# Learn more at https://docs.fastlane.tools/#metrics

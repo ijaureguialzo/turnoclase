@@ -1,4 +1,4 @@
-platform :ios, '8.0'
+platform :ios, '9.3'
 use_frameworks!
 
 workspace 'TurnoClase'
@@ -10,7 +10,7 @@ def turnoclase_pods
     # REF: Google Firebase: https://firebase.google.com/docs/ios
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
-    pod 'FirebaseFirestore'
+    pod 'Firebase/Firestore'
     
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end

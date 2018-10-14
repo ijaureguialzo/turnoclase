@@ -49,11 +49,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         #endif
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 
         // Comprobar si saltamos a la siguiente pantalla o no
@@ -113,33 +108,49 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func botonConectar(_ sender: UIButton) {
 
-        fadeIn(sender)
+        efectoBoton(sender)
 
         codigoAula = textoAula.text!.uppercased()
         nombreUsuario = textoUsuario.text
     }
 
+    // MARK: Funciones exclusivas de la versión iOS
+
+    fileprivate func efectoBoton(_ sender: UIButton) {
+        fadeIn(sender)
+        feedbackTactil()
+    }
+
     @IBAction func fadeOut(_ sender: UIButton) {
 
-        // Difuminar
-        UIView.animate(withDuration: 0.1,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 0.15
-                       }, completion: nil)
+        // Ver si estamos en modo test, haciendo capturas de pantalla
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+
+            // Difuminar un botón
+            UIView.animate(withDuration: 0.1,
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 0.15
+                }, completion: nil)
+        }
     }
 
     @IBAction func fadeIn(_ sender: UIButton) {
 
-        // Restaurar
-        UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       options: UIViewAnimationOptions.curveLinear.intersection(.allowUserInteraction).intersection(.beginFromCurrentState),
-                       animations: {
-                           sender.alpha = 1
-                       }, completion: nil)
+        // Ver si estamos en modo test, haciendo capturas de pantalla
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+
+            // Restaurar el botón
+            UIView.animate(withDuration: 0.3,
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 1
+                }, completion: nil)
+        }
     }
+
 }
 
 // Hacer que el botón Siguiente del teclado virtual salte al siguiente campo

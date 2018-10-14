@@ -19,7 +19,7 @@
     <string name="etiqueta_turnos_restantes">Ahead of you in the queue:</string>
     <string name="botonActualizar">Update</string>
     <string name="boton_cancelar">Cancel</string>
-    <string name="mensaje_turno">It\'s your turn!</string>
+    <string name="ES_TU_TURNO">It\'s your turn!</string>
     <string name="menu_acerca_de">About...</string>
     <string name="texto_asl" translatable="false">
         <![CDATA[
@@ -52,4 +52,5 @@
             <p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
        ]]>
     </string>
+    <string name="VOLVER_A_EMPEZAR">Press ⟳ to request a turn</string>
 </resources>

@@ -25,19 +25,27 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MotionEvent
-import android.widget.EditText
+import android.view.View
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    // Referencias a los controles
-    private var campoAula: EditText? = null
-    private var campoNombre: EditText? = null
+    // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
+    private val isRunningTest: Boolean by lazy {
+        try {
+            Class.forName("android.support.test.espresso.Espresso")
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Ocultar la barra de título en horizontal
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
+                !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_XLARGE))
             supportActionBar!!.hide()
         else
             supportActionBar!!.show()
@@ -45,22 +53,18 @@ class MainActivity : AppCompatActivity() {
         // Cargar el layout
         setContentView(R.layout.activity_main)
 
-        // Referencias a los controles
-        campoAula = findViewById(R.id.campoAula) as EditText
-        campoNombre = findViewById(R.id.campoNombre) as EditText
-
         // Nombre aleatorio
         val nombreAleatorio = Nombres().aleatorio()
-        campoNombre!!.hint = nombreAleatorio
+        campoNombre.hint = nombreAleatorio
 
         // Depuración
         if (BuildConfig.DEBUG) {
-            campoAula!!.setText("BE131")
-            campoNombre!!.setText(nombreAleatorio)
+            campoAula.setText("BE131")
+            campoNombre.setText(nombreAleatorio)
         }
 
         // Evento del botón conectar, pasamos a la siguiente actividad
-        findViewById(R.id.botonSiguiente).setOnClickListener {
+        botonSiguiente.setOnClickListener {
             // Obtenemos los datos del interfaz
             val codigoAula = campoAula!!.text.toString().toUpperCase()
             val nombreUsuario = campoNombre!!.text.toString()
@@ -77,21 +81,32 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Animación del botón
-        findViewById(R.id.botonSiguiente).setOnTouchListener { v, event ->
+        botonSiguiente.setOnTouchListener { v, event ->
+            animarBoton(event, v, "botonSiguiente")
+            false
+        }
+
+    }
+
+    private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
+
+        if (!isRunningTest) {
             if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón botonSiguiente...")
+                Log.d("TurnoClase", "DOWN del botón $nombre...")
+
+                // Difuminar
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
                 anim.duration = 100
                 anim.start()
             } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón botonSiguiente...")
+                Log.d("TurnoClase", "UP del botón $nombre...")
+
+                // Restaurar
                 val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
                 anim.duration = 300
                 anim.start()
             }
-            false
         }
-
     }
 
     // Crear el menú "Acerca de..."

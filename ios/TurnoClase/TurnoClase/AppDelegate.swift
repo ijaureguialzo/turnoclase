@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Configurar XCGLogger
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
@@ -51,9 +51,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Habilitar Firebase
         FirebaseApp.configure()
 
-        // Desactivar el modo offline de Firestore
-        let settings = FirestoreSettings()
+        // REF: Aviso de "missing Push Entitlement" al enviar a la App Store por incluir Firebase: https://stackoverflow.com/a/46802075/5136913
+        
+        // Opciones de Firestore
+        let settings = db.settings
         settings.isPersistenceEnabled = false
+        settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
 
         // Barra de estado a las 9:41

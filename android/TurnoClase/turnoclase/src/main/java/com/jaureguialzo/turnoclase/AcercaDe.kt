@@ -20,34 +20,39 @@ package com.jaureguialzo.turnoclase
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
+import android.text.Spanned
 import android.text.method.LinkMovementMethod
-import android.widget.TextView
-
+import kotlinx.android.synthetic.main.activity_acerca_de.*
 
 class AcercaDe : AppCompatActivity() {
-
-    // Referencias a los controles
-    private var etiquetaLicenciaImagenes: TextView? = null
-    private var etiquetaASL: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_acerca_de)
 
         // Cargar HTML desde un @string
-        etiquetaASL = findViewById(R.id.etiquetaASL) as TextView
-        etiquetaASL!!.text = Html.fromHtml(getString(R.string.texto_asl))
-        etiquetaASL!!.movementMethod = LinkMovementMethod.getInstance()
+        etiquetaASL.text = fromHtml(getString(R.string.texto_asl))
+        etiquetaASL.movementMethod = LinkMovementMethod.getInstance()
 
         // Cargar HTML desde un @string y activar los enlaces
-        etiquetaLicenciaImagenes = findViewById(R.id.etiquetaLicenciaImagenes) as TextView
-        etiquetaLicenciaImagenes!!.text = Html.fromHtml(getString(R.string.texto_licencia_imagenes))
-        etiquetaLicenciaImagenes!!.movementMethod = LinkMovementMethod.getInstance()
+        etiquetaLicenciaImagenes.text = fromHtml(getString(R.string.texto_licencia_imagenes))
+        etiquetaLicenciaImagenes.movementMethod = LinkMovementMethod.getInstance()
 
         // Cargar HTML desde un @string
-        etiquetaASL = findViewById(R.id.etiquetaLicenciaVictor) as TextView
-        etiquetaASL!!.text = Html.fromHtml(getString(R.string.texto_licencia_victor))
-        etiquetaASL!!.movementMethod = LinkMovementMethod.getInstance()
+        etiquetaASL.text = fromHtml(getString(R.string.texto_licencia_victor))
+        etiquetaASL.movementMethod = LinkMovementMethod.getInstance()
+    }
+
+    // REF: Método obsoleto en Android N: https://stackoverflow.com/a/37905107/5136913
+    @Suppress("DEPRECATION")
+    private fun fromHtml(html: String): Spanned {
+        val result: Spanned
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            result = Html.fromHtml(html)
+        }
+        return result
     }
 
 }

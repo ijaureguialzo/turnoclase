@@ -3,36 +3,58 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.trello:victor:0.3.0'
+        classpath "com.trello:victor:$victor_version"
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 // Make sure to apply this plugin *after* the Android plugin
 apply plugin: 'com.trello.victor'
 
+// REF: Firmado automáticamente: https://stackoverflow.com/a/43230396/5136913
+def keystorePropertiesFile = rootProject.file("../../private/android/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
-    compileSdkVersion 25
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.jaureguialzo.turnoclaseprofesor"
-        minSdkVersion 14
-        targetSdkVersion 25
-        versionCode 11
-        versionName "2.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 17
+        versionName "2.0.6"
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        multiDexEnabled true
+    }
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
         }
     }
     sourceSets {
         main {
             svg.srcDir 'src/main/svg'
         }
+        main.java.srcDirs += 'src/main/kotlin'
     }
-    buildToolsVersion '26.0.2'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildToolsVersion '28.0.3'
 }
 
 victor {
@@ -43,15 +65,18 @@ victor {
     excludeDensities = ['ldpi']
 }
 
+// REF: Generar árbol de dependencias: https://stackoverflow.com/a/42374426/5136913
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.4.0'
-
-    compile 'com.google.firebase:firebase-core:11.6.0'
-    compile 'com.google.firebase:firebase-auth:11.6.0'
-    compile 'com.google.firebase:firebase-firestore:11.6.0'
-
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:$support_lib_version"
+    implementation "com.android.support:support-media-compat:$support_lib_version"
+    implementation "com.android.support:support-v4:$support_lib_version"
+    implementation "com.android.support:multidex:$multidex_support_lib_version"
+    implementation "com.google.firebase:firebase-core:$firebase_core_version"
+    implementation "com.google.firebase:firebase-auth:$firebase_auth_version"
+    implementation "com.google.firebase:firebase-firestore:$firebase_firestore_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    androidTestImplementation "tools.fastlane:screengrab:$fastlane_screengrab_version"
 }
 
 apply plugin: 'com.google.gms.google-services'

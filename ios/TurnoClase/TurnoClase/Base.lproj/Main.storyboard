@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +25,7 @@
                                 <rect key="frame" x="52" y="191" width="285" height="285"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="Jm1-YI-w1W" userLabel="imagenFondo">
-                                        <rect key="frame" x="15" y="15" width="256" height="256"/>
+                                        <rect key="frame" x="14.5" y="14.5" width="256" height="256"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLASS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5W-k5-R8I" userLabel="etiquetaAula">
                                         <rect key="frame" x="116" y="65" width="53" height="20.5"/>
@@ -34,13 +34,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BE131" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KDG-Yu-H2h" userLabel="textoAula">
-                                        <rect key="frame" x="32" y="93" width="221" height="31"/>
+                                        <rect key="frame" x="32" y="93.5" width="221" height="31"/>
                                         <accessibility key="accessibilityConfiguration" identifier="textoAula"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6B-ON-j6k" userLabel="etiquetaUsuario">
-                                        <rect key="frame" x="119" y="140" width="47.5" height="20.5"/>
+                                        <rect key="frame" x="119" y="140.5" width="47.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Zt-ce-FAZ" userLabel="contenedorBotonConectar" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
-                                <rect key="frame" x="230" y="421" width="72" height="72"/>
+                                <rect key="frame" x="229.5" y="420.5" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRC-dO-aCu" userLabel="botonConectar" customClass="BotonGrafico" customModule="TurnoClase" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
@@ -168,11 +168,11 @@
                                 <rect key="frame" x="52" y="191" width="285" height="285"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="YwI-8f-W76" userLabel="imagenFondo">
-                                        <rect key="frame" x="14" y="15" width="256" height="256"/>
+                                        <rect key="frame" x="14.5" y="14.5" width="256" height="256"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="UsV-sj-uaF" userLabel="etiquetaNumero">
-                                        <rect key="frame" x="16" y="143" width="253" height="0.0"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="etiquetaNumero"/>
+                                        <rect key="frame" x="16" y="142.5" width="253" height="0.0"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="etiquetaMensaje"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="102"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -232,7 +232,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csW-Ho-Yvk" userLabel="contenedorBotonCancelar" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
-                                <rect key="frame" x="36" y="227" width="72" height="72"/>
+                                <rect key="frame" x="35.5" y="226.5" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dp2-gh-yJM" userLabel="botonCancelar" customClass="BotonGrafico" customModule="TurnoClase" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
@@ -339,7 +339,7 @@
                     </view>
                     <connections>
                         <outlet property="etiquetaAula" destination="j8F-6N-3YS" id="K4z-y2-xKO"/>
-                        <outlet property="etiquetaNumero" destination="UsV-sj-uaF" id="lra-Ms-QTl"/>
+                        <outlet property="etiquetaMensaje" destination="UsV-sj-uaF" id="5vn-De-MqH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rDu-11-WqQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -17,15 +17,11 @@
 
 package com.jaureguialzo.turnoclaseprofesor
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 
 /**
  * Created by widemos on 19/6/15.
  */
-class App : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-    }
-
+class App : MultiDexApplication() {
+    // No borrar esta clase, se usa en el AndroidManifest.xml
 }
