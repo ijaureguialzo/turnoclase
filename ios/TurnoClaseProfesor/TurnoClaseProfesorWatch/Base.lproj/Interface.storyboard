@@ -16,7 +16,7 @@
                     <items>
                         <group width="1" height="0.20000000000000001" alignment="center" id="JIS-Tg-Z5g" userLabel="Superior">
                             <items>
-                                <group width="0.45000000000000001" alignment="center" verticalAlignment="center" radius="12" id="pDy-fq-biw" userLabel="Codigo">
+                                <group width="0.40000000000000002" alignment="center" verticalAlignment="center" radius="6" id="pDy-fq-biw" userLabel="Codigo">
                                     <items>
                                         <label width="1" height="1" alignment="center" text="BE131" textAlignment="center" id="Wr3-R3-nnb">
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -25,8 +25,8 @@
                                     <color key="backgroundColor" red="0.87404829263687134" green="0.88608193397521973" blue="0.90262514352798462" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <edgeInsets key="margins" left="4" right="4" top="4" bottom="4"/>
                                 </group>
-                                <group width="0.14999999999999999" alignment="center" spacing="4" id="f5p-QE-gSp" userLabel="Espaciador"/>
-                                <group width="0.29999999999999999" alignment="center" verticalAlignment="center" radius="12" id="ogo-3V-2p3" userLabel="Cola">
+                                <group width="0.10000000000000001" alignment="center" spacing="4" id="f5p-QE-gSp" userLabel="Espaciador"/>
+                                <group width="0.29999999999999999" alignment="center" verticalAlignment="center" radius="6" id="ogo-3V-2p3" userLabel="Cola">
                                     <items>
                                         <label width="1" height="1" alignment="center" text="999" textAlignment="center" id="CHX-1K-R65"/>
                                     </items>
@@ -44,7 +44,7 @@
                             </items>
                             <color key="backgroundColor" red="1" green="0.7775987982749939" blue="0.0045356974005699158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </group>
-                        <group width="1" height="0.34999999999999998" alignment="left" verticalAlignment="bottom" radius="6" id="JSe-e2-IyL" userLabel="Inferior">
+                        <group width="0.66000000000000003" height="0.34999999999999998" alignment="center" verticalAlignment="bottom" radius="6" id="JSe-e2-IyL" userLabel="Inferior">
                             <items>
                                 <button width="1" height="1" alignment="left" verticalAlignment="center" title="Next" id="0ai-8C-dd4" userLabel="Siguiente">
                                     <color key="backgroundColor" red="0.0" green="0.45684128999710083" blue="0.73509865999221802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
