@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14313.18" targetRuntime="watchKit" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
-    <device id="watch42" orientation="portrait">
+    <device id="watch44" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -12,7 +12,7 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="TurnoClaseProfesorWatch" customModuleProvider="target">
+                <controller fullBounds="YES" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="TurnoClaseProfesorWatch" customModuleProvider="target">
                     <items>
                         <group width="1" height="0.20000000000000001" alignment="center" id="JIS-Tg-Z5g" userLabel="Superior">
                             <items>
