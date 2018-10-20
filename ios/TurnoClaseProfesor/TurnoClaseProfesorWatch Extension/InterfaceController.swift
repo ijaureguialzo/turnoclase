@@ -29,32 +29,53 @@ class InterfaceController: WKInterfaceController {
 
     @IBAction func botonSiguiente() {
 
-        if WCSession.isSupported() {
+        if(!demo) {
+            if WCSession.isSupported() {
+                session!.sendMessage(["comando": "siguiente"], replyHandler: { (response) -> Void in
+                        print("Comando: Siguiente")
+                    }, errorHandler: { (error) -> Void in
+                        print("Error al enviar petición al iPhone \(error)")
+                    })
+            }
+        } else {
+            if n >= 0 {
+                actualizarPantalla(numero: n, nombre: nombreAleatorio())
+            } else {
+                actualizarPantalla(numero: 0, nombre: "")
+            }
 
-            session!.sendMessage(["comando": "siguiente"], replyHandler: { (response) -> Void in
-                    print("Comando: Siguiente")
-                }, errorHandler: { (error) -> Void in
-                    print("Error al enviar petición al iPhone \(error)")
-                })
+            n -= 1
         }
-
     }
 
     var watch: WKInterfaceDevice!
+
+    var demo = true
+    var n = 2
+
+    fileprivate func actualizarPantalla(numero: Int, nombre: String) {
+        self.etiquetaNumero.setText(String(numero))
+        self.etiquetaNombre.setText(nombre)
+    }
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 
         self.etiquetaBotonSiguiente.setTitle(NSLocalizedString("NEXT", comment: "Siguiente"))
-        self.etiquetaAula.setText("...")
-        self.etiquetaNumero.setText("0")
-        self.etiquetaNombre.setText("")
+        actualizarPantalla(numero: 0, nombre: "")
+
+        if(!demo) {
+            self.etiquetaAula.setText("...")
+        } else {
+            self.etiquetaAula.setText("BE131")
+        }
 
         // Configure interface objects here.
         session = WCSession.default
 
         // Acceso al dispositivo
         watch = WKInterfaceDevice.current()
+
     }
 
     override func willActivate() {
