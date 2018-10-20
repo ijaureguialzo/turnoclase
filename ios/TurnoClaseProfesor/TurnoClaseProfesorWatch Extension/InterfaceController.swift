@@ -50,7 +50,7 @@ class InterfaceController: WKInterfaceController {
 
     var watch: WKInterfaceDevice!
 
-    var demo = true
+    var demo = false
     var n = 2
 
     fileprivate func actualizarPantalla(numero: Int, nombre: String) {
