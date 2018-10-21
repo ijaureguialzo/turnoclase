@@ -563,15 +563,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
 extension ViewController: WCSessionDelegate {
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        print("iPhone: sesión activa")
+        log.debug("iPhone: sesión activa")
     }
 
     func sessionDidBecomeInactive(_ session: WCSession) {
-        print("iPhone: sesión inactiva")
+        log.debug("iPhone: sesión inactiva")
     }
 
     func sessionDidDeactivate(_ session: WCSession) {
-        print("iPhone: sesión desactivada")
+        log.debug("iPhone: sesión desactivada")
     }
 
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {

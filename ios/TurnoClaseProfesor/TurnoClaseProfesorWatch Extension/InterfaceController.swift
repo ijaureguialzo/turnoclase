@@ -11,6 +11,11 @@ import Foundation
 
 import WatchConnectivity
 
+import XCGLogger
+
+// Servicio de logs XCGLogger
+let log = XCGLogger.default
+
 class InterfaceController: WKInterfaceController {
 
     var session: WCSession? {
@@ -32,9 +37,9 @@ class InterfaceController: WKInterfaceController {
         if(!demo) {
             if WCSession.isSupported() {
                 session!.sendMessage(["comando": "siguiente"], replyHandler: { (response) -> Void in
-                        print("Comando: Siguiente")
+                        log.debug("Comando: Siguiente")
                     }, errorHandler: { (error) -> Void in
-                        print("Error al enviar petición al iPhone \(error)")
+                        log.error("Error al enviar petición al iPhone \(error)")
                     })
             }
         } else {
@@ -60,6 +65,9 @@ class InterfaceController: WKInterfaceController {
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+
+        // Configurar XCGLogger
+        log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
 
         self.etiquetaBotonSiguiente.setTitle(NSLocalizedString("NEXT", comment: "Siguiente"))
         actualizarPantalla(numero: 0, nombre: "")
@@ -93,7 +101,7 @@ class InterfaceController: WKInterfaceController {
 extension InterfaceController: WCSessionDelegate {
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        print("Watch: sesión activa")
+        log.debug("Watch: sesión activa")
     }
 
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
