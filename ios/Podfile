@@ -17,7 +17,7 @@ def turnoclase_ios_pods
 end
 
 def turnoclase_watchos_pods
-    platform :watchos, '3.0'
+    platform :watchos, '4.0'
     turnoclase_shared_pods
 end
 
@@ -42,4 +42,15 @@ end
 target 'TurnoClase' do
     project 'TurnoClase/TurnoClase'
     turnoclase_ios_pods
+end
+
+# REF: https://stackoverflow.com/a/52739262
+post_install do |installer_representation|
+    installer_representation.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            if config.build_settings['SDKROOT'] == 'watchos'
+                config.build_settings['WATCHOS_DEPLOYMENT_TARGET'] = '4.0'
+            end
+        end
+    end
 end
