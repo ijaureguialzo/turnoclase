@@ -439,8 +439,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     fileprivate func dialogoError() {
-        self.alertController = UIAlertController(title: "Error de conexión".localized(), message: "No se ha podido acceder al aula con los datos proporcionados.".localized(), preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Ok".localized(), style: .default) { (_) in }
+        self.alertController = UIAlertController(title: "Error de conexión".localized(),
+                                                 message: "No se ha podido acceder al aula con los datos proporcionados.".localized(),
+                                                 preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok".localized(),
+                                         style: .default) { (_) in }
         alertController.addAction(cancelAction)
         self.present(self.alertController, animated: true, completion: nil)
     }
@@ -457,10 +460,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         loginAulaOk = false
         loginPinOk = false
 
-        alertController = UIAlertController(title: "Conectar a otra aula".localized(), message: "Introduce los datos del aula a la que quieres conectar.".localized(), preferredStyle: .alert)
+        alertController = UIAlertController(title: "Conectar a otra aula".localized(),
+                                            message: "Introduce los datos del aula a la que quieres conectar.".localized(),
+                                            preferredStyle: .alert)
 
         // Conectar
-        let confirmAction = UIAlertAction(title: "Conectar".localized(), style: .default) { (_) in
+        let confirmAction = UIAlertAction(title: "Conectar".localized(),
+                                          style: .default) { (_) in
 
             log.info("Conectando a otra aula")
 
@@ -475,7 +481,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         confirmAction.isEnabled = false
 
         // Cancelar
-        let cancelAction = UIAlertAction(title: "Cancelar".localized(), style: .cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Cancelar".localized(),
+                                         style: .cancel) { (_) in }
 
         // Cuadros de texto
         alertController.addTextField { (textField) in

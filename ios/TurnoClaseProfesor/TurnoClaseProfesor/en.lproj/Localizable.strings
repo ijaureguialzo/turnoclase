@@ -6,4 +6,18 @@
   Copyright © 2018 Ion Jaureguialzo Sarasola. All rights reserved.
 */
 
-NEXT="Next";
+"Aula %@" = "Class %@";
+"Cancelar" = "Cancel";
+"Conectar" = "Connect";
+"Conectar a otra aula" = "Connect to another class";
+"Código de aula" = "Class code";
+"Desconectar del aula" = "Disconnect from the class";
+"Error de conexión" = "Connection error";
+"Generar nueva aula" = "Generate new class";
+"Introduce los datos del aula a la que quieres conectar." = "Insert data of the class you are connecting to.";
+"Invitado" = "Guest";
+"No se ha podido acceder al aula con los datos proporcionados." = "Can't access to the class with provided data.";
+"Ok" = "Ok";
+"PIN" = "PIN";
+"PIN para compartir este aula: %@" = "PIN to share this class: %@";
+"Siguiente" = "Next";
