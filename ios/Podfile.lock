@@ -109,6 +109,7 @@ PODS:
     - gRPC-RxLibrary (= 1.14.0)
   - GTMSessionFetcher/Core (1.2.0)
   - leveldb-library (1.20)
+  - Localize-Swift (2.0.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -128,6 +129,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - Localize-Swift
   - SimulatorStatusMagic
   - XCGLogger
 
@@ -150,6 +152,7 @@ SPEC REPOS:
     - gRPC-RxLibrary
     - GTMSessionFetcher
     - leveldb-library
+    - Localize-Swift
     - nanopb
     - ObjcExceptionBridging
     - Protobuf
@@ -174,12 +177,13 @@ SPEC CHECKSUMS:
   gRPC-RxLibrary: 3c305f32155024b116b780f389323c73a28197e6
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SimulatorStatusMagic: 631fe6e4195a8a8d587ad8744af9015126526cc2
   XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
 
-PODFILE CHECKSUM: e062a5603d695f08d5f47074981566db6f468988
+PODFILE CHECKSUM: 5a1be01befe4dec9679e0007d0eb5dfcf24533c9
 
 COCOAPODS: 1.5.3

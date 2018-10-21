@@ -24,6 +24,9 @@ end
 def turnoclase_shared_pods
     # REF: Librería para mostrar mensajes de depuración: https://github.com/DaveWoodCom/XCGLogger
     pod 'XCGLogger'
+
+    # REF: Localización: https://github.com/marmelroy/Localize-Swift
+    pod 'Localize-Swift'
 end
 
 target 'TurnoClaseProfesor' do
