@@ -1,0 +1,15 @@
+git_url("git@github.com:ijaureguialzo/turnoclase-appstore.git")
+
+type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
+
+app_identifier([
+	"com.jaureguialzo.TurnoClase",
+	"com.jaureguialzo.TurnoClaseProfesor", 
+	"com.jaureguialzo.TurnoClaseProfesor.watchkitapp",
+	"com.jaureguialzo.TurnoClaseProfesor.watchkitapp.watchkitextension"
+])
+
+username("widemos@gmail.com") # Your Apple Developer Portal username
+
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options
