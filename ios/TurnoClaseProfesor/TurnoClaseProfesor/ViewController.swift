@@ -29,6 +29,8 @@ import FirebaseFirestore
 
 import WatchConnectivity
 
+import Localize_Swift
+
 class ViewController: UIViewController, UITextFieldDelegate {
 
     // ID de usuario único generado por Firebase
@@ -353,32 +355,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // REF: iOS Action Sheet: http://swiftdeveloperblog.com/actionsheet-example-in-swift/
 
         let alertController: UIAlertController = {
+            // REF: Localizar una cadena con interpolación: https://github.com/marmelroy/Localize-Swift/issues/89#issuecomment-331673546
             if !invitado {
-                return UIAlertController(title: "Aula \(codigoAula)", message: "PIN del aula: \(PIN)", preferredStyle: .actionSheet)
+                return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
+                    message: String(format: "PIN para compartir este aula: %@".localized(), PIN),
+                    preferredStyle: .actionSheet)
             } else {
-                return UIAlertController(title: "Aula \(codigoAula)", message: "Invitado", preferredStyle: .actionSheet)
+                return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
+                    message: "Invitado".localized(),
+                    preferredStyle: .actionSheet)
             }
         }()
 
-        let accionGenerarNuevoCodigo = UIAlertAction(title: "Generar nueva aula", style: .destructive, handler: { (action) -> Void in
-            log.info("Generar nueva aula")
-            self.desconectarListeners()
-            self.borrarAula()
-        })
+        let accionGenerarNuevoCodigo = UIAlertAction(title: "Generar nueva aula".localized(), style: .destructive, handler: { (action) -> Void in
+                log.info("Generar nueva aula")
+                self.desconectarListeners()
+                self.borrarAula()
+            })
 
-        let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula", style: .default, handler: { (action) -> Void in
-            log.info("Conectar a otra aula")
-            self.dialogoConexion()
-        })
+        let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
+                log.info("Conectar a otra aula")
+                self.dialogoConexion()
+            })
 
-        let accionDesconectarAula = UIAlertAction(title: "Desconectar del aula", style: .destructive, handler: { (action) -> Void in
-            log.info("Desconectar del aula")
-            self.desconectarAula()
-        })
+        let accionDesconectarAula = UIAlertAction(title: "Desconectar del aula".localized(), style: .destructive, handler: { (action) -> Void in
+                log.info("Desconectar del aula")
+                self.desconectarAula()
+            })
 
-        let accionCancelar = UIAlertAction(title: "Cancelar", style: .cancel, handler: { (action) -> Void in
-            log.info("Cancelar")
-        })
+        let accionCancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel, handler: { (action) -> Void in
+                log.info("Cancelar")
+            })
 
         if(!invitado) {
             alertController.addAction(accionGenerarNuevoCodigo)
@@ -432,8 +439,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     fileprivate func dialogoError() {
-        self.alertController = UIAlertController(title: "Error de conexión", message: "No se ha podido acceder al aula con los datos proporcionados.", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Ok", style: .default) { (_) in }
+        self.alertController = UIAlertController(title: "Error de conexión".localized(), message: "No se ha podido acceder al aula con los datos proporcionados.".localized(), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok".localized(), style: .default) { (_) in }
         alertController.addAction(cancelAction)
         self.present(self.alertController, animated: true, completion: nil)
     }
@@ -450,10 +457,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         loginAulaOk = false
         loginPinOk = false
 
-        alertController = UIAlertController(title: "Conectar a otra aula", message: "Introduce los datos del aula a la que quieres conectar.", preferredStyle: .alert)
+        alertController = UIAlertController(title: "Conectar a otra aula".localized(), message: "Introduce los datos del aula a la que quieres conectar.".localized(), preferredStyle: .alert)
 
         // Conectar
-        let confirmAction = UIAlertAction(title: "Conectar", style: .default) { (_) in
+        let confirmAction = UIAlertAction(title: "Conectar".localized(), style: .default) { (_) in
 
             log.info("Conectando a otra aula")
 
@@ -468,11 +475,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         confirmAction.isEnabled = false
 
         // Cancelar
-        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Cancelar".localized(), style: .cancel) { (_) in }
 
         // Cuadros de texto
         alertController.addTextField { (textField) in
-            textField.placeholder = "Código de aula"
+            textField.placeholder = "Código de aula".localized()
             textField.tag = 10
             textField.autocapitalizationType = .allCharacters
             textField.keyboardType = .asciiCapable
@@ -481,7 +488,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             textField.delegate = self
         }
         alertController.addTextField { (textField) in
-            textField.placeholder = "PIN"
+            textField.placeholder = "PIN".localized()
             textField.tag = 20
             textField.keyboardType = .numberPad
             textField.autocorrectionType = .no

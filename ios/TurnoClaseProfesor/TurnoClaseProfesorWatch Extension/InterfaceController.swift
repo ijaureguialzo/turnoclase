@@ -7,14 +7,14 @@
 //
 
 import WatchKit
-import Foundation
-
 import WatchConnectivity
 
 import XCGLogger
 
 // Servicio de logs XCGLogger
 let log = XCGLogger.default
+
+import Localize_Swift
 
 class InterfaceController: WKInterfaceController {
 
@@ -69,7 +69,7 @@ class InterfaceController: WKInterfaceController {
         // Configurar XCGLogger
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
 
-        self.etiquetaBotonSiguiente.setTitle(NSLocalizedString("NEXT", comment: "Siguiente"))
+        self.etiquetaBotonSiguiente.setTitle("Siguiente".localized())
         actualizarPantalla(numero: 0, nombre: "")
 
         if(!demo) {
