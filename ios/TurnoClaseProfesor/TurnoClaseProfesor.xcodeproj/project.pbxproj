@@ -34,7 +34,8 @@
 		41F8B927216A156D006EBBAC /* Teclado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8B926216A156D006EBBAC /* Teclado.swift */; };
 		41FBD076217B397F007FFCA2 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A3E241FC42F1500B3AC3D /* InterfaceController.swift */; };
 		41FBD07A217B3C38007FFCA2 /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669BD1FC1135700DEB965 /* Nombres.swift */; };
-		D701C6065AB83DE19666FC5F /* Pods_TurnoClaseProfesor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD076638CC1F27DC86333D7 /* Pods_TurnoClaseProfesor.framework */; };
+		5ED1B4120AE1225D7AD054AA /* Pods_TurnoClaseProfesor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */; };
+		C6FDB4D28A1D7A94784141B5 /* Pods_TurnoClaseProfesorWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +88,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0FD076638CC1F27DC86333D7 /* Pods_TurnoClaseProfesor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4102AB502169A1E800AEC36D /* Efectos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Efectos.swift; sourceTree = "<group>"; };
 		410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurnoClaseProfesorWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		410A3E181FC42F1500B3AC3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -125,8 +126,11 @@
 		41F4C5D51B34BCD5004AA55E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		41F4C5D81B34BCD6004AA55E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		41F8B926216A156D006EBBAC /* Teclado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teclado.swift; sourceTree = "<group>"; };
-		63E67A3F426E090070BE462B /* Pods-TurnoClaseProfesor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.debug.xcconfig"; sourceTree = "<group>"; };
-		9EEA0A44053B58DE7CAA9482 /* Pods-TurnoClaseProfesor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.release.xcconfig"; sourceTree = "<group>"; };
+		A2B5FCD9A98F46DE39F2C927 /* Pods-TurnoClaseProfesor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.debug.xcconfig"; sourceTree = "<group>"; };
+		AEF6504144637E62FC53D0E7 /* Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		C8F0C998A673C21B6D08D9D4 /* Pods-TurnoClaseProfesor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.release.xcconfig"; sourceTree = "<group>"; };
+		C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesorWatch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEC2D70D195470DB34D41967 /* Pods-TurnoClaseProfesorWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesorWatch Extension.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6FDB4D28A1D7A94784141B5 /* Pods_TurnoClaseProfesorWatch_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,7 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D701C6065AB83DE19666FC5F /* Pods_TurnoClaseProfesor.framework in Frameworks */,
+				5ED1B4120AE1225D7AD054AA /* Pods_TurnoClaseProfesor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,8 +229,8 @@
 				410A3E141FC42F1500B3AC3D /* TurnoClaseProfesorWatch */,
 				410A3E231FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension */,
 				41F4C5CA1B34BCD5004AA55E /* Products */,
-				F7A91AD7491067EF15642691 /* Pods */,
-				AC811C938802DD331C620029 /* Frameworks */,
+				C7081229FC52421FC6A6135B /* Pods */,
+				5031ED4ECEA45C73F5F6EF1B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -265,19 +270,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AC811C938802DD331C620029 /* Frameworks */ = {
+		5031ED4ECEA45C73F5F6EF1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0FD076638CC1F27DC86333D7 /* Pods_TurnoClaseProfesor.framework */,
+				13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */,
+				C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F7A91AD7491067EF15642691 /* Pods */ = {
+		C7081229FC52421FC6A6135B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				63E67A3F426E090070BE462B /* Pods-TurnoClaseProfesor.debug.xcconfig */,
-				9EEA0A44053B58DE7CAA9482 /* Pods-TurnoClaseProfesor.release.xcconfig */,
+				A2B5FCD9A98F46DE39F2C927 /* Pods-TurnoClaseProfesor.debug.xcconfig */,
+				C8F0C998A673C21B6D08D9D4 /* Pods-TurnoClaseProfesor.release.xcconfig */,
+				AEF6504144637E62FC53D0E7 /* Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig */,
+				EEC2D70D195470DB34D41967 /* Pods-TurnoClaseProfesorWatch Extension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -307,9 +315,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 410A3E321FC42F1500B3AC3D /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorWatch Extension" */;
 			buildPhases = (
+				80E6339796820AB15ADDD957 /* [CP] Check Pods Manifest.lock */,
 				410A3E1B1FC42F1500B3AC3D /* Sources */,
 				410A3E1C1FC42F1500B3AC3D /* Frameworks */,
 				410A3E1D1FC42F1500B3AC3D /* Resources */,
+				58164D55F8CEF4F64B109A0E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -342,12 +352,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41F4C5E81B34BCD6004AA55E /* Build configuration list for PBXNativeTarget "TurnoClaseProfesor" */;
 			buildPhases = (
-				6BF8114C8ECB7CD1717563D8 /* [CP] Check Pods Manifest.lock */,
+				69F8D8E51D129774679F12D9 /* [CP] Check Pods Manifest.lock */,
 				41F4C5C51B34BCD5004AA55E /* Sources */,
 				41F4C5C61B34BCD5004AA55E /* Frameworks */,
 				41F4C5C71B34BCD5004AA55E /* Resources */,
-				E11506942027563C22955673 /* [CP] Embed Pods Frameworks */,
 				410A3E351FC42F1500B3AC3D /* Embed Watch Content */,
+				086D67162CA5CA8247BFCBEB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -470,38 +480,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6BF8114C8ECB7CD1717563D8 /* [CP] Check Pods Manifest.lock */ = {
+		086D67162CA5CA8247BFCBEB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TurnoClaseProfesor-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E11506942027563C22955673 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging-iOS/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
-				"${BUILT_PRODUCTS_DIR}/XCGLogger/XCGLogger.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger-iOS/XCGLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -511,6 +505,8 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -530,6 +526,74 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		58164D55F8CEF4F64B109A0E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging-watchOS/ObjcExceptionBridging.framework",
+				"${BUILT_PRODUCTS_DIR}/XCGLogger-watchOS/XCGLogger.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		69F8D8E51D129774679F12D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TurnoClaseProfesor-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		80E6339796820AB15ADDD957 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TurnoClaseProfesorWatch Extension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -695,6 +759,7 @@
 		};
 		410A3E301FC42F1500B3AC3D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEF6504144637E62FC53D0E7 /* Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -724,6 +789,7 @@
 		};
 		410A3E311FC42F1500B3AC3D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEC2D70D195470DB34D41967 /* Pods-TurnoClaseProfesorWatch Extension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -915,7 +981,7 @@
 		};
 		41F4C5E91B34BCD6004AA55E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 63E67A3F426E090070BE462B /* Pods-TurnoClaseProfesor.debug.xcconfig */;
+			baseConfigurationReference = A2B5FCD9A98F46DE39F2C927 /* Pods-TurnoClaseProfesor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TurnoClaseProfesor/TurnoClaseProfesor.entitlements;
@@ -941,7 +1007,7 @@
 		};
 		41F4C5EA1B34BCD6004AA55E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EEA0A44053B58DE7CAA9482 /* Pods-TurnoClaseProfesor.release.xcconfig */;
+			baseConfigurationReference = C8F0C998A673C21B6D08D9D4 /* Pods-TurnoClaseProfesor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TurnoClaseProfesor/TurnoClaseProfesor.entitlements;

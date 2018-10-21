@@ -1,26 +1,42 @@
-platform :ios, '9.3'
 use_frameworks!
 
 workspace 'TurnoClase'
 
-def turnoclase_pods
-    # REF: Librería para mostrar mensajes de depuración: https://github.com/DaveWoodCom/XCGLogger
-    pod 'XCGLogger'
+def turnoclase_ios_pods
+    # REF: Error de integración con los Pods del watch: https://github.com/CocoaPods/CocoaPods/issues/3382#issuecomment-392605607
+    platform :ios, '9.3'
+    turnoclase_shared_pods
 
     # REF: Google Firebase: https://firebase.google.com/docs/ios
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Firestore'
-    
+
+    # REF: Limpiar la barra de estado y poner las 9:41 para hacer capturas: https://github.com/shinydevelopment/SimulatorStatusMagic
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
+end
+
+def turnoclase_watchos_pods
+    platform :watchos, '3.0'
+    turnoclase_shared_pods
+end
+
+def turnoclase_shared_pods
+    # REF: Librería para mostrar mensajes de depuración: https://github.com/DaveWoodCom/XCGLogger
+    pod 'XCGLogger'
 end
 
 target 'TurnoClaseProfesor' do
     project 'TurnoClaseProfesor/TurnoClaseProfesor'
-    turnoclase_pods
+    turnoclase_ios_pods
+end
+
+target 'TurnoClaseProfesorWatch Extension' do
+    project 'TurnoClaseProfesor/TurnoClaseProfesor'
+    turnoclase_watchos_pods
 end
 
 target 'TurnoClase' do
     project 'TurnoClase/TurnoClase'
-    turnoclase_pods
+    turnoclase_ios_pods
 end
