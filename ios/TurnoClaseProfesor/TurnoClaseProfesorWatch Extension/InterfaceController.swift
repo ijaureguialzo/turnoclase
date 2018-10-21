@@ -56,6 +56,7 @@ class InterfaceController: WKInterfaceController {
     var watch: WKInterfaceDevice!
 
     var demo = false
+    var localizado = true
     var n = 2
 
     fileprivate func actualizarPantalla(numero: Int, nombre: String) {
@@ -69,7 +70,11 @@ class InterfaceController: WKInterfaceController {
         // Configurar XCGLogger
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
 
-        self.etiquetaBotonSiguiente.setTitle("Siguiente".localized())
+        if localizado {
+            self.etiquetaBotonSiguiente.setTitle("Siguiente".localized())
+        } else {
+            self.etiquetaBotonSiguiente.setTitle("Siguiente")
+        }
         actualizarPantalla(numero: 0, nombre: "")
 
         if(!demo) {
