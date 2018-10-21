@@ -15,7 +15,7 @@
 "Error de conexión" = "Connection error";
 "Generar nueva aula" = "Generate new class";
 "Introduce los datos del aula a la que quieres conectar." = "Insert data of the class you are connecting to.";
-"Invitado" = "Guest";
+"Conectado como invitado" = "Connected as guest";
 "No se ha podido acceder al aula con los datos proporcionados." = "Can't access to the class with provided data.";
 "Ok" = "Ok";
 "PIN" = "PIN";

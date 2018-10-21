@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "415BC6411B2F5305004FADE0"
-               BuildableName = "TurnoClase.app"
-               BlueprintName = "TurnoClase"
-               ReferencedContainer = "container:TurnoClase.xcodeproj">
+               BlueprintIdentifier = "41F4C5C81B34BCD5004AA55E"
+               BuildableName = "TurnoClaseProfesor.app"
+               BlueprintName = "TurnoClaseProfesor"
+               ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,20 +32,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "410088F51FBED8F60058B3F5"
-               BuildableName = "TurnoClaseUITests.xctest"
-               BlueprintName = "TurnoClaseUITests"
-               ReferencedContainer = "container:TurnoClase.xcodeproj">
+               BlueprintIdentifier = "41B669AE1FC10B7300DEB965"
+               BuildableName = "TurnoClaseProfesorUITests.xctest"
+               BlueprintName = "TurnoClaseProfesorUITests"
+               ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "415BC6411B2F5305004FADE0"
-            BuildableName = "TurnoClase.app"
-            BlueprintName = "TurnoClase"
-            ReferencedContainer = "container:TurnoClase.xcodeproj">
+            BlueprintIdentifier = "41F4C5C81B34BCD5004AA55E"
+            BuildableName = "TurnoClaseProfesor.app"
+            BlueprintName = "TurnoClaseProfesor"
+            ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,6 +55,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = "es"
+      region = "ES"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -65,10 +67,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "415BC6411B2F5305004FADE0"
-            BuildableName = "TurnoClase.app"
-            BlueprintName = "TurnoClase"
-            ReferencedContainer = "container:TurnoClase.xcodeproj">
+            BlueprintIdentifier = "41F4C5C81B34BCD5004AA55E"
+            BuildableName = "TurnoClaseProfesor.app"
+            BlueprintName = "TurnoClaseProfesor"
+            ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -84,10 +86,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "415BC6411B2F5305004FADE0"
-            BuildableName = "TurnoClase.app"
-            BlueprintName = "TurnoClase"
-            ReferencedContainer = "container:TurnoClase.xcodeproj">
+            BlueprintIdentifier = "41F4C5C81B34BCD5004AA55E"
+            BuildableName = "TurnoClaseProfesor.app"
+            BlueprintName = "TurnoClaseProfesor"
+            ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

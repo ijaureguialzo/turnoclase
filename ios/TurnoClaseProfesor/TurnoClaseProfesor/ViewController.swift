@@ -362,7 +362,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     preferredStyle: .actionSheet)
             } else {
                 return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                    message: "Invitado".localized(),
+                    message: "Conectado como invitado".localized(),
                     preferredStyle: .actionSheet)
             }
         }()
@@ -440,10 +440,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     fileprivate func dialogoError() {
         self.alertController = UIAlertController(title: "Error de conexión".localized(),
-                                                 message: "No se ha podido acceder al aula con los datos proporcionados.".localized(),
-                                                 preferredStyle: .alert)
+            message: "No se ha podido acceder al aula con los datos proporcionados.".localized(),
+            preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Ok".localized(),
-                                         style: .default) { (_) in }
+            style: .default) { (_) in }
         alertController.addAction(cancelAction)
         self.present(self.alertController, animated: true, completion: nil)
     }
@@ -461,12 +461,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         loginPinOk = false
 
         alertController = UIAlertController(title: "Conectar a otra aula".localized(),
-                                            message: "Introduce los datos del aula a la que quieres conectar.".localized(),
-                                            preferredStyle: .alert)
+            message: "Introduce los datos del aula a la que quieres conectar.".localized(),
+            preferredStyle: .alert)
 
         // Conectar
         let confirmAction = UIAlertAction(title: "Conectar".localized(),
-                                          style: .default) { (_) in
+            style: .default) { (_) in
 
             log.info("Conectando a otra aula")
 
@@ -482,7 +482,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         // Cancelar
         let cancelAction = UIAlertAction(title: "Cancelar".localized(),
-                                         style: .cancel) { (_) in }
+            style: .cancel) { (_) in }
 
         // Cuadros de texto
         alertController.addTextField { (textField) in
