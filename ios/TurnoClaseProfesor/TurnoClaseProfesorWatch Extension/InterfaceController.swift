@@ -56,8 +56,9 @@ class InterfaceController: WKInterfaceController {
     var watch: WKInterfaceDevice!
 
     var demo = false
-    var localizado = true
     var n = 2
+
+    var localizado = true // Por defecto a true; parche para corregir el problema de la localización del watch al hacer capturas
 
     fileprivate func actualizarPantalla(numero: Int, nombre: String) {
         self.etiquetaNumero.setText(String(numero))
@@ -73,11 +74,11 @@ class InterfaceController: WKInterfaceController {
         if localizado {
             self.etiquetaBotonSiguiente.setTitle("Siguiente".localized())
         } else {
-            self.etiquetaBotonSiguiente.setTitle("Siguiente")
+            self.etiquetaBotonSiguiente.setTitle("Boton_Siguiente")
         }
         actualizarPantalla(numero: 0, nombre: "")
 
-        if(!demo) {
+        if !demo {
             self.etiquetaAula.setText("...")
         } else {
             self.etiquetaAula.setText("BE131")
