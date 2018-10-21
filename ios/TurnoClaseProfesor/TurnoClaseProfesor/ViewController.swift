@@ -579,6 +579,9 @@ extension ViewController: WCSessionDelegate {
         switch message["comando"] as! String {
         case "siguiente":
             mostrarSiguiente(avanzarCola: true)
+        case "actualizar":
+            self.actualizarAula(codigo: codigoAula)
+            mostrarSiguiente(avanzarCola: false)
         default:
             break
         }

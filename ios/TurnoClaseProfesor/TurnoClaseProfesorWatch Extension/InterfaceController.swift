@@ -102,6 +102,15 @@ extension InterfaceController: WCSessionDelegate {
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         log.debug("Watch: sesión activa")
+
+        // Actualizar la pantalla al conectar por primera vez
+        if(!demo) {
+            session.sendMessage(["comando": "actualizar"], replyHandler: { (response) -> Void in
+                    log.debug("Comando: Actualizar")
+                }, errorHandler: { (error) -> Void in
+                    log.error("Error al enviar petición al iPhone \(error)")
+                })
+        }
     }
 
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
