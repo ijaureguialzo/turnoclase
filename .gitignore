@@ -88,3 +88,5 @@ android/TurnoClase/\.idea/caches/
 web/FirebaseHosting/\.firebase/
 
 \.idea/
+
+ios/TurnoClaseProfesor/genstrings\.swift
