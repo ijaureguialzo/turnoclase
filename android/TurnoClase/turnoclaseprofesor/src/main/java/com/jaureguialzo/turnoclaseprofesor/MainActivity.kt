@@ -465,6 +465,7 @@ class MainActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle("Conectar a otra aula")
+        builder.setMessage("Introduce los datos del aula a la que quieres conectar.")
 
         val vista = layoutInflater.inflate(R.layout.dialogo_conectar, null)
 
@@ -475,7 +476,7 @@ class MainActivity : AppCompatActivity() {
         val inputPIN = vista.findViewById(R.id.conectar_pin) as EditText
 
         // Set up the buttons
-        builder.setPositiveButton("Ok") { dialog, which ->
+        builder.setPositiveButton("Connect") { dialog, which ->
             Log.d(TAG, inputCodigo.text.toString())
             Log.d(TAG, inputPIN.text.toString())
 
@@ -494,7 +495,7 @@ class MainActivity : AppCompatActivity() {
 
         val builder = AlertDialog.Builder(this)
 
-        builder.setTitle("Error")
+        builder.setTitle("Error de conexión")
         builder.setMessage("No se ha podido acceder al aula con los datos proporcionados.")
 
         builder.setPositiveButton("Ok") { dialog, which ->
