@@ -214,9 +214,10 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "Actualizando datos del aula")
 
                     val codigoAula = aula!!["codigo"] as? String ?: "?"
-                    Log.d(TAG, "Aula: $codigoAula")
+                    val pin = aula!!["pin"] as? String ?: "?"
 
                     actualizarAula(codigoAula)
+                    actualizarPIN(pin)
 
                     // Listener de la cola
                     if (listenerCola == null) {
@@ -233,7 +234,14 @@ class MainActivity : AppCompatActivity() {
 
                 } else {
                     Log.d(TAG, "El aula ha desaparecido")
-                    actualizarAula("?", 0)
+
+                    // Detectar si el aula desaparece y si somos invitados, desconectar
+                    if (!invitado) {
+                        actualizarAula("?", 0)
+                    } else {
+                        desconectarAula()
+                    }
+
                 }
             }
         }
@@ -335,6 +343,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun desconectarAula() {
+        invitado = false
+        uid = uidPropio
+        desconectarListeners()
+        conectarAula()
+    }
+
     private fun borrarAula() {
 
         // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
@@ -357,6 +372,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun actualizarAula(codigo: String) {
         botonCodigoAula.text = codigo
+        codigoAula = codigo
+        Log.d(TAG, "Aula: $codigoAula")
     }
 
     private fun actualizarAula(enCola: Int) {
@@ -364,10 +381,15 @@ class MainActivity : AppCompatActivity() {
             botonEnCola.text = enCola.toString()
         else
             botonEnCola.text = "..."
+        Log.d(TAG, "Alumnos en cola: $enCola")
     }
 
     private fun actualizarMensaje(texto: String = "?") {
         etiquetaNombreAlumno.text = texto
+    }
+
+    private fun actualizarPIN(pin: String) {
+        this.PIN = pin
     }
 
     //region Funciones exclusivas de la versión Android
@@ -405,6 +427,8 @@ class MainActivity : AppCompatActivity() {
     // Menú de acciones
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         val result = super.onPrepareOptionsMenu(menu)
+
+        menu.findItem(R.id.etiqueta_pin).title = "PIN to share this class: $PIN"
 
         menu.findItem(R.id.accion_acerca_de).setOnMenuItemClickListener {
             startActivity(Intent(this@MainActivity, AcercaDe::class.java))
