@@ -172,10 +172,10 @@ class AlumnoTurno : AppCompatActivity() {
                     } else {
 
                         // Comprobar que se han recuperado registros
-                        if (it.result.count() > 0) {
+                        if (it.result!!.count() > 0) {
 
                             // Accedemos al primer documento
-                            val document = it.result.documents[0]
+                            val document = it.result!!.documents[0]
                             Log.d(TAG, "Conectado a aula existente")
 
                             conectarListenerAula(document)
@@ -239,7 +239,7 @@ class AlumnoTurno : AppCompatActivity() {
                     if (!it.isSuccessful) {
                         Log.e(TAG, "Error al recuperar datos: ", it.exception)
                     } else {
-                        pedirTurno(it.result)
+                        pedirTurno(it.result!!)
                     }
                 }
     }
@@ -303,14 +303,14 @@ class AlumnoTurno : AppCompatActivity() {
                 val alumno = document.result
 
                 refAula?.collection("cola")
-                        ?.whereLessThanOrEqualTo("timestamp", alumno["timestamp"] as Any)
+                        ?.whereLessThanOrEqualTo("timestamp", alumno!!["timestamp"] as Any)
                         ?.get()
                         ?.addOnCompleteListener {
                             if (!it.isSuccessful) {
                                 Log.e(TAG, "Error al recuperar datos: ", it.exception)
                             } else {
 
-                                val posicion = it.result.count()
+                                val posicion = it.result!!.count()
                                 Log.d(TAG, "Posicion en la cola: $posicion")
 
                                 when {

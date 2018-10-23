@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                                     .addOnCompleteListener {
                                         if (it.isSuccessful) {
 
-                                            val document = it.result
+                                            val document = it.result!!
                                             if (!document.exists()) {
                                                 Log.d(TAG, "Creando nueva aula")
                                                 crearAula()
@@ -231,22 +231,22 @@ class MainActivity : AppCompatActivity() {
                         if (!querySnapshot.isSuccessful) {
                             Log.e(TAG, "Error al recuperar datos: ", querySnapshot.exception)
                         } else {
-                            if (querySnapshot.result.count() > 0) {
-                                val refPosicion = querySnapshot.result.documents[0].reference
+                            if (querySnapshot.result!!.count() > 0) {
+                                val refPosicion = querySnapshot.result!!.documents[0].reference
 
                                 refPosicion.get().addOnCompleteListener {
                                     val posicion = it.result
 
                                     // Cargar el alumno
-                                    db.collection("alumnos").document(posicion["alumno"] as String)
+                                    db.collection("alumnos").document(posicion!!["alumno"] as String)
                                             .get()
                                             .addOnCompleteListener { document ->
                                                 if (document.isSuccessful) {
-                                                    if (document.result.exists()) {
+                                                    if (document.result!!.exists()) {
                                                         val alumno = document.result
 
                                                         // Mostrar el nombre
-                                                        actualizarMensaje(alumno["nombre"] as String)
+                                                        actualizarMensaje(alumno!!["nombre"] as String)
 
                                                         // Borrar la entrada de la cola
                                                         if (avanzarCola) {
