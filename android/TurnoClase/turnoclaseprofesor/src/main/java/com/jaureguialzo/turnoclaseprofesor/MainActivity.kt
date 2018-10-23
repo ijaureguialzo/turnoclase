@@ -24,13 +24,13 @@ import android.os.Bundle
 import android.support.v4.view.MenuCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -166,6 +166,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
+    private fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
+
     private fun crearAula() {
 
         // Almacenar la referencia a la nueva aula
@@ -173,6 +176,7 @@ class MainActivity : AppCompatActivity() {
 
         val datos = HashMap<String, Any>()
         datos["timestamp"] = FieldValue.serverTimestamp()
+        datos["pin"] = "%04d".format((0..9999).random())
 
         // Guardar el documento con un Timestamp, para que se genere el código
         refAula!!.set(datos)
