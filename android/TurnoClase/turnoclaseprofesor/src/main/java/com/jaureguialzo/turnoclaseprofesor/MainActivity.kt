@@ -37,6 +37,10 @@ class MainActivity : AppCompatActivity() {
     // ID de usuario único generado por Firebase
     private var uid: String? = null
 
+    // Conectar a otro aula
+    private var invitado = false
+    private var uidPropio: String? = null
+
     // Listeners para recibir las actualizaciones
     private var listenerAula: ListenerRegistration? = null
     private var listenerCola: ListenerRegistration? = null
@@ -50,6 +54,10 @@ class MainActivity : AppCompatActivity() {
     // Activar Firestore
     private val db = FirebaseFirestore.getInstance()
     private var mAuth: FirebaseAuth? = null
+
+    // Datos del aula
+    private var codigoAula = "..."
+    private var PIN = "..."
 
     // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
     private val isRunningTest: Boolean by lazy {
@@ -100,25 +108,11 @@ class MainActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
 
                             uid = mAuth?.currentUser?.uid
+                            uidPropio = uid
                             Log.d(TAG, "Registrado como usuario con UID: $uid")
 
-                            // Cargar el aula y si no, crearla
-                            db.collection("aulas").document(uid!!)
-                                    .get()
-                                    .addOnCompleteListener {
-                                        if (it.isSuccessful) {
+                            conectarAula()
 
-                                            val document = it.result!!
-                                            if (!document.exists()) {
-                                                Log.d(TAG, "Creando nueva aula")
-                                                crearAula()
-                                            } else {
-                                                Log.d(TAG, "Conectado a aula existente")
-                                                refAula = document.reference
-                                                conectarListener()
-                                            }
-                                        }
-                                    }
                         } else {
                             Log.e(TAG, "Error de inicio de sesión", task.exception)
                         }
@@ -166,19 +160,39 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
-    private fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
+    private fun conectarAula() {
+        // Cargar el aula y si no, crearla
+        db.collection("aulas").document(uid!!)
+                .get()
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+
+                        val document = it.result!!
+                        if (!document.exists()) {
+                            Log.d(TAG, "Creando nueva aula")
+                            crearAula()
+                        } else {
+                            Log.d(TAG, "Conectado a aula existente")
+                            refAula = document.reference
+                            conectarListener()
+                        }
+                    }
+                }
+    }
 
     private fun crearAula() {
 
         // Almacenar la referencia a la nueva aula
         refAula = db.collection("aulas").document(uid!!)
 
+        // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
+        fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
+
+        // Guardar el documento con un Timestamp, para que se genere el código
         val datos = HashMap<String, Any>()
         datos["timestamp"] = FieldValue.serverTimestamp()
         datos["pin"] = "%04d".format((0..9999).random())
 
-        // Guardar el documento con un Timestamp, para que se genere el código
         refAula!!.set(datos)
                 .addOnSuccessListener {
                     Log.d(TAG, "Aula creada")
