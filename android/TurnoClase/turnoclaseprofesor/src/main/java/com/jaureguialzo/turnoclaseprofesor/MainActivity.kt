@@ -308,30 +308,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun botonCodigoAulaLargo() {
+        // Anulado
+    }
 
-        Log.d(TAG, "Generando nueva aula...")
+    private fun desconectarListeners() {
 
-        if (listenerAula != null) {
+        listenerAula?.remove()
+        listenerAula = null
 
-            listenerAula!!.remove()
-            listenerAula = null
+        listenerCola?.remove()
+        listenerCola = null
 
-            // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+    }
 
-            db.collection("aulas").document(uid!!).delete().addOnCompleteListener {
-                if (!it.isSuccessful) {
-                    Log.e(TAG, "Error al borrar el aula: ", it.exception)
-                } else {
-                    Log.d(TAG, "Aula borrada")
-                    Log.d(TAG, "Creando nueva aula")
-                    crearAula()
-                }
+    private fun borrarAula() {
+
+        // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+
+        db.collection("aulas").document(uid!!).delete().addOnCompleteListener {
+            if (!it.isSuccessful) {
+                Log.e(TAG, "Error al borrar el aula: ", it.exception)
+            } else {
+                Log.d(TAG, "Aula borrada")
+                Log.d(TAG, "Creando nueva aula")
+                crearAula()
             }
-
-        } else {
-            Log.e(TAG, "El listener no está conectado")
         }
-
     }
 
     private fun actualizarAula(codigo: String = "?", enCola: Int = -1) {
@@ -397,6 +399,8 @@ class MainActivity : AppCompatActivity() {
 
         menu.findItem(R.id.accion_generar).setOnMenuItemClickListener {
             Log.d("TurnoClase", "Generar nueva aula")
+            desconectarListeners()
+            borrarAula()
             true
         }
 
