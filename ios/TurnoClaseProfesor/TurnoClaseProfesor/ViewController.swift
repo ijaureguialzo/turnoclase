@@ -331,15 +331,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     fileprivate func desconectarListeners() {
 
-        if self.listenerAula != nil {
-            self.listenerAula.remove()
-            self.listenerAula = nil
-        }
+        self.listenerAula?.remove()
+        self.listenerAula = nil
 
-        if self.listenerCola != nil {
-            self.listenerCola.remove()
-            self.listenerCola = nil
-        }
+        self.listenerCola?.remove()
+        self.listenerCola = nil
 
     }
 
