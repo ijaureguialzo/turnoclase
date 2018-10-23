@@ -478,11 +478,27 @@ class MainActivity : AppCompatActivity() {
         builder.setPositiveButton("Ok") { dialog, which ->
             Log.d(TAG, inputCodigo.text.toString())
             Log.d(TAG, inputPIN.text.toString())
+
+            dialogoError()
         }
 
         builder.setNegativeButton("Cancel") { dialog, which ->
             Log.d(TAG, "Cancelado")
             dialog.cancel()
+        }
+
+        builder.show()
+    }
+
+    fun dialogoError() {
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("Error")
+        builder.setMessage("No se ha podido acceder al aula con los datos proporcionados.")
+
+        builder.setPositiveButton("Ok") { dialog, which ->
+            Log.e(TAG, "Error de conexión")
         }
 
         builder.show()
