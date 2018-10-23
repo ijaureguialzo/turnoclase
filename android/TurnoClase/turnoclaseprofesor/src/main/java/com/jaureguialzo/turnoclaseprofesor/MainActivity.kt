@@ -21,6 +21,7 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.support.v4.view.MenuCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.util.TypedValue
@@ -371,19 +372,35 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Crear el menú "Acerca de..."
+    // Crear el menú de acciones
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+
+        // REF: Mostrar los separadores: https://stackoverflow.com/a/51500113
+        MenuCompat.setGroupDividerEnabled(menu, true);
+
         return true
     }
 
-    // Abrir la actividad "Acerca de..."
+    // Menú de acciones
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         val result = super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.menu_main).setOnMenuItemClickListener {
+
+        menu.findItem(R.id.accion_acerca_de).setOnMenuItemClickListener {
             startActivity(Intent(this@MainActivity, AcercaDe::class.java))
             true
         }
+
+        menu.findItem(R.id.accion_generar).setOnMenuItemClickListener {
+            Log.d("TurnoClase", "Generar nueva aula")
+            true
+        }
+
+        menu.findItem(R.id.accion_conectar).setOnMenuItemClickListener {
+            Log.d("TurnoClase", "Conectar a otra aula")
+            true
+        }
+
         return result
     }
 
