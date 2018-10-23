@@ -22,11 +22,13 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.view.MenuCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
+import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -444,10 +446,46 @@ class MainActivity : AppCompatActivity() {
 
         menu.findItem(R.id.accion_conectar).setOnMenuItemClickListener {
             Log.d("TurnoClase", "Conectar a otra aula")
+            dialogoConexion()
             true
         }
 
         return result
+    }
+
+    // Para gestionar si se activa el botón de conectar
+    private var loginAulaOk = false
+    private var loginPinOk = false
+
+    fun dialogoConexion() {
+
+        // REF: AlertDialog: https://stackoverflow.com/a/10904665
+        // REF: Diseño personalizado: https://developer.android.com/guide/topics/ui/dialogs?hl=es-419#CustomLayout
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("Conectar a otra aula")
+
+        val vista = layoutInflater.inflate(R.layout.dialogo_conectar, null)
+
+        builder.setView(vista)
+
+        // Set up the input
+        val inputCodigo = vista.findViewById(R.id.conectar_codigo) as EditText
+        val inputPIN = vista.findViewById(R.id.conectar_pin) as EditText
+
+        // Set up the buttons
+        builder.setPositiveButton("Ok") { dialog, which ->
+            Log.d(TAG, inputCodigo.text.toString())
+            Log.d(TAG, inputPIN.text.toString())
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            Log.d(TAG, "Cancelado")
+            dialog.cancel()
+        }
+
+        builder.show()
     }
 
     companion object {
