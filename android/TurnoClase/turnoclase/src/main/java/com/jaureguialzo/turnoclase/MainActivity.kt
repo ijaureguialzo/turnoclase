@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         // Ocultar la barra de título en horizontal
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
-                !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_XLARGE))
+                !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE))
             supportActionBar!!.hide()
         else
             supportActionBar!!.show()

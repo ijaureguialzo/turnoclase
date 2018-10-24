@@ -2,9 +2,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
-    <item
-        android:id="@+id/menu_main"
-        android:title="@string/menu_acerca_de"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+    <group
+        android:id="@+id/cabecera"
+        android:checkableBehavior="none"
+        android:enabled="false">
+        <item
+            android:id="@+id/etiqueta_pin"
+            android:checkable="false"
+            android:enabled="false"
+            android:title="@string/menu_etiqueta_invitado"
+            android:visible="true" />
+    </group>
+    <group
+        android:id="@+id/acciones"
+        android:enabled="true"
+        android:visible="true">
+        <item
+            android:id="@+id/accion_generar"
+            android:title="@string/menu_accion_generar" />
+        <item
+            android:id="@+id/accion_conectar"
+            android:title="@string/menu_accion_conectar" />
+        <item
+            android:id="@+id/accion_desconectar"
+            android:title="@string/menu_accion_desconectar" />
+    </group>
+    <group android:id="@+id/acerca_de">
+        <item
+            android:id="@+id/accion_acerca_de"
+            android:orderInCategory="100"
+            android:title="@string/menu_acerca_de"
+            app:showAsAction="never" />
+    </group>
 </menu>

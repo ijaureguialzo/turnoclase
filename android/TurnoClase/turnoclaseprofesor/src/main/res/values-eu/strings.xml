@@ -3,4 +3,18 @@
     <string name="menu_acerca_de">...buruz</string>
     <string name="etiqueta_titulo_licencia">Lizentzia</string>
     <string name="etiqueta_titulo_reconocimientos">Aitorpenak</string>
+    <string name="dialogo_conectar_codigo">Gela zenbakia</string>
+    <string name="dialogo_conectar_pin">PIN</string>
+    <string name="menu_etiqueta_pin">Gela partekatzeko PIN kodea: %1$s</string>
+    <string name="menu_etiqueta_invitado">Gonbidatu moduan konektatua</string>
+    <string name="menu_accion_generar">Gela berria sortu</string>
+    <string name="menu_accion_conectar">Beste gela batera konektatu</string>
+    <string name="menu_accion_desconectar">Gela honetatik deskonektatu</string>
+    <string name="dialogo_conexion_mensaje">Idatzi konektatu nahi duzun gelaren datuak.</string>
+    <string name="dialogo_conexion_conectar">Konektatu</string>
+    <string name="dialogo_error_titulo">Konexio arazoa</string>
+    <string name="dialogo_error_mensaje">Idatzitako datuekin ezin izan da gela horretara konektatu.</string>
+    <string name="dialogo_error_ok">Ados</string>
+    <string name="dialogo_conexion_titulo">Beste gela batera konektatu</string>
+    <string name="dialogo_conexion_cancelar">Ezeztatu</string>
 </resources>
