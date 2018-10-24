@@ -6,18 +6,19 @@
   Copyright © 2018 Ion Jaureguialzo Sarasola. All rights reserved.
 */
 
-"Aula %@" = "Aula %@";
-"Cancelar" = "Cancelar";
-"Conectar" = "Conectar";
-"Conectar a otra aula" = "Conectar a otra aula";
-"Código de aula" = "Código de aula";
-"Desconectar del aula" = "Desconectar del aula";
-"Error de conexión" = "Error de conexión";
-"Generar nueva aula" = "Generar nueva aula";
-"Introduce los datos del aula a la que quieres conectar." = "Introduce los datos del aula a la que quieres conectar.";
-"Invitado" = "Invitado";
-"No se ha podido acceder al aula con los datos proporcionados." = "No se ha podido acceder al aula con los datos proporcionados.";
-"Ok" = "Ok";
+"Aula %@" = "%@ gela";
+"Cancelar" = "Ezeztatu";
+"Conectar" = "Konektatu";
+"Conectar a otra aula" = "Beste gela batera konektatu";
+"Código de aula" = "Gela zenbakia";
+"Desconectar del aula" = "Gela honetatik deskonektatu";
+"Error de conexión" = "Konexio arazoa";
+"Generar nueva aula" = "Gela berria sortu";
+"Introduce los datos del aula a la que quieres conectar." = "Idatzi konektatu nahi duzun gelaren datuak.";
+"Conectado como invitado" = "Gonbidatu moduan konektatua";
+"No se ha podido acceder al aula con los datos proporcionados." = "Idatzitako datuekin ezin izan da gela horretara konektatu.";
+"Ok" = "Ados";
 "PIN" = "PIN";
-"PIN para compartir este aula: %@" = "PIN para compartir esta aula: %@";
+"PIN para compartir este aula: %@" = "Gela partekatzeko PIN kodea: %@";
 "Siguiente" = "Hurrengoa";
+"Boton_Siguiente" = "Siguiente"; // No traducir

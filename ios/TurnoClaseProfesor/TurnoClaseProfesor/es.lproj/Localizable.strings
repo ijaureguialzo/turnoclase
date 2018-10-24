@@ -21,3 +21,4 @@
 "PIN" = "PIN";
 "PIN para compartir este aula: %@" = "PIN para compartir esta aula: %@";
 "Siguiente" = "Siguiente";
+"Boton_Siguiente" = "Siguiente"; // No traducir
