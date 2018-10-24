@@ -24,6 +24,7 @@ import android.os.Bundle
 import android.support.v4.view.MenuCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.text.InputFilter
 import android.util.Log
 import android.view.Menu
 import android.view.MotionEvent
@@ -430,32 +431,51 @@ class MainActivity : AppCompatActivity() {
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         val result = super.onPrepareOptionsMenu(menu)
 
-        menu.findItem(R.id.etiqueta_pin).title = "PIN to share this class: $PIN"
+        if (!invitado) {
+            menu.findItem(R.id.etiqueta_pin).title = "PIN to share this class: $PIN"
+        } else {
+            menu.findItem(R.id.etiqueta_pin).title = "Connected as guest"
+        }
 
         menu.findItem(R.id.accion_acerca_de).setOnMenuItemClickListener {
             startActivity(Intent(this@MainActivity, AcercaDe::class.java))
             true
         }
 
-        menu.findItem(R.id.accion_generar).setOnMenuItemClickListener {
-            Log.d("TurnoClase", "Generar nueva aula")
-            desconectarListeners()
-            borrarAula()
-            true
+        if (!invitado) {
+            menu.findItem(R.id.accion_generar).isVisible = true
+            menu.findItem(R.id.accion_generar).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Generar nueva aula")
+                desconectarListeners()
+                borrarAula()
+                true
+            }
+        } else {
+            menu.findItem(R.id.accion_generar).isVisible = false
         }
 
-        menu.findItem(R.id.accion_conectar).setOnMenuItemClickListener {
-            Log.d("TurnoClase", "Conectar a otra aula")
-            dialogoConexion()
-            true
+        if (!invitado) {
+            menu.findItem(R.id.accion_conectar).isVisible = true
+            menu.findItem(R.id.accion_desconectar).isVisible = false
+
+            menu.findItem(R.id.accion_conectar).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Conectar a otra aula")
+                dialogoConexion()
+                true
+            }
+        } else {
+            menu.findItem(R.id.accion_conectar).isVisible = false
+            menu.findItem(R.id.accion_desconectar).isVisible = true
+
+            menu.findItem(R.id.accion_desconectar).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Desconectar del aula")
+                desconectarAula()
+                true
+            }
         }
 
         return result
     }
-
-    // Para gestionar si se activa el botón de conectar
-    private var loginAulaOk = false
-    private var loginPinOk = false
 
     fun dialogoConexion() {
 
@@ -475,12 +495,18 @@ class MainActivity : AppCompatActivity() {
         val inputCodigo = vista.findViewById(R.id.conectar_codigo) as EditText
         val inputPIN = vista.findViewById(R.id.conectar_pin) as EditText
 
+        inputCodigo.filters.plus(InputFilter.AllCaps())
+
         // Set up the buttons
         builder.setPositiveButton("Connect") { dialog, which ->
-            Log.d(TAG, inputCodigo.text.toString())
-            Log.d(TAG, inputPIN.text.toString())
 
-            dialogoError()
+            Log.d(TAG, "Conectando a otra aula")
+
+            val codigoAula = inputCodigo.text.toString()
+            val PIN = inputPIN.text.toString()
+
+            buscarAula(codigoAula, PIN)
+
         }
 
         builder.setNegativeButton("Cancel") { dialog, which ->
@@ -489,6 +515,43 @@ class MainActivity : AppCompatActivity() {
         }
 
         builder.show()
+    }
+
+    private fun buscarAula(codigo: String, pin: String) {
+
+        Log.d(TAG, "Buscando UID del aula:$codigo:$pin")
+
+        // Buscar el aula
+        db.collection("aulas")
+                .whereEqualTo("codigo", codigo.toUpperCase())
+                .whereEqualTo("pin", pin)
+                .limit(1)
+                .get()
+                .addOnCompleteListener {
+                    if (!it.isSuccessful) {
+                        Log.e(TAG, "Error al recuperar datos: ", it.exception)
+                    } else {
+
+                        // Comprobar que se han recuperado registros
+                        if (it.result!!.count() > 0) {
+
+                            // Accedemos al primer documento
+                            val document = it.result!!.documents[0]
+
+                            val uid = document.reference.id
+                            Log.d(TAG, "Aula encontrada")
+
+                            invitado = true
+                            desconectarListeners()
+                            this.uid = uid
+                            conectarAula()
+
+                        } else {
+                            Log.e(TAG, "Aula no encontrada")
+                            dialogoError()
+                        }
+                    }
+                }
     }
 
     fun dialogoError() {

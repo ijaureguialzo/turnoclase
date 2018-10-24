@@ -23,6 +23,9 @@
         <item
             android:id="@+id/accion_conectar"
             android:title="Connect to another classroom" />
+        <item
+            android:id="@+id/accion_desconectar"
+            android:title="Disconnect from the class" />
     </group>
     <group android:id="@+id/acerca_de">
         <item

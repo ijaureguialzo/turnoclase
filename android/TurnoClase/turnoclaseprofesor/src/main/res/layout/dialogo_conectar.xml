@@ -10,12 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="Código de aula" />
+        android:hint="Class code"
+        android:inputType="textCapCharacters|textVisiblePassword"
+        android:maxLength="5" />
 
     <EditText
         android:id="@+id/conectar_pin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="PIN" />
+        android:hint="PIN"
+        android:inputType="number"
+        android:maxLength="4" />
 </LinearLayout>
