@@ -60,23 +60,23 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - GoogleUtilities/AppDelegateSwizzler (5.3.3):
+  - GoogleUtilities/AppDelegateSwizzler (5.3.4):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (5.3.3)
-  - GoogleUtilities/Logger (5.3.3):
+  - GoogleUtilities/Environment (5.3.4)
+  - GoogleUtilities/Logger (5.3.4):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (5.3.3):
+  - GoogleUtilities/MethodSwizzler (5.3.4):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (5.3.3):
+  - GoogleUtilities/Network (5.3.4):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (5.3.3)"
-  - GoogleUtilities/Reachability (5.3.3):
+  - "GoogleUtilities/NSData+zlib (5.3.4)"
+  - GoogleUtilities/Reachability (5.3.4):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (5.3.3):
+  - GoogleUtilities/UserDefaults (5.3.4):
     - GoogleUtilities/Logger
   - gRPC (1.14.0):
     - gRPC-RxLibrary (= 1.14.0)
@@ -119,7 +119,7 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - Protobuf (3.6.1)
-  - SimulatorStatusMagic (2.3)
+  - SimulatorStatusMagic (2.3.2)
   - XCGLogger (6.1.0):
     - XCGLogger/Core (= 6.1.0)
   - XCGLogger/Core (6.1.0):
@@ -169,7 +169,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 45a9a3045a2dc27f23c13bf832556fe287fbe1b5
   FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
   GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
-  GoogleUtilities: 8208aee3e97a1ae93d44c57e96c476a5a3b03f0a
+  GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
   gRPC: 9d4c549f37c7cef22478634bac7a0405b6e3dbfb
   "gRPC-C++": ee0b01db3122f0b6c2be28b5b11039f62fa15fe6
   gRPC-Core: f4836515817c0eb479aeeb9cc27c91c4ba62a9f6
@@ -181,7 +181,7 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  SimulatorStatusMagic: 631fe6e4195a8a8d587ad8744af9015126526cc2
+  SimulatorStatusMagic: 0c0e711acef6e70dd8a0710962347635a9cdef24
   XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
 
 PODFILE CHECKSUM: 4871139270e3807ad66aa21a48de93db611449b5
