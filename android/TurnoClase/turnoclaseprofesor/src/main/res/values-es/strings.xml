@@ -3,4 +3,18 @@
     <string name="menu_acerca_de">Acerca de...</string>
     <string name="etiqueta_titulo_licencia">Licencia</string>
     <string name="etiqueta_titulo_reconocimientos">Reconocimientos</string>
+    <string name="dialogo_conectar_codigo">Código de aula</string>
+    <string name="dialogo_conectar_pin">PIN</string>
+    <string name="menu_etiqueta_pin">PIN para compartir esta aula: %1$s</string>
+    <string name="menu_etiqueta_invitado">Conectado como invitado</string>
+    <string name="menu_accion_generar">Generar nueva aula</string>
+    <string name="menu_accion_conectar">Conectar a otra aula</string>
+    <string name="menu_accion_desconectar">Desconectar del aula</string>
+    <string name="dialogo_conexion_mensaje">Introduce los datos del aula a la que quieres conectar.</string>
+    <string name="dialogo_conexion_conectar">Conectar</string>
+    <string name="dialogo_conexion_cancelar">Cancelar</string>
+    <string name="dialogo_error_titulo">Error de conexión</string>
+    <string name="dialogo_error_mensaje">No se ha podido acceder al aula con los datos proporcionados.</string>
+    <string name="dialogo_error_ok">Ok</string>
+    <string name="dialogo_conexion_titulo">Conectar a otra aula</string>
 </resources>

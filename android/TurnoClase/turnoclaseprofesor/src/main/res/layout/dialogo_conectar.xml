@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="Class code"
+        android:hint="@string/dialogo_conectar_codigo"
         android:inputType="textCapCharacters|textVisiblePassword"
         android:maxLength="5" />
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:hint="PIN"
+        android:hint="@string/dialogo_conectar_pin"
         android:inputType="number"
         android:maxLength="4" />
 </LinearLayout>

@@ -10,7 +10,7 @@
             android:id="@+id/etiqueta_pin"
             android:checkable="false"
             android:enabled="false"
-            android:title="PIN to share this classroom: 9999"
+            android:title="@string/menu_etiqueta_invitado"
             android:visible="true" />
     </group>
     <group
@@ -19,13 +19,13 @@
         android:visible="true">
         <item
             android:id="@+id/accion_generar"
-            android:title="Generate new classroom" />
+            android:title="@string/menu_accion_generar" />
         <item
             android:id="@+id/accion_conectar"
-            android:title="Connect to another classroom" />
+            android:title="@string/menu_accion_conectar" />
         <item
             android:id="@+id/accion_desconectar"
-            android:title="Disconnect from the class" />
+            android:title="@string/menu_accion_desconectar" />
     </group>
     <group android:id="@+id/acerca_de">
         <item

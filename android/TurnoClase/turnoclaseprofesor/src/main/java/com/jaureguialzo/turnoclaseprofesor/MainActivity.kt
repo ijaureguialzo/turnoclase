@@ -395,28 +395,6 @@ class MainActivity : AppCompatActivity() {
         this.PIN = pin
     }
 
-    //region Funciones exclusivas de la versión Android
-    private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
-
-        if (!isRunningTest) {
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                Log.d("TurnoClase", "DOWN del botón $nombre...")
-
-                // Difuminar
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
-                anim.duration = 100
-                anim.start()
-            } else if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("TurnoClase", "UP del botón $nombre...")
-
-                // Restaurar
-                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
-                anim.duration = 300
-                anim.start()
-            }
-        }
-    }
-
     // Crear el menú de acciones
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -431,10 +409,11 @@ class MainActivity : AppCompatActivity() {
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         val result = super.onPrepareOptionsMenu(menu)
 
+        // REF: Dar formato a strings localizados: https://developer.android.com/guide/topics/resources/string-resource?hl=es-419#dar-formato-a-las-strings
         if (!invitado) {
-            menu.findItem(R.id.etiqueta_pin).title = "PIN to share this class: $PIN"
+            menu.findItem(R.id.etiqueta_pin).title = String.format(getString(R.string.menu_etiqueta_pin), PIN)
         } else {
-            menu.findItem(R.id.etiqueta_pin).title = "Connected as guest"
+            menu.findItem(R.id.etiqueta_pin).title = getString(R.string.menu_etiqueta_invitado)
         }
 
         menu.findItem(R.id.accion_acerca_de).setOnMenuItemClickListener {
@@ -477,15 +456,15 @@ class MainActivity : AppCompatActivity() {
         return result
     }
 
-    fun dialogoConexion() {
+    private fun dialogoConexion() {
 
         // REF: AlertDialog: https://stackoverflow.com/a/10904665
         // REF: Diseño personalizado: https://developer.android.com/guide/topics/ui/dialogs?hl=es-419#CustomLayout
 
         val builder = AlertDialog.Builder(this)
 
-        builder.setTitle("Conectar a otra aula")
-        builder.setMessage("Introduce los datos del aula a la que quieres conectar.")
+        builder.setTitle(getString(R.string.dialogo_conexion_titulo))
+        builder.setMessage(getString(R.string.dialogo_conexion_mensaje))
 
         val vista = layoutInflater.inflate(R.layout.dialogo_conectar, null)
 
@@ -498,7 +477,7 @@ class MainActivity : AppCompatActivity() {
         inputCodigo.filters.plus(InputFilter.AllCaps())
 
         // Set up the buttons
-        builder.setPositiveButton("Connect") { dialog, which ->
+        builder.setPositiveButton(getString(R.string.dialogo_conexion_conectar)) { dialog, which ->
 
             Log.d(TAG, "Conectando a otra aula")
 
@@ -509,7 +488,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        builder.setNegativeButton("Cancel") { dialog, which ->
+        builder.setNegativeButton(getString(R.string.dialogo_conexion_cancelar)) { dialog, which ->
             Log.d(TAG, "Cancelado")
             dialog.cancel()
         }
@@ -558,14 +537,36 @@ class MainActivity : AppCompatActivity() {
 
         val builder = AlertDialog.Builder(this)
 
-        builder.setTitle("Error de conexión")
-        builder.setMessage("No se ha podido acceder al aula con los datos proporcionados.")
+        builder.setTitle(getString(R.string.dialogo_error_titulo))
+        builder.setMessage(getString(R.string.dialogo_error_mensaje))
 
-        builder.setPositiveButton("Ok") { dialog, which ->
+        builder.setPositiveButton(getString(R.string.dialogo_error_ok)) { dialog, which ->
             Log.e(TAG, "Error de conexión")
         }
 
         builder.show()
+    }
+
+    //region Funciones exclusivas de la versión Android
+    private fun animarBoton(event: MotionEvent, v: View?, nombre: String) {
+
+        if (!isRunningTest) {
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                Log.d("TurnoClase", "DOWN del botón $nombre...")
+
+                // Difuminar
+                val anim = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.15f)
+                anim.duration = 100
+                anim.start()
+            } else if (event.action == MotionEvent.ACTION_UP) {
+                Log.d("TurnoClase", "UP del botón $nombre...")
+
+                // Restaurar
+                val anim = ObjectAnimator.ofFloat(v, "alpha", 0.15f, 1f)
+                anim.duration = 300
+                anim.start()
+            }
+        }
     }
 
     companion object {
