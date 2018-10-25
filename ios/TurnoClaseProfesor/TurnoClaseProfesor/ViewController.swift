@@ -469,7 +469,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let codigoAula = self.alertController.textFields?[0].text
             let PIN = self.alertController.textFields?[1].text
 
-            self.buscarAula(codigo: codigoAula, pin: PIN)
+            if self.codigoAula != codigoAula {
+                self.buscarAula(codigo: codigoAula, pin: PIN)
+            } else {
+                log.error("No se puede conectar a la propia aula en que estamos")
+                self.dialogoError()
+            }
 
         }
 

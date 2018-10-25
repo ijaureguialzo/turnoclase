@@ -484,7 +484,12 @@ class MainActivity : AppCompatActivity() {
             val codigoAula = inputCodigo.text.toString()
             val PIN = inputPIN.text.toString()
 
-            buscarAula(codigoAula, PIN)
+            if (codigoAula != this.codigoAula) {
+                buscarAula(codigoAula, PIN)
+            } else {
+                Log.e(TAG, "No se puede conectar a la propia aula en que estamos")
+                dialogoError()
+            }
 
         }
 
