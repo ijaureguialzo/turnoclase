@@ -9,9 +9,9 @@ buildscript {
 
         kotlin_version = '1.2.71'
 
-        firebase_core_version = '16.0.4'
-        firebase_auth_version = '16.0.5'
-        firebase_firestore_version = '17.1.1'
+        firebase_core_version = '16.0.6'
+        firebase_auth_version = '16.1.0'
+        firebase_firestore_version = '17.1.4'
 
         fastlane_screengrab_version = '1.2.0'
 
