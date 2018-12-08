@@ -217,7 +217,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "Actualizando datos del aula")
 
                     val codigoAula = aula!!["codigo"] as? String ?: "?"
-                    val pin = aula!!["pin"] as? String ?: "?"
+                    val pin = aula["pin"] as? String ?: "?"
 
                     actualizarAula(codigoAula)
                     actualizarPIN(pin)
@@ -477,7 +477,7 @@ class MainActivity : AppCompatActivity() {
         inputCodigo.filters.plus(InputFilter.AllCaps())
 
         // Set up the buttons
-        builder.setPositiveButton(getString(R.string.dialogo_conexion_conectar)) { dialog, which ->
+        builder.setPositiveButton(getString(R.string.dialogo_conexion_conectar)) { _, _ ->
 
             Log.d(TAG, "Conectando a otra aula")
 
@@ -493,7 +493,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        builder.setNegativeButton(getString(R.string.dialogo_conexion_cancelar)) { dialog, which ->
+        builder.setNegativeButton(getString(R.string.dialogo_conexion_cancelar)) { dialog, _ ->
             Log.d(TAG, "Cancelado")
             dialog.cancel()
         }
@@ -545,7 +545,7 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle(getString(R.string.dialogo_error_titulo))
         builder.setMessage(getString(R.string.dialogo_error_mensaje))
 
-        builder.setPositiveButton(getString(R.string.dialogo_error_ok)) { dialog, which ->
+        builder.setPositiveButton(getString(R.string.dialogo_error_ok)) { _, _ ->
             Log.e(TAG, "Error de conexión")
         }
 
