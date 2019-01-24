@@ -56,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Opciones de Firestore
         let settings = db.settings
         settings.isPersistenceEnabled = false
-        settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
 
         // Barra de estado a las 9:41
