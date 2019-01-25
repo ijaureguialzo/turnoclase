@@ -7,7 +7,7 @@
 # Feel free to remove the following line if you use fastlane (which you should)
 
 app_identifier "com.jaureguialzo.TurnoClase" # The bundle identifier of your app
-username "widemos@gmail.com" # your Apple ID user
+username "ion@jaureguialzo.com" # your Apple ID user
 
 app_icon "./fastlane/metadata/icono_1024.png"
 copyright "#{Time.now.year} Ion Jaureguialzo Sarasola"

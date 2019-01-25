@@ -22,15 +22,15 @@ platform :ios do
   desc "Crear y subir capturas"
   lane :capturas do
 
-    if prompt(text: "Modo prueba (sólo un iPhone) (s|n): ").downcase == "s"
-      dispositivos = ["iPhone XS"]
+    if prompt(text: "Modo prueba (sólo un iPhone X) (s|n): ").downcase == "s"
+      dispositivos = ["iPhone X"]
     else
       dispositivos = [
           "iPhone SE",
           "iPhone 8",
           "iPhone 8 Plus",
           "iPhone XS",
-          #"iPhone XS Max",
+          "iPhone XS Max",
           "iPad Pro (12.9-inch)",
           "iPad Pro (9.7-inch)"
       ]
