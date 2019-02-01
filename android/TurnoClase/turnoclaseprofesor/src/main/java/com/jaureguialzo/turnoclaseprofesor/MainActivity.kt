@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity() {
         // Configurar las opciones de Firebase
         val settings = FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(false)
-                .setTimestampsInSnapshotsEnabled(true)
                 .build()
         db.firestoreSettings = settings
 
