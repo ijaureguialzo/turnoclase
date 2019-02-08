@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
-var actualizando = false;
+let actualizando = false;
 
 // Responder al click del botón y conectar el listener a la cola para obtener actualizaciones
 $('#aula-boton').on("click", function () {
@@ -31,7 +31,7 @@ $('#aula-boton').on("click", function () {
     if (codigoAula.length === 5) {
 
         // Recuperar el aula
-        db.collection("aulas").where("codigo", "==", $('#aula-input').val().toUpperCase()).limit(1).get()
+        db.collection("aulas").where("codigo", "==", codigoAula.toUpperCase()).limit(1).get()
             .then(snapshot => {
                 snapshot.forEach(doc => {
 
@@ -45,8 +45,8 @@ $('#aula-boton').on("click", function () {
                         .orderBy("timestamp")
                         .onSnapshot(querySnapshot => {
 
-                            if (!this.actualizando) {
-                                this.actualizando = true;
+                            if (!actualizando) {
+                                actualizando = true;
 
                                 // Actualizar el recuento
                                 let recuento = querySnapshot.size;
@@ -55,9 +55,9 @@ $('#aula-boton').on("click", function () {
                                 console.log("Recuento: " + recuento);
 
                                 // El primero se visualiza en amarillo
-                                var primero = true;
+                                let primero = true;
 
-                                $("#listaprimero").empty()
+                                $("#listaprimero").empty();
                                 $("#lista").empty();
 
                                 querySnapshot.forEach(doc => {
@@ -79,7 +79,7 @@ $('#aula-boton').on("click", function () {
                                     });
                                 });
 
-                                this.actualizando = false;
+                                actualizando = false;
                             }
                         }, err => {
                             console.log(`Error: ${err}`);
@@ -93,6 +93,6 @@ $('#aula-boton').on("click", function () {
 });
 
 // REF: Quitar el foco del botón: https://stackoverflow.com/a/23444942/5136913
-$(".btn").mouseup(function () {
+$('.btn').mouseup(function () {
     $(this).blur();
-})
+});
