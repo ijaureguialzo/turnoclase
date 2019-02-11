@@ -30,6 +30,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var codigoAula: String!
     var nombreUsuario: String!
 
+    // REF: Barra de navegación en color claro: https://stackoverflow.com/a/52443917/5136913
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.textoAula.delegate = self

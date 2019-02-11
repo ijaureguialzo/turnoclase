@@ -24,7 +24,7 @@ import UIKit
 
 @IBDesignable class BotonGrafico: UIButton {
 
-    @IBInspectable var colorForma: UIColor = UIColor.black
+    @IBInspectable var colorForma: UIColor = UIColor.clear
 
     @IBInspectable var forma: Int = 0
 

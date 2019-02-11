@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -54,9 +54,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="w4Z-4N-Fld" secondAttribute="trailing" constant="32" id="0TU-7O-88S"/>
+                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="w4Z-4N-Fld" secondAttribute="trailing" constant="32" id="0TU-7O-88S"/>
                                     <constraint firstAttribute="centerX" secondItem="Jm1-YI-w1W" secondAttribute="centerX" id="2Kj-NE-iP9"/>
-                                    <constraint firstAttribute="trailing" secondItem="KDG-Yu-H2h" secondAttribute="trailing" constant="32" id="3RM-Wh-GHP"/>
+                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="KDG-Yu-H2h" secondAttribute="trailing" constant="32" id="3RM-Wh-GHP"/>
                                     <constraint firstItem="l5W-k5-R8I" firstAttribute="centerX" secondItem="KDG-Yu-H2h" secondAttribute="centerX" id="7Ix-OL-An1"/>
                                     <constraint firstItem="Jm1-YI-w1W" firstAttribute="top" secondItem="Ism-yy-2Lp" secondAttribute="top" id="EK5-BQ-FcV"/>
                                     <constraint firstItem="KDG-Yu-H2h" firstAttribute="top" secondItem="l5W-k5-R8I" secondAttribute="bottom" constant="8" id="MJL-2E-iuH"/>
@@ -70,8 +70,8 @@
                                     <constraint firstAttribute="centerY" secondItem="i6B-ON-j6k" secondAttribute="centerY" constant="-8" id="aeU-8j-21v"/>
                                     <constraint firstItem="i6B-ON-j6k" firstAttribute="centerX" secondItem="KDG-Yu-H2h" secondAttribute="centerX" id="byV-dS-ZdZ"/>
                                     <constraint firstAttribute="bottom" secondItem="Jm1-YI-w1W" secondAttribute="bottom" id="jUw-IO-lE8"/>
-                                    <constraint firstItem="w4Z-4N-Fld" firstAttribute="leading" secondItem="Ism-yy-2Lp" secondAttribute="leading" constant="32" id="ldE-Bl-1CU"/>
-                                    <constraint firstItem="KDG-Yu-H2h" firstAttribute="leading" secondItem="Ism-yy-2Lp" secondAttribute="leading" constant="32" id="qJp-n4-z9T"/>
+                                    <constraint firstItem="w4Z-4N-Fld" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Ism-yy-2Lp" secondAttribute="leading" constant="32" id="ldE-Bl-1CU"/>
+                                    <constraint firstItem="KDG-Yu-H2h" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Ism-yy-2Lp" secondAttribute="leading" constant="32" id="qJp-n4-z9T"/>
                                     <constraint firstItem="w4Z-4N-Fld" firstAttribute="top" secondItem="i6B-ON-j6k" secondAttribute="bottom" constant="8" id="sW1-P1-bV6"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -135,7 +135,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ism-yy-2Lp" firstAttribute="centerX" secondItem="4Zt-ce-FAZ" secondAttribute="centerX" constant="-71" id="BfI-aM-GhY"/>
                             <constraint firstItem="Ism-yy-2Lp" firstAttribute="centerY" secondItem="4Zt-ce-FAZ" secondAttribute="centerY" constant="-123" id="U7t-5q-c0A"/>
@@ -171,7 +171,7 @@
                                         <rect key="frame" x="14.5" y="14.5" width="256" height="256"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="UsV-sj-uaF" userLabel="etiquetaNumero">
-                                        <rect key="frame" x="16" y="142.5" width="253" height="0.0"/>
+                                        <rect key="frame" x="142.5" y="142.5" width="0.0" height="0.0"/>
                                         <accessibility key="accessibilityConfiguration" identifier="etiquetaMensaje"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="102"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -181,14 +181,14 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="UsV-sj-uaF" secondAttribute="centerX" id="935-52-8m3"/>
-                                    <constraint firstItem="UsV-sj-uaF" firstAttribute="leading" secondItem="YOw-p5-o8R" secondAttribute="leading" constant="16" id="A8N-qV-6Qn"/>
+                                    <constraint firstItem="UsV-sj-uaF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YOw-p5-o8R" secondAttribute="leading" constant="16" id="A8N-qV-6Qn"/>
                                     <constraint firstItem="UsV-sj-uaF" firstAttribute="top" secondItem="YOw-p5-o8R" secondAttribute="top" constant="16" id="I9G-Nm-Mkc"/>
                                     <constraint firstAttribute="centerY" secondItem="UsV-sj-uaF" secondAttribute="centerY" id="Rve-JI-Ffb"/>
                                     <constraint firstAttribute="bottom" secondItem="UsV-sj-uaF" secondAttribute="bottom" constant="16" id="SJi-e3-FJf"/>
                                     <constraint firstAttribute="centerX" secondItem="YwI-8f-W76" secondAttribute="centerX" id="bMn-OB-WiR"/>
                                     <constraint firstAttribute="centerY" secondItem="YwI-8f-W76" secondAttribute="centerY" id="cfV-VH-ds4"/>
                                     <constraint firstAttribute="height" constant="285" id="gfa-Zk-GRy"/>
-                                    <constraint firstAttribute="trailing" secondItem="UsV-sj-uaF" secondAttribute="trailing" constant="16" id="rWe-ub-zqf"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UsV-sj-uaF" secondAttribute="trailing" constant="16" id="rWe-ub-zqf"/>
                                     <constraint firstAttribute="width" constant="285" id="yRS-Qt-WT2"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -204,10 +204,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trg-x5-eMf" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
-                                <rect key="frame" x="230" y="175" width="72" height="72"/>
+                                <rect key="frame" x="229.5" y="174.5" width="72" height="72"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="···" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="j8F-6N-3YS" userLabel="etiquetaAula">
-                                        <rect key="frame" x="4" y="26" width="64" height="21"/>
+                                        <rect key="frame" x="29" y="25.5" width="14" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -221,9 +221,7 @@
                                     <constraint firstAttribute="centerX" secondItem="j8F-6N-3YS" secondAttribute="centerX" id="2lD-oc-x3D"/>
                                     <constraint firstAttribute="width" constant="72" id="E2J-5Y-vEP"/>
                                     <constraint firstAttribute="height" constant="72" id="JqQ-Rt-MBi"/>
-                                    <constraint firstItem="j8F-6N-3YS" firstAttribute="leading" secondItem="Trg-x5-eMf" secondAttribute="leading" constant="4" id="UmS-Ge-5ug"/>
                                     <constraint firstAttribute="centerY" secondItem="j8F-6N-3YS" secondAttribute="centerY" id="ce3-xX-tHj"/>
-                                    <constraint firstAttribute="trailing" secondItem="j8F-6N-3YS" secondAttribute="trailing" constant="4" id="dlW-Y5-Ywd"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="colorCirculo">
@@ -278,7 +276,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crC-5K-I1E" userLabel="contenedorBotonActualizar" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
-                                <rect key="frame" x="230" y="421" width="72" height="72"/>
+                                <rect key="frame" x="229.5" y="420.5" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-nP-zxH" userLabel="botonActualizar" customClass="BotonGrafico" customModule="TurnoClase" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
@@ -325,7 +323,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Trg-x5-eMf" firstAttribute="centerX" secondItem="YOw-p5-o8R" secondAttribute="centerX" constant="71" id="Apg-fx-uHe"/>
                             <constraint firstAttribute="centerX" secondItem="YOw-p5-o8R" secondAttribute="centerX" constant="-7" id="BWf-IK-EQH"/>
