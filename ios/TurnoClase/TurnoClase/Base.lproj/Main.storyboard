@@ -260,10 +260,8 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Dp2-gh-yJM" secondAttribute="trailing" id="17f-YV-m2D"/>
-                                    <constraint firstAttribute="centerX" secondItem="Dp2-gh-yJM" secondAttribute="centerX" id="4DU-Hd-aVf"/>
                                     <constraint firstAttribute="height" constant="72" id="BNW-3w-IVM"/>
-                                    <constraint firstItem="Dp2-gh-yJM" firstAttribute="leading" secondItem="csW-Ho-Yvk" secondAttribute="leading" id="FzA-w1-SUj"/>
+                                    <constraint firstItem="Dp2-gh-yJM" firstAttribute="centerX" secondItem="csW-Ho-Yvk" secondAttribute="centerX" id="QjY-Ka-cq5"/>
                                     <constraint firstAttribute="bottom" secondItem="Dp2-gh-yJM" secondAttribute="bottom" id="eCS-Cy-SJD"/>
                                     <constraint firstItem="Dp2-gh-yJM" firstAttribute="top" secondItem="csW-Ho-Yvk" secondAttribute="top" id="mYm-WC-WxH"/>
                                     <constraint firstAttribute="centerY" secondItem="Dp2-gh-yJM" secondAttribute="centerY" id="sLo-gR-e6b"/>
