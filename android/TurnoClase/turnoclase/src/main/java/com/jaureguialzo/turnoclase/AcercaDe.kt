@@ -39,8 +39,8 @@ class AcercaDe : AppCompatActivity() {
         etiquetaLicenciaImagenes.movementMethod = LinkMovementMethod.getInstance()
 
         // Cargar HTML desde un @string
-        etiquetaASL.text = fromHtml(getString(R.string.texto_licencia_victor))
-        etiquetaASL.movementMethod = LinkMovementMethod.getInstance()
+        etiquetaLicenciaVictor.text = fromHtml(getString(R.string.texto_licencia_victor))
+        etiquetaLicenciaVictor.movementMethod = LinkMovementMethod.getInstance()
     }
 
     // REF: Método obsoleto en Android N: https://stackoverflow.com/a/37905107/5136913
