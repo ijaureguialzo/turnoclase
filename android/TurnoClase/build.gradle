@@ -11,7 +11,7 @@ buildscript {
 
         firebase_core_version = '16.0.7'
         firebase_auth_version = '16.1.0'
-        firebase_firestore_version = '18.0.0'
+        firebase_firestore_version = '18.0.1'
 
         fastlane_screengrab_version = '1.2.0'
 
