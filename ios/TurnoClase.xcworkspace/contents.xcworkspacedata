@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:TurnoClaseSharedWatch/TurnoClaseSharedWatch.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:TurnoClaseShared/TurnoClaseShared.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:TurnoClase/TurnoClase.xcodeproj">
    </FileRef>
    <FileRef

@@ -31,6 +31,8 @@ import WatchConnectivity
 
 import Localize_Swift
 
+import TurnoClaseShared
+
 class ViewController: UIViewController, UITextFieldDelegate {
 
     // ID de usuario único generado por Firebase
@@ -260,7 +262,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             if n >= 0 {
                 self.actualizarAula(enCola: n)
-                self.actualizarMensaje(texto: nombreAleatorio())
+                self.actualizarMensaje(texto: Nombres.aleatorio())
             } else {
                 self.actualizarAula(enCola: 0)
                 self.actualizarMensaje(texto: "")

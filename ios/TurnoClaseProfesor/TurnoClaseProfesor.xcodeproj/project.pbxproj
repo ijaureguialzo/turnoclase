@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4102AB512169A1E800AEC36D /* Efectos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4102AB502169A1E800AEC36D /* Efectos.swift */; };
 		410A3E171FC42F1500B3AC3D /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 410A3E151FC42F1500B3AC3D /* Interface.storyboard */; };
 		410A3E191FC42F1500B3AC3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410A3E181FC42F1500B3AC3D /* Assets.xcassets */; };
 		410A3E201FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 410A3E1F1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -19,13 +18,14 @@
 		4110815C2173FF4700ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
 		4110815E217402BA00ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
 		4120B87F21024F790000EA79 /* OperadorOpcional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4120B87E21024F790000EA79 /* OperadorOpcional.swift */; };
+		413592BE221F83240089E71C /* TurnoClaseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413592BD221F83240089E71C /* TurnoClaseShared.framework */; };
+		413592DD221F85DD0089E71C /* TurnoClaseSharedWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413592DC221F85DD0089E71C /* TurnoClaseSharedWatch.framework */; };
 		413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20A1B5015D500E58F25 /* FondoCircular.swift */; };
 		413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */; };
 		41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BDE1B51643B000E3C8E /* Settings.bundle */; };
 		41A59BE21B516A20000E3C8E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BE11B516A20000E3C8E /* Licenses */; };
 		41B669B21FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */; };
 		41B669BC1FC10D3000DEB965 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669BB1FC10D3000DEB965 /* SnapshotHelper.swift */; };
-		41B669BE1FC1135700DEB965 /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669BD1FC1135700DEB965 /* Nombres.swift */; };
 		41F4C5CF1B34BCD5004AA55E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F4C5CE1B34BCD5004AA55E /* AppDelegate.swift */; };
 		41F4C5D11B34BCD5004AA55E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F4C5D01B34BCD5004AA55E /* ViewController.swift */; };
 		41F4C5D41B34BCD5004AA55E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D21B34BCD5004AA55E /* Main.storyboard */; };
@@ -33,7 +33,6 @@
 		41F4C5D91B34BCD6004AA55E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D71B34BCD6004AA55E /* LaunchScreen.xib */; };
 		41F8B927216A156D006EBBAC /* Teclado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8B926216A156D006EBBAC /* Teclado.swift */; };
 		41FBD076217B397F007FFCA2 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A3E241FC42F1500B3AC3D /* InterfaceController.swift */; };
-		41FBD07A217B3C38007FFCA2 /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669BD1FC1135700DEB965 /* Nombres.swift */; };
 		5ED1B4120AE1225D7AD054AA /* Pods_TurnoClaseProfesor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */; };
 		C6FDB4D28A1D7A94784141B5 /* Pods_TurnoClaseProfesorWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */; };
 /* End PBXBuildFile section */
@@ -89,7 +88,6 @@
 
 /* Begin PBXFileReference section */
 		13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4102AB502169A1E800AEC36D /* Efectos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Efectos.swift; sourceTree = "<group>"; };
 		410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurnoClaseProfesorWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		410A3E181FC42F1500B3AC3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		410A3E1A1FC42F1500B3AC3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,6 +102,11 @@
 		411081592173FE0300ADD784 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4110815B2173FEF600ADD784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		4120B87E21024F790000EA79 /* OperadorOpcional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperadorOpcional.swift; sourceTree = "<group>"; };
+		413592BD221F83240089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		413592BF221F84100089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		413592C1221F84410089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		413592C3221F84BD0089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		413592DC221F85DD0089E71C /* TurnoClaseSharedWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseSharedWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		413BC20A1B5015D500E58F25 /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
 		413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonGrafico.swift; sourceTree = "<group>"; };
 		41675B1E1B553EC1001696CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -117,7 +120,6 @@
 		41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnoClaseProfesorUITests.swift; sourceTree = "<group>"; };
 		41B669B31FC10B7300DEB965 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B669BB1FC10D3000DEB965 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
-		41B669BD1FC1135700DEB965 /* Nombres.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nombres.swift; sourceTree = "<group>"; };
 		41F4C5C91B34BCD5004AA55E /* TurnoClaseProfesor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurnoClaseProfesor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41F4C5CD1B34BCD5004AA55E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41F4C5CE1B34BCD5004AA55E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				413592DD221F85DD0089E71C /* TurnoClaseSharedWatch.framework in Frameworks */,
 				C6FDB4D28A1D7A94784141B5 /* Pods_TurnoClaseProfesorWatch_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				413592BE221F83240089E71C /* TurnoClaseShared.framework in Frameworks */,
 				5ED1B4120AE1225D7AD054AA /* Pods_TurnoClaseProfesor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,9 +254,7 @@
 			children = (
 				41F4C5CE1B34BCD5004AA55E /* AppDelegate.swift */,
 				41F4C5D01B34BCD5004AA55E /* ViewController.swift */,
-				41B669BD1FC1135700DEB965 /* Nombres.swift */,
 				4120B87E21024F790000EA79 /* OperadorOpcional.swift */,
-				4102AB502169A1E800AEC36D /* Efectos.swift */,
 				41F8B926216A156D006EBBAC /* Teclado.swift */,
 				41BD61D51FB79575002385FE /* UI */,
 				41F4C5CC1B34BCD5004AA55E /* Supporting Files */,
@@ -273,6 +275,11 @@
 		5031ED4ECEA45C73F5F6EF1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				413592DC221F85DD0089E71C /* TurnoClaseSharedWatch.framework */,
+				413592C3221F84BD0089E71C /* TurnoClaseShared.framework */,
+				413592C1221F84410089E71C /* TurnoClaseShared.framework */,
+				413592BF221F84100089E71C /* TurnoClaseShared.framework */,
+				413592BD221F83240089E71C /* TurnoClaseShared.framework */,
 				13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */,
 				C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */,
 			);
@@ -602,7 +609,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				410A3E271FC42F1500B3AC3D /* ExtensionDelegate.swift in Sources */,
-				41FBD07A217B3C38007FFCA2 /* Nombres.swift in Sources */,
 				41FBD076217B397F007FFCA2 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -622,11 +628,9 @@
 			files = (
 				41F4C5D11B34BCD5004AA55E /* ViewController.swift in Sources */,
 				4120B87F21024F790000EA79 /* OperadorOpcional.swift in Sources */,
-				4102AB512169A1E800AEC36D /* Efectos.swift in Sources */,
 				413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */,
 				41F8B927216A156D006EBBAC /* Teclado.swift in Sources */,
 				413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */,
-				41B669BE1FC1135700DEB965 /* Nombres.swift in Sources */,
 				41F4C5CF1B34BCD5004AA55E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

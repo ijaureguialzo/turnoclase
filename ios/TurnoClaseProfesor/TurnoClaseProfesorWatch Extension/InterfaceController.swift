@@ -11,6 +11,8 @@ import WatchConnectivity
 
 import XCGLogger
 
+import TurnoClaseSharedWatch
+
 // Servicio de logs XCGLogger
 let log = XCGLogger.default
 
@@ -44,7 +46,7 @@ class InterfaceController: WKInterfaceController {
             }
         } else {
             if n >= 0 {
-                actualizarPantalla(numero: n, nombre: nombreAleatorio())
+                actualizarPantalla(numero: n, nombre: Nombres.aleatorio())
             } else {
                 actualizarPantalla(numero: 0, nombre: "")
             }
