@@ -19,8 +19,6 @@
 		4110815E217402BA00ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
 		413592BE221F83240089E71C /* TurnoClaseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413592BD221F83240089E71C /* TurnoClaseShared.framework */; };
 		413592DD221F85DD0089E71C /* TurnoClaseSharedWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413592DC221F85DD0089E71C /* TurnoClaseSharedWatch.framework */; };
-		413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20A1B5015D500E58F25 /* FondoCircular.swift */; };
-		413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */; };
 		41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BDE1B51643B000E3C8E /* Settings.bundle */; };
 		41A59BE21B516A20000E3C8E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BE11B516A20000E3C8E /* Licenses */; };
 		41B669B21FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */; };
@@ -105,8 +103,6 @@
 		413592C1221F84410089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		413592C3221F84BD0089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		413592DC221F85DD0089E71C /* TurnoClaseSharedWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseSharedWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		413BC20A1B5015D500E58F25 /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
-		413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonGrafico.swift; sourceTree = "<group>"; };
 		41675B1E1B553EC1001696CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		41675B1F1B553EC1001696CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		41675B201B553EE9001696CE /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Main.strings; sourceTree = "<group>"; };
@@ -213,8 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				41F4C5D21B34BCD5004AA55E /* Main.storyboard */,
-				413BC20A1B5015D500E58F25 /* FondoCircular.swift */,
-				413BC20C1B5025FF00E58F25 /* BotonGrafico.swift */,
 				41F4C5D51B34BCD5004AA55E /* Images.xcassets */,
 				41F4C5D71B34BCD6004AA55E /* LaunchScreen.xib */,
 				411081572173FDF900ADD784 /* Localizable.strings */,
@@ -624,9 +618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41F4C5D11B34BCD5004AA55E /* ViewController.swift in Sources */,
-				413BC20D1B5025FF00E58F25 /* BotonGrafico.swift in Sources */,
 				41F8B927216A156D006EBBAC /* Teclado.swift in Sources */,
-				413BC20B1B5015D500E58F25 /* FondoCircular.swift in Sources */,
 				41F4C5CF1B34BCD5004AA55E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

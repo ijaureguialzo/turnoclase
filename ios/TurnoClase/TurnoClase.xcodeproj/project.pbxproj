@@ -21,8 +21,6 @@
 		415BC64D1B2F5305004FADE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BC64B1B2F5305004FADE0 /* Main.storyboard */; };
 		415BC64F1B2F5305004FADE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415BC64E1B2F5305004FADE0 /* Images.xcassets */; };
 		415BC6521B2F5305004FADE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415BC6501B2F5305004FADE0 /* LaunchScreen.xib */; };
-		416796721B50461C00DCF09B /* BotonGrafico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416796701B50461C00DCF09B /* BotonGrafico.swift */; };
-		416796731B50461C00DCF09B /* FondoCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416796711B50461C00DCF09B /* FondoCircular.swift */; };
 		49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,8 +58,6 @@
 		415BC64C1B2F5305004FADE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		415BC64E1B2F5305004FADE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		415BC6511B2F5305004FADE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		416796701B50461C00DCF09B /* BotonGrafico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonGrafico.swift; sourceTree = "<group>"; };
-		416796711B50461C00DCF09B /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
 		4199FF0B1E32EF9500F9E42F /* TurnoClase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TurnoClase.entitlements; sourceTree = "<group>"; };
 		A58F32411CFA55EA494330C8 /* Pods-TurnoClase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.debug.xcconfig"; sourceTree = "<group>"; };
 		CF984E0ACB82BD169BB892C2 /* Pods-TurnoClase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,8 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				415BC64B1B2F5305004FADE0 /* Main.storyboard */,
-				416796711B50461C00DCF09B /* FondoCircular.swift */,
-				416796701B50461C00DCF09B /* BotonGrafico.swift */,
 				415BC64E1B2F5305004FADE0 /* Images.xcassets */,
 				415BC6501B2F5305004FADE0 /* LaunchScreen.xib */,
 				414EC8641B4C8B1B0002492C /* Localizable.strings */,
@@ -375,10 +369,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				416796721B50461C00DCF09B /* BotonGrafico.swift in Sources */,
 				415BC64A1B2F5305004FADE0 /* ViewController.swift in Sources */,
 				415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */,
-				416796731B50461C00DCF09B /* FondoCircular.swift in Sources */,
 				411609241B41B7E700E5BD59 /* TurnoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

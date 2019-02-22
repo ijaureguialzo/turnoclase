@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ism-yy-2Lp" userLabel="contenedorLogin" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ism-yy-2Lp" userLabel="contenedorLogin" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="52" y="191" width="285" height="285"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="Jm1-YI-w1W" userLabel="imagenFondo">
@@ -88,10 +88,10 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Zt-ce-FAZ" userLabel="contenedorBotonConectar" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Zt-ce-FAZ" userLabel="contenedorBotonConectar" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="229.5" y="420.5" width="72" height="72"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRC-dO-aCu" userLabel="botonConectar" customClass="BotonGrafico" customModule="TurnoClase" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRC-dO-aCu" userLabel="botonConectar" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                         <accessibility key="accessibilityConfiguration" identifier="botonConectar"/>
                                         <constraints>
@@ -164,7 +164,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOw-p5-o8R" userLabel="contenedorRestantes" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOw-p5-o8R" userLabel="contenedorRestantes" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="52" y="191" width="285" height="285"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="YwI-8f-W76" userLabel="imagenFondo">
@@ -203,7 +203,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trg-x5-eMf" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trg-x5-eMf" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="229.5" y="174.5" width="72" height="72"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="···" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="j8F-6N-3YS" userLabel="etiquetaAula">
@@ -229,10 +229,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csW-Ho-Yvk" userLabel="contenedorBotonCancelar" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csW-Ho-Yvk" userLabel="contenedorBotonCancelar" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="35.5" y="226.5" width="72" height="72"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dp2-gh-yJM" userLabel="botonCancelar" customClass="BotonGrafico" customModule="TurnoClase" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dp2-gh-yJM" userLabel="botonCancelar" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="72" id="HJn-Yv-4Un"/>
@@ -273,10 +273,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crC-5K-I1E" userLabel="contenedorBotonActualizar" customClass="FondoCircular" customModule="TurnoClase" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crC-5K-I1E" userLabel="contenedorBotonActualizar" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="229.5" y="420.5" width="72" height="72"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-nP-zxH" userLabel="botonActualizar" customClass="BotonGrafico" customModule="TurnoClase" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-nP-zxH" userLabel="botonActualizar" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                         <accessibility key="accessibilityConfiguration" identifier="botonActualizar"/>
                                         <constraints>
