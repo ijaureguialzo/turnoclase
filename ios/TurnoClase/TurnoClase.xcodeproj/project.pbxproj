@@ -9,13 +9,11 @@
 /* Begin PBXBuildFile section */
 		410088F91FBED8F70058B3F5 /* TurnoClaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410088F81FBED8F70058B3F5 /* TurnoClaseUITests.swift */; };
 		410089011FBEEAB90058B3F5 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410089001FBEEAB90058B3F5 /* SnapshotHelper.swift */; };
-		4102AB4F2169A00200AEC36D /* Efectos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4102AB4E2169A00200AEC36D /* Efectos.swift */; };
-		410D511C1F58365B00401C6C /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410D511B1F58365B00401C6C /* Nombres.swift */; };
 		410D71021FA8D634009AC062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 410D71011FA8D633009AC062 /* GoogleService-Info.plist */; };
 		4116087A1B517B88008C9A1E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 411608781B517B88008C9A1E /* Licenses */; };
 		4116087B1B517B88008C9A1E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 411608791B517B88008C9A1E /* Settings.bundle */; };
 		411609241B41B7E700E5BD59 /* TurnoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411609231B41B7E700E5BD59 /* TurnoViewController.swift */; };
-		4120B87D21024D940000EA79 /* OperadorOpcional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4120B87C21024D940000EA79 /* OperadorOpcional.swift */; };
+		413592BC221F814C0089E71C /* TurnoClaseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413592BB221F814C0089E71C /* TurnoClaseShared.framework */; };
 		414C5BF81FBF65E500D88D64 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414EC8641B4C8B1B0002492C /* Localizable.strings */; };
 		414EC8621B4C8B1B0002492C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414EC8641B4C8B1B0002492C /* Localizable.strings */; };
 		415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415BC6471B2F5305004FADE0 /* AppDelegate.swift */; };
@@ -23,8 +21,6 @@
 		415BC64D1B2F5305004FADE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BC64B1B2F5305004FADE0 /* Main.storyboard */; };
 		415BC64F1B2F5305004FADE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415BC64E1B2F5305004FADE0 /* Images.xcassets */; };
 		415BC6521B2F5305004FADE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415BC6501B2F5305004FADE0 /* LaunchScreen.xib */; };
-		416796721B50461C00DCF09B /* BotonGrafico.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416796701B50461C00DCF09B /* BotonGrafico.swift */; };
-		416796731B50461C00DCF09B /* FondoCircular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416796711B50461C00DCF09B /* FondoCircular.swift */; };
 		49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,13 +39,11 @@
 		410088F81FBED8F70058B3F5 /* TurnoClaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnoClaseUITests.swift; sourceTree = "<group>"; };
 		410088FA1FBED8F70058B3F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		410089001FBEEAB90058B3F5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
-		4102AB4E2169A00200AEC36D /* Efectos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Efectos.swift; sourceTree = "<group>"; };
-		410D511B1F58365B00401C6C /* Nombres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nombres.swift; sourceTree = "<group>"; };
 		410D71011FA8D633009AC062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		411608781B517B88008C9A1E /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Licenses; path = TurnoClase/Licenses; sourceTree = "<group>"; };
 		411608791B517B88008C9A1E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = TurnoClase/Settings.bundle; sourceTree = "<group>"; };
 		411609231B41B7E700E5BD59 /* TurnoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnoViewController.swift; sourceTree = "<group>"; };
-		4120B87C21024D940000EA79 /* OperadorOpcional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperadorOpcional.swift; sourceTree = "<group>"; };
+		413592BB221F814C0089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		414EC8541B4C83CB0002492C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		414EC8551B4C83CB0002492C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		414EC8561B4C85260002492C /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Main.strings; sourceTree = "<group>"; };
@@ -64,8 +58,6 @@
 		415BC64C1B2F5305004FADE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		415BC64E1B2F5305004FADE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		415BC6511B2F5305004FADE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		416796701B50461C00DCF09B /* BotonGrafico.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BotonGrafico.swift; sourceTree = "<group>"; };
-		416796711B50461C00DCF09B /* FondoCircular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FondoCircular.swift; sourceTree = "<group>"; };
 		4199FF0B1E32EF9500F9E42F /* TurnoClase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TurnoClase.entitlements; sourceTree = "<group>"; };
 		A58F32411CFA55EA494330C8 /* Pods-TurnoClase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.debug.xcconfig"; sourceTree = "<group>"; };
 		CF984E0ACB82BD169BB892C2 /* Pods-TurnoClase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.release.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				413592BC221F814C0089E71C /* TurnoClaseShared.framework in Frameworks */,
 				49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,9 +130,6 @@
 				415BC6471B2F5305004FADE0 /* AppDelegate.swift */,
 				415BC6491B2F5305004FADE0 /* ViewController.swift */,
 				411609231B41B7E700E5BD59 /* TurnoViewController.swift */,
-				410D511B1F58365B00401C6C /* Nombres.swift */,
-				4120B87C21024D940000EA79 /* OperadorOpcional.swift */,
-				4102AB4E2169A00200AEC36D /* Efectos.swift */,
 				41BD61D41FB79521002385FE /* UI */,
 				415BC6451B2F5305004FADE0 /* Supporting Files */,
 			);
@@ -160,8 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				415BC64B1B2F5305004FADE0 /* Main.storyboard */,
-				416796711B50461C00DCF09B /* FondoCircular.swift */,
-				416796701B50461C00DCF09B /* BotonGrafico.swift */,
 				415BC64E1B2F5305004FADE0 /* Images.xcassets */,
 				415BC6501B2F5305004FADE0 /* LaunchScreen.xib */,
 				414EC8641B4C8B1B0002492C /* Localizable.strings */,
@@ -181,6 +169,7 @@
 		DF45B9DA60FC384B1AA2D15F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				413592BB221F814C0089E71C /* TurnoClaseShared.framework */,
 				D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */,
 			);
 			name = Frameworks;
@@ -380,14 +369,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				416796721B50461C00DCF09B /* BotonGrafico.swift in Sources */,
-				4102AB4F2169A00200AEC36D /* Efectos.swift in Sources */,
 				415BC64A1B2F5305004FADE0 /* ViewController.swift in Sources */,
-				4120B87D21024D940000EA79 /* OperadorOpcional.swift in Sources */,
 				415BC6481B2F5305004FADE0 /* AppDelegate.swift in Sources */,
-				416796731B50461C00DCF09B /* FondoCircular.swift in Sources */,
 				411609241B41B7E700E5BD59 /* TurnoViewController.swift in Sources */,
-				410D511C1F58365B00401C6C /* Nombres.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

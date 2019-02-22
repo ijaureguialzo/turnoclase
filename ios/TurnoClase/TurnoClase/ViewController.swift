@@ -22,6 +22,8 @@
 
 import UIKit
 
+import TurnoClaseShared
+
 class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textoAula: UITextField!
@@ -43,7 +45,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.textoAula.nextField = self.textoUsuario
 
         // REF: Nombre al azar
-        let nombre = nombreAleatorio()
+        let nombre = Nombres.aleatorio()
         textoUsuario.placeholder = nombre
 
         // Depuración
@@ -133,11 +135,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             // Difuminar un botón
             UIView.animate(withDuration: 0.1,
-                delay: 0,
-                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-                animations: {
-                    sender.alpha = 0.15
-                }, completion: nil)
+                           delay: 0,
+                           options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                           animations: {
+                               sender.alpha = 0.15
+                           }, completion: nil)
         }
     }
 
@@ -148,11 +150,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             // Restaurar el botón
             UIView.animate(withDuration: 0.3,
-                delay: 0,
-                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-                animations: {
-                    sender.alpha = 1
-                }, completion: nil)
+                           delay: 0,
+                           options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                           animations: {
+                               sender.alpha = 1
+                           }, completion: nil)
         }
     }
 

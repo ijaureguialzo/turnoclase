@@ -27,6 +27,8 @@ import XCGLogger
 import Firebase
 import FirebaseFirestore
 
+import TurnoClaseShared
+
 class TurnoViewController: UIViewController {
 
     // Datos que introduce el usuario

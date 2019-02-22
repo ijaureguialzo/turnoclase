@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEC-KV-Dai" userLabel="contenedorActual" customClass="FondoCircular" customModule="TurnoClaseProfesor" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEC-KV-Dai" userLabel="contenedorActual" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="52" y="263.66666666666669" width="285" height="285.00000000000006"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="aPZ-OB-zLv" userLabel="imagenFondo">
@@ -50,10 +50,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hc-gA-Oel" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClaseProfesor" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hc-gA-Oel" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="35.666666666666657" y="299" width="72" height="72"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfn-8u-Zne" userLabel="botonCodigoAula" customClass="BotonGrafico" customModule="TurnoClaseProfesor" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfn-8u-Zne" userLabel="botonCodigoAula" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="21" y="0.0" width="30" height="72"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -86,10 +86,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7k-GT-Ntb" userLabel="contenedorRestantes" customClass="FondoCircular" customModule="TurnoClaseProfesor" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7k-GT-Ntb" userLabel="contenedorRestantes" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="229.66666666666663" y="247" width="72" height="72"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anU-ip-9Dt" userLabel="botonEnCola" customClass="BotonGrafico" customModule="TurnoClaseProfesor" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anU-ip-9Dt" userLabel="botonEnCola" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="21" y="0.0" width="30" height="72"/>
                                         <accessibility key="accessibilityConfiguration" identifier="botonEnCola"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -119,10 +119,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkH-NG-bdu" userLabel="contenedorBotonSiguiente" customClass="FondoCircular" customModule="TurnoClaseProfesor" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkH-NG-bdu" userLabel="contenedorBotonSiguiente" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="229.66666666666663" y="493" width="72" height="72"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1E-Zv-bEE" userLabel="botonSiguiente" customClass="BotonGrafico" customModule="TurnoClaseProfesor" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1E-Zv-bEE" userLabel="botonSiguiente" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="72" id="CTH-q4-3hH"/>
