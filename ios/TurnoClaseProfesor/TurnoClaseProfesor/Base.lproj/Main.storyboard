@@ -53,7 +53,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hc-gA-Oel" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="35.666666666666657" y="299" width="72" height="72"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfn-8u-Zne" userLabel="botonCodigoAula" customClass="BotonGrafico" customModule="TurnoClaseProfesor" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfn-8u-Zne" userLabel="botonCodigoAula" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="21" y="0.0" width="30" height="72"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -89,7 +89,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7k-GT-Ntb" userLabel="contenedorRestantes" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="229.66666666666663" y="247" width="72" height="72"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anU-ip-9Dt" userLabel="botonEnCola" customClass="BotonGrafico" customModule="TurnoClaseProfesor" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anU-ip-9Dt" userLabel="botonEnCola" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="21" y="0.0" width="30" height="72"/>
                                         <accessibility key="accessibilityConfiguration" identifier="botonEnCola"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
