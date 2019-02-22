@@ -8,10 +8,10 @@
       location = "group:TurnoClaseProfesor/TurnoClaseProfesor.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:TurnoClaseSharedWatch/TurnoClaseSharedWatch.xcodeproj">
+      location = "group:TurnoClaseShared/TurnoClaseShared.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:TurnoClaseShared/TurnoClaseShared.xcodeproj">
+      location = "group:TurnoClaseSharedWatch/TurnoClaseSharedWatch.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

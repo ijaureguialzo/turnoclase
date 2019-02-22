@@ -17,8 +17,10 @@
 		411081552173FDF900ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
 		4110815C2173FF4700ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
 		4110815E217402BA00ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
-		413592BE221F83240089E71C /* TurnoClaseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413592BD221F83240089E71C /* TurnoClaseShared.framework */; };
-		413592DD221F85DD0089E71C /* TurnoClaseSharedWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413592DC221F85DD0089E71C /* TurnoClaseSharedWatch.framework */; };
+		414C7985221F998F003E97E4 /* TurnoClaseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413592C3221F84BD0089E71C /* TurnoClaseShared.framework */; };
+		414C7986221F998F003E97E4 /* TurnoClaseShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 413592C3221F84BD0089E71C /* TurnoClaseShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		414C7993221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */; };
+		414C7994221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BDE1B51643B000E3C8E /* Settings.bundle */; };
 		41A59BE21B516A20000E3C8E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BE11B516A20000E3C8E /* Licenses */; };
 		41B669B21FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */; };
@@ -30,7 +32,6 @@
 		41F4C5D91B34BCD6004AA55E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D71B34BCD6004AA55E /* LaunchScreen.xib */; };
 		41F8B927216A156D006EBBAC /* Teclado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8B926216A156D006EBBAC /* Teclado.swift */; };
 		41FBD076217B397F007FFCA2 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A3E241FC42F1500B3AC3D /* InterfaceController.swift */; };
-		5ED1B4120AE1225D7AD054AA /* Pods_TurnoClaseProfesor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */; };
 		C6FDB4D28A1D7A94784141B5 /* Pods_TurnoClaseProfesorWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,38 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		414C7987221F998F003E97E4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				414C7986221F998F003E97E4 /* TurnoClaseShared.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		414C7991221F9C69003E97E4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		414C7995221F9CB5003E97E4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				414C7994221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -98,11 +131,8 @@
 		411081582173FDFF00ADD784 /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		411081592173FE0300ADD784 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4110815B2173FEF600ADD784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		413592BD221F83240089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		413592BF221F84100089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		413592C1221F84410089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		413592C3221F84BD0089E71C /* TurnoClaseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		413592DC221F85DD0089E71C /* TurnoClaseSharedWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseSharedWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TurnoClaseSharedWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41675B1E1B553EC1001696CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		41675B1F1B553EC1001696CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		41675B201B553EE9001696CE /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Main.strings; sourceTree = "<group>"; };
@@ -134,8 +164,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				413592DD221F85DD0089E71C /* TurnoClaseSharedWatch.framework in Frameworks */,
 				C6FDB4D28A1D7A94784141B5 /* Pods_TurnoClaseProfesorWatch_Extension.framework in Frameworks */,
+				414C7993221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,8 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				413592BE221F83240089E71C /* TurnoClaseShared.framework in Frameworks */,
-				5ED1B4120AE1225D7AD054AA /* Pods_TurnoClaseProfesor.framework in Frameworks */,
+				414C7985221F998F003E97E4 /* TurnoClaseShared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,12 +295,9 @@
 		5031ED4ECEA45C73F5F6EF1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				413592DC221F85DD0089E71C /* TurnoClaseSharedWatch.framework */,
 				413592C3221F84BD0089E71C /* TurnoClaseShared.framework */,
-				413592C1221F84410089E71C /* TurnoClaseShared.framework */,
-				413592BF221F84100089E71C /* TurnoClaseShared.framework */,
-				413592BD221F83240089E71C /* TurnoClaseShared.framework */,
 				13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */,
+				414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */,
 				C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */,
 			);
 			name = Frameworks;
@@ -298,6 +324,7 @@
 				410A3E111FC42F1500B3AC3D /* Resources */,
 				410A3E331FC42F1500B3AC3D /* Embed App Extensions */,
 				F4F5865541D07C3C50CAB478 /* Frameworks */,
+				414C7991221F9C69003E97E4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -318,6 +345,7 @@
 				410A3E1C1FC42F1500B3AC3D /* Frameworks */,
 				410A3E1D1FC42F1500B3AC3D /* Resources */,
 				58164D55F8CEF4F64B109A0E /* [CP] Embed Pods Frameworks */,
+				414C7995221F9CB5003E97E4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -356,6 +384,7 @@
 				41F4C5C71B34BCD5004AA55E /* Resources */,
 				410A3E351FC42F1500B3AC3D /* Embed Watch Content */,
 				086D67162CA5CA8247BFCBEB /* [CP] Embed Pods Frameworks */,
+				414C7987221F998F003E97E4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -704,6 +733,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				IBSC_MODULE = TurnoClaseProfesorWatch_Extension;
 				INFOPLIST_FILE = TurnoClaseProfesorWatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -735,6 +765,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				IBSC_MODULE = TurnoClaseProfesorWatch_Extension;
 				INFOPLIST_FILE = TurnoClaseProfesorWatch/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
