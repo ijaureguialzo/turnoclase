@@ -100,7 +100,7 @@ class TurnoViewController: UIViewController {
 
         // Guarda el nombre en el UID de este usuario. Si existe, lo sobreescribe.
         db.collection("alumnos").document(self.uid).setData([
-            "nombre": self.nombreUsuario
+            "nombre": self.nombreUsuario!
         ], merge: true) { error in
             if let error = error {
                 log.error("Error al actualizar el alumno: \(error.localizedDescription)")
@@ -113,7 +113,7 @@ class TurnoViewController: UIViewController {
     fileprivate func encolarAlumno() {
 
         // Buscar el aula
-        db.collection("aulas").whereField("codigo", isEqualTo: self.codigoAula).limit(to: 1).getDocuments() { (querySnapshot, error) in
+        db.collection("aulas").whereField("codigo", isEqualTo: self.codigoAula!).limit(to: 1).getDocuments() { (querySnapshot, error) in
 
             if let error = error {
                 log.error("Error al recuperar datos: \(error.localizedDescription)")
@@ -182,7 +182,7 @@ class TurnoViewController: UIViewController {
 
     fileprivate func buscarAlumnoEnCola() {
 
-        self.refAula.collection("cola").whereField("alumno", isEqualTo: self.uid).limit(to: 1).getDocuments() { (resultados, error) in
+        self.refAula.collection("cola").whereField("alumno", isEqualTo: self.uid!).limit(to: 1).getDocuments() { (resultados, error) in
 
             if let error = error {
                 log.error("Error al recuperar datos: \(error.localizedDescription)")
@@ -200,7 +200,7 @@ class TurnoViewController: UIViewController {
             log.info("Alumno no encontrado, lo añadimos")
 
             self.refPosicion = self.refAula.collection("cola").addDocument(data: [
-                "alumno": self.uid,
+                "alumno": self.uid!,
                 "timestamp": FieldValue.serverTimestamp()
             ]) { error in
                 if let error = error {

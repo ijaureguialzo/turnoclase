@@ -53,4 +53,18 @@ post_install do |installer_representation|
             end
         end
     end
+
+    # Seleccionar la versión concreta de Swift para un Pod: https://github.com/CocoaPods/CocoaPods/issues/6791
+
+    # Your list of targets here.
+    #    myTargets = ['Localize-Swift']
+    myTargets = []
+    
+    installer_representation.pods_project.targets.each do |target|
+      if myTargets.include? target.name
+        target.build_configurations.each do |config|
+          config.build_settings['SWIFT_VERSION'] = '4.2'
+        end
+      end
+    end
 end
