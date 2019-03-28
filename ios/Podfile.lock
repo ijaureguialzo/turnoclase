@@ -106,9 +106,9 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - Protobuf (3.7.0)
   - SimulatorStatusMagic (2.4.1)
-  - XCGLogger (6.1.0):
-    - XCGLogger/Core (= 6.1.0)
-  - XCGLogger/Core (6.1.0):
+  - XCGLogger (7.0.0):
+    - XCGLogger/Core (= 7.0.0)
+  - XCGLogger/Core (7.0.0):
     - ObjcExceptionBridging
 
 DEPENDENCIES:
@@ -162,8 +162,8 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   SimulatorStatusMagic: 28d4a9d1a500ac7cea0b2b5a43c1c6ddb40ba56c
-  XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
+  XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 4871139270e3807ad66aa21a48de93db611449b5
+PODFILE CHECKSUM: ea16ffc53142fe65741d07dbed44ad6e6545c1b9
 
 COCOAPODS: 1.6.1
