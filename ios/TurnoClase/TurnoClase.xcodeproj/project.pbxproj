@@ -266,10 +266,9 @@
 			};
 			buildConfigurationList = 415BC63D1B2F5305004FADE0 /* Build configuration list for PBXProject "TurnoClase" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				eu,
