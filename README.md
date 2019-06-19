@@ -25,8 +25,8 @@ TurnoClase se compone de dos aplicaciones móviles independientes (alumno y prof
 
 ### iOS
 
-- [Aplicación del profesor](https://itunes.apple.com/us/app/turnoclase-teacher/id1016192152?l=es&ls=1&mt=8).
-- [Aplicación del alumno](https://itunes.apple.com/us/app/turnoclase/id1016190896?l=es&ls=1&mt=8).
+- [Aplicación del profesor](https://apps.apple.com/us/app/turnoclase-teacher/id1016192152?l=es&ls=1).
+- [Aplicación del alumno](https://apps.apple.com/us/app/turnoclase/id1016190896?l=es&ls=1).
 
 ### Android
 
