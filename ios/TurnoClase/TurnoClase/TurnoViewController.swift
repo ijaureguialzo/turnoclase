@@ -79,6 +79,7 @@ class TurnoViewController: UIViewController {
         // Detectar si estamos haciendo capturas de pantalla para la App Store
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             self.actualizarAula(codigo: "BE131", mensaje: "2")
+            self.mostrarBoton()
         } else {
 
             // Registrarse como usuario anónimo
@@ -208,7 +209,7 @@ class TurnoViewController: UIViewController {
             self.recuperarUltimaPeticion() {
 
                 if !(self.tiempoEspera() > 0) {
-                    self.ocultarCronometro()
+                    self.mostrarBoton()
                     self.reiniciarCronometro()
 
                     self.refPosicion = self.refAula.collection("cola").addDocument(data: [
@@ -224,8 +225,8 @@ class TurnoViewController: UIViewController {
                     }
                 } else {
                     self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("ESPERA", comment: "Mensaje de que te toca esperar"))
-                    self.iniciarCronometro()
                     self.mostrarCronometro()
+                    self.iniciarCronometro()
                 }
             }
 
@@ -241,13 +242,13 @@ class TurnoViewController: UIViewController {
             self.recuperarUltimaPeticion() {
 
                 if self.atendido && !(self.tiempoEspera() > 0) {
-                    self.ocultarCronometro()
+                    self.mostrarBoton()
                     self.reiniciarCronometro()
                     self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
                 } else {
                     self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("ESPERA", comment: "Mensaje de que te toca esperar"))
-                    self.iniciarCronometro()
                     self.mostrarCronometro()
+                    self.iniciarCronometro()
                 }
             }
         }
@@ -428,17 +429,17 @@ class TurnoViewController: UIViewController {
     var segundosEspera = 10
 
     func mostrarCronometro() {
+        actualizarCronometro()
         botonActualizar.isHidden = true
         contenedorCronometro.isHidden = false
     }
 
-    func ocultarCronometro() {
+    func mostrarBoton() {
         botonActualizar.isHidden = false
         contenedorCronometro.isHidden = true
     }
 
     func iniciarCronometro() {
-        actualizarCronometro()
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarCronometro), userInfo: nil, repeats: true)
     }
 
@@ -465,7 +466,7 @@ class TurnoViewController: UIViewController {
             etiquetaMinutos.text = String(format: "%02d", minutosRestantes)
             etiquetaSegundos.text = String(format: "%02d", segundosRestantes)
         } else {
-            ocultarCronometro()
+            mostrarBoton()
             reiniciarCronometro()
             self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
             self.atendido = true
