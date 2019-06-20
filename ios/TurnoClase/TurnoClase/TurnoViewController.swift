@@ -72,9 +72,6 @@ class TurnoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        mostrarCronometro()
-        iniciarCronometro()
-
         log.debug("Valores recibidos: \(codigoAula ??? "[Aula desconocida]") - \(nombreUsuario ??? "[Usuario desconocido]")")
 
         log.info("Iniciando la aplicación...")
@@ -93,7 +90,6 @@ class TurnoViewController: UIViewController {
                     log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
                     self.actualizarAlumno()
-
                     self.encolarAlumno()
 
                 } else {
@@ -206,15 +202,27 @@ class TurnoViewController: UIViewController {
 
             log.info("Alumno no encontrado, lo añadimos")
 
-            self.refPosicion = self.refAula.collection("cola").addDocument(data: [
-                "alumno": self.uid!,
-                "timestamp": FieldValue.serverTimestamp()
-            ]) { error in
-                if let error = error {
-                    log.error("Error al añadir el documento: \(error.localizedDescription)")
+            self.recuperarUltimaPeticion() {
+
+                if !(self.tiempoEspera() > 0) {
+                    self.ocultarCronometro()
+                    self.reiniciarCronometro()
+
+                    self.refPosicion = self.refAula.collection("cola").addDocument(data: [
+                        "alumno": self.uid!,
+                        "timestamp": FieldValue.serverTimestamp()
+                    ]) { error in
+                        if let error = error {
+                            log.error("Error al añadir el documento: \(error.localizedDescription)")
+                        } else {
+                            self.conectarListenerPosicion(self.refPosicion)
+                            self.actualizarPantalla()
+                        }
+                    }
                 } else {
-                    self.conectarListenerPosicion(self.refPosicion)
-                    self.actualizarPantalla()
+                    self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("ESPERA", comment: "Mensaje de que te toca esperar"))
+                    self.iniciarCronometro()
+                    self.mostrarCronometro()
                 }
             }
 
@@ -227,8 +235,17 @@ class TurnoViewController: UIViewController {
         } else if querySnapshot!.documents.count == 0 {
             log.info("La cola se ha vaciado")
 
-            if self.atendido {
-                self.actualizarAula(codigo: codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
+            self.recuperarUltimaPeticion() {
+
+                if self.atendido && !(self.tiempoEspera() > 0) {
+                    self.ocultarCronometro()
+                    self.reiniciarCronometro()
+                    self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
+                } else {
+                    self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("ESPERA", comment: "Mensaje de que te toca esperar"))
+                    self.iniciarCronometro()
+                    self.mostrarCronometro()
+                }
             }
         }
     }
@@ -403,10 +420,9 @@ class TurnoViewController: UIViewController {
         }
     }
 
-    var timer: Timer!
+    var timer: Timer?
     var ultimaPeticion: Date!
-    var segundosEspera = 300
-    var tiempoRestante = 0
+    var segundosEspera = 10
 
     func mostrarCronometro() {
         botonActualizar.isHidden = true
@@ -419,24 +435,53 @@ class TurnoViewController: UIViewController {
     }
 
     func iniciarCronometro() {
-        ultimaPeticion = Date()
+        actualizarCronometro()
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarCronometro), userInfo: nil, repeats: true)
     }
 
     func reiniciarCronometro() {
-        timer.invalidate()
+        timer?.invalidate()
+    }
+
+    func tiempoEspera() -> Int {
+        if(ultimaPeticion != nil) {
+            let segundosTranscurridos = Int(Date().timeIntervalSince(ultimaPeticion))
+            return segundosEspera - segundosTranscurridos
+        } else {
+            return -1
+        }
     }
 
     @objc func actualizarCronometro()
     {
-        let segundosTranscurridos = Int(Date().timeIntervalSince(ultimaPeticion))
-        let tiempoRestante = segundosEspera - segundosTranscurridos
-        if(tiempoRestante > 0) {
+        let tiempoRestante = tiempoEspera()
+
+        if(tiempoRestante >= 0) {
             let segundosRestantes = tiempoRestante % 60
             let minutosRestantes = tiempoRestante / 60
             etiquetaMinutos.text = String(format: "%02d", minutosRestantes)
             etiquetaSegundos.text = String(format: "%02d", segundosRestantes)
+        } else {
+            ocultarCronometro()
+            reiniciarCronometro()
+            self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
+            self.atendido = true
         }
     }
 
+    func recuperarUltimaPeticion(completado: @escaping () -> Void) {
+
+        self.refAula.collection("espera").document(self.uid!).getDocument() { (document, error) in
+
+            if let error = error {
+                log.error("Error al recuperar datos: \(error.localizedDescription)")
+            } else {
+                if let datos = document?.data() {
+                    let stamp = datos["timestamp"] as? Timestamp
+                    self.ultimaPeticion = stamp?.dateValue()
+                }
+                completado()
+            }
+        }
+    }
 }

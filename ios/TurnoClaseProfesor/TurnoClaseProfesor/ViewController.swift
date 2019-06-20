@@ -228,6 +228,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
                                                 // Borrar la entrada de la cola
                                                 if avanzarCola {
+
+                                                    // Marcar cuando hemos atendido al alumno
+                                                    self.refAula.collection("espera").document(posicion["alumno"] as! String).setData([
+                                                        "timestamp": FieldValue.serverTimestamp()
+                                                    ]) { error in
+                                                        if let error = error {
+                                                            log.error("Error al añadir el documento: \(error.localizedDescription)")
+                                                        }
+                                                    }
+
                                                     refPosicion.delete()
                                                 }
                                             }
