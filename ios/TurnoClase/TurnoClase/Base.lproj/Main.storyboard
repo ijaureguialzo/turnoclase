@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -206,8 +206,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trg-x5-eMf" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="229.5" y="174.5" width="72" height="72"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="···" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="j8F-6N-3YS" userLabel="etiquetaAula">
-                                        <rect key="frame" x="29" y="25.5" width="14" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="j8F-6N-3YS" userLabel="etiquetaAula">
+                                        <rect key="frame" x="29" y="26" width="14" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -276,6 +276,49 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crC-5K-I1E" userLabel="contenedorBotonActualizar" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="229.5" y="420.5" width="72" height="72"/>
                                 <subviews>
+                                    <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ct9-cP-gnP" userLabel="contenedorCronometro">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="ZdV-fO-lp1">
+                                                <rect key="frame" x="13" y="26" width="20.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="headTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEN-5v-je4">
+                                                <rect key="frame" x="33.5" y="27.5" width="5" height="17"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content=":">
+                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <font key="NSFont" metaFont="system" size="17"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="truncatingTail" baseWritingDirection="natural" maximumLineHeight="17" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="iEP-5n-3TB">
+                                                <rect key="frame" x="38.5" y="26" width="21" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="ZdV-fO-lp1" firstAttribute="centerY" secondItem="Ct9-cP-gnP" secondAttribute="centerY" id="7st-LJ-W1d"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iEP-5n-3TB" secondAttribute="trailing" constant="12.5" id="RiA-vE-t4j"/>
+                                            <constraint firstItem="iEP-5n-3TB" firstAttribute="centerY" secondItem="Ct9-cP-gnP" secondAttribute="centerY" id="bE0-N8-ZIe"/>
+                                            <constraint firstItem="oEN-5v-je4" firstAttribute="centerX" secondItem="Ct9-cP-gnP" secondAttribute="centerX" id="gqY-1S-bpP"/>
+                                            <constraint firstItem="oEN-5v-je4" firstAttribute="centerY" secondItem="Ct9-cP-gnP" secondAttribute="centerY" id="kKP-0R-18Q"/>
+                                            <constraint firstAttribute="height" constant="72" id="kLG-WJ-a5E"/>
+                                            <constraint firstItem="oEN-5v-je4" firstAttribute="leading" secondItem="ZdV-fO-lp1" secondAttribute="trailing" priority="999" id="lQx-ru-XIs"/>
+                                            <constraint firstAttribute="width" constant="72" id="scp-1P-LaG"/>
+                                            <constraint firstItem="ZdV-fO-lp1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ct9-cP-gnP" secondAttribute="leading" id="t4L-yN-CxN"/>
+                                            <constraint firstItem="iEP-5n-3TB" firstAttribute="leading" secondItem="oEN-5v-je4" secondAttribute="trailing" id="z4p-rh-sIP"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-nP-zxH" userLabel="botonActualizar" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                         <accessibility key="accessibilityConfiguration" identifier="botonActualizar"/>
@@ -308,11 +351,13 @@
                                     <constraint firstItem="d9k-nP-zxH" firstAttribute="top" secondItem="crC-5K-I1E" secondAttribute="top" id="48B-xW-KdE"/>
                                     <constraint firstItem="d9k-nP-zxH" firstAttribute="leading" secondItem="crC-5K-I1E" secondAttribute="leading" id="5WX-Om-4mk"/>
                                     <constraint firstAttribute="bottom" secondItem="d9k-nP-zxH" secondAttribute="bottom" id="Ab5-zJ-1tS"/>
+                                    <constraint firstItem="Ct9-cP-gnP" firstAttribute="centerY" secondItem="crC-5K-I1E" secondAttribute="centerY" id="NIb-92-Qxm"/>
                                     <constraint firstAttribute="centerX" secondItem="d9k-nP-zxH" secondAttribute="centerX" id="Rzc-0l-d5d"/>
                                     <constraint firstAttribute="width" constant="72" id="UA7-KF-BgL"/>
                                     <constraint firstAttribute="height" constant="72" id="VBG-Kp-3Qp"/>
                                     <constraint firstAttribute="centerY" secondItem="d9k-nP-zxH" secondAttribute="centerY" id="aBZ-Q8-Vwc"/>
                                     <constraint firstAttribute="trailing" secondItem="d9k-nP-zxH" secondAttribute="trailing" id="kjo-9b-Iix"/>
+                                    <constraint firstItem="Ct9-cP-gnP" firstAttribute="centerX" secondItem="crC-5K-I1E" secondAttribute="centerX" id="wsj-xo-bOI"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="colorCirculo">
@@ -334,8 +379,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="botonActualizar" destination="d9k-nP-zxH" id="Acx-xn-Bxm"/>
+                        <outlet property="contenedorCronometro" destination="Ct9-cP-gnP" id="mt1-QP-ABi"/>
                         <outlet property="etiquetaAula" destination="j8F-6N-3YS" id="K4z-y2-xKO"/>
                         <outlet property="etiquetaMensaje" destination="UsV-sj-uaF" id="5vn-De-MqH"/>
+                        <outlet property="etiquetaMinutos" destination="ZdV-fO-lp1" id="vj3-Zt-btb"/>
+                        <outlet property="etiquetaSegundos" destination="iEP-5n-3TB" id="TB2-LF-OxS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rDu-11-WqQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

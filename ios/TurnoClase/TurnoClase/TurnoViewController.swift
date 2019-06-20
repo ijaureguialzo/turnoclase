@@ -59,6 +59,10 @@ class TurnoViewController: UIViewController {
     // UI
     @IBOutlet weak var etiquetaAula: UILabel!
     @IBOutlet weak var etiquetaMensaje: UILabel!
+    @IBOutlet weak var etiquetaMinutos: UILabel!
+    @IBOutlet weak var etiquetaSegundos: UILabel!
+    @IBOutlet weak var contenedorCronometro: UIView!
+    @IBOutlet weak var botonActualizar: UIButton!
 
     // REF: Barra de navegación en color claro: https://stackoverflow.com/a/52443917/5136913
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -67,6 +71,9 @@ class TurnoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        mostrarCronometro()
+        iniciarCronometro()
 
         log.debug("Valores recibidos: \(codigoAula ??? "[Aula desconocida]") - \(nombreUsuario ??? "[Usuario desconocido]")")
 
@@ -320,6 +327,7 @@ class TurnoViewController: UIViewController {
         desconectarListeners()
         abandonarCola()
 
+        reiniciarCronometro()
     }
 
     @IBAction func botonActualizar(_ sender: UIButton) {
@@ -392,6 +400,42 @@ class TurnoViewController: UIViewController {
                            animations: {
                                sender.alpha = 1
                            }, completion: nil)
+        }
+    }
+
+    var timer: Timer!
+    var ultimaPeticion: Date!
+    var segundosEspera = 300
+    var tiempoRestante = 0
+
+    func mostrarCronometro() {
+        botonActualizar.isHidden = true
+        contenedorCronometro.isHidden = false
+    }
+
+    func ocultarCronometro() {
+        botonActualizar.isHidden = false
+        contenedorCronometro.isHidden = true
+    }
+
+    func iniciarCronometro() {
+        ultimaPeticion = Date()
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarCronometro), userInfo: nil, repeats: true)
+    }
+
+    func reiniciarCronometro() {
+        timer.invalidate()
+    }
+
+    @objc func actualizarCronometro()
+    {
+        let segundosTranscurridos = Int(Date().timeIntervalSince(ultimaPeticion))
+        let tiempoRestante = segundosEspera - segundosTranscurridos
+        if(tiempoRestante > 0) {
+            let segundosRestantes = tiempoRestante % 60
+            let minutosRestantes = tiempoRestante / 60
+            etiquetaMinutos.text = String(format: "%02d", minutosRestantes)
+            etiquetaSegundos.text = String(format: "%02d", segundosRestantes)
         }
     }
 
