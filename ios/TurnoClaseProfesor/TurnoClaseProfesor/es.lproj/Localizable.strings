@@ -6,19 +6,23 @@
   Copyright © 2018 Ion Jaureguialzo Sarasola. All rights reserved.
 */
 
+"Boton_Siguiente" = "Siguiente"; // No traducir
+
 "Aula %@" = "Aula %@";
 "Cancelar" = "Cancelar";
+"Conectado como invitado" = "Conectado como invitado";
 "Conectar" = "Conectar";
 "Conectar a otra aula" = "Conectar a otra aula";
 "Código de aula" = "Código de aula";
 "Desconectar del aula" = "Desconectar del aula";
 "Error de conexión" = "Error de conexión";
+"Establecer tiempo de espera" = "Establecer tiempo de espera";
 "Generar nueva aula" = "Generar nueva aula";
+"Guardar" = "Guardar";
 "Introduce los datos del aula a la que quieres conectar." = "Introduce los datos del aula a la que quieres conectar.";
-"Conectado como invitado" = "Conectado como invitado";
 "No se ha podido acceder al aula con los datos proporcionados." = "No se ha podido acceder al aula con los datos proporcionados.";
 "Ok" = "Ok";
 "PIN" = "PIN";
-"PIN para compartir este aula: %@" = "PIN para compartir esta aula: %@";
+"PIN para compartir este aula: %@" = "PIN para compartir este aula: %@";
 "Siguiente" = "Siguiente";
-"Boton_Siguiente" = "Siguiente"; // No traducir
+"Tiempo de espera (minutos)" = "Tiempo de espera (minutos)";

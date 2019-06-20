@@ -472,7 +472,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         pickerView.selectRow(tiempos.firstIndex(of: tiempoEspera) ?? 0, inComponent: 0, animated: true)
 
-        let minutosAlert = UIAlertController(title: "Tiempo de espera (minutos)", message: "", preferredStyle: UIAlertController.Style.alert)
+        let minutosAlert = UIAlertController(title: "Tiempo de espera (minutos)".localized(), message: "", preferredStyle: UIAlertController.Style.alert)
         minutosAlert.setValue(vc, forKey: "contentViewController")
 
         // Guardar el nuevo tiempo para el aula
