@@ -147,6 +147,9 @@ class TurnoViewController: UIViewController {
                 if (documentSnapshot?.exists)! && documentSnapshot?.data()?["codigo"] as? String == self.codigoAula {
                     self.refAula = documentSnapshot?.reference
                     self.conectarListenerCola()
+
+                    let tiempoEspera = documentSnapshot?.data()?["espera"] as? Int ?? 5
+                    self.segundosEspera = tiempoEspera * 60
                 } else {
                     log.info("El aula ha desaparecido")
                     self.desconectarListeners()
