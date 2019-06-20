@@ -6,19 +6,23 @@
   Copyright © 2018 Ion Jaureguialzo Sarasola. All rights reserved.
 */
 
+"Boton_Siguiente" = "Siguiente"; // No traducir
+
 "Aula %@" = "Class %@";
 "Cancelar" = "Cancel";
+"Conectado como invitado" = "Connected as guest";
 "Conectar" = "Connect";
 "Conectar a otra aula" = "Connect to another class";
 "Código de aula" = "Class code";
 "Desconectar del aula" = "Disconnect from the class";
 "Error de conexión" = "Connection error";
+"Establecer tiempo de espera" = "Set wait time";
 "Generar nueva aula" = "Generate new class";
+"Guardar" = "Save";
 "Introduce los datos del aula a la que quieres conectar." = "Insert data of the class you are connecting to.";
-"Conectado como invitado" = "Connected as guest";
 "No se ha podido acceder al aula con los datos proporcionados." = "Can't access to the class with provided data.";
 "Ok" = "Ok";
 "PIN" = "PIN";
 "PIN para compartir este aula: %@" = "PIN to share this class: %@";
 "Siguiente" = "Next";
-"Boton_Siguiente" = "Siguiente"; // No traducir
+"Tiempo de espera (minutos)" = "Wait time (minutes)";
