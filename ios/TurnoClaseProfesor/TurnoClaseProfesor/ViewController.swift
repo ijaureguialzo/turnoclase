@@ -33,7 +33,7 @@ import Localize_Swift
 
 import TurnoClaseShared
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // ID de usuario único generado por Firebase
     var uid: String!
@@ -63,6 +63,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // Datos del aula
     var codigoAula = "..."
     var PIN = "..."
+    var tiempoEspera = -1
 
     fileprivate func conectarAula() {
         // Cargar el aula y si no, crearla
@@ -142,8 +143,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Guardar el documento con un Timestamp, para que se genere el código
         self.refAula.setData([
             "timestamp": FieldValue.serverTimestamp(),
-            "pin": String(format: "%04d", Int.random(in: 0...9999))
-            ]) { error in
+            "pin": String(format: "%04d", Int.random(in: 0...9999)),
+            "espera": 5
+        ]) { error in
             if let error = error {
                 log.error("Error al crear el aula: \(error.localizedDescription)")
             } else {
@@ -168,6 +170,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
                             self.actualizarAula(codigo: aula["codigo"] ??? "?")
                             self.actualizarPIN(aula["pin"] ??? "?")
+                            self.tiempoEspera = aula["espera"] as? Int ?? 5
 
                             // Listener de la cola
                             if self.listenerCola == nil {
@@ -317,10 +320,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && session != nil {
             self.session!.sendMessage([campo: dato], replyHandler: { (response) -> Void in
-                    log.info("Enviado al Watch")
-                }, errorHandler: { (error) -> Void in
-                    log.error("Error al enviar datos al Watch \(error)")
-                })
+                log.info("Enviado al Watch")
+            }, errorHandler: { (error) -> Void in
+                log.error("Error al enviar datos al Watch \(error)")
+            })
         }
     }
 
@@ -371,37 +374,43 @@ class ViewController: UIViewController, UITextFieldDelegate {
             // REF: Localizar una cadena con interpolación: https://github.com/marmelroy/Localize-Swift/issues/89#issuecomment-331673546
             if !invitado {
                 return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                    message: String(format: "PIN para compartir este aula: %@".localized(), PIN),
-                    preferredStyle: .actionSheet)
+                                         message: String(format: "PIN para compartir este aula: %@".localized(), PIN),
+                                         preferredStyle: .actionSheet)
             } else {
                 return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                    message: "Conectado como invitado".localized(),
-                    preferredStyle: .actionSheet)
+                                         message: "Conectado como invitado".localized(),
+                                         preferredStyle: .actionSheet)
             }
         }()
 
         let accionGenerarNuevoCodigo = UIAlertAction(title: "Generar nueva aula".localized(), style: .destructive, handler: { (action) -> Void in
-                log.info("Generar nueva aula")
-                self.desconectarListeners()
-                self.borrarAula()
-            })
+            log.info("Generar nueva aula")
+            self.desconectarListeners()
+            self.borrarAula()
+        })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
-                log.info("Conectar a otra aula")
-                self.dialogoConexion()
-            })
+            log.info("Conectar a otra aula")
+            self.dialogoConexion()
+        })
 
         let accionDesconectarAula = UIAlertAction(title: "Desconectar del aula".localized(), style: .destructive, handler: { (action) -> Void in
-                log.info("Desconectar del aula")
-                self.desconectarAula()
-            })
+            log.info("Desconectar del aula")
+            self.desconectarAula()
+        })
 
         let accionCancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel, handler: { (action) -> Void in
-                log.info("Cancelar")
-            })
+            log.info("Cancelar")
+        })
+
+        let accionEstablecerTiempoEspera = UIAlertAction(title: "Establecer tiempo de espera".localized(), style: .default, handler: { (action) -> Void in
+            log.info("Establecer tiempo de espera")
+            self.dialogoTiempoEspera()
+        })
 
         if(!invitado) {
             alertController.addAction(accionGenerarNuevoCodigo)
+            alertController.addAction(accionEstablecerTiempoEspera)
             alertController.addAction(accionConectarOtraAula)
         } else {
             alertController.addAction(accionDesconectarAula)
@@ -451,12 +460,69 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
+    func dialogoTiempoEspera() {
+
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 250, height: 100)
+
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 100))
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        vc.view.addSubview(pickerView)
+
+        pickerView.selectRow(tiempos.firstIndex(of: tiempoEspera) ?? 0, inComponent: 0, animated: true)
+
+        let minutosAlert = UIAlertController(title: "Tiempo de espera (minutos)", message: "", preferredStyle: UIAlertController.Style.alert)
+        minutosAlert.setValue(vc, forKey: "contentViewController")
+
+        // Guardar el nuevo tiempo para el aula
+        let confirmAction = UIAlertAction(title: "Guardar".localized(),
+                                          style: .default) { _ in
+
+            self.tiempoEspera = self.tiempos[pickerView.selectedRow(inComponent: 0)]
+            log.info("Establecer tiempo de espera en \(self.tiempoEspera) minutos...")
+
+            self.refAula.updateData([
+                "espera": self.tiempoEspera
+            ]) { error in
+                if let error = error {
+                    log.error("Error al actualizar el aula: \(error.localizedDescription)")
+                } else {
+                    log.info("Aula actualizada")
+                }
+            }
+        }
+
+        // Cancelar
+        let cancelAction = UIAlertAction(title: "Cancelar".localized(),
+                                         style: .cancel) { (_) in }
+
+        minutosAlert.addAction(confirmAction)
+        minutosAlert.addAction(cancelAction)
+
+        self.present(minutosAlert, animated: true)
+    }
+
+    let tiempos = [1, 2, 3, 5, 10, 15, 20, 30, 45, 60]
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return tiempos.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(tiempos[row])
+    }
+
     fileprivate func dialogoError() {
         self.alertController = UIAlertController(title: "Error de conexión".localized(),
-            message: "No se ha podido acceder al aula con los datos proporcionados.".localized(),
-            preferredStyle: .alert)
+                                                 message: "No se ha podido acceder al aula con los datos proporcionados.".localized(),
+                                                 preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Ok".localized(),
-            style: .default) { (_) in }
+                                         style: .default) { (_) in }
         alertController.addAction(cancelAction)
         self.present(self.alertController, animated: true, completion: nil)
     }
@@ -474,12 +540,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         loginPinOk = false
 
         alertController = UIAlertController(title: "Conectar a otra aula".localized(),
-            message: "Introduce los datos del aula a la que quieres conectar.".localized(),
-            preferredStyle: .alert)
+                                            message: "Introduce los datos del aula a la que quieres conectar.".localized(),
+                                            preferredStyle: .alert)
 
         // Conectar
         let confirmAction = UIAlertAction(title: "Conectar".localized(),
-            style: .default) { (_) in
+                                          style: .default) { (_) in
 
             log.info("Conectando a otra aula")
 
@@ -500,7 +566,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         // Cancelar
         let cancelAction = UIAlertAction(title: "Cancelar".localized(),
-            style: .cancel) { (_) in }
+                                         style: .cancel) { (_) in }
 
         // Cuadros de texto
         alertController.addTextField { (textField) in
@@ -567,11 +633,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             // Difuminar un botón
             UIView.animate(withDuration: 0.1,
-                delay: 0,
-                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-                animations: {
-                    sender.alpha = 0.15
-                }, completion: nil)
+                           delay: 0,
+                           options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                           animations: {
+                               sender.alpha = 0.15
+                           }, completion: nil)
         }
     }
 
@@ -582,11 +648,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             // Restaurar el botón
             UIView.animate(withDuration: 0.3,
-                delay: 0,
-                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-                animations: {
-                    sender.alpha = 1
-                }, completion: nil)
+                           delay: 0,
+                           options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                           animations: {
+                               sender.alpha = 1
+                           }, completion: nil)
         }
     }
 
