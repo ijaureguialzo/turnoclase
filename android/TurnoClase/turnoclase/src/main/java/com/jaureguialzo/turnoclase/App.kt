@@ -18,6 +18,7 @@
 package com.jaureguialzo.turnoclase
 
 import android.support.multidex.MultiDexApplication
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
  * Created by widemos on 19/6/15.
@@ -29,4 +30,8 @@ class App : MultiDexApplication() {
         var atendido = false
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
+    }
 }

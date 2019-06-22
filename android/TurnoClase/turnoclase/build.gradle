@@ -77,6 +77,7 @@ dependencies {
     implementation "com.google.firebase:firebase-firestore:$firebase_firestore_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     androidTestImplementation "tools.fastlane:screengrab:$fastlane_screengrab_version"
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -53,4 +53,5 @@
        ]]>
     </string>
     <string name="VOLVER_A_EMPEZAR">Press ⟳ to request a turn</string>
+    <string name="ESPERA">Wait to request another turn...</string>
 </resources>
