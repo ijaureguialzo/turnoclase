@@ -16,4 +16,5 @@
     <string name="etiqueta_titulo_licencia">Lizentzia</string>
     <string name="etiqueta_titulo_reconocimientos">Aitorpenak</string>
     <string name="VOLVER_A_EMPEZAR">Sakatu ⟳ txanda eskatzeko</string>
+    <string name="ESPERA">Itxaron txanda eskatzeko...</string>
 </resources>

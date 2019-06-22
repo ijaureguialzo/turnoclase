@@ -16,4 +16,5 @@
     <string name="etiqueta_titulo_licencia">Licencia</string>
     <string name="etiqueta_titulo_reconocimientos">Reconocimientos</string>
     <string name="VOLVER_A_EMPEZAR">Pulsa ⟳ para pedir turno</string>
+    <string name="ESPERA">Espera para pedir turno...</string>
 </resources>

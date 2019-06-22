@@ -23,13 +23,23 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.util.TypedValue
 import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_alumno_turno.*
+import java.util.*
+import kotlin.collections.HashMap
+import android.os.CountDownTimer
+import com.google.firebase.Timestamp
+import org.threeten.bp.Instant
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneId
+import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.chrono.ChronoPeriod.between
+import org.threeten.bp.temporal.ChronoUnit
+import javax.xml.datatype.DatatypeConstants.SECONDS
 
 class AlumnoTurno : AppCompatActivity() {
 
@@ -99,6 +109,7 @@ class AlumnoTurno : AppCompatActivity() {
             // No usar la llamada a la función actualizar, no vuelve a tiempo para el test
             etiquetaAula.text = "BE131"
             etiquetaMensaje.text = "2"
+            mostrarBoton()
         } else {
 
             // Extraer los parámetros desde el Intent
@@ -195,6 +206,12 @@ class AlumnoTurno : AppCompatActivity() {
                 if (snapshot != null && snapshot.exists() && snapshot.data!!["codigo"] as? String == codigoAula) {
                     refAula = snapshot.reference
                     conectarListenerCola()
+
+                    val tiempoEspera = snapshot.data!!["espera"] as? Long ?: 5
+                    segundosEspera = tiempoEspera.toInt() * 60
+
+                    reiniciarCronometro()
+                    iniciarCronometro()
                 } else {
                     Log.d(TAG, "El aula ha desaparecido")
                     desconectarListeners()
@@ -250,29 +267,52 @@ class AlumnoTurno : AppCompatActivity() {
 
             Log.d(TAG, "Alumno no encontrado, lo añadimos")
 
-            val datos = HashMap<String, Any>()
-            datos["alumno"] = uid!!
-            datos["timestamp"] = FieldValue.serverTimestamp()
+            recuperarUltimaPeticion {
 
-            refAula!!.collection("cola").add(datos)
-                    .addOnSuccessListener { documentReference ->
-                        refPosicion = documentReference
-                        conectarListenerPosicion(refPosicion!!)
-                        actualizarPantalla()
-                    }
-                    .addOnFailureListener { e -> Log.e(TAG, "Error al añadir el documento", e) }
+                if (tiempoEspera() <= 0) {
+                    mostrarBoton()
+                    reiniciarCronometro()
+
+                    val datos = HashMap<String, Any>()
+                    datos["alumno"] = uid!!
+                    datos["timestamp"] = FieldValue.serverTimestamp()
+
+                    refAula!!.collection("cola").add(datos)
+                            .addOnSuccessListener { documentReference ->
+                                refPosicion = documentReference
+                                conectarListenerPosicion(refPosicion!!)
+                                actualizarPantalla()
+                            }
+                            .addOnFailureListener { e -> Log.e(TAG, "Error al añadir el documento", e) }
+
+                } else {
+                    actualizarAula(codigoAula!!, resources.getString(R.string.ESPERA))
+                    mostrarCronometro()
+                    iniciarCronometro()
+                }
+            }
 
         } else if (querySnapshot.documents.count() > 0) {
             Log.e(TAG, "Alumno encontrado, ya está en la cola")
             refPosicion = querySnapshot.documents[0].reference
             conectarListenerPosicion(refPosicion!!)
             actualizarPantalla()
+            mostrarBoton()
 
         } else if (querySnapshot.documents.count() == 0) {
             Log.d(TAG, "La cola se ha vaciado")
 
-            if (App.atendido) {
-                actualizarAula(codigoAula!!, resources.getString(R.string.VOLVER_A_EMPEZAR))
+            recuperarUltimaPeticion {
+
+                if (App.atendido && tiempoEspera() <= 0) {
+                    mostrarBoton()
+                    reiniciarCronometro()
+                    actualizarAula(codigoAula!!, resources.getString(R.string.VOLVER_A_EMPEZAR))
+                } else {
+                    actualizarAula(codigoAula!!, resources.getString(R.string.ESPERA))
+                    mostrarCronometro()
+                    iniciarCronometro()
+                }
             }
         }
     }
@@ -372,7 +412,7 @@ class AlumnoTurno : AppCompatActivity() {
 
         desconectarListeners()
         abandonarCola()
-
+        reiniciarCronometro()
     }
 
     private fun botonActualizar() {
@@ -459,4 +499,96 @@ class AlumnoTurno : AppCompatActivity() {
     }
     //endregion
 
+    var timer: CountDownTimer? = null
+    var ultimaPeticion: LocalDateTime? = null
+    var segundosEspera = 10
+
+    fun mostrarCronometro() {
+        actualizarCronometro()
+        botonActualizar.visibility = View.INVISIBLE
+        etiquetaCronometro.visibility = View.VISIBLE
+    }
+
+    fun mostrarBoton() {
+        etiquetaCronometro.visibility = View.INVISIBLE
+        botonActualizar.visibility = View.VISIBLE
+    }
+
+    fun iniciarCronometro() {
+
+        timer = object : CountDownTimer((tiempoEspera() * 1000).toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                actualizarCronometro()
+            }
+
+            override fun onFinish() {
+                actualizarCronometro()
+
+                mostrarBoton()
+                reiniciarCronometro()
+
+                App.atendido = true
+                actualizarAula(codigoAula!!, resources.getString(R.string.VOLVER_A_EMPEZAR))
+            }
+        }
+        timer?.start()
+    }
+
+    fun reiniciarCronometro() {
+        timer?.cancel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        reiniciarCronometro()
+    }
+
+    fun tiempoEspera(): Int {
+
+        if (ultimaPeticion != null) {
+
+            // REF: Librería de fechas java.time para Android antiguos: https://github.com/JakeWharton/ThreeTenABP
+            // REF: Diferencia entre fechas: https://www.baeldung.com/java-date-difference
+
+            val segundosTranscurridos = ChronoUnit.SECONDS.between(ultimaPeticion, LocalDateTime.now()).toInt()
+            return segundosEspera - segundosTranscurridos
+
+        } else {
+            return -1
+        }
+    }
+
+    fun actualizarCronometro() {
+        val tiempoRestante = tiempoEspera()
+
+        if (tiempoRestante >= 0) {
+            val segundosRestantes = tiempoRestante % 60
+            val minutosRestantes = tiempoRestante / 60
+            etiquetaCronometro.text = "%02d:%02d".format(minutosRestantes, segundosRestantes)
+        }
+    }
+
+    fun recuperarUltimaPeticion(completado: () -> Unit) {
+
+        refAula!!.collection("espera").document(uid!!)
+                .get()
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val datos = it.result!!
+                        if (datos.exists()) {
+
+                            // REF: Librería de fechas java.time para Android antiguos: https://github.com/JakeWharton/ThreeTenABP
+                            // REF: Fechas con Kotlin y Firestore: https://code.luasoftware.com/tutorials/google-cloud-firestore/understanding-date-in-firestore/
+
+                            val timestamp = datos["timestamp"] as Timestamp
+                            val milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
+                            val tz = ZoneId.systemDefault()
+                            ultimaPeticion = LocalDateTime.ofInstant(Instant.ofEpochMilli(milliseconds), tz)
+
+                            Log.d(TAG, "Última petición: $ultimaPeticion")
+                        }
+                        completado()
+                    }
+                }
+    }
 }
