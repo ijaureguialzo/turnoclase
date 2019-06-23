@@ -18,10 +18,10 @@
 package com.jaureguialzo.turnoclase
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_acerca_de.*
 
 class AcercaDe : AppCompatActivity() {

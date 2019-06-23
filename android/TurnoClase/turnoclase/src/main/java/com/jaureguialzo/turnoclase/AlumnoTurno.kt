@@ -21,25 +21,20 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_alumno_turno.*
-import java.util.*
-import kotlin.collections.HashMap
-import android.os.CountDownTimer
-import com.google.firebase.Timestamp
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
-import org.threeten.bp.ZonedDateTime
-import org.threeten.bp.chrono.ChronoPeriod.between
 import org.threeten.bp.temporal.ChronoUnit
-import javax.xml.datatype.DatatypeConstants.SECONDS
 
 class AlumnoTurno : AppCompatActivity() {
 
