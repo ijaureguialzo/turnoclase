@@ -21,6 +21,9 @@
             android:id="@+id/accion_generar"
             android:title="@string/menu_accion_generar" />
         <item
+            android:id="@+id/accion_establecer_espera"
+            android:title="@string/menu_establecer_espera" />
+        <item
             android:id="@+id/accion_conectar"
             android:title="@string/menu_accion_conectar" />
         <item

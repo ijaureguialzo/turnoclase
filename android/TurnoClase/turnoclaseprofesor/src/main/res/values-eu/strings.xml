@@ -16,5 +16,8 @@
     <string name="dialogo_error_mensaje">Idatzitako datuekin ezin izan da gela horretara konektatu.</string>
     <string name="dialogo_error_ok">Ados</string>
     <string name="dialogo_conexion_titulo">Beste gela batera konektatu</string>
-    <string name="dialogo_conexion_cancelar">Ezeztatu</string>
+    <string name="dialogo_cancelar">Ezeztatu</string>
+    <string name="menu_establecer_espera">Itxaroteko denbora ezarri</string>
+    <string name="dialogo_establecer_espera_titulo">Itxaroteko denbora (minutuak)</string>
+    <string name="dialogo_guardar">Gorde</string>
 </resources>
