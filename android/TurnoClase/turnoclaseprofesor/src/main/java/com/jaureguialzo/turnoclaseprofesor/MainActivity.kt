@@ -30,6 +30,7 @@ import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
+import android.widget.NumberPicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
     // Datos del aula
     private var codigoAula = "..."
     private var PIN = "..."
+    private var tiempoEspera = -1
 
     // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
     private val isRunningTest: Boolean by lazy {
@@ -194,6 +196,7 @@ class MainActivity : AppCompatActivity() {
         val datos = HashMap<String, Any>()
         datos["timestamp"] = FieldValue.serverTimestamp()
         datos["pin"] = "%04d".format((0..9999).random())
+        datos["espera"] = 5
 
         refAula!!.set(datos)
                 .addOnSuccessListener {
@@ -217,6 +220,7 @@ class MainActivity : AppCompatActivity() {
 
                     val codigoAula = aula!!["codigo"] as? String ?: "?"
                     val pin = aula["pin"] as? String ?: "?"
+                    tiempoEspera = (aula["espera"] as? Long ?: 5).toInt()
 
                     actualizarAula(codigoAula)
                     actualizarPIN(pin)
@@ -279,6 +283,14 @@ class MainActivity : AppCompatActivity() {
 
                                                         // Borrar la entrada de la cola
                                                         if (avanzarCola) {
+
+                                                            // Marcar cuando hemos atendido al alumno
+                                                            val datos = HashMap<String, Any>()
+                                                            datos["timestamp"] = FieldValue.serverTimestamp()
+
+                                                            refAula!!.collection("espera").document(posicion["alumno"] as String).set(datos)
+                                                                    .addOnFailureListener { e -> Log.e(TAG, "Error al añadir el documento", e) }
+
                                                             refPosicion.delete()
                                                         }
                                                     } else {
@@ -433,6 +445,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (!invitado) {
+            menu.findItem(R.id.accion_establecer_espera).isVisible = true
+            menu.findItem(R.id.accion_establecer_espera).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Establecer tiempo de espera")
+                dialogoTiempoEspera()
+                true
+            }
+        } else {
+            menu.findItem(R.id.accion_establecer_espera).isVisible = false
+        }
+
+        if (!invitado) {
             menu.findItem(R.id.accion_conectar).isVisible = true
             menu.findItem(R.id.accion_desconectar).isVisible = false
 
@@ -492,7 +515,61 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        builder.setNegativeButton(getString(R.string.dialogo_conexion_cancelar)) { dialog, _ ->
+        builder.setNegativeButton(getString(R.string.dialogo_cancelar)) { dialog, _ ->
+            Log.d(TAG, "Cancelado")
+            dialog.cancel()
+        }
+
+        builder.show()
+    }
+
+    private fun dialogoTiempoEspera() {
+
+        // REF: AlertDialog: https://stackoverflow.com/a/10904665
+        // REF: Diseño personalizado: https://developer.android.com/guide/topics/ui/dialogs?hl=es-419#CustomLayout
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(getString(R.string.dialogo_establecer_espera_titulo))
+
+        val vista = layoutInflater.inflate(R.layout.dialogo_establecer_espera, null)
+
+        builder.setView(vista)
+
+        // Set up the input
+
+        val picker = vista.findViewById(R.id.picker) as NumberPicker
+
+        val tiempos = arrayOf("1", "2", "3", "5", "10", "15", "20", "30", "45", "60")
+
+        picker.minValue = 0
+        picker.maxValue = tiempos.size - 1
+        picker.displayedValues = tiempos
+        picker.wrapSelectorWheel = false
+        picker.value = tiempos.indexOfFirst {
+            it == tiempoEspera.toString()
+        }
+
+        // Set up the buttons
+        builder.setPositiveButton(getString(R.string.dialogo_guardar)) { _, _ ->
+
+            Log.d(TAG, "Conectando a otra aula")
+
+            tiempoEspera = tiempos[picker.value].toInt()
+            Log.d(TAG, "Establecer tiempo de espera en $tiempoEspera minutos...")
+
+            val datos = HashMap<String, Any>()
+            datos["espera"] = tiempoEspera
+
+            refAula!!.update(datos)
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Aula actualizada")
+                        conectarListener()
+                    }
+                    .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
+        }
+
+        builder.setNegativeButton(getString(R.string.dialogo_cancelar)) { dialog, _ ->
             Log.d(TAG, "Cancelado")
             dialog.cancel()
         }

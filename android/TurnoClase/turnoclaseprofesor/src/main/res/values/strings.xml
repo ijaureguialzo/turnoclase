@@ -42,10 +42,13 @@
     <string name="menu_accion_desconectar">Disconnect from the class</string>
     <string name="dialogo_conexion_mensaje">Insert data of the class you are connecting to.</string>
     <string name="dialogo_conexion_conectar">Connect</string>
-    <string name="dialogo_conexion_cancelar">Cancel</string>
+    <string name="dialogo_cancelar">Cancel</string>
     <string name="dialogo_error_titulo">Connection error</string>
     <string name="dialogo_error_mensaje">Can\'t access to the class with provided data.</string>
     <string name="dialogo_error_ok">Ok</string>
     <string name="dialogo_conexion_titulo">Connect to another classroom</string>
+    <string name="menu_establecer_espera">Set wait time</string>
+    <string name="dialogo_establecer_espera_titulo">Wait time (minutes)</string>
+    <string name="dialogo_guardar">Save</string>
 
 </resources>

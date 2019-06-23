@@ -12,9 +12,12 @@
     <string name="menu_accion_desconectar">Desconectar del aula</string>
     <string name="dialogo_conexion_mensaje">Introduce los datos del aula a la que quieres conectar.</string>
     <string name="dialogo_conexion_conectar">Conectar</string>
-    <string name="dialogo_conexion_cancelar">Cancelar</string>
+    <string name="dialogo_cancelar">Cancelar</string>
     <string name="dialogo_error_titulo">Error de conexión</string>
     <string name="dialogo_error_mensaje">No se ha podido acceder al aula con los datos proporcionados.</string>
     <string name="dialogo_error_ok">Ok</string>
     <string name="dialogo_conexion_titulo">Conectar a otra aula</string>
+    <string name="menu_establecer_espera">Establecer tiempo de espera</string>
+    <string name="dialogo_establecer_espera_titulo">Tiempo de espera (minutos)</string>
+    <string name="dialogo_guardar">Guardar</string>
 </resources>
