@@ -21,9 +21,9 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.support.v4.view.MenuCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.core.view.MenuCompat
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.text.InputFilter
 import android.util.Log
 import android.view.Menu

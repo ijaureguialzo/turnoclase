@@ -17,7 +17,7 @@
 
 package com.jaureguialzo.turnoclaseprofesor
 
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 
 /**
  * Created by widemos on 19/6/15.

@@ -27,7 +27,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 23
         versionName "2.2.0"
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
     signingConfigs {
@@ -68,10 +68,10 @@ victor {
 // REF: Generar árbol de dependencias: https://stackoverflow.com/a/42374426/5136913
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:$support_lib_version"
-    implementation "com.android.support:support-media-compat:$support_lib_version"
-    implementation "com.android.support:support-v4:$support_lib_version"
-    implementation "com.android.support:multidex:$multidex_support_lib_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.media:media:$media_version"
+    implementation "androidx.legacy:legacy-support-v4:$legacy_support_version"
+    implementation "androidx.multidex:multidex:$multidex_support_lib_version"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
     implementation "com.google.firebase:firebase-auth:$firebase_auth_version"
     implementation "com.google.firebase:firebase-firestore:$firebase_firestore_version"

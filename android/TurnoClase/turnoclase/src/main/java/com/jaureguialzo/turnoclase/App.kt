@@ -17,7 +17,7 @@
 
 package com.jaureguialzo.turnoclase
 
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
