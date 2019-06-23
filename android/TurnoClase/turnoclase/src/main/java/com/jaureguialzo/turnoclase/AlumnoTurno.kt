@@ -209,9 +209,6 @@ class AlumnoTurno : AppCompatActivity() {
 
                     val tiempoEspera = snapshot.data!!["espera"] as? Long ?: 5
                     segundosEspera = tiempoEspera.toInt() * 60
-
-                    reiniciarCronometro()
-                    iniciarCronometro()
                 } else {
                     Log.d(TAG, "El aula ha desaparecido")
                     desconectarListeners()
@@ -342,7 +339,7 @@ class AlumnoTurno : AppCompatActivity() {
                 val alumno = document.result
 
                 refAula?.collection("cola")
-                        ?.whereLessThanOrEqualTo("timestamp", alumno!!["timestamp"] as Any)
+                        ?.whereLessThanOrEqualTo("timestamp", alumno?.get("timestamp") as Any)
                         ?.get()
                         ?.addOnCompleteListener {
                             if (!it.isSuccessful) {
@@ -516,26 +513,29 @@ class AlumnoTurno : AppCompatActivity() {
 
     fun iniciarCronometro() {
 
-        timer = object : CountDownTimer((tiempoEspera() * 1000).toLong(), 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                actualizarCronometro()
+        if (timer == null) {
+            timer = object : CountDownTimer((tiempoEspera() * 1000).toLong(), 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    actualizarCronometro()
+                }
+
+                override fun onFinish() {
+                    actualizarCronometro()
+
+                    mostrarBoton()
+                    reiniciarCronometro()
+
+                    App.atendido = true
+                    actualizarAula(codigoAula!!, resources.getString(R.string.VOLVER_A_EMPEZAR))
+                }
             }
-
-            override fun onFinish() {
-                actualizarCronometro()
-
-                mostrarBoton()
-                reiniciarCronometro()
-
-                App.atendido = true
-                actualizarAula(codigoAula!!, resources.getString(R.string.VOLVER_A_EMPEZAR))
-            }
+            timer?.start()
         }
-        timer?.start()
     }
 
     fun reiniciarCronometro() {
         timer?.cancel()
+        timer = null
     }
 
     override fun onDestroy() {
