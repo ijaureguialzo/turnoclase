@@ -95,6 +95,7 @@ class TurnoViewController: UIViewController {
 
                 } else {
                     log.error("Error de inicio de sesión: \(error!.localizedDescription)")
+                    self.actualizarAula(codigo: "?", mensaje: "")
                 }
             }
         }

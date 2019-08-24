@@ -126,6 +126,7 @@ class AlumnoTurno : AppCompatActivity() {
                             encolarAlumno()
                         } else {
                             Log.e(TAG, "Error de inicio de sesión", it.exception)
+                            actualizarAula("?", "")
                         }
                     }
         }

@@ -119,6 +119,7 @@ class MainActivity : AppCompatActivity() {
 
                         } else {
                             Log.e(TAG, "Error de inicio de sesión", task.exception)
+                            actualizarAula("?", 0)
                         }
                     }
         }
@@ -180,6 +181,9 @@ class MainActivity : AppCompatActivity() {
                             refAula = document.reference
                             conectarListener()
                         }
+                    } else {
+                        Log.e(TAG, "Error al conectar al aula", it.exception)
+                        actualizarAula("?", 0)
                     }
                 }
     }

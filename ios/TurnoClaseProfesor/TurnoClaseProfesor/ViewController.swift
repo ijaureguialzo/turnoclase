@@ -69,13 +69,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         // Cargar el aula y si no, crearla
         db.collection("aulas").document(self.uid).getDocument() { (document, error) in
 
-            if !(document?.exists)! {
-                log.info("Creando nueva aula...")
-                self.crearAula()
+            if let error = error {
+                log.error("Error al conectar al aula: \(error.localizedDescription)")
+                self.actualizarAula(codigo: "?", enCola: 0)
             } else {
-                log.info("Conectado a aula existente")
-                self.refAula = document?.reference
-                self.conectarListener()
+                if !(document?.exists)! {
+                    log.info("Creando nueva aula...")
+                    self.crearAula()
+                } else {
+                    log.info("Conectado a aula existente")
+                    self.refAula = document?.reference
+                    self.conectarListener()
+                }
             }
         }
     }
@@ -126,6 +131,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                 } else {
                     log.error("Error de inicio de sesión: \(error!.localizedDescription)")
+                    self.actualizarAula(codigo: "?", enCola: 0)
                 }
             }
         }
