@@ -67,6 +67,10 @@ class TurnoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+        
         log.debug("Valores recibidos: \(codigoAula ??? "[Aula desconocida]") - \(nombreUsuario ??? "[Usuario desconocido]")")
 
         log.info("Iniciando la aplicación...")
