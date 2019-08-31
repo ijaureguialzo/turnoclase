@@ -45,8 +45,8 @@ target 'TurnoClase' do
 end
 
 # REF: https://stackoverflow.com/a/52739262
-post_install do |installer_representation|
-    installer_representation.pods_project.targets.each do |target|
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
             if config.build_settings['SDKROOT'] == 'watchos'
                 config.build_settings['WATCHOS_DEPLOYMENT_TARGET'] = '4.0'
@@ -60,11 +60,18 @@ post_install do |installer_representation|
     #    myTargets = ['Localize-Swift']
     myTargets = []
     
-    installer_representation.pods_project.targets.each do |target|
+    installer.pods_project.targets.each do |target|
       if myTargets.include? target.name
         target.build_configurations.each do |config|
           config.build_settings['SWIFT_VERSION'] = '4.2'
         end
+      end
+    end
+
+    # REF: Parche temporal: https://github.com/CocoaPods/CocoaPods/issues/9135
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}.${PLATFORM_NAME}"
       end
     end
 end
