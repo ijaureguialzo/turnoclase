@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,35 +16,35 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ism-yy-2Lp" userLabel="contenedorLogin" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="52" y="191" width="285" height="285"/>
+                                <rect key="frame" x="52" y="263.66666666666669" width="285" height="285.00000000000006"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="Jm1-YI-w1W" userLabel="imagenFondo">
-                                        <rect key="frame" x="14.5" y="14.5" width="256" height="256"/>
+                                    <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fondo" translatesAutoresizingMaskIntoConstraints="NO" id="Jm1-YI-w1W" userLabel="imagenFondo">
+                                        <rect key="frame" x="14.666666666666686" y="14.333333333333314" width="256" height="256"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLASS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5W-k5-R8I" userLabel="etiquetaAula">
-                                        <rect key="frame" x="116" y="65" width="53" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLASS" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5W-k5-R8I" userLabel="etiquetaAula">
+                                        <rect key="frame" x="116" y="60.666666666666636" width="53" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BE131" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KDG-Yu-H2h" userLabel="textoAula">
-                                        <rect key="frame" x="32" y="93.5" width="221" height="31"/>
+                                        <rect key="frame" x="32" y="89" width="221" height="35"/>
                                         <accessibility key="accessibilityConfiguration" identifier="textoAula"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6B-ON-j6k" userLabel="etiquetaUsuario">
-                                        <rect key="frame" x="119" y="140.5" width="47.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6B-ON-j6k" userLabel="etiquetaUsuario">
+                                        <rect key="frame" x="118.66666666666667" y="140" width="47.666666666666671" height="20.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ion" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w4Z-4N-Fld" userLabel="textoUsuario">
-                                        <rect key="frame" x="32" y="169" width="221" height="31"/>
+                                        <rect key="frame" x="32" y="168.66666666666663" width="221" height="35"/>
                                         <accessibility key="accessibilityConfiguration" identifier="textoUsuario"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
@@ -89,7 +87,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Zt-ce-FAZ" userLabel="contenedorBotonConectar" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="229.5" y="420.5" width="72" height="72"/>
+                                <rect key="frame" x="229.66666666666663" y="493" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRC-dO-aCu" userLabel="botonConectar" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
@@ -135,7 +133,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Ism-yy-2Lp" firstAttribute="centerX" secondItem="4Zt-ce-FAZ" secondAttribute="centerX" constant="-71" id="BfI-aM-GhY"/>
                             <constraint firstItem="Ism-yy-2Lp" firstAttribute="centerY" secondItem="4Zt-ce-FAZ" secondAttribute="centerY" constant="-123" id="U7t-5q-c0A"/>
@@ -161,17 +159,17 @@
                         <viewControllerLayoutGuide type="bottom" id="nCt-SV-Ejk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mjK-d1-wRg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOw-p5-o8R" userLabel="contenedorRestantes" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="52" y="191" width="285" height="285"/>
+                                <rect key="frame" x="52" y="236.66666666666663" width="285" height="285"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="YwI-8f-W76" userLabel="imagenFondo">
-                                        <rect key="frame" x="14.5" y="14.5" width="256" height="256"/>
+                                    <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fondo" translatesAutoresizingMaskIntoConstraints="NO" id="YwI-8f-W76" userLabel="imagenFondo">
+                                        <rect key="frame" x="14.666666666666686" y="14.333333333333343" width="256" height="256"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="UsV-sj-uaF" userLabel="etiquetaNumero">
-                                        <rect key="frame" x="142.5" y="142.5" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="142.66666666666666" y="142.33333333333334" width="0.0" height="0.0"/>
                                         <accessibility key="accessibilityConfiguration" identifier="etiquetaMensaje"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="102"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -204,10 +202,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trg-x5-eMf" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="229.5" y="174.5" width="72" height="72"/>
+                                <rect key="frame" x="229.66666666666663" y="220" width="72" height="72"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="j8F-6N-3YS" userLabel="etiquetaAula">
-                                        <rect key="frame" x="29" y="26" width="14" height="20.5"/>
+                                        <rect key="frame" x="29.000000000000028" y="25.666666666666657" width="14" height="20.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -230,7 +228,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csW-Ho-Yvk" userLabel="contenedorBotonCancelar" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="35.5" y="226.5" width="72" height="72"/>
+                                <rect key="frame" x="35.666666666666657" y="272" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dp2-gh-yJM" userLabel="botonCancelar" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
@@ -274,19 +272,19 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crC-5K-I1E" userLabel="contenedorBotonActualizar" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="229.5" y="420.5" width="72" height="72"/>
+                                <rect key="frame" x="229.66666666666663" y="466" width="72" height="72"/>
                                 <subviews>
                                     <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ct9-cP-gnP" userLabel="contenedorCronometro">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="ZdV-fO-lp1">
-                                                <rect key="frame" x="13" y="26" width="20.5" height="20.5"/>
+                                                <rect key="frame" x="12.999999999999998" y="25.666666666666686" width="20.333333333333329" height="20.666666666666671"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="headTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEN-5v-je4">
-                                                <rect key="frame" x="33.5" y="27.5" width="5" height="17"/>
+                                                <rect key="frame" x="33.333333333333343" y="27.666666666666686" width="5" height="17"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content=":">
                                                         <attributes>
@@ -299,7 +297,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="iEP-5n-3TB">
-                                                <rect key="frame" x="38.5" y="26" width="21" height="20.5"/>
+                                                <rect key="frame" x="38.333333333333343" y="25.666666666666686" width="21" height="20.666666666666671"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -366,7 +364,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Trg-x5-eMf" firstAttribute="centerX" secondItem="YOw-p5-o8R" secondAttribute="centerX" constant="71" id="Apg-fx-uHe"/>
                             <constraint firstAttribute="centerX" secondItem="YOw-p5-o8R" secondAttribute="centerX" constant="-7" id="BWf-IK-EQH"/>
@@ -393,6 +391,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Launch" width="256" height="256"/>
+        <image name="Fondo" width="256" height="256"/>
     </resources>
 </document>
