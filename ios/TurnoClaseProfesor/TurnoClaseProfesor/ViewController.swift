@@ -87,11 +87,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     var session: WCSession?
 
-    // REF: Barra de navegación en color claro: https://stackoverflow.com/a/52443917/5136913
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
