@@ -44,8 +44,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textoUsuario.placeholder = nombre
         
         if #available(iOS 13.0, *) {
-            textoAula.overrideUserInterfaceStyle = .light
-            textoUsuario.overrideUserInterfaceStyle = .light
+            textoAula.textColor = .black
+            textoAula.backgroundColor = .white
+            textoUsuario.textColor = .black
+            textoUsuario.backgroundColor = .white
         }
         
         // Depuración
