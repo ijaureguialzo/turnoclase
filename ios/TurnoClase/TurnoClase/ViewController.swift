@@ -42,14 +42,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // REF: Nombre al azar
         let nombre = Nombres.aleatorio()
         textoUsuario.placeholder = nombre
-        
+
         if #available(iOS 13.0, *) {
             textoAula.textColor = .black
             textoAula.backgroundColor = .white
+            // REF: Color del placeholder: https://stackoverflow.com/a/43346157
+            textoAula.attributedPlaceholder = NSAttributedString(string: "BE131", attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)])
             textoUsuario.textColor = .black
             textoUsuario.backgroundColor = .white
+            textoUsuario.attributedPlaceholder = NSAttributedString(string: nombre, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)])
         }
-        
+
         // Depuración
         #if DEBUG
             log.debug("Generando datos de prueba...")
