@@ -31,12 +31,8 @@ platform :ios do
           "iPhone 8 Plus",
           "iPhone Xs",
           "iPhone Xs Max",
-          "iPhone Xʀ",
           "iPad Pro (12.9-inch) (3rd generation)",
           "iPad Pro (12.9-inch)",
-          "iPad Pro (11-inch)",
-          "iPad Pro (10.5-inch)",
-          "iPad Pro (9.7-inch)"
       ]
     end
 
@@ -63,7 +59,6 @@ platform :ios do
     deliver(
         force: true,
         skip_binary_upload: true,
-        overwrite_screenshots: true,
         skip_screenshots: !subir_appstore
     )
   end
