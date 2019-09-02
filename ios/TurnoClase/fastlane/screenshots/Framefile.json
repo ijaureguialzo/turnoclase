@@ -4,13 +4,14 @@
       "color": "#545454"
     },
     "keyword": {
-      "color": "#1076B9", // Azul
-      "padding": 200
+      "color": "#1076B9" // Azul
     },
     "background": "./background.jpg",
-    "padding": 100,
+    "padding": "3%x8%",
     "show_complete_frame": false,
-      "stack_title": true
+    "stack_title": true,
+    "title_min_height": "20%",
+    "font_scale_factor": 0.06
   },
 
   "data": [
