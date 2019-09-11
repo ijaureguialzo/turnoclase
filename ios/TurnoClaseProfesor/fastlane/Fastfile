@@ -22,8 +22,8 @@ platform :ios do
   desc "Crear y subir capturas"
   lane :capturas do
 
-    if prompt(text: "Modo prueba (sólo un iPhone X) (s|n): ").downcase == "s"
-      dispositivos = ["iPhone X"]
+    if prompt(text: "Modo prueba (sólo un iPhone Xs) (s|n): ").downcase == "s"
+      dispositivos = ["iPhone Xs"]
     else
       dispositivos = [
           "iPhone SE",
@@ -39,7 +39,7 @@ platform :ios do
     if prompt(text: "Localizado (s|n): ").downcase == "s"
       idiomas = ["en-US", "es-ES"]
     else
-      idiomas = ["es-ES"]
+      idiomas = ["en-US"]
     end
 
     subir_appstore = prompt(text: "Subirlas a la App Store (s|n): ").downcase == "s"
@@ -56,11 +56,13 @@ platform :ios do
 
     frame_screenshots
 
-    deliver(
-        force: true,
-        skip_binary_upload: true,
-        skip_screenshots: !subir_appstore
-    )
+    if subir_appstore
+      deliver(
+          force: true,
+          skip_binary_upload: true,
+          skip_screenshots: false
+      )
+    end
   end
 
   desc "Subir una nueva versión a la App Store"
