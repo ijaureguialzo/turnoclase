@@ -32,7 +32,6 @@ platform :ios do
           "iPhone Xs",
           "iPhone Xs Max",
           "iPad Pro (12.9-inch) (3rd generation)",
-          "iPad Pro (12.9-inch)",
       ]
     end
 
