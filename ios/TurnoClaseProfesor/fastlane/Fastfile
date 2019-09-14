@@ -26,12 +26,13 @@ platform :ios do
       dispositivos = ["iPhone Xs"]
     else
       dispositivos = [
-          "iPhone 5s",
+          "iPhone SE",
           "iPhone 8",
           "iPhone 8 Plus",
           "iPhone Xs",
           "iPhone Xs Max",
           "iPad Pro (12.9-inch) (3rd generation)",
+          "iPad Pro (12.9-inch) (2nd generation)",
       ]
     end
 
