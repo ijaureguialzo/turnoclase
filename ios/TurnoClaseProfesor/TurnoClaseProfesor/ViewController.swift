@@ -464,9 +464,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     func dialogoTiempoEspera() {
 
         let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: 250, height: 100)
+        vc.preferredContentSize = CGSize(width: 320, height: 216)
 
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 100))
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 320, height: 216))
         pickerView.delegate = self
         pickerView.dataSource = self
         vc.view.addSubview(pickerView)
