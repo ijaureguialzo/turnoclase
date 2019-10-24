@@ -119,7 +119,6 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - Protobuf (3.10.0)
-  - SimulatorStatusMagic (2.4.1)
   - XCGLogger (7.0.0):
     - XCGLogger/Core (= 7.0.0)
   - XCGLogger/Core (7.0.0):
@@ -130,7 +129,6 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - Localize-Swift
-  - SimulatorStatusMagic
   - XCGLogger
 
 SPEC REPOS:
@@ -157,7 +155,6 @@ SPEC REPOS:
     - nanopb
     - ObjcExceptionBridging
     - Protobuf
-    - SimulatorStatusMagic
     - XCGLogger
 
 SPEC CHECKSUMS:
@@ -183,9 +180,8 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
-  SimulatorStatusMagic: 28d4a9d1a500ac7cea0b2b5a43c1c6ddb40ba56c
   XCGLogger: 0434f15e3909cdc450bb63faf638b8792ab782ab
 
-PODFILE CHECKSUM: 16d3dd75f5bce63a0b3a7d32e3b40f24f379859e
+PODFILE CHECKSUM: a6bada37cd40a85369f72d2060ca9db20be979a1
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4
