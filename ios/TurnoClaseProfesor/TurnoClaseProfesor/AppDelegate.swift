@@ -33,11 +33,6 @@ let log = XCGLogger.default
 // Conexión a Firestore
 let db = Firestore.firestore()
 
-// Barra de estado a las 9:41
-#if DEBUG
-    import SimulatorStatusMagic
-#endif
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -57,16 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = db.settings
         settings.isPersistenceEnabled = false
         db.settings = settings
-
-        // Barra de estado a las 9:41
-        #if DEBUG
-            if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-                // runtime check that we are in snapshot mode
-                SDStatusBarManager.sharedInstance().enableOverrides()
-            } else {
-                SDStatusBarManager.sharedInstance().disableOverrides()
-            }
-        #endif
 
         return true
     }

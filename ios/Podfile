@@ -11,9 +11,6 @@ def turnoclase_ios_pods
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Firestore'
-
-    # REF: Limpiar la barra de estado y poner las 9:41 para hacer capturas: https://github.com/shinydevelopment/SimulatorStatusMagic
-    pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
 
 def turnoclase_watchos_pods
