@@ -17,4 +17,6 @@
     <string name="etiqueta_titulo_reconocimientos">Reconocimientos</string>
     <string name="VOLVER_A_EMPEZAR">Pulsa ⟳ para pedir turno</string>
     <string name="ESPERA">Espera para pedir turno...</string>
+    <string name="etiqueta_error">ERROR</string>
+    <string name="MENSAJE_ERROR">Verifica el número de aula\no la conexión de red</string>
 </resources>
