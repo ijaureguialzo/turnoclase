@@ -63,6 +63,7 @@ class TurnoViewController: UIViewController {
     @IBOutlet weak var etiquetaSegundos: UILabel!
     @IBOutlet weak var contenedorCronometro: UIView!
     @IBOutlet weak var botonActualizar: UIButton!
+    @IBOutlet weak var contenedorError: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +71,7 @@ class TurnoViewController: UIViewController {
         if #available(iOS 13.0, *) {
             self.isModalInPresentation = true
         }
-        
+
         log.debug("Valores recibidos: \(codigoAula ??? "[Aula desconocida]") - \(nombreUsuario ??? "[Usuario desconocido]")")
 
         log.info("Iniciando la aplicación...")

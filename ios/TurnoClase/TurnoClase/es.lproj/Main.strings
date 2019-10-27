@@ -2,14 +2,23 @@
 /* Class = "UITextField"; placeholder = "BE131"; ObjectID = "KDG-Yu-H2h"; */
 "KDG-Yu-H2h.placeholder" = "BE131";
 
-/* Class = "UILabel"; text = "NOMBRE"; ObjectID = "i6B-ON-j6k"; */
+/* Class = "UILabel"; text = "NAME"; ObjectID = "i6B-ON-j6k"; */
 "i6B-ON-j6k.text" = "NOMBRE";
 
 /* Class = "UILabel"; text = "..."; ObjectID = "j8F-6N-3YS"; */
 "j8F-6N-3YS.text" = "···";
 
-/* Class = "UILabel"; text = "AULA"; ObjectID = "l5W-k5-R8I"; */
+/* Class = "UILabel"; text = "CLASSROOM"; ObjectID = "l5W-k5-R8I"; */
 "l5W-k5-R8I.text" = "AULA";
 
-/* Class = "UITextField"; placeholder = "a224p05"; ObjectID = "w4Z-4N-Fld"; */
+/* Class = "UITextField"; placeholder = "Ion"; ObjectID = "w4Z-4N-Fld"; */
 "w4Z-4N-Fld.placeholder" = "Ion";
+
+/* Class = "UILabel"; text = "05"; ObjectID = "ZdV-fO-lp1"; */
+"ZdV-fO-lp1.text" = "";
+
+/* Class = "UILabel"; text = "00"; ObjectID = "iEP-5n-3TB"; */
+"iEP-5n-3TB.text" = "";
+
+/* Class = "UILabel"; text = "ERROR"; ObjectID = "MFa-WW-w84"; */
+"MFa-WW-w84.text" = "ERROR";

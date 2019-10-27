@@ -317,6 +317,24 @@
                                             <constraint firstItem="iEP-5n-3TB" firstAttribute="leading" secondItem="oEN-5v-je4" secondAttribute="trailing" id="z4p-rh-sIP"/>
                                         </constraints>
                                     </view>
+                                    <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9y-yI-c2h" userLabel="contenedorError">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="ERROR" textAlignment="natural" lineBreakMode="headTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFa-WW-w84" userLabel="Error">
+                                                <rect key="frame" x="11.333333333333343" y="27" width="49" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="MFa-WW-w84" firstAttribute="centerX" secondItem="k9y-yI-c2h" secondAttribute="centerX" id="7g6-Fs-TtG"/>
+                                            <constraint firstAttribute="width" constant="72" id="8gn-O3-vFt"/>
+                                            <constraint firstAttribute="height" constant="72" id="OIv-vl-Fyv"/>
+                                            <constraint firstItem="MFa-WW-w84" firstAttribute="centerY" secondItem="k9y-yI-c2h" secondAttribute="centerY" id="ljp-ZM-ora"/>
+                                        </constraints>
+                                    </view>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9k-nP-zxH" userLabel="botonActualizar" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                         <accessibility key="accessibilityConfiguration" identifier="botonActualizar"/>
@@ -348,6 +366,7 @@
                                 <constraints>
                                     <constraint firstItem="d9k-nP-zxH" firstAttribute="top" secondItem="crC-5K-I1E" secondAttribute="top" id="48B-xW-KdE"/>
                                     <constraint firstItem="d9k-nP-zxH" firstAttribute="leading" secondItem="crC-5K-I1E" secondAttribute="leading" id="5WX-Om-4mk"/>
+                                    <constraint firstItem="k9y-yI-c2h" firstAttribute="centerY" secondItem="crC-5K-I1E" secondAttribute="centerY" id="83V-t6-NmH"/>
                                     <constraint firstAttribute="bottom" secondItem="d9k-nP-zxH" secondAttribute="bottom" id="Ab5-zJ-1tS"/>
                                     <constraint firstItem="Ct9-cP-gnP" firstAttribute="centerY" secondItem="crC-5K-I1E" secondAttribute="centerY" id="NIb-92-Qxm"/>
                                     <constraint firstAttribute="centerX" secondItem="d9k-nP-zxH" secondAttribute="centerX" id="Rzc-0l-d5d"/>
@@ -356,6 +375,7 @@
                                     <constraint firstAttribute="centerY" secondItem="d9k-nP-zxH" secondAttribute="centerY" id="aBZ-Q8-Vwc"/>
                                     <constraint firstAttribute="trailing" secondItem="d9k-nP-zxH" secondAttribute="trailing" id="kjo-9b-Iix"/>
                                     <constraint firstItem="Ct9-cP-gnP" firstAttribute="centerX" secondItem="crC-5K-I1E" secondAttribute="centerX" id="wsj-xo-bOI"/>
+                                    <constraint firstItem="k9y-yI-c2h" firstAttribute="centerX" secondItem="crC-5K-I1E" secondAttribute="centerX" id="zoG-H4-YRq"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="colorCirculo">
@@ -379,6 +399,7 @@
                     <connections>
                         <outlet property="botonActualizar" destination="d9k-nP-zxH" id="Acx-xn-Bxm"/>
                         <outlet property="contenedorCronometro" destination="Ct9-cP-gnP" id="mt1-QP-ABi"/>
+                        <outlet property="contenedorError" destination="k9y-yI-c2h" id="k4z-jE-EQn"/>
                         <outlet property="etiquetaAula" destination="j8F-6N-3YS" id="K4z-y2-xKO"/>
                         <outlet property="etiquetaMensaje" destination="UsV-sj-uaF" id="5vn-De-MqH"/>
                         <outlet property="etiquetaMinutos" destination="ZdV-fO-lp1" id="vj3-Zt-btb"/>
