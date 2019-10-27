@@ -266,6 +266,13 @@ class TurnoViewController: UIViewController {
     }
 
     fileprivate func actualizarAula(mensaje: String) {
+
+        if mensaje.contains("\n") {
+            self.etiquetaMensaje.numberOfLines = 2
+        } else {
+            self.etiquetaMensaje.numberOfLines = 1
+        }
+
         etiquetaMensaje.text = mensaje
         log.info("Mensaje: \(mensaje)")
     }
