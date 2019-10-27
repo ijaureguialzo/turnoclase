@@ -63,6 +63,7 @@ class TurnoViewController: UIViewController {
     @IBOutlet weak var etiquetaSegundos: UILabel!
     @IBOutlet weak var contenedorCronometro: UIView!
     @IBOutlet weak var botonActualizar: UIButton!
+    @IBOutlet weak var contenedorError: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +71,7 @@ class TurnoViewController: UIViewController {
         if #available(iOS 13.0, *) {
             self.isModalInPresentation = true
         }
-        
+
         log.debug("Valores recibidos: \(codigoAula ??? "[Aula desconocida]") - \(nombreUsuario ??? "[Usuario desconocido]")")
 
         log.info("Iniciando la aplicación...")
@@ -94,7 +95,8 @@ class TurnoViewController: UIViewController {
 
                 } else {
                     log.error("Error de inicio de sesión: \(error!.localizedDescription)")
-                    self.actualizarAula(codigo: "?", mensaje: "")
+                    self.actualizarAula(codigo: "?", mensaje: NSLocalizedString("MENSAJE_ERROR", comment: "Mensaje de aula no encontrada o sin conexión"))
+                    self.mostrarError()
                 }
             }
         }
@@ -132,8 +134,9 @@ class TurnoViewController: UIViewController {
 
                     self.conectarListenerAula(document)
                 } else {
-                    log.info("Aula no encontrada")
-                    self.actualizarAula(codigo: "?", mensaje: "")
+                    log.error("Aula no encontrada")
+                    self.actualizarAula(codigo: "?", mensaje: NSLocalizedString("MENSAJE_ERROR", comment: "Mensaje de aula no encontrada o sin conexión"))
+                    self.mostrarError()
                 }
             }
         }
@@ -263,6 +266,13 @@ class TurnoViewController: UIViewController {
     }
 
     fileprivate func actualizarAula(mensaje: String) {
+
+        if mensaje.contains("\n") {
+            self.etiquetaMensaje.numberOfLines = 2
+        } else {
+            self.etiquetaMensaje.numberOfLines = 1
+        }
+
         etiquetaMensaje.text = mensaje
         log.info("Mensaje: \(mensaje)")
     }
@@ -298,8 +308,9 @@ class TurnoViewController: UIViewController {
             }
 
         } else {
-            self.actualizarAula(codigo: "?", mensaje: "")
             log.error("No hay referencia al aula")
+            self.actualizarAula(codigo: "?", mensaje: NSLocalizedString("MENSAJE_ERROR", comment: "Mensaje de aula no encontrada o sin conexión"))
+            self.mostrarError()
         }
     }
 
@@ -432,11 +443,19 @@ class TurnoViewController: UIViewController {
         actualizarCronometro()
         botonActualizar.isHidden = true
         contenedorCronometro.isHidden = false
+        contenedorError.isHidden = true
     }
 
     func mostrarBoton() {
         botonActualizar.isHidden = false
         contenedorCronometro.isHidden = true
+        contenedorError.isHidden = true
+    }
+
+    func mostrarError() {
+        botonActualizar.isHidden = true
+        contenedorCronometro.isHidden = true
+        contenedorError.isHidden = false
     }
 
     func iniciarCronometro() {

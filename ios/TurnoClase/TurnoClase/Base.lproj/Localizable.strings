@@ -9,3 +9,4 @@
 ES_TU_TURNO="It's your turn!";
 VOLVER_A_EMPEZAR="Press ⟳ to request a turn";
 ESPERA="Wait to request another turn...";
+MENSAJE_ERROR="Check classroom number\nor network connection";

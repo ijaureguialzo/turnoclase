@@ -9,3 +9,4 @@
 ES_TU_TURNO="Zure txanda da!";
 VOLVER_A_EMPEZAR="Sakatu ⟳ txanda eskatzeko";
 ESPERA="Itxaron txanda eskatzeko...";
+MENSAJE_ERROR="Gela zenbakia edo\nsare konexioa egiaztatu";
