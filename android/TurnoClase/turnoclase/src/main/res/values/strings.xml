@@ -54,4 +54,6 @@
     </string>
     <string name="VOLVER_A_EMPEZAR">Press ⟳ to request a turn</string>
     <string name="ESPERA">Wait to request another turn...</string>
+    <string name="etiqueta_error">ERROR</string>
+    <string name="MENSAJE_ERROR">Check classroom number\nor network connection</string>
 </resources>

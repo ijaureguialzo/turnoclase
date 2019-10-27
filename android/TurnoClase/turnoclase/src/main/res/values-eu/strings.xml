@@ -17,4 +17,6 @@
     <string name="etiqueta_titulo_reconocimientos">Aitorpenak</string>
     <string name="VOLVER_A_EMPEZAR">Sakatu ⟳ txanda eskatzeko</string>
     <string name="ESPERA">Itxaron txanda eskatzeko...</string>
+    <string name="etiqueta_error">ERRORE</string>
+    <string name="MENSAJE_ERROR">Gela zenbakia edo\nsare konexioa egiaztatu</string>
 </resources>

@@ -126,7 +126,8 @@ class AlumnoTurno : AppCompatActivity() {
                             encolarAlumno()
                         } else {
                             Log.e(TAG, "Error de inicio de sesión", it.exception)
-                            actualizarAula("?", "")
+                            actualizarAula("?", resources.getString(R.string.MENSAJE_ERROR))
+                            mostrarError()
                         }
                     }
         }
@@ -186,8 +187,9 @@ class AlumnoTurno : AppCompatActivity() {
 
                             conectarListenerAula(document)
                         } else {
-                            Log.d(TAG, "Aula no encontrada")
-                            actualizarAula("?", "")
+                            Log.e(TAG, "Aula no encontrada")
+                            actualizarAula("?", resources.getString(R.string.MENSAJE_ERROR))
+                            mostrarError()
                         }
                     }
                 }
@@ -319,6 +321,13 @@ class AlumnoTurno : AppCompatActivity() {
     }
 
     private fun actualizarAula(mensaje: String) {
+
+        if (mensaje.contains('\n')) {
+            etiquetaMensaje.maxLines = 2
+        } else {
+            etiquetaMensaje.maxLines = 1
+        }
+
         etiquetaMensaje.text = mensaje
         Log.d(TAG, "Mensaje: $mensaje")
     }
@@ -354,8 +363,9 @@ class AlumnoTurno : AppCompatActivity() {
                         }
             }
         } else {
-            actualizarAula("?", "")
             Log.e(TAG, "No hay referencia al aula")
+            actualizarAula("?", resources.getString(R.string.MENSAJE_ERROR))
+            mostrarError()
         }
     }
 
@@ -505,6 +515,12 @@ class AlumnoTurno : AppCompatActivity() {
     fun mostrarBoton() {
         etiquetaCronometro.visibility = View.INVISIBLE
         botonActualizar.visibility = View.VISIBLE
+    }
+
+    fun mostrarError() {
+        botonActualizar.visibility = View.INVISIBLE
+        etiquetaCronometro.visibility = View.INVISIBLE
+        etiquetaError.visibility = View.VISIBLE
     }
 
     fun iniciarCronometro() {

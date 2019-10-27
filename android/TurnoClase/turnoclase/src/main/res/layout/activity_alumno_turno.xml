@@ -72,6 +72,17 @@
             android:textColor="@android:color/white"
             android:visibility="invisible" />
 
+        <TextView
+            android:id="@+id/etiquetaError"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:width="72dp"
+            android:height="72dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/etiqueta_error"
+            android:textColor="@android:color/white"
+            android:visibility="invisible" />
+
     </FrameLayout>
 
     <TextView
