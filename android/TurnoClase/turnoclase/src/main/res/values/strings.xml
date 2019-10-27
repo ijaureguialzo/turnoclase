@@ -14,7 +14,7 @@
     <string name="texto_usuario" translatable="false">a224p05</string>
     <string name="etiqueta_nombre_usuario">Name</string>
     <string name="etiqueta_introduce_datos">Insert your information and tap connect.</string>
-    <string name="etiqueta_aula">Class</string>
+    <string name="etiqueta_aula">Classroom</string>
     <string name="boton_conectar">Connect</string>
     <string name="etiqueta_turnos_restantes">Ahead of you in the queue:</string>
     <string name="botonActualizar">Update</string>
