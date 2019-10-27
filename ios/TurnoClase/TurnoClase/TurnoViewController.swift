@@ -95,7 +95,8 @@ class TurnoViewController: UIViewController {
 
                 } else {
                     log.error("Error de inicio de sesión: \(error!.localizedDescription)")
-                    self.actualizarAula(codigo: "?", mensaje: "")
+                    self.actualizarAula(codigo: "?", mensaje: NSLocalizedString("MENSAJE_ERROR", comment: "Mensaje de aula no encontrada o sin conexión"))
+                    self.mostrarError()
                 }
             }
         }
@@ -133,8 +134,9 @@ class TurnoViewController: UIViewController {
 
                     self.conectarListenerAula(document)
                 } else {
-                    log.info("Aula no encontrada")
-                    self.actualizarAula(codigo: "?", mensaje: "")
+                    log.error("Aula no encontrada")
+                    self.actualizarAula(codigo: "?", mensaje: NSLocalizedString("MENSAJE_ERROR", comment: "Mensaje de aula no encontrada o sin conexión"))
+                    self.mostrarError()
                 }
             }
         }
@@ -299,8 +301,9 @@ class TurnoViewController: UIViewController {
             }
 
         } else {
-            self.actualizarAula(codigo: "?", mensaje: "")
             log.error("No hay referencia al aula")
+            self.actualizarAula(codigo: "?", mensaje: NSLocalizedString("MENSAJE_ERROR", comment: "Mensaje de aula no encontrada o sin conexión"))
+            self.mostrarError()
         }
     }
 
@@ -433,11 +436,19 @@ class TurnoViewController: UIViewController {
         actualizarCronometro()
         botonActualizar.isHidden = true
         contenedorCronometro.isHidden = false
+        contenedorError.isHidden = true
     }
 
     func mostrarBoton() {
         botonActualizar.isHidden = false
         contenedorCronometro.isHidden = true
+        contenedorError.isHidden = true
+    }
+
+    func mostrarError() {
+        botonActualizar.isHidden = true
+        contenedorCronometro.isHidden = true
+        contenedorError.isHidden = false
     }
 
     func iniciarCronometro() {
