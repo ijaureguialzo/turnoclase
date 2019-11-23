@@ -8,21 +8,21 @@
 
 "Boton_Siguiente" = "Siguiente"; // No traducir
 
-"Aula %@" = "Class %@";
+"Aula %@" = "Classroom %@";
 "Cancelar" = "Cancel";
 "Conectado como invitado" = "Connected as guest";
 "Conectar" = "Connect";
-"Conectar a otra aula" = "Connect to another class";
-"Código de aula" = "Class code";
-"Desconectar del aula" = "Disconnect from the class";
+"Conectar a otra aula" = "Connect to another classroom";
+"Código de aula" = "Classroom code";
+"Desconectar del aula" = "Disconnect from the classroom";
 "Error de conexión" = "Connection error";
 "Establecer tiempo de espera" = "Set wait time";
-"Generar nueva aula" = "Generate new class";
+"Generar nueva aula" = "Generate new classroom";
 "Guardar" = "Save";
-"Introduce los datos del aula a la que quieres conectar." = "Insert data of the class you are connecting to.";
-"No se ha podido acceder al aula con los datos proporcionados." = "Can't access to the class with provided data.";
+"Introduce los datos del aula a la que quieres conectar." = "Insert data of the classroom you are connecting to.";
+"No se ha podido acceder al aula con los datos proporcionados." = "Can't access to the classroom with provided data.";
 "Ok" = "Ok";
 "PIN" = "PIN";
-"PIN para compartir este aula: %@" = "PIN to share this class: %@";
+"PIN para compartir este aula: %@" = "PIN to share this classroom: %@";
 "Siguiente" = "Next";
 "Tiempo de espera (minutos)" = "Wait time (minutes)";
