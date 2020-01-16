@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,17 +16,17 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEC-KV-Dai" userLabel="contenedorActual" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="52" y="263.66666666666669" width="285" height="285.00000000000006"/>
+                                <rect key="frame" x="71.5" y="305.5" width="285" height="285"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.025000000000000001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fondo" translatesAutoresizingMaskIntoConstraints="NO" id="aPZ-OB-zLv" userLabel="imagenFondo">
-                                        <rect key="frame" x="14.666666666666686" y="14.333333333333314" width="256" height="256"/>
+                                        <rect key="frame" x="14.5" y="14.5" width="256" height="256"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="bbj-7Q-0e0" userLabel="etiquetaNombreAlumno">
-                                        <rect key="frame" x="16" y="142.33333333333331" width="253" height="0.0"/>
+                                        <rect key="frame" x="16" y="142.5" width="253" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="51"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -48,8 +48,13 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="16" translatesAutoresizingMaskIntoConstraints="NO" id="iFo-yO-TrL" userLabel="pageControl">
+                                <rect key="frame" x="83.5" y="622.5" width="247" height="37"/>
+                                <color key="pageIndicatorTintColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hc-gA-Oel" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="35.666666666666657" y="299" width="72" height="72"/>
+                                <rect key="frame" x="55" y="341" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfn-8u-Zne" userLabel="botonCodigoAula" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="21" y="0.0" width="30" height="72"/>
@@ -85,7 +90,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7k-GT-Ntb" userLabel="contenedorRestantes" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="229.66666666666663" y="247" width="72" height="72"/>
+                                <rect key="frame" x="249" y="289" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anU-ip-9Dt" userLabel="botonEnCola" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="21" y="0.0" width="30" height="72"/>
@@ -118,7 +123,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkH-NG-bdu" userLabel="contenedorBotonSiguiente" customClass="FondoCircular" customModule="TurnoClaseShared">
-                                <rect key="frame" x="229.66666666666663" y="493" width="72" height="72"/>
+                                <rect key="frame" x="249" y="535" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1E-Zv-bEE" userLabel="botonSiguiente" customClass="BotonGrafico" customModule="TurnoClaseShared">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
@@ -164,6 +169,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="aPZ-OB-zLv" firstAttribute="centerX" secondItem="dkH-NG-bdu" secondAttribute="centerX" constant="-71" id="1Fr-uI-TXY"/>
                             <constraint firstItem="4hc-gA-Oel" firstAttribute="centerX" secondItem="hEC-KV-Dai" secondAttribute="centerX" constant="-194.5" id="3UY-Qc-opE">
@@ -187,11 +193,13 @@
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="centerY" secondItem="4hc-gA-Oel" secondAttribute="centerY" constant="0.5" id="UQh-YS-c2B">
                                 <variation key="heightClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="hEC-KV-Dai" firstAttribute="bottom" secondItem="iFo-yO-TrL" secondAttribute="top" constant="-32" id="VuD-vt-jhD"/>
                             <constraint firstItem="4hc-gA-Oel" firstAttribute="centerX" secondItem="hEC-KV-Dai" secondAttribute="centerX" constant="-142.5" id="aRr-Ry-4bd">
                                 <variation key="heightClass=compact" constant="-123"/>
                             </constraint>
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="centerY" secondItem="S7k-GT-Ntb" secondAttribute="centerY" constant="123" id="fUM-nT-EGd"/>
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="top" secondItem="S7k-GT-Ntb" secondAttribute="bottom" constant="-16" id="hkw-Hi-yju"/>
+                            <constraint firstItem="iFo-yO-TrL" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="hlO-UE-zjI"/>
                             <constraint firstItem="aPZ-OB-zLv" firstAttribute="centerY" secondItem="dkH-NG-bdu" secondAttribute="centerY" constant="-123" id="neX-or-DMN"/>
                             <constraint firstItem="4hc-gA-Oel" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="sBn-6R-ZWr"/>
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="top" secondItem="4hc-gA-Oel" secondAttribute="bottom" constant="-36" id="v7F-xA-8R5"/>
@@ -224,11 +232,16 @@
                                 <include reference="aRr-Ry-4bd"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="CiO-T6-0Te" appends="YES" id="JhT-UQ-S6E"/>
+                            <outletCollection property="gestureRecognizers" destination="BhY-uY-fCh" appends="YES" id="TV7-sG-I5c"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="etiquetaBotonCodigoAula" destination="Gfn-8u-Zne" id="2iV-44-MQY"/>
                         <outlet property="etiquetaBotonEnCola" destination="anU-ip-9Dt" id="QJg-kS-3kR"/>
                         <outlet property="etiquetaNombreAlumno" destination="bbj-7Q-0e0" id="raP-0p-Xeb"/>
+                        <outlet property="pageControl" destination="iFo-yO-TrL" id="kBM-JU-bVC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -237,6 +250,16 @@
                         <action selector="botonCodigoAulaLargo:" destination="vXZ-lx-hvc" id="JKS-P3-bFk"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="CiO-T6-0Te">
+                    <connections>
+                        <action selector="swipeDerecha:" destination="vXZ-lx-hvc" id="CVD-q9-fln"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="BhY-uY-fCh">
+                    <connections>
+                        <action selector="swipeIzquierda:" destination="vXZ-lx-hvc" id="S1c-3j-GLB"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="254" y="351"/>
         </scene>

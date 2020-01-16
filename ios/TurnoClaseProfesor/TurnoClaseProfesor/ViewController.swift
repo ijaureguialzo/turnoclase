@@ -59,6 +59,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     @IBOutlet weak var etiquetaNombreAlumno: UILabel!
     @IBOutlet weak var etiquetaBotonEnCola: UIButton!
     @IBOutlet weak var etiquetaBotonCodigoAula: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
+
+    // Soporte para varias aulas
+    let MAX_AULAS = 16
+    var aulaActual = 0
+    var numAulas = 8
 
     // Para llamar a las funciones Cloud
     lazy var functions = Functions.functions(region: "europe-west1")
@@ -122,6 +128,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             // Limpiar el UI
             self.actualizarAula(codigo: "...", enCola: 0)
             self.actualizarMensaje(texto: "")
+
+            // Cargar el número de aulas creadas por el usuario
+            pageControl.numberOfPages = numAulas
 
             // Iniciar sesión y conectar al aula
             Auth.auth().signInAnonymously() { (result, error) in
@@ -651,6 +660,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         default:
             return newLength <= 0
         }
+    }
+
+    // Moverse entre aulas
+    @IBAction func swipeDerecha(_ sender: Any) {
+        if aulaActual > 0 {
+            aulaActual -= 1
+        }
+
+        pageControl.currentPage = aulaActual
+    }
+
+    @IBAction func swipeIzquierda(_ sender: Any) {
+        if aulaActual < pageControl.numberOfPages - 1 {
+            aulaActual += 1
+        }
+
+        pageControl.currentPage = aulaActual
     }
 
     // MARK: Funciones exclusivas de la versión iOS
