@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="?android:attr/colorBackground"
     android:gravity="center_vertical"
     tools:context="com.jaureguialzo.turnoclase.MainActivity">
 
@@ -26,7 +26,8 @@
         android:layout_toLeftOf="@+id/circuloGris"
         android:width="72dp"
         android:height="72dp"
-        android:background="@drawable/circulo_rojo">
+        android:background="@drawable/circulo_rojo"
+        android:theme="@style/Theme.AppCompat.Light">
 
         <Button
             android:id="@+id/botonCancelar"
@@ -49,7 +50,8 @@
         android:layout_toRightOf="@+id/circuloGris"
         android:width="72dp"
         android:height="72dp"
-        android:background="@drawable/circulo_azul">
+        android:background="@drawable/circulo_azul"
+        android:theme="@style/Theme.AppCompat.Light">
 
         <Button
             android:id="@+id/botonActualizar"
@@ -108,7 +110,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:theme="@style/Theme.AppCompat.Light">
 
         <TextView
             android:id="@+id/etiquetaMensaje"

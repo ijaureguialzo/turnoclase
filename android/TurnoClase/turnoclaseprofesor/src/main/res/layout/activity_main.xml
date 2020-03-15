@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="?android:attr/colorBackground"
     android:gravity="center_vertical"
     tools:context="com.jaureguialzo.turnoclaseprofesor.MainActivity">
 
@@ -104,7 +104,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:theme="@style/Theme.AppCompat.Light">
 
         <TextView
             android:id="@+id/etiquetaNombreAlumno"
