@@ -11,3 +11,5 @@ services:
     tty: true
     volumes:
       - .:/firebase
+    ports:
+      - 9005:9005
