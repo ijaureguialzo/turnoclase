@@ -10,4 +10,4 @@ services:
         - NODE_VERSION=${NODE_VERSION}
     tty: true
     volumes:
-      - ./functions:/functions
+      - .:/firebase

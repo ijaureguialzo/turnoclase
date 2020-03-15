@@ -8,6 +8,6 @@ RUN apk update && apk add --no-cache \
 
 RUN npm install -g firebase-tools
 
-WORKDIR /functions
+WORKDIR /firebase
 
 USER node
