@@ -15,7 +15,7 @@ exports.crearAula = functions.firestore
     .document('aulas/{userId}')
     .onCreate((snap, context) => {
 
-        const hashids = new Hashids("turnoclase", 5, "1234567890ABCDEFGHIJKLNOPQRSTUVXYZ");
+        const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
 
         const refContador = db.collection('total').doc('aulas');
 
