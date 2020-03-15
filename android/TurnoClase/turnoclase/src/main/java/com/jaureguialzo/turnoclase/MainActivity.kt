@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
     private val isRunningTest: Boolean by lazy {
         try {
-            Class.forName("android.support.test.espresso.Espresso")
+            Class.forName("androidx.test.espresso.Espresso")
             true
         } catch (e: ClassNotFoundException) {
             false
