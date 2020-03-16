@@ -33,6 +33,8 @@ import Localize_Swift
 
 import TurnoClaseShared
 
+import AudioToolbox
+
 class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // ID de usuario único generado por Firebase
@@ -64,6 +66,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var codigoAula = "..."
     var PIN = "..."
     var tiempoEspera = -1
+
+    // Almacenar el número de alumnos anterior para detectar el paso de 0 a 1 y reproducir el sonido
+    var recuentoAnterior = 0
 
     fileprivate func conectarAula() {
         // Cargar el aula y si no, crearla
@@ -336,6 +341,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     fileprivate func actualizarAula(enCola recuento: Int) {
+
+        let sonidoActivado = UserDefaults.standard.bool(forKey: "QUEUE_NOT_EMPTY")
+
+        if sonidoActivado && self.recuentoAnterior == 0 && recuento == 1 {
+            AudioServicesPlaySystemSound(SystemSoundID(1315))
+        }
+        self.recuentoAnterior = recuento
+
         self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
         log.info("Alumnos en cola: \(recuento)")
         enviarWatch(campo: "enCola", String(recuento))
