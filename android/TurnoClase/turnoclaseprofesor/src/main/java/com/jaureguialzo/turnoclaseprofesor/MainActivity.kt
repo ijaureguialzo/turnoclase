@@ -20,6 +20,8 @@ package com.jaureguialzo.turnoclaseprofesor
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.res.Configuration
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
 import android.util.Log
@@ -35,6 +37,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,6 +66,9 @@ class MainActivity : AppCompatActivity() {
     private var codigoAula = "..."
     private var PIN = "..."
     private var tiempoEspera = -1
+
+    // Almacenar el número de alumnos anterior para detectar el paso de 0 a 1 y reproducir el sonido
+    private var recuentoAnterior = 0
 
     // REF: Detectar si estamos en modo test: https://stackoverflow.com/a/40220621/5136913
     private val isRunningTest: Boolean by lazy {
@@ -395,9 +401,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun actualizarAula(enCola: Int) {
-        if (enCola != -1)
+        if (enCola != -1) {
+
+            if (recuentoAnterior == 0 && enCola == 1) {
+                try {
+                    val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                    val r = RingtoneManager.getRingtone(applicationContext, notification)
+                    r.play()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            recuentoAnterior = enCola
+
             botonEnCola.text = enCola.toString()
-        else
+        } else
             botonEnCola.text = "..."
         Log.d(TAG, "Alumnos en cola: $enCola")
     }
