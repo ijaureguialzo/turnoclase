@@ -269,7 +269,7 @@ class MainActivity : AppCompatActivity() {
 
         if (refAula != null) {
 
-            refAula!!.collection("cola").orderBy("timestamp").limit(1).get()
+            refAula!!.collection("cola").orderBy("timestamp").get()
                     .addOnCompleteListener { querySnapshot ->
                         if (!querySnapshot.isSuccessful) {
                             Log.e(TAG, "Error al recuperar datos: ", querySnapshot.exception)

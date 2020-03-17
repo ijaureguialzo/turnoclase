@@ -213,7 +213,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         if self.refAula != nil {
 
-            self.refAula.collection("cola").order(by: "timestamp").limit(to: 1).getDocuments() { (querySnapshot, error) in
+            self.refAula.collection("cola").order(by: "timestamp").getDocuments() { (querySnapshot, error) in
 
                 if let error = error {
                     log.error("Error al recuperar datos: \(error.localizedDescription)")
