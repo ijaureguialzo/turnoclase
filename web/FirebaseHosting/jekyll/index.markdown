@@ -40,4 +40,4 @@ TurnoClase is divided into two separate applications: one for students and one f
 </tbody>
 </table>
 
-You can write with your questions or suggestions to info@turnoclase.com.
+You can write with your questions or suggestions to [info@turnoclase.com](mailto:info@turnoclase.com).
