@@ -22,3 +22,8 @@ clean:
 
 serve:
 	@cd jekyll && bundle exec jekyll serve
+
+deploy:
+	@cd jekyll && bundle exec jekyll build
+	@cd ..
+	@docker-compose exec node firebase deploy --only hosting
