@@ -25,17 +25,17 @@ TurnoClase is divided into two separate applications: one for students and one f
 </tr>
 <tr>
 <th style="text-align: center;">Teacher's app</th>
-<td style="text-align: center;"><a href="https://apps.apple.com/us/app/turnoclase-teacher/id1016192152?ls=1" target="_blank" rel="noopener noreferrer"><img class="aligncenter wp-image-160" style="height: 48px;" src="https://www.jaureguialzo.com/wp-content/uploads/2015/07/Download_on_the_App_Store_Badge_US-UK_135x401.svg" alt="Download_on_the_App_Store_Badge_US-UK_135x40" height="48" /></a></td>
-<td style="text-align: center;"><a href="https://play.google.com/store/apps/details?id=com.jaureguialzo.turnoclaseprofesor" target="_blank" rel="noopener noreferrer"><img class="aligncenter wp-image-162" style="height: 48px;" src="https://www.jaureguialzo.com/wp-content/uploads/2015/07/en_get.svg" alt="en_get" height="48" /></a></td>
+<td style="text-align: center;"><a href="https://apps.apple.com/us/app/turnoclase-teacher/id1016192152?ls=1" target="_blank"><img style="height: 48px;" src="/images/badge_appstore-lrg-en.svg" alt="App Store Logo" height="48" /></a></td>
+<td style="text-align: center;"><a href="https://play.google.com/store/apps/details?id=com.jaureguialzo.turnoclaseprofesor" target="_blank"><img style="height: 48px;" src="/images/en_get.svg" alt="Play Store Logo" height="48" /></a></td>
 </tr>
 <tr>
 <th style="text-align: center;">Student's app</th>
-<td style="text-align: center;"><a href="https://apps.apple.com/us/app/turnoclase/id1016190896?ls=1" target="_blank" rel="noopener noreferrer"><img class="aligncenter wp-image-160" style="height: 48px;" src="https://www.jaureguialzo.com/wp-content/uploads/2015/07/Download_on_the_App_Store_Badge_US-UK_135x401.svg" alt="Download_on_the_App_Store_Badge_US-UK_135x40" height="48" /></a></td>
-<td style="text-align: center;"><a href="https://play.google.com/store/apps/details?id=com.jaureguialzo.turnoclase" target="_blank" rel="noopener noreferrer"><img class="aligncenter wp-image-162" style="height: 48px;" src="https://www.jaureguialzo.com/wp-content/uploads/2015/07/en_get.svg" alt="en_get" height="48" /></a></td>
+<td style="text-align: center;"><a href="https://apps.apple.com/us/app/turnoclase/id1016190896?ls=1" target="_blank"><img style="height: 48px;" src="/images/badge_appstore-lrg-en.svg" alt="App Store Logo" height="48" /></a></td>
+<td style="text-align: center;"><a href="https://play.google.com/store/apps/details?id=com.jaureguialzo.turnoclase" target="_blank"><img style="height: 48px;" src="/images/en_get.svg" alt="Play Store Logo" height="48" /></a></td>
 </tr>
 <tr>
 <th style="text-align: center;">Source code</th>
-<td style="text-align: center;" colspan="2"><a href="https://github.com/ijaureguialzo/turnoclase" target="_blank" rel="noopener noreferrer"><img class="aligncenter wp-image-155" style="height: 48px;" src="https://www.jaureguialzo.com/wp-content/uploads/2015/07/GitHub-Mark.svg" alt="GitHub-Mark" height="48" /></a></td>
+<td style="text-align: center;" colspan="2"><a href="https://github.com/ijaureguialzo/turnoclase" target="_blank"><img style="height: 48px;" src="/images/GitHub-Mark.svg" alt="GitHub Mark" height="48" /></a></td>
 </tr>
 </tbody>
 </table>
