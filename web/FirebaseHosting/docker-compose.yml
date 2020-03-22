@@ -1,0 +1,15 @@
+version: "3.5"
+
+services:
+
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_VERSION=${NODE_VERSION}
+    tty: true
+    volumes:
+      - .:/firebase
+    ports:
+      - 9005:9005
