@@ -22,8 +22,8 @@ Una pulsación sobre el código de aula en iOS o sobre los tres puntos verticale
 <caption style="caption-side: bottom">Menú de la aplicación en iOS y Android.</caption>
 <tbody>
 <tr>
-<td style="padding:3em;"><img src="/images/devices/teacher_ios_menu.png" alt=""/></td>
-<td style="padding:3em;"><img src="/images/devices/teacher_android_menu.png" alt=""/></td>
+<td style="padding:3em;"><img src="/images/devices/teacher_ios_menu_es.png" alt=""/></td>
+<td style="padding:3em;"><img src="/images/devices/teacher_android_menu_es.png" alt=""/></td>
 </tr>
 </tbody>
 </table>
