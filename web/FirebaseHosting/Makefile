@@ -20,7 +20,7 @@ build:
 clean:
 	@docker-compose down
 
-serve:
+serve: start
 	@cd jekyll && bundle exec jekyll serve
 
 deploy:
