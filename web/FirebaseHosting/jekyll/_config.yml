@@ -20,11 +20,9 @@
 
 title: TurnoClase
 author: © 2020 Ion Jaureguialzo Sarasola
-#email:
-#description: >- # this means to ignore newlines until "baseurl:"
-#  TurnoClase facilita a los profesores organizar la resolución de preguntas durante una clase permitiendo que los alumnos pidan su turno y sean atendidos de uno en uno.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
+github_username:  ijaureguialzo
 
 # Build settings
 theme: minima
