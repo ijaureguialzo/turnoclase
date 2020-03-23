@@ -2,6 +2,8 @@
 layout: home
 ---
 
+# What does it do
+
 TurnoClase lets teachers arrange the resolution of questions during a class, allowing students to ask their turn and get served one at a time.
 
 Automatically manages turns and prevents anyone from not being heeded either by oversight or because other students monopolize teacher's attention.

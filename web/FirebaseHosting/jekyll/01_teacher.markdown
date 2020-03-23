@@ -11,7 +11,7 @@ Just load the app and a unique classroom code will be generated.
 > If the classroom code shows `?`, tap it and select `Generate new classroom` to try again.
 
 <table>
-<caption style="caption-side: bottom">Main screen on iOS and Android</caption>
+<caption style="caption-side: bottom">Main screen on iOS and Android.</caption>
 <tbody>
 <tr>
 <td style="padding:3em;"><img src="/images/devices/teacher_ios_start.png" alt=""/></td>
@@ -25,7 +25,7 @@ Just load the app and a unique classroom code will be generated.
 Tapping the classroom code on iOS or the three vertical dots on Android shows the menu.
 
 <table>
-<caption style="caption-side: bottom">App menu on iOS and Android</caption>
+<caption style="caption-side: bottom">App menu on iOS and Android.</caption>
 <tbody>
 <tr>
 <td style="padding:3em;"><img src="/images/devices/teacher_ios_menu.png" alt=""/></td>
