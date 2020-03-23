@@ -26,8 +26,11 @@ github_username:  ijaureguialzo
 
 # Build settings
 theme: minima
-#plugins:
-#  - jekyll-feed
+plugins:
+  - jekyll-multiple-languages-plugin
+
+languages: ["en", "es"]
+exclude_from_localizations: ["images"]
 
 # Exclude from processing.
 # The following items will not be processed, by default.
