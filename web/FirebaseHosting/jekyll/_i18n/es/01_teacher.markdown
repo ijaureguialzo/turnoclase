@@ -1,11 +1,11 @@
 ## Uso básico
 
-Just load the app and a unique classroom code will be generated.
+Solo abre la aplicación y se generará un código único de aula.
 
-> If the classroom code shows `?`, tap it and select `Generate new classroom` to try again.
+> Si el código de aula muestra `?`, pulsa sobre él y selecciona `Generar nueva aula` para volver a intentarlo.
 
 <table>
-<caption style="caption-side: bottom">Main screen on iOS and Android.</caption>
+<caption style="caption-side: bottom">Pantalla principal en iOS y Android.</caption>
 <tbody>
 <tr>
 <td style="padding:3em;"><img src="/images/devices/teacher_ios_start.png" alt=""/></td>
@@ -16,10 +16,10 @@ Just load the app and a unique classroom code will be generated.
 
 ## Opciones avanzadas
 
-Tapping the classroom code on iOS or the three vertical dots on Android shows the menu.
+Una pulsación sobre el código de aula en iOS o sobre los tres puntos verticales en Android muestra el menú.
 
 <table>
-<caption style="caption-side: bottom">App menu on iOS and Android.</caption>
+<caption style="caption-side: bottom">Menú de la aplicación en iOS y Android.</caption>
 <tbody>
 <tr>
 <td style="padding:3em;"><img src="/images/devices/teacher_ios_menu.png" alt=""/></td>
@@ -28,9 +28,9 @@ Tapping the classroom code on iOS or the three vertical dots on Android shows th
 </tbody>
 </table>
 
-Available options:
+Opciones disponibles:
 
-- __PIN to share the classroom__: for using with the `Connect to another classroom` feature (see below).
-- __Generate new classroom__: clear the classroom and get a new code.
-- __Set wait time__: define the time, in minutes, a student has to wait before asking for a turn again (defaults to 5 minutes).
-- __Connect to another classroom__: allows two or more teachers to share same classroom queue.
+- __PIN para compartir este aula__: para usarlo con la opción `Conectar a otra aula` (ver más abajo).
+- __Generar nueva aula__: vaciar el aula y generar un nuevo código.
+- __Establecer tiempo de espera__: define el tiempo, en minutos, que un estudiante tiene que esperar antes de pedir turno otra vez (por defecto 5 minutos).
+- __Conectar a otra aula__: permite que dos o más profesores compartan la cola de estudiantes de un aula.
