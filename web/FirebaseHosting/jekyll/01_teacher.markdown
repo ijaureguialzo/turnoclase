@@ -39,4 +39,4 @@ Available options:
 - __PIN to share the classroom__: for using with the `Connect to another classroom` feature (see below).
 - __Generate new classroom__: clear the classroom and get a new code.
 - __Set wait time__: define the time, in minutes, a student has to wait before asking for a turn again (defaults to 5 minutes).
-- __Connect to another classroom__: allows two or more teacher to share same classroom queue.
+- __Connect to another classroom__: allows two or more teachers to share same classroom queue.
