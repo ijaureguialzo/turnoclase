@@ -26,10 +26,10 @@
 
                 {% if site.lang == "es" %}
                 {% capture link %}{{page.namespace}} en{% endcapture %}
-                <a href="{% tl {{ link }} %}">en</a>
+                <a class="page-link" style="color:#2a7ae2;" href="{% tl {{ link }} %}">en</a>
                 {% else if site.lang == "en" %}
                 {% capture link %}{{page.namespace}} es{% endcapture %}
-                <a href="{% tl {{ link }} %}">es</a>
+                <a class="page-link" style="color:#2a7ae2;" href="{% tl {{ link }} %}">es</a>
                 {% endif %}
 
             </div>
