@@ -4,7 +4,8 @@ help:
 	@echo workspace
 	@echo build / clean
 	@echo serve
-
+	@echo deploy
+	
 start:
 	@docker-compose up -d
 
@@ -26,4 +27,5 @@ serve: start
 deploy:
 	@cd jekyll && bundle exec jekyll build
 	@cd ..
+	@docker-compose exec node firebase login
 	@docker-compose exec node firebase deploy --only hosting

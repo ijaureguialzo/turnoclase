@@ -3,6 +3,7 @@ help:
 	@echo start / stop
 	@echo workspace
 	@echo build / clean
+	@deploy
 
 start:
 	@docker-compose up -d
@@ -18,3 +19,7 @@ build:
 
 clean:
 	@docker-compose down
+
+deploy:
+	@docker-compose exec node firebase login
+	@docker-compose exec node firebase deploy --only functions

@@ -15,30 +15,52 @@ exports.crearAula = functions.firestore
     .document('aulas/{userId}')
     .onCreate((snap, context) => {
 
-        const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
+        let userId = context.params.userId;
 
-        const refContador = db.collection('total').doc('aulas');
+        if (userId !== 'keepalive') {
+            const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
 
-        let contador = 0;
+            const refContador = db.collection('total').doc('aulas');
 
-        // Incrementar el contador en una transacción y usarlo para generar el código
-        let transaction = db.runTransaction(t => {
-            return t.get(refContador)
-                .then(doc => {
-                    contador = doc.data().contador + 1;
-                    t.update(refContador, {contador: contador});
-                });
-        }).then(result => {
-            console.log('Transaction success!');
+            let contador = 0;
 
-            return snap.ref.set({
-                codigo: hashids.encode(contador)
-            }, {merge: true});
-        }).catch(err => {
-            console.log('Transaction failure:', err);
+            // Incrementar el contador en una transacción y usarlo para generar el código
+            let transaction = db.runTransaction(t => {
+                return t.get(refContador)
+                    .then(doc => {
+                        contador = doc.data().contador + 1;
+                        t.update(refContador, {contador: contador});
+                    });
+            }).then(result => {
+                console.log('Transaction success!');
 
-            return snap.ref.set({
-                codigo: "?"
-            }, {merge: true});
+                return snap.ref.set({
+                    codigo: hashids.encode(contador)
+                }, {merge: true});
+            }).catch(err => {
+                console.log('Transaction failure:', err);
+
+                return snap.ref.set({
+                    codigo: "?"
+                }, {merge: true});
+            });
+        } else
+            console.log('Keep me alive...');
+
+        return null;
+    });
+
+exports.keepalive = functions.pubsub
+    .schedule('every 1 minutes')
+    .onRun((context) => {
+
+        let data = {
+            codigo: '$$$$$'
+        };
+
+        db.collection('aulas').doc('keepalive').delete().then(function () {
+            db.collection('aulas').doc('keepalive').set(data);
         });
+
+        return null;
     });
