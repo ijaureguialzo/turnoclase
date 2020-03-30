@@ -26,6 +26,7 @@ import XCGLogger
 
 import Firebase
 import FirebaseFirestore
+import FirebaseFunctions
 
 import WatchConnectivity
 
@@ -58,6 +59,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     @IBOutlet weak var etiquetaNombreAlumno: UILabel!
     @IBOutlet weak var etiquetaBotonEnCola: UIButton!
     @IBOutlet weak var etiquetaBotonCodigoAula: UIButton!
+
+    // Para llamar a las funciones Cloud
+    lazy var functions = Functions.functions()
 
     // Para simular el interfaz al hacer las capturas
     var n = 2
@@ -146,17 +150,33 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         // REF: Números aleatorios en Swift 4.2: https://www.hackingwithswift.com/articles/102/how-to-generate-random-numbers-in-swift
         // REF: Formatear un número con 0s a la izquierda: https://stackoverflow.com/a/25566860
 
-        // Guardar el documento con un Timestamp, para que se genere el código
-        self.refAula.setData([
-            "timestamp": FieldValue.serverTimestamp(),
-            "pin": String(format: "%04d", Int.random(in: 0...9999)),
-            "espera": 5
-        ]) { error in
-            if let error = error {
-                log.error("Error al crear el aula: \(error.localizedDescription)")
-            } else {
-                log.info("Aula creada")
-                self.conectarListener()
+        // Llamar a la función Cloud que devuelve el código y crear el registro cuando lo retorne
+        // REF: https://firebase.google.com/docs/functions/callable#call_the_function
+        functions.httpsCallable("nuevoCodigo").call(["keepalive": false]) { (result, error) in
+            if let error = error as NSError? {
+                if error.domain == FunctionsErrorDomain {
+                    log.error(error.localizedDescription)
+                }
+            }
+
+            if let codigo = (result?.data as? [String: Any])?["codigo"] as? String {
+
+                log.info("Nuevo código de aula: \(codigo)")
+
+                // Guardar el documento con un Timestamp, para que se genere el código
+                self.refAula.setData([
+                    "timestamp": FieldValue.serverTimestamp(),
+                    "pin": String(format: "%04d", Int.random(in: 0...9999)),
+                    "espera": 5,
+                    "codigo": codigo
+                ]) { error in
+                    if let error = error {
+                        log.error("Error al crear el aula: \(error.localizedDescription)")
+                    } else {
+                        log.info("Aula creada")
+                        self.conectarListener()
+                    }
+                }
             }
         }
     }
