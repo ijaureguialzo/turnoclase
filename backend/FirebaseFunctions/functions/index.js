@@ -110,6 +110,7 @@ exports.keepalive = functions.pubsub
         return null;
     });
 
+// REF: Llamar de una función a otra: https://stackoverflow.com/a/60470745
 const callCloudFunction = async (functionName, data) => {
 
     let url = `https://us-central1-${functions.firebaseConfig().projectId}.cloudfunctions.net/${functionName}`;
