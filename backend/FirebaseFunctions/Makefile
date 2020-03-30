@@ -20,6 +20,6 @@ build:
 clean:
 	@docker-compose down
 
-deploy:
+deploy: start
 	@docker-compose exec node firebase login
 	@docker-compose exec node firebase deploy --only functions

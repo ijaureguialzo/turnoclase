@@ -24,7 +24,7 @@ clean:
 serve: start
 	@cd jekyll && bundle exec jekyll serve
 
-deploy:
+deploy: start
 	@cd jekyll && bundle exec jekyll build
 	@cd ..
 	@docker-compose exec node firebase login
