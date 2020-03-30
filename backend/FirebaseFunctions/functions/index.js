@@ -63,9 +63,10 @@ exports.nuevoCodigo = functions.https.onCall((data, context) => {
     const keepalive = data.keepalive;
 
     if (!keepalive) {
+
         const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
 
-        const refContador = db.collection('total').doc('aulas');
+        const refContador = db.collection('total').doc('aulas'); // Max: 234255 (9RRRR)
 
         let contador = 0;
 
