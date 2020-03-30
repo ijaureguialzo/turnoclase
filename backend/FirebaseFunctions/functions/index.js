@@ -22,7 +22,6 @@ exports.crearAula = functions.firestore
         let userId = context.params.userId;
 
         let codigo = snap.data().codigo;
-        console.log('Recibido código:' + codigo);
 
         if (userId !== 'keepalive' && codigo === undefined) {
             const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
