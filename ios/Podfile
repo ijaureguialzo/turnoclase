@@ -11,6 +11,7 @@ def turnoclase_ios_pods
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Firestore'
+    pod 'Firebase/Functions'
 end
 
 def turnoclase_watchos_pods
