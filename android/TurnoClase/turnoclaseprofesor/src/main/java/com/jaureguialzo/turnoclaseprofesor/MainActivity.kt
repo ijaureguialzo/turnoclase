@@ -33,10 +33,15 @@ import android.widget.NumberPicker
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuCompat
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
+import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.functions.FirebaseFunctionsException
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import kotlin.collections.HashMap
 
 
 class MainActivity : AppCompatActivity() {
@@ -61,6 +66,8 @@ class MainActivity : AppCompatActivity() {
     // Activar Firestore
     private val db = FirebaseFirestore.getInstance()
     private var mAuth: FirebaseAuth? = null
+
+    private var functions = FirebaseFunctions.getInstance()
 
     // Datos del aula
     private var codigoAula = "..."
@@ -199,21 +206,49 @@ class MainActivity : AppCompatActivity() {
         // Almacenar la referencia a la nueva aula
         refAula = db.collection("aulas").document(uid!!)
 
-        // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
-        fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
+        // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
+        obtenerNuevoCodigo()
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        val e = task.exception
+                        if (e is FirebaseFunctionsException) {
+                            Log.e(TAG, e.details as String)
+                        }
+                    } else {
 
-        // Guardar el documento con un Timestamp, para que se genere el código
-        val datos = HashMap<String, Any>()
-        datos["timestamp"] = FieldValue.serverTimestamp()
-        datos["pin"] = "%04d".format((0..9999).random())
-        datos["espera"] = 5
+                        val codigo = task.result?.get("codigo")
 
-        refAula!!.set(datos)
-                .addOnSuccessListener {
-                    Log.d(TAG, "Aula creada")
-                    conectarListener()
+                        // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
+                        fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
+
+                        // Guardar el documento con un Timestamp, para que se genere el código
+                        val datos = HashMap<String, Any>()
+                        datos["timestamp"] = FieldValue.serverTimestamp()
+                        datos["pin"] = "%04d".format((0..9999).random())
+                        datos["espera"] = 5
+
+                        refAula!!.set(datos)
+                                .addOnSuccessListener {
+                                    Log.d(TAG, "Aula creada")
+                                    conectarListener()
+                                }
+                                .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
+                    }
+                })
+    }
+
+    private fun obtenerNuevoCodigo(): Task<HashMap<String, String>> {
+
+        val data = hashMapOf(
+                "keepalive" to false
+        )
+
+        return functions
+                .getHttpsCallable("nuevoCodigo")
+                .call(data)
+                .continueWith { task ->
+                    task.result?.data as HashMap<String, String>
                 }
-                .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
     }
 
     private fun conectarListener() {
