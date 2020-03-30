@@ -44,14 +44,18 @@ exports.crearAula = functions.firestore
                     codigo: "?"
                 }, {merge: true});
             });
-        } else
+        } else {
             console.log('Keep me alive...');
+            return snap.ref.set({
+                codigo: "#####"
+            }, {merge: true});
+        }
 
         return null;
     });
 
 exports.keepalive = functions.pubsub
-    .schedule('every 1 minutes')
+    .schedule('every 2 minutes')
     .onRun((context) => {
 
         let data = {
