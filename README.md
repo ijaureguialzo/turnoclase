@@ -1,11 +1,10 @@
 # TurnoClase
 
-[![Versión de Xcode](https://img.shields.io/badge/Xcode-10.0-3cacfa.svg?label=Xcode&longCache=true)](https://developer.apple.com/xcode/)
-[![Versión de Swift](https://img.shields.io/badge/Swift-4.2-f05339.svg?label=Swift&longCache=true)](https://developer.apple.com/swift/)
-[![Versión de Android Studio](https://img.shields.io/badge/Android%20Studio-3.2-a4c639.svg?label=Android%20Studio&longCache=true)](https://developer.android.com/studio/index.html)
-[![Versión de Kotlin](https://img.shields.io/badge/Kotlin-1.2.71-ff8802.svg?label=Kotlin&longCache=true)](https://kotlinlang.org/)
-[![Versión de Bootstrap](https://img.shields.io/badge/Bootstrap-4.1.3-563d7c.svg?label=Bootstrap&longCache=true)](https://getbootstrap.com/)
-[![Versión de fastlane](https://img.shields.io/badge/fastlane-2.105.2-ff0201.svg?label=fastlane&longCache=true)](https://fastlane.tools/)
+[![Versión de Xcode](https://img.shields.io/badge/Xcode-11.4-3cacfa.svg?label=Xcode&longCache=true)](https://developer.apple.com/xcode/)
+[![Versión de Swift](https://img.shields.io/badge/Swift-5.2-f05339.svg?label=Swift&longCache=true)](https://developer.apple.com/swift/)
+[![Versión de Android Studio](https://img.shields.io/badge/Android%20Studio-3.6.1-a4c639.svg?label=Android%20Studio&longCache=true)](https://developer.android.com/studio/index.html)
+[![Versión de Kotlin](https://img.shields.io/badge/Kotlin-1.3.71-ff8802.svg?label=Kotlin&longCache=true)](https://kotlinlang.org/)
+[![Versión de fastlane](https://img.shields.io/badge/fastlane-2.144.0-ff0201.svg?label=fastlane&longCache=true)](https://fastlane.tools/)
 
 TurnoClase facilita a los profesores organizar la resolución de preguntas durante una clase permitiendo que los alumnos pidan su turno y sean atendidos de uno en uno.
 
@@ -33,8 +32,6 @@ TurnoClase se compone de dos aplicaciones móviles independientes (alumno y prof
 - [Aplicación del profesor](https://play.google.com/store/apps/details?id=com.jaureguialzo.turnoclaseprofesor).
 - [Aplicación del alumno](https://play.google.com/store/apps/details?id=com.jaureguialzo.turnoclase).
 
-### Web
+## Contribuye
 
-- [Visor web del aula](https://turnoclase.com).
-
-Se admiten sugerencias, críticas y todo tipo de ideas que ayuden a mejorarla.
+Si encuentras algún problema, [crea un issue](https://github.com/ijaureguialzo/turnoclase/issues).
