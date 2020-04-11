@@ -2,9 +2,6 @@
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
 
-// Librería para llamar a otras funciones
-const fetch = require('node-fetch');
-
 // Inicializar la aplicación
 admin.initializeApp(functions.config().firebase);
 
@@ -60,67 +57,28 @@ exports.crearAula = functions.firestore
 // Generar el código de aula y retornarlo
 exports.nuevoCodigo = functions.https.onCall((data, context) => {
 
-    const keepalive = data.keepalive;
+    const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
 
-    if (!keepalive) {
+    const refContador = db.collection('total').doc('aulas'); // Max: 234255 (9RRRR)
 
-        const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
+    let contador = 0;
 
-        const refContador = db.collection('total').doc('aulas'); // Max: 234255 (9RRRR)
-
-        let contador = 0;
-
-        // Incrementar el contador en una transacción y usarlo para generar el código
-        return db.runTransaction(t => {
-            return t.get(refContador)
-                .then(doc => {
-                    contador = doc.data().contador + 1;
-                    t.update(refContador, {contador: contador});
-                });
-        }).then(result => {
-            console.log('Nuevo código generado.');
-            return {
-                codigo: hashids.encode(contador)
-            };
-        }).catch(err => {
-            console.log('Error al generar el código:', err);
-            return {
-                codigo: "?"
-            };
-        });
-    } else {
-        console.log('Keep me alive...');
-    }
-});
-
-// Mantener cargadas las funciones, llamándolas cada 2 minutos
-exports.keepalive = functions.pubsub
-    .schedule('every 2 minutes')
-    .onRun((context) => {
-
-        let data = {
-            codigo: '$$$$$'
+    // Incrementar el contador en una transacción y usarlo para generar el código
+    return db.runTransaction(t => {
+        return t.get(refContador)
+            .then(doc => {
+                contador = doc.data().contador + 1;
+                t.update(refContador, {contador: contador});
+            });
+    }).then(result => {
+        console.log('Nuevo código generado.');
+        return {
+            codigo: hashids.encode(contador)
         };
-
-        db.collection('aulas').doc('keepalive').delete().then(function () {
-            db.collection('aulas').doc('keepalive').set(data);
-        });
-
-        callCloudFunction('nuevoCodigo', {keepalive: true});
-
-        return null;
+    }).catch(err => {
+        console.log('Error al generar el código:', err);
+        return {
+            codigo: "?"
+        };
     });
-
-// REF: Llamar de una función a otra: https://stackoverflow.com/a/60470745
-const callCloudFunction = async (functionName, data) => {
-
-    let url = `https://us-central1-${functions.firebaseConfig().projectId}.cloudfunctions.net/${functionName}`;
-
-    await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({data}),
-    })
-};
+});
