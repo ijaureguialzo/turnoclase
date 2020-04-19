@@ -288,20 +288,23 @@ class TurnoViewController: UIViewController {
 
                 if let alumno = document?.data() {
 
-                    self.refAula.collection("cola").whereField("timestamp", isLessThanOrEqualTo: alumno["timestamp"]!).getDocuments() { (querySnapshot, error) in
-                        if let error = error {
-                            log.error("Error al recuperar datos: \(error.localizedDescription)")
-                        } else {
+                    if(alumno["timestamp"] != nil) {
 
-                            let posicion = querySnapshot!.documents.count
-                            log.info("Posicion en la cola: \(posicion)")
+                        self.refAula.collection("cola").whereField("timestamp", isLessThanOrEqualTo: alumno["timestamp"]!).getDocuments() { (querySnapshot, error) in
+                            if let error = error {
+                                log.error("Error al recuperar datos: \(error.localizedDescription)")
+                            } else {
 
-                            if posicion > 1 {
-                                self.actualizarAula(mensaje: String(posicion - 1))
-                            } else if posicion == 1 {
-                                self.actualizarAula(mensaje: NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno"))
+                                let posicion = querySnapshot!.documents.count
+                                log.info("Posicion en la cola: \(posicion)")
+
+                                if posicion > 1 {
+                                    self.actualizarAula(mensaje: String(posicion - 1))
+                                } else if posicion == 1 {
+                                    self.actualizarAula(mensaje: NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno"))
+                                }
+
                             }
-
                         }
                     }
                 }

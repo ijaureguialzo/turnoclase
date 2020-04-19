@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private var mAuth: FirebaseAuth? = null
 
-    private var functions = FirebaseFunctions.getInstance()
+    private var functions = FirebaseFunctions.getInstance("europe-west1")
 
     // Datos del aula
     private var codigoAula = "..."
@@ -216,7 +216,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     } else {
 
-                        val codigo = task.result?.get("codigo")
+                        val codigo = task.result?.get("codigo") as String
 
                         // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
                         fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
@@ -226,6 +226,7 @@ class MainActivity : AppCompatActivity() {
                         datos["timestamp"] = FieldValue.serverTimestamp()
                         datos["pin"] = "%04d".format((0..9999).random())
                         datos["espera"] = 5
+                        datos["codigo"] = codigo
 
                         refAula!!.set(datos)
                                 .addOnSuccessListener {

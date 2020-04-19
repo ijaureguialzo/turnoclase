@@ -61,7 +61,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     @IBOutlet weak var etiquetaBotonCodigoAula: UIButton!
 
     // Para llamar a las funciones Cloud
-    lazy var functions = Functions.functions()
+    lazy var functions = Functions.functions(region: "europe-west1")
 
     // Para simular el interfaz al hacer las capturas
     var n = 2
