@@ -12,30 +12,32 @@ let db = admin.firestore();
 const Hashids = require('hashids/cjs');
 
 // Generar el código de aula y retornarlo
-exports.nuevoCodigo = functions.https.onCall((data, context) => {
+exports.nuevoCodigo = functions
+    .region('europe-west1')
+    .https.onCall((data, context) => {
 
-    const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
+        const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
 
-    const refContador = db.collection('total').doc('aulas'); // Max: 234255 (9RRRR)
+        const refContador = db.collection('total').doc('aulas'); // Max: 234255 (9RRRR)
 
-    let contador = 0;
+        let contador = 0;
 
-    // Incrementar el contador en una transacción y usarlo para generar el código
-    return db.runTransaction(t => {
-        return t.get(refContador)
-            .then(doc => {
-                contador = doc.data().contador + 1;
-                t.update(refContador, {contador: contador});
-            });
-    }).then(result => {
-        console.log('Nuevo código generado.');
-        return {
-            codigo: hashids.encode(contador)
-        };
-    }).catch(err => {
-        console.log('Error al generar el código:', err);
-        return {
-            codigo: "?"
-        };
+        // Incrementar el contador en una transacción y usarlo para generar el código
+        return db.runTransaction(t => {
+            return t.get(refContador)
+                .then(doc => {
+                    contador = doc.data().contador + 1;
+                    t.update(refContador, {contador: contador});
+                });
+        }).then(result => {
+            console.log('Nuevo código generado.');
+            return {
+                codigo: hashids.encode(contador)
+            };
+        }).catch(err => {
+            console.log('Error al generar el código:', err);
+            return {
+                codigo: "?"
+            };
+        });
     });
-});
