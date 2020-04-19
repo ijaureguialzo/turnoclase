@@ -343,24 +343,26 @@ class AlumnoTurno : AppCompatActivity() {
 
                 val alumno = document.result
 
-                refAula?.collection("cola")
-                        ?.whereLessThanOrEqualTo("timestamp", alumno?.get("timestamp") as Any)
-                        ?.get()
-                        ?.addOnCompleteListener {
-                            if (!it.isSuccessful) {
-                                Log.e(TAG, "Error al recuperar datos: ", it.exception)
-                            } else {
+                alumno?.get("timestamp")?.let {
+                    refAula?.collection("cola")
+                            ?.whereLessThanOrEqualTo("timestamp", it)
+                            ?.get()
+                            ?.addOnCompleteListener {
+                                if (!it.isSuccessful) {
+                                    Log.e(TAG, "Error al recuperar datos: ", it.exception)
+                                } else {
 
-                                val posicion = it.result!!.count()
-                                Log.d(TAG, "Posicion en la cola: $posicion")
+                                    val posicion = it.result!!.count()
+                                    Log.d(TAG, "Posicion en la cola: $posicion")
 
-                                when {
-                                    posicion > 1 -> actualizarAula((posicion - 1).toString())
-                                    posicion == 1 -> actualizarAula(resources.getString(R.string.ES_TU_TURNO))
+                                    when {
+                                        posicion > 1 -> actualizarAula((posicion - 1).toString())
+                                        posicion == 1 -> actualizarAula(resources.getString(R.string.ES_TU_TURNO))
+                                    }
+
                                 }
-
                             }
-                        }
+                }
             }
         } else {
             Log.e(TAG, "No hay referencia al aula")
