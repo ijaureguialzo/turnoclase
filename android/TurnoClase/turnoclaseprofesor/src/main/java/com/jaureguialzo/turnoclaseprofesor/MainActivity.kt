@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private var mAuth: FirebaseAuth? = null
 
-    private var functions = FirebaseFunctions.getInstance()
+    private var functions = FirebaseFunctions.getInstance("europe-west1")
 
     // Datos del aula
     private var codigoAula = "..."
