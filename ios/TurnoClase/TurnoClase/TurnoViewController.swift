@@ -288,22 +288,22 @@ class TurnoViewController: UIViewController {
 
                 if let alumno = document?.data() {
 
-                    if(alumno["timestamp"] != nil) {
+                    if let timestamp = alumno["timestamp"] {
+                        if timestamp is Timestamp {
+                            self.refAula.collection("cola").whereField("timestamp", isLessThanOrEqualTo: timestamp).getDocuments() { (querySnapshot, error) in
+                                if let error = error {
+                                    log.error("Error al recuperar datos: \(error.localizedDescription)")
+                                } else {
 
-                        self.refAula.collection("cola").whereField("timestamp", isLessThanOrEqualTo: alumno["timestamp"]!).getDocuments() { (querySnapshot, error) in
-                            if let error = error {
-                                log.error("Error al recuperar datos: \(error.localizedDescription)")
-                            } else {
+                                    let posicion = querySnapshot!.documents.count
+                                    log.info("Posicion en la cola: \(posicion)")
 
-                                let posicion = querySnapshot!.documents.count
-                                log.info("Posicion en la cola: \(posicion)")
-
-                                if posicion > 1 {
-                                    self.actualizarAula(mensaje: String(posicion - 1))
-                                } else if posicion == 1 {
-                                    self.actualizarAula(mensaje: NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno"))
+                                    if posicion > 1 {
+                                        self.actualizarAula(mensaje: String(posicion - 1))
+                                    } else if posicion == 1 {
+                                        self.actualizarAula(mensaje: NSLocalizedString("ES_TU_TURNO", comment: "Mensaje de que ha llegado el turno"))
+                                    }
                                 }
-
                             }
                         }
                     }
