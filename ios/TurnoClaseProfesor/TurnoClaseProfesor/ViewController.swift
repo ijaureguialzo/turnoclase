@@ -575,19 +575,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                         // Comprobar que se han recuperado registros
                         if let documents = querySnapshot?.documents {
 
-                            // Accedemos al primer documento
-                            let document = documents.first
+                            if documents.count > 0 {
+                                // Accedemos al primer documento
+                                let document = documents.first
 
-                            log.info("Aula encontrada: \(codigo)")
+                                log.info("Aula encontrada: \(codigo)")
 
-                            self.desconectarListeners()
-                            self.invitado = true
-                            self.refAula = document?.reference
-                            self.conectarListener()
-
-                        } else {
-                            log.error("Aula no encontrada")
-                            self.dialogoError()
+                                self.desconectarListeners()
+                                self.invitado = true
+                                self.refAula = document?.reference
+                                self.conectarListener()
+                            } else {
+                                log.error("Aula no encontrada")
+                                self.dialogoError()
+                            }
                         }
                     }
             }
