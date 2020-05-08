@@ -26,3 +26,7 @@
 "PIN para compartir este aula: %@" = "PIN to share this classroom: %@";
 "Siguiente" = "Next";
 "Tiempo de espera (minutos)" = "Wait time (minutes)";
+
+"Añadir aula" = "Add classroom";
+"Borrar aula" = "Delete classroom";
+"Vaciar aula" = "Empty classroom";

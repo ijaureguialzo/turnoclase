@@ -426,10 +426,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             }
         }()
 
-        let accionGenerarNuevoCodigo = UIAlertAction(title: "Generar nueva aula".localized(), style: .destructive, handler: { (action) -> Void in
-            log.info("Generar nueva aula")
-            self.desconectarListeners()
-            self.borrarAula()
+        let accionAnyadirAula = UIAlertAction(title: "Añadir aula".localized(), style: .default, handler: { (action) -> Void in
+            log.info("Añadir aula")
+        })
+
+        let accionBorrarAula = UIAlertAction(title: "Borrar aula".localized(), style: .destructive, handler: { (action) -> Void in
+            log.info("Borrar aula")
+        })
+
+        let accionVaciarAula = UIAlertAction(title: "Vaciar aula".localized(), style: .destructive, handler: { (action) -> Void in
+            log.info("Vaciar aula")
         })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
@@ -451,9 +457,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.dialogoTiempoEspera()
         })
 
-        if(!invitado) {
-            alertController.addAction(accionGenerarNuevoCodigo)
+        if !invitado {
             alertController.addAction(accionEstablecerTiempoEspera)
+            alertController.addAction(accionVaciarAula)
+            if numAulas < MAX_AULAS {
+                alertController.addAction(accionAnyadirAula)
+            }
+            if numAulas > 1 {
+                alertController.addAction(accionBorrarAula)
+            }
             alertController.addAction(accionConectarOtraAula)
         } else {
             alertController.addAction(accionDesconectarAula)
