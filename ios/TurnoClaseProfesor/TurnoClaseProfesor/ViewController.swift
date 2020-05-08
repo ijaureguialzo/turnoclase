@@ -355,7 +355,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func enviarWatch(campo: String, _ dato: String) {
 
-        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && session?.isPaired == true {
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && session?.isReachable == true {
             self.session!.sendMessage([campo: dato], replyHandler: { (response) -> Void in
                 log.info("Enviado al Watch")
             }, errorHandler: { (error) -> Void in
