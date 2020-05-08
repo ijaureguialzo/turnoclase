@@ -85,7 +85,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     // Almacenar el número de alumnos anterior para detectar el paso de 0 a 1 y reproducir el sonido
     var recuentoAnterior = 0
 
-    fileprivate func conectarAula() {
+    fileprivate func conectarAula(posicion: Int = 0) {
 
         // Colección que contiene las aulas del usuario
         refMisAulas = db.collection("profesores").document(self.uid).collection("aulas")
@@ -100,13 +100,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                 self.numAulas = querySnapshot?.documents.count ?? 0
 
-                if let primera = querySnapshot?.documents.first {
-                    log.info("Conectado a aula existente")
-                    self.refAula = primera.reference
-                    self.conectarListener()
-                } else {
-                    log.info("Creando nueva aula...")
-                    self.crearAula()
+                if posicion >= 0 && posicion < self.numAulas {
+
+                    if let seleccionada = querySnapshot?.documents[posicion] {
+                        log.info("Conectado a aula existente")
+                        self.refAula = seleccionada.reference
+                        self.conectarListener()
+                    } else {
+                        log.info("Creando nueva aula...")
+                        self.crearAula()
+                    }
                 }
             }
         }
@@ -442,9 +445,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             log.info("Borrar aula")
             self.desconectarListeners()
             self.borrarAula()
-            self.conectarAula()
             self.numAulas -= 1
             self.aulaActual -= 1
+            self.conectarAula(posicion: self.aulaActual)
         })
 
         let accionVaciarAula = UIAlertAction(title: "Vaciar aula".localized(), style: .destructive, handler: { (action) -> Void in
@@ -520,7 +523,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                             self.invitado = true
                             self.desconectarListeners()
                             self.uid = uid
-                            self.conectarAula()
+                            self.conectarAula() // Tiene que ser por código
 
                         } else {
                             log.error("Aula no encontrada")
@@ -698,6 +701,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         log.debug("Aula anterior")
 
+        self.desconectarListeners()
+        self.conectarAula(posicion: self.aulaActual)
+
         pageControl.currentPage = aulaActual
     }
 
@@ -707,6 +713,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
 
         log.debug("Aula siguiente")
+
+        self.desconectarListeners()
+        self.conectarAula(posicion: self.aulaActual)
 
         pageControl.currentPage = aulaActual
     }
