@@ -205,13 +205,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                             log.info("Actualizando datos del aula...")
 
-                            self.actualizarAula(codigo: aula["codigo"] ??? "?")
+                            self.actualizarAula(codigo: documentSnapshot?.documentID ??? "?")
                             self.actualizarPIN(aula["pin"] ??? "?")
                             self.tiempoEspera = aula["espera"] as? Int ?? 5
 
                             // Listener de la cola
                             if self.listenerCola == nil {
-                                self.listenerCola = db.collection("aulas").document(self.uid)
+                                self.listenerCola = db.collection("profesores").document(self.uid).collection("aulas").document(self.codigoAula)
                                     .collection("cola").addSnapshotListener { querySnapshot, error in
 
                                         if let error = error {
