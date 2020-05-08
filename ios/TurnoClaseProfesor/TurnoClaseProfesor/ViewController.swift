@@ -203,6 +203,43 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
     }
 
+    fileprivate func anyadirAula() {
+
+        // Generar el PIN del aula
+        // REF: Números aleatorios en Swift 4.2: https://www.hackingwithswift.com/articles/102/how-to-generate-random-numbers-in-swift
+        // REF: Formatear un número con 0s a la izquierda: https://stackoverflow.com/a/25566860
+
+        // Llamar a la función Cloud que devuelve el código y crear el registro cuando lo retorne
+        // REF: https://firebase.google.com/docs/functions/callable#call_the_function
+        functions.httpsCallable("nuevoCodigo").call(["keepalive": false]) { (result, error) in
+            if let error = error as NSError? {
+                if error.domain == FunctionsErrorDomain {
+                    log.error(error.localizedDescription)
+                }
+            }
+
+            if let codigo = (result?.data as? [String: Any])?["codigo"] as? String {
+
+                log.info("Nuevo código de aula: \(codigo)")
+
+                // Guardar el documento
+                self.refMisAulas.addDocument(data: [
+                    "codigo": codigo,
+                    "timestamp": FieldValue.serverTimestamp(),
+                    "pin": String(format: "%04d", Int.random(in: 0...9999)),
+                    "espera": 5,
+                ]) { error in
+                    if let error = error {
+                        log.error("Error al crear el aula: \(error.localizedDescription)")
+                    } else {
+                        log.info("Aula creada")
+                        self.numAulas += 1
+                    }
+                }
+            }
+        }
+    }
+
     fileprivate func conectarListener() {
 
         // Conectar el listener del aula para detectar cambios (por ejemplo, que se borra)
@@ -469,7 +506,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         let accionAnyadirAula = UIAlertAction(title: "Añadir aula".localized(), style: .default, handler: { (action) -> Void in
             log.info("Añadir aula")
-            self.crearAula()
+            self.anyadirAula()
         })
 
         let accionBorrarAula = UIAlertAction(title: "Borrar aula".localized(), style: .destructive, handler: { (action) -> Void in
