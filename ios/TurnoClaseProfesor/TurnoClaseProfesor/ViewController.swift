@@ -65,7 +65,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     // Soporte para varias aulas
     let MAX_AULAS = 16
     var aulaActual = 0
-    var numAulas = 8
+    var numAulas: Int = 0 {
+        didSet {
+            pageControl.numberOfPages = numAulas
+        }
+    }
 
     // Para llamar a las funciones Cloud
     lazy var functions = Functions.functions(region: "europe-west1")
@@ -93,6 +97,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 log.error("Error al recuperar la lista de aulas \(error.localizedDescription)")
                 self.actualizarAula(codigo: "?", enCola: 0)
             } else {
+
+                self.numAulas = querySnapshot?.documents.count ?? 0
 
                 if let primera = querySnapshot?.documents.first {
                     log.info("Conectado a aula existente")
@@ -430,10 +436,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         let accionAnyadirAula = UIAlertAction(title: "Añadir aula".localized(), style: .default, handler: { (action) -> Void in
             log.info("Añadir aula")
+            self.numAulas += 1
         })
 
         let accionBorrarAula = UIAlertAction(title: "Borrar aula".localized(), style: .destructive, handler: { (action) -> Void in
             log.info("Borrar aula")
+            self.numAulas -= 1
         })
 
         let accionVaciarAula = UIAlertAction(title: "Vaciar aula".localized(), style: .destructive, handler: { (action) -> Void in
@@ -684,6 +692,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             aulaActual -= 1
         }
 
+        log.debug("Aula anterior")
+
         pageControl.currentPage = aulaActual
     }
 
@@ -691,6 +701,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         if aulaActual < pageControl.numberOfPages - 1 {
             aulaActual += 1
         }
+
+        log.debug("Aula siguiente")
 
         pageControl.currentPage = aulaActual
     }
