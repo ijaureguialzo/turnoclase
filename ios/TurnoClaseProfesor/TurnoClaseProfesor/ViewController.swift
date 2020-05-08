@@ -734,7 +734,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     // Moverse entre aulas
     @IBAction func swipeDerecha(_ sender: Any) {
-        if !invitado {
+        if !invitado && numAulas > 1 {
             if aulaActual > 0 {
                 aulaActual -= 1
             }
@@ -749,7 +749,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     @IBAction func swipeIzquierda(_ sender: Any) {
-        if !invitado {
+        if !invitado && numAulas > 1 {
             if aulaActual < pageControl.numberOfPages - 1 {
                 aulaActual += 1
             }
