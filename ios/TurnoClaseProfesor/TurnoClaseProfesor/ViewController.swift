@@ -333,7 +333,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
 
-        db.collection("aulas").document(self.uid).delete() { error in
+        self.refAula.delete() { error in
             if let error = error {
                 log.error("Error al borrar el aula: \(error.localizedDescription)")
             } else {
@@ -438,6 +438,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         let accionVaciarAula = UIAlertAction(title: "Vaciar aula".localized(), style: .destructive, handler: { (action) -> Void in
             log.info("Vaciar aula")
+            self.desconectarListeners()
+            self.borrarAula()
         })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
