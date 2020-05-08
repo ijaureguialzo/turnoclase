@@ -81,20 +81,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var recuentoAnterior = 0
 
     fileprivate func conectarAula() {
-        // Cargar el aula y si no, crearla
-        db.collection("aulas").document(self.uid).getDocument() { (document, error) in
+
+        // Recuperar las aulas del usuario
+        db.collection("profesores").document(self.uid).collection("aulas").getDocuments() { (querySnapshot, error) in
 
             if let error = error {
-                log.error("Error al conectar al aula: \(error.localizedDescription)")
+                log.error("Error al recuperar la lista de aulas \(error.localizedDescription)")
                 self.actualizarAula(codigo: "?", enCola: 0)
             } else {
-                if !(document?.exists)! {
+
+                if let primera = querySnapshot?.documents.first {
+                    log.info("Conectado a aula existente")
+                    self.refAula = primera.reference
+                    self.conectarListener()
+                } else {
                     log.info("Creando nueva aula...")
                     self.crearAula()
-                } else {
-                    log.info("Conectado a aula existente")
-                    self.refAula = document?.reference
-                    self.conectarListener()
                 }
             }
         }
