@@ -119,7 +119,7 @@ class TurnoViewController: UIViewController {
     fileprivate func encolarAlumno() {
 
         // Buscar el aula
-        db.collection("aulas").whereField("codigo", isEqualTo: self.codigoAula!).limit(to: 1).getDocuments() { (querySnapshot, error) in
+        db.collectionGroup("aulas").whereField("codigo", isEqualTo: self.codigoAula!).limit(to: 1).getDocuments() { (querySnapshot, error) in
 
             if let error = error {
                 log.error("Error al recuperar datos: \(error.localizedDescription)")
