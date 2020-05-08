@@ -175,11 +175,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                 log.info("Nuevo código de aula: \(codigo)")
 
-                // Almacenar la referencia a la nueva aula
-                self.refAula = self.refMisAulas.document(codigo)
-
-                // Guardar el documento con un Timestamp, para que se genere el código
-                self.refAula.setData([
+                // Guardar el documento
+                self.refAula = self.refMisAulas.addDocument(data: [
+                    "codigo": codigo,
                     "timestamp": FieldValue.serverTimestamp(),
                     "pin": String(format: "%04d", Int.random(in: 0...9999)),
                     "espera": 5,
@@ -208,7 +206,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                             log.info("Actualizando datos del aula...")
 
-                            self.actualizarAula(codigo: documentSnapshot?.documentID ??? "?")
+                            self.actualizarAula(codigo: aula["codigo"] ??? "?")
                             self.actualizarPIN(aula["pin"] ??? "?")
                             self.tiempoEspera = aula["espera"] as? Int ?? 5
 
