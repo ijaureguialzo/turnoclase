@@ -496,7 +496,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         let accionBorrarAula = UIAlertAction(title: "Borrar aula".localized(), style: .destructive, handler: { (action) -> Void in
             log.info("Borrar aula")
-            self.borrarAulaReconectar(codigo: self.codigoAula)
+            self.confirmarBorrado()
         })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
@@ -534,6 +534,27 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         alertController.addAction(accionCancelar)
 
         self.present(alertController, animated: true, completion: nil)
+    }
+
+    fileprivate func confirmarBorrado() {
+
+        let dialogo = UIAlertController(title: "Borrar aula".localized(),
+                                        message: "Esta acción vaciará la cola de espera.".localized(),
+                                        preferredStyle: .alert)
+
+        let ok = UIAlertAction(title: "Ok".localized(), style: .destructive, handler: { (action) -> Void in
+            log.info("Ok")
+            self.borrarAulaReconectar(codigo: self.codigoAula)
+        })
+
+        let cancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel) { (action) -> Void in
+            log.info("Cancelar")
+        }
+
+        dialogo.addAction(ok)
+        dialogo.addAction(cancelar)
+
+        self.present(dialogo, animated: true, completion: nil)
     }
 
     fileprivate func buscarAula(codigo: String?, pin: String?) {

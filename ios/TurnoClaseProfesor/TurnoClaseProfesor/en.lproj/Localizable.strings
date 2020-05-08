@@ -30,3 +30,5 @@
 "Añadir aula" = "Add classroom";
 "Borrar aula" = "Delete classroom";
 "Vaciar aula" = "Empty classroom";
+
+"Esta acción vaciará la cola de espera." = "This action will clear the waiting queue.";

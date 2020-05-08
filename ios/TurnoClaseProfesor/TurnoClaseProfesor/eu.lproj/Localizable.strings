@@ -30,3 +30,5 @@
 "Añadir aula" = "Gela bat gehitu";
 "Borrar aula" = "Gela ezabatu";
 "Vaciar aula" = "Gela ustu";
+
+"Esta acción vaciará la cola de espera." = "Akzio honek itxaroten daudenen lerroa ezabatuko du.";
