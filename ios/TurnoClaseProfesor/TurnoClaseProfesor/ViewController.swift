@@ -43,7 +43,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     // Conectar a otro aula
     var invitado = false
-    var uidPropio: String!
 
     // Para visualizar el diálogo de login
     var alertController: UIAlertController!
@@ -151,7 +150,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 if let resultado = result {
 
                     self.uid = resultado.user.uid
-                    self.uidPropio = self.uid
                     log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
                     self.conectarAula()
@@ -466,9 +464,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func desconectarAula() {
         self.invitado = false
-        self.uid = self.uidPropio
         self.desconectarListeners()
-        self.conectarAula()
+        self.conectarAula(posicion: self.aulaActual)
     }
 
     fileprivate func mostrarAcciones() {
@@ -544,7 +541,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             db.collectionGroup("aulas")
                 .whereField("codigo", isEqualTo: codigo.uppercased())
                 .whereField("pin", isEqualTo: pin)
-                .limit(to: 1)
                 .getDocuments() { (querySnapshot, error) in
 
                     if let error = error {
@@ -552,18 +548,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     } else {
 
                         // Comprobar que se han recuperado registros
-                        if querySnapshot!.documents.count > 0 {
+                        if let documents = querySnapshot?.documents {
 
                             // Accedemos al primer documento
-                            let document = querySnapshot!.documents[0]
+                            let document = documents.first
 
-                            let uid = document.reference.documentID
-                            log.info("Aula encontrada: \(uid)")
+                            log.info("Aula encontrada: \(codigo)")
 
-                            self.invitado = true
                             self.desconectarListeners()
-                            self.uid = uid
-                            self.conectarAula() // Tiene que ser por código
+                            self.invitado = true
+                            self.numAulas = 1
+                            self.refAula = document?.reference
+                            self.conectarListener()
 
                         } else {
                             log.error("Aula no encontrada")
