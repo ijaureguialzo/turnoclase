@@ -91,7 +91,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         refMisAulas = db.collection("profesores").document(self.uid).collection("aulas")
 
         // Recuperar las aulas del usuario
-        refMisAulas.getDocuments() { (querySnapshot, error) in
+        refMisAulas.order(by: "timestamp").getDocuments() { (querySnapshot, error) in
 
             if let error = error {
                 log.error("Error al recuperar la lista de aulas \(error.localizedDescription)")
