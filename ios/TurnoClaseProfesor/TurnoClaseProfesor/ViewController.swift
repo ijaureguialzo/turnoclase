@@ -212,16 +212,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                             // Listener de la cola
                             if self.listenerCola == nil {
-                                self.listenerCola = self.refMisAulas.document(self.codigoAula)
-                                    .collection("cola").addSnapshotListener { querySnapshot, error in
+                                self.listenerCola = self.refAula.collection("cola").addSnapshotListener { querySnapshot, error in
 
-                                        if let error = error {
-                                            log.error("Error al recuperar datos: \(error.localizedDescription)")
-                                        } else {
-                                            self.actualizarAula(codigo: self.codigoAula, enCola: querySnapshot!.documents.count)
-                                            self.mostrarSiguiente()
-                                            self.feedbackTactil(alerta: true)
-                                        }
+                                    if let error = error {
+                                        log.error("Error al recuperar datos: \(error.localizedDescription)")
+                                    } else {
+                                        self.actualizarAula(codigo: self.codigoAula, enCola: querySnapshot!.documents.count)
+                                        self.mostrarSiguiente()
+                                        self.feedbackTactil(alerta: true)
+                                    }
                                 }
                             }
                         }
