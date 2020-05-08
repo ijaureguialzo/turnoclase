@@ -338,6 +338,28 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         feedbackTactil()
     }
 
+    fileprivate func borrarAulaReconectar() {
+
+        // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+
+        self.desconectarListeners()
+
+        self.refAula.delete() { error in
+            if let error = error {
+                log.error("Error al borrar el aula: \(error.localizedDescription)")
+            } else {
+                log.info("Aula borrada")
+
+                self.numAulas -= 1
+                if self.aulaActual == self.numAulas {
+                    self.aulaActual -= 1
+                }
+
+                self.conectarAula(posicion: self.aulaActual)
+            }
+        }
+    }
+
     fileprivate func borrarAula() {
 
         // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
@@ -443,18 +465,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         let accionBorrarAula = UIAlertAction(title: "Borrar aula".localized(), style: .destructive, handler: { (action) -> Void in
             log.info("Borrar aula")
-            self.desconectarListeners()
-            self.borrarAula()
-            self.numAulas -= 1
-            self.aulaActual -= 1
-            self.conectarAula(posicion: self.aulaActual)
-        })
-
-        let accionVaciarAula = UIAlertAction(title: "Vaciar aula".localized(), style: .destructive, handler: { (action) -> Void in
-            log.info("Vaciar aula")
-            self.desconectarListeners()
-            self.borrarAula()
-            self.crearAula()
+            self.borrarAulaReconectar()
         })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
@@ -478,7 +489,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         if !invitado {
             alertController.addAction(accionEstablecerTiempoEspera)
-            alertController.addAction(accionVaciarAula)
             if numAulas < MAX_AULAS {
                 alertController.addAction(accionAnyadirAula)
             }
