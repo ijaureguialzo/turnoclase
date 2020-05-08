@@ -42,7 +42,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var uid: String!
 
     // Conectar a otro aula
-    var invitado = false
+    var invitado: Bool = false {
+        didSet {
+            pageControl.isHidden = invitado
+        }
+    }
 
     // Para visualizar el diálogo de login
     var alertController: UIAlertController!
@@ -557,7 +561,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                             self.desconectarListeners()
                             self.invitado = true
-                            self.numAulas = 1
                             self.refAula = document?.reference
                             self.conectarListener()
 
@@ -731,29 +734,33 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     // Moverse entre aulas
     @IBAction func swipeDerecha(_ sender: Any) {
-        if aulaActual > 0 {
-            aulaActual -= 1
+        if !invitado {
+            if aulaActual > 0 {
+                aulaActual -= 1
+            }
+
+            log.debug("Aula anterior")
+
+            self.desconectarListeners()
+            self.conectarAula(posicion: self.aulaActual)
+
+            pageControl.currentPage = aulaActual
         }
-
-        log.debug("Aula anterior")
-
-        self.desconectarListeners()
-        self.conectarAula(posicion: self.aulaActual)
-
-        pageControl.currentPage = aulaActual
     }
 
     @IBAction func swipeIzquierda(_ sender: Any) {
-        if aulaActual < pageControl.numberOfPages - 1 {
-            aulaActual += 1
+        if !invitado {
+            if aulaActual < pageControl.numberOfPages - 1 {
+                aulaActual += 1
+            }
+
+            log.debug("Aula siguiente")
+
+            self.desconectarListeners()
+            self.conectarAula(posicion: self.aulaActual)
+
+            pageControl.currentPage = aulaActual
         }
-
-        log.debug("Aula siguiente")
-
-        self.desconectarListeners()
-        self.conectarAula(posicion: self.aulaActual)
-
-        pageControl.currentPage = aulaActual
     }
 
     // MARK: Funciones exclusivas de la versión iOS
