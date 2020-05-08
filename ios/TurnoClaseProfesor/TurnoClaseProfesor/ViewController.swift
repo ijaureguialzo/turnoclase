@@ -54,6 +54,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     // Referencias al documento del aula y la posición en la cola
     var refAula: DocumentReference!
+    var refMisAulas: CollectionReference!
 
     // Outlets para el interfaz de usuario
     @IBOutlet weak var etiquetaNombreAlumno: UILabel!
@@ -82,8 +83,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func conectarAula() {
 
+        // Colección que contiene las aulas del usuario
+        refMisAulas = db.collection("profesores").document(self.uid).collection("aulas")
+
         // Recuperar las aulas del usuario
-        db.collection("profesores").document(self.uid).collection("aulas").getDocuments() { (querySnapshot, error) in
+        refMisAulas.getDocuments() { (querySnapshot, error) in
 
             if let error = error {
                 log.error("Error al recuperar la lista de aulas \(error.localizedDescription)")
@@ -154,9 +158,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func crearAula() {
 
-        // Almacenar la referencia a la nueva aula
-        self.refAula = db.collection("aulas").document(self.uid)
-
         // Generar el PIN del aula
         // REF: Números aleatorios en Swift 4.2: https://www.hackingwithswift.com/articles/102/how-to-generate-random-numbers-in-swift
         // REF: Formatear un número con 0s a la izquierda: https://stackoverflow.com/a/25566860
@@ -174,12 +175,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                 log.info("Nuevo código de aula: \(codigo)")
 
+                // Almacenar la referencia a la nueva aula
+                self.refAula = self.refMisAulas.document(codigo)
+
                 // Guardar el documento con un Timestamp, para que se genere el código
                 self.refAula.setData([
                     "timestamp": FieldValue.serverTimestamp(),
                     "pin": String(format: "%04d", Int.random(in: 0...9999)),
                     "espera": 5,
-                    "codigo": codigo
                 ]) { error in
                     if let error = error {
                         log.error("Error al crear el aula: \(error.localizedDescription)")
@@ -211,7 +214,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                             // Listener de la cola
                             if self.listenerCola == nil {
-                                self.listenerCola = db.collection("profesores").document(self.uid).collection("aulas").document(self.codigoAula)
+                                self.listenerCola = self.refMisAulas.document(self.codigoAula)
                                     .collection("cola").addSnapshotListener { querySnapshot, error in
 
                                         if let error = error {
