@@ -101,15 +101,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 self.numAulas = querySnapshot?.documents.count ?? 0
 
                 if posicion >= 0 && posicion < self.numAulas {
-
                     if let seleccionada = querySnapshot?.documents[posicion] {
                         log.info("Conectado a aula existente")
                         self.refAula = seleccionada.reference
                         self.conectarListener()
-                    } else {
-                        log.info("Creando nueva aula...")
-                        self.crearAula()
                     }
+                } else {
+                    log.info("Creando nueva aula...")
+                    self.crearAula()
                 }
             }
         }
