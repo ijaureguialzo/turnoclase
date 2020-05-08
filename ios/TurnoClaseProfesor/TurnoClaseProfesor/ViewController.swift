@@ -484,7 +484,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             log.debug("Buscando UID del aula: \(codigo):\(pin)")
 
             // Buscar el aula
-            db.collection("aulas")
+            db.collectionGroup("aulas")
                 .whereField("codigo", isEqualTo: codigo.uppercased())
                 .whereField("pin", isEqualTo: pin)
                 .limit(to: 1)
