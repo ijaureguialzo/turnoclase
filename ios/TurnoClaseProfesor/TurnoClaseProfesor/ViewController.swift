@@ -195,6 +195,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                         log.error("Error al crear el aula: \(error.localizedDescription)")
                     } else {
                         log.info("Aula creada")
+                        self.numAulas += 1
                         self.conectarListener()
                     }
                 }
@@ -338,25 +339,34 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         feedbackTactil()
     }
 
-    fileprivate func borrarAulaReconectar() {
+    fileprivate func borrarAulaReconectar(codigo: String) {
 
         // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
 
         self.desconectarListeners()
 
-        self.refAula.delete() { error in
-            if let error = error {
-                log.error("Error al borrar el aula: \(error.localizedDescription)")
-            } else {
-                log.info("Aula borrada")
+        refMisAulas.whereField("codigo", isEqualTo: codigo.uppercased())
+            .getDocuments() { (querySnapshot, error) in
 
-                self.numAulas -= 1
-                if self.aulaActual == self.numAulas {
-                    self.aulaActual -= 1
+                if let error = error {
+                    log.error("Error al recuperar datos: \(error.localizedDescription)")
+                } else {
+
+                    querySnapshot!.documents.first?.reference.delete() { error in
+                        if let error = error {
+                            log.error("Error al borrar el aula: \(error.localizedDescription)")
+                        } else {
+                            log.info("Aula borrada")
+
+                            self.numAulas -= 1
+                            if self.aulaActual == self.numAulas {
+                                self.aulaActual -= 1
+                            }
+
+                            self.conectarAula(posicion: self.aulaActual)
+                        }
+                    }
                 }
-
-                self.conectarAula(posicion: self.aulaActual)
-            }
         }
     }
 
@@ -460,12 +470,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         let accionAnyadirAula = UIAlertAction(title: "Añadir aula".localized(), style: .default, handler: { (action) -> Void in
             log.info("Añadir aula")
             self.crearAula()
-            self.numAulas += 1
         })
 
         let accionBorrarAula = UIAlertAction(title: "Borrar aula".localized(), style: .destructive, handler: { (action) -> Void in
             log.info("Borrar aula")
-            self.borrarAulaReconectar()
+            self.borrarAulaReconectar(codigo: self.codigoAula)
         })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
