@@ -344,8 +344,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 log.error("Error al borrar el aula: \(error.localizedDescription)")
             } else {
                 log.info("Aula borrada")
-                log.info("Creando nueva aula...")
-                self.crearAula()
             }
         }
     }
@@ -436,18 +434,24 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         let accionAnyadirAula = UIAlertAction(title: "Añadir aula".localized(), style: .default, handler: { (action) -> Void in
             log.info("Añadir aula")
+            self.crearAula()
             self.numAulas += 1
         })
 
         let accionBorrarAula = UIAlertAction(title: "Borrar aula".localized(), style: .destructive, handler: { (action) -> Void in
             log.info("Borrar aula")
+            self.desconectarListeners()
+            self.borrarAula()
+            self.conectarAula()
             self.numAulas -= 1
+            self.aulaActual -= 1
         })
 
         let accionVaciarAula = UIAlertAction(title: "Vaciar aula".localized(), style: .destructive, handler: { (action) -> Void in
             log.info("Vaciar aula")
             self.desconectarListeners()
             self.borrarAula()
+            self.crearAula()
         })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
