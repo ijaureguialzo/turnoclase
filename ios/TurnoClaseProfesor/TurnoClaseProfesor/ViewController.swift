@@ -258,10 +258,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                         refPosicion.getDocument { (document, error) in
 
-                            if let posicion = document?.data() {
+                            if let idAlumno = document?.documentID {
 
                                 // Cargar el alumno
-                                db.collection("alumnos").document(posicion["alumno"] as! String).getDocument { (document, error) in
+                                db.collection("alumnos").document(idAlumno).getDocument { (document, error) in
                                     if let document = document {
                                         if document.exists {
                                             if let alumno = document.data() {
@@ -273,7 +273,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                                                 if avanzarCola {
 
                                                     // Marcar cuando hemos atendido al alumno
-                                                    self.refAula.collection("espera").document(posicion["alumno"] as! String).setData([
+                                                    self.refAula.collection("espera").document(idAlumno).setData([
                                                         "timestamp": FieldValue.serverTimestamp()
                                                     ]) { error in
                                                         if let error = error {
