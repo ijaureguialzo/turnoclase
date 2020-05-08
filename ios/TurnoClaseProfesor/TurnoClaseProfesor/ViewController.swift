@@ -378,8 +378,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func borrarAulaReconectar(codigo: String) {
 
-        // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
-
         self.desconectarListeners()
 
         refMisAulas.whereField("codigo", isEqualTo: codigo.uppercased())
@@ -404,19 +402,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                         }
                     }
                 }
-        }
-    }
-
-    fileprivate func borrarAula() {
-
-        // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
-
-        self.refAula.delete() { error in
-            if let error = error {
-                log.error("Error al borrar el aula: \(error.localizedDescription)")
-            } else {
-                log.info("Aula borrada")
-            }
         }
     }
 
