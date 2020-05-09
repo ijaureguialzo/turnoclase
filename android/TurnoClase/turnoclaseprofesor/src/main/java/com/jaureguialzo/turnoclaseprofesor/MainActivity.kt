@@ -93,22 +93,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Soporte para varias aulas
-    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    private val MAX_AULAS = 16
+    private var aulaActual = 0
+    private var numAulas = 1
 
-        private var numAulas = 1
+    // Soporte para varias aulas
+    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getCount(): Int = numAulas
 
         override fun getItem(position: Int): Fragment = Fragment()
 
         fun incrementar() {
-            this.numAulas += 1
+            numAulas += 1
             notifyDataSetChanged()
         }
 
         fun decrementar() {
-            this.numAulas -= 1
+            numAulas -= 1
             notifyDataSetChanged()
         }
     }
@@ -144,6 +146,12 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                 pageIndicatorView.selection = position
+
+                aulaActual = position
+                Log.d(TAG, "Cargado aula en posición: " + aulaActual)
+
+                //desconectarListeners()
+                //conectarAula()
             }
 
             override fun onPageScrollStateChanged(state: Int) {
