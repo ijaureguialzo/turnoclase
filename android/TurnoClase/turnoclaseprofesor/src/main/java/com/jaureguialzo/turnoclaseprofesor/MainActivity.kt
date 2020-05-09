@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     // Referencias al documento del aula y la posición en la cola
     private var refAula: DocumentReference? = null
+    private var refMisAulas: CollectionReference? = null
 
     // Para simular el interfaz al hacer las capturas
     private var n = 2
@@ -230,33 +231,40 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun conectarAula() {
-        // Cargar el aula y si no, crearla
-        db.collection("aulas").document(uid!!)
-                .get()
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
+    private fun conectarAula(posicion: Int = 0) {
 
-                        val document = it.result!!
-                        if (!document.exists()) {
-                            Log.d(TAG, "Creando nueva aula")
-                            crearAula()
-                        } else {
-                            Log.d(TAG, "Conectado a aula existente")
-                            refAula = document.reference
+        // Colección que contiene las aulas del usuario
+        refMisAulas = db.collection("profesores").document(uid!!).collection("aulas")
+
+        // Cargar el aula y si no, crearla
+        refMisAulas!!.orderBy("timestamp")
+                .get()
+                .addOnSuccessListener { result ->
+
+                    numAulas = result.documents.count()
+                    Log.e(TAG, "Número: $numAulas")
+
+                    if (posicion >= 0 && posicion < numAulas) {
+
+                        var seleccionada = result.documents[posicion]
+
+                        if (seleccionada != null) {
+                            Log.i(TAG, "Conectado a aula existente")
+                            this.refAula = seleccionada.reference
                             conectarListener()
                         }
                     } else {
-                        Log.e(TAG, "Error al conectar al aula", it.exception)
-                        actualizarAula("?", 0)
+                        Log.i(TAG, "Creando nueva aula...")
+                        crearAula()
                     }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e(TAG, "Error al conectar al aula", exception)
+                    actualizarAula("?", 0)
                 }
     }
 
     private fun crearAula() {
-
-        // Almacenar la referencia a la nueva aula
-        refAula = db.collection("aulas").document(uid!!)
 
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
@@ -273,16 +281,18 @@ class MainActivity : AppCompatActivity() {
                         // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
                         fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
 
-                        // Guardar el documento con un Timestamp, para que se genere el código
+                        // Guardar el documento
                         val datos = HashMap<String, Any>()
+                        datos["codigo"] = codigo
                         datos["timestamp"] = FieldValue.serverTimestamp()
                         datos["pin"] = "%04d".format((0..9999).random())
                         datos["espera"] = 5
-                        datos["codigo"] = codigo
 
-                        refAula!!.set(datos)
-                                .addOnSuccessListener {
+                        // Almacenar la referencia a la nueva aula
+                        refMisAulas!!.add(datos)
+                                .addOnSuccessListener { nueva ->
                                     Log.d(TAG, "Aula creada")
+                                    refAula = nueva
                                     conectarListener()
                                 }
                                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
@@ -765,6 +775,6 @@ class MainActivity : AppCompatActivity() {
         private val TAG = "MainActivity"
 
     }
-    //endregion
+//endregion
 
 }
