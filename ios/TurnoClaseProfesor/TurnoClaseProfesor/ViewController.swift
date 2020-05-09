@@ -278,6 +278,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                         // Detectar si el aula desaparece y si somos invitados, desconectar
                         if !self.invitado {
                             self.actualizarAula(codigo: "?", enCola: 0)
+                            self.PIN = "?"
+                            self.desconectarListeners()
+                            self.conectarAula()
                         } else {
                             self.desconectarAula()
                         }
@@ -509,6 +512,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.desconectarAula()
         })
 
+        let accionRecuperarAula = UIAlertAction(title: "Recuperar aula".localized(), style: .destructive, handler: { (action) -> Void in
+            log.info("Recuperar aula")
+            self.desconectarListeners()
+            self.conectarAula()
+        })
+
         let accionCancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel, handler: { (action) -> Void in
             log.info("Cancelar")
         })
@@ -519,14 +528,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         })
 
         if !invitado {
-            alertController.addAction(accionEstablecerTiempoEspera)
-            if numAulas < MAX_AULAS {
-                alertController.addAction(accionAnyadirAula)
+            if codigoAula != "?" {
+                alertController.addAction(accionEstablecerTiempoEspera)
+                if numAulas < MAX_AULAS {
+                    alertController.addAction(accionAnyadirAula)
+                }
+                if numAulas > 1 {
+                    alertController.addAction(accionBorrarAula)
+                }
+                alertController.addAction(accionConectarOtraAula)
+            } else {
+                alertController.addAction(accionRecuperarAula)
             }
-            if numAulas > 1 {
-                alertController.addAction(accionBorrarAula)
-            }
-            alertController.addAction(accionConectarOtraAula)
         } else {
             alertController.addAction(accionDesconectarAula)
         }
