@@ -293,7 +293,43 @@ class MainActivity : AppCompatActivity() {
                                 .addOnSuccessListener { nueva ->
                                     Log.d(TAG, "Aula creada")
                                     refAula = nueva
+                                    numAulas += 1
                                     conectarListener()
+                                }
+                                .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
+                    }
+                })
+    }
+
+    private fun anyadirAula() {
+
+        // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
+        obtenerNuevoCodigo()
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        val e = task.exception
+                        if (e is FirebaseFunctionsException) {
+                            Log.e(TAG, e.details as String)
+                        }
+                    } else {
+
+                        val codigo = task.result?.get("codigo") as String
+
+                        // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
+                        fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
+
+                        // Guardar el documento
+                        val datos = HashMap<String, Any>()
+                        datos["codigo"] = codigo
+                        datos["timestamp"] = FieldValue.serverTimestamp()
+                        datos["pin"] = "%04d".format((0..9999).random())
+                        datos["espera"] = 5
+
+                        // Almacenar la referencia a la nueva aula
+                        refMisAulas!!.add(datos)
+                                .addOnSuccessListener { nueva ->
+                                    Log.d(TAG, "Aula creada")
+                                    numAulas += 1
                                 }
                                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
                     }
