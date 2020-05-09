@@ -75,8 +75,9 @@ dependencies {
     implementation "com.google.firebase:firebase-core:$firebase_core_version"
     implementation "com.google.firebase:firebase-auth:$firebase_auth_version"
     implementation "com.google.firebase:firebase-firestore:$firebase_firestore_version"
-    implementation 'com.google.firebase:firebase-functions-ktx:19.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation 'com.google.firebase:firebase-functions-ktx:19.0.2'
 
     // REF: Dependencias para tests: https://stackoverflow.com/a/56624085
     testImplementation 'junit:junit:4.13'
