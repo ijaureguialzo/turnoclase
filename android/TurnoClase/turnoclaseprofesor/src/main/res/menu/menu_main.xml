@@ -18,17 +18,23 @@
         android:enabled="true"
         android:visible="true">
         <item
-            android:id="@+id/accion_generar"
-            android:title="@string/menu_accion_generar" />
-        <item
             android:id="@+id/accion_establecer_espera"
             android:title="@string/menu_establecer_espera" />
+        <item
+            android:id="@+id/accion_anyadir_aula"
+            android:title="@string/menu_accion_anyadir_aula" />
+        <item
+            android:id="@+id/accion_borrar_aula"
+            android:title="@string/menu_accion_borrar_aula" />
         <item
             android:id="@+id/accion_conectar"
             android:title="@string/menu_accion_conectar" />
         <item
             android:id="@+id/accion_desconectar"
             android:title="@string/menu_accion_desconectar" />
+        <item
+            android:id="@+id/accion_recuperar_aula"
+            android:title="@string/menu_accion_recuperar_aula" />
     </group>
     <group android:id="@+id/acerca_de">
         <item

@@ -20,4 +20,7 @@
     <string name="menu_establecer_espera">Establecer tiempo de espera</string>
     <string name="dialogo_establecer_espera_titulo">Tiempo de espera (minutos)</string>
     <string name="dialogo_guardar">Guardar</string>
+    <string name="menu_accion_borrar_aula">Delete classroom</string>
+    <string name="menu_accion_recuperar_aula">Classroom recovery</string>
+    <string name="menu_accion_anyadir_aula">Add classroom</string>
 </resources>

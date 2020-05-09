@@ -50,5 +50,8 @@
     <string name="menu_establecer_espera">Set wait time</string>
     <string name="dialogo_establecer_espera_titulo">Wait time (minutes)</string>
     <string name="dialogo_guardar">Save</string>
+    <string name="menu_accion_anyadir_aula">Add classroom</string>
+    <string name="menu_accion_borrar_aula">Delete classroom</string>
+    <string name="menu_accion_recuperar_aula">Classroom recovery</string>
 
 </resources>

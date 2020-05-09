@@ -588,50 +588,79 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        if (!invitado) {
-            menu.findItem(R.id.accion_generar).isVisible = true
-            menu.findItem(R.id.accion_generar).setOnMenuItemClickListener {
-                Log.d("TurnoClase", "Generar nueva aula")
+        if (codigoAula != "?") {
+            if (!invitado && numAulas < MAX_AULAS) {
+                menu.findItem(R.id.accion_anyadir_aula).isVisible = true
+                menu.findItem(R.id.accion_anyadir_aula).setOnMenuItemClickListener {
+                    Log.d("TurnoClase", "Añadir aula")
+                    anyadirAula()
+                    true
+                }
+            } else {
+                menu.findItem(R.id.accion_anyadir_aula).isVisible = false
+            }
+
+            if (!invitado && numAulas > 1) {
+                menu.findItem(R.id.accion_borrar_aula).isVisible = true
+                menu.findItem(R.id.accion_borrar_aula).setOnMenuItemClickListener {
+                    Log.d("TurnoClase", "Borrar aula")
+                    confirmarBorrado()
+                    true
+                }
+            } else {
+                menu.findItem(R.id.accion_borrar_aula).isVisible = false
+            }
+
+            if (!invitado) {
+                menu.findItem(R.id.accion_establecer_espera).isVisible = true
+                menu.findItem(R.id.accion_establecer_espera).setOnMenuItemClickListener {
+                    Log.d("TurnoClase", "Establecer tiempo de espera")
+                    dialogoTiempoEspera()
+                    true
+                }
+            } else {
+                menu.findItem(R.id.accion_establecer_espera).isVisible = false
+            }
+
+            if (!invitado) {
+                menu.findItem(R.id.accion_conectar).isVisible = true
+                menu.findItem(R.id.accion_desconectar).isVisible = false
+
+                menu.findItem(R.id.accion_conectar).setOnMenuItemClickListener {
+                    Log.d("TurnoClase", "Conectar a otra aula")
+                    dialogoConexion()
+                    true
+                }
+            } else {
+                menu.findItem(R.id.accion_conectar).isVisible = false
+                menu.findItem(R.id.accion_desconectar).isVisible = true
+
+                menu.findItem(R.id.accion_desconectar).setOnMenuItemClickListener {
+                    Log.d("TurnoClase", "Desconectar del aula")
+                    desconectarAula()
+                    true
+                }
+            }
+        }
+
+        if (codigoAula == "?") {
+            menu.findItem(R.id.accion_recuperar_aula).isVisible = true
+
+            menu.findItem(R.id.accion_recuperar_aula).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Recuperar aula")
                 desconectarListeners()
-                borrarAula()
+                conectarAula()
                 true
             }
         } else {
-            menu.findItem(R.id.accion_generar).isVisible = false
-        }
-
-        if (!invitado) {
-            menu.findItem(R.id.accion_establecer_espera).isVisible = true
-            menu.findItem(R.id.accion_establecer_espera).setOnMenuItemClickListener {
-                Log.d("TurnoClase", "Establecer tiempo de espera")
-                dialogoTiempoEspera()
-                true
-            }
-        } else {
-            menu.findItem(R.id.accion_establecer_espera).isVisible = false
-        }
-
-        if (!invitado) {
-            menu.findItem(R.id.accion_conectar).isVisible = true
-            menu.findItem(R.id.accion_desconectar).isVisible = false
-
-            menu.findItem(R.id.accion_conectar).setOnMenuItemClickListener {
-                Log.d("TurnoClase", "Conectar a otra aula")
-                dialogoConexion()
-                true
-            }
-        } else {
-            menu.findItem(R.id.accion_conectar).isVisible = false
-            menu.findItem(R.id.accion_desconectar).isVisible = true
-
-            menu.findItem(R.id.accion_desconectar).setOnMenuItemClickListener {
-                Log.d("TurnoClase", "Desconectar del aula")
-                desconectarAula()
-                true
-            }
+            menu.findItem(R.id.accion_recuperar_aula).isVisible = false
         }
 
         return result
+    }
+
+    private fun confirmarBorrado() {
+        TODO("Not yet implemented")
     }
 
     private fun dialogoConexion() {

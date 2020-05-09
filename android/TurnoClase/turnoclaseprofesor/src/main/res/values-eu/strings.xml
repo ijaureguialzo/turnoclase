@@ -20,4 +20,7 @@
     <string name="menu_establecer_espera">Itxaroteko denbora ezarri</string>
     <string name="dialogo_establecer_espera_titulo">Itxaroteko denbora (minutuak)</string>
     <string name="dialogo_guardar">Gorde</string>
+    <string name="menu_accion_borrar_aula">Delete classroom</string>
+    <string name="menu_accion_recuperar_aula">Classroom recovery</string>
+    <string name="menu_accion_anyadir_aula">Add classroom</string>
 </resources>
