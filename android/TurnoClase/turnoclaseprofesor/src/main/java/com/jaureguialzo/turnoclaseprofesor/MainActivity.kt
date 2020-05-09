@@ -583,6 +583,9 @@ class MainActivity : AppCompatActivity() {
 
         // REF: Dar formato a strings localizados: https://developer.android.com/guide/topics/resources/string-resource?hl=es-419#dar-formato-a-las-strings
         if (!invitado) {
+            if (codigoAula == "?") {
+                PIN = "?"
+            }
             menu.findItem(R.id.etiqueta_pin).title = String.format(getString(R.string.menu_etiqueta_pin), PIN)
         } else {
             menu.findItem(R.id.etiqueta_pin).title = getString(R.string.menu_etiqueta_invitado)
@@ -593,40 +596,40 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        if (!invitado && numAulas < MAX_AULAS && codigoAula != "?") {
+            menu.findItem(R.id.accion_anyadir_aula).isVisible = true
+            menu.findItem(R.id.accion_anyadir_aula).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Añadir aula")
+                anyadirAula()
+                true
+            }
+        } else {
+            menu.findItem(R.id.accion_anyadir_aula).isVisible = false
+        }
+
+        if (!invitado && numAulas > 1 && codigoAula != "?") {
+            menu.findItem(R.id.accion_borrar_aula).isVisible = true
+            menu.findItem(R.id.accion_borrar_aula).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Borrar aula")
+                dialogoConfirmarBorrado()
+                true
+            }
+        } else {
+            menu.findItem(R.id.accion_borrar_aula).isVisible = false
+        }
+
+        if (!invitado && codigoAula != "?") {
+            menu.findItem(R.id.accion_establecer_espera).isVisible = true
+            menu.findItem(R.id.accion_establecer_espera).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Establecer tiempo de espera")
+                dialogoTiempoEspera()
+                true
+            }
+        } else {
+            menu.findItem(R.id.accion_establecer_espera).isVisible = false
+        }
+
         if (codigoAula != "?") {
-            if (!invitado && numAulas < MAX_AULAS) {
-                menu.findItem(R.id.accion_anyadir_aula).isVisible = true
-                menu.findItem(R.id.accion_anyadir_aula).setOnMenuItemClickListener {
-                    Log.d("TurnoClase", "Añadir aula")
-                    anyadirAula()
-                    true
-                }
-            } else {
-                menu.findItem(R.id.accion_anyadir_aula).isVisible = false
-            }
-
-            if (!invitado && numAulas > 1) {
-                menu.findItem(R.id.accion_borrar_aula).isVisible = true
-                menu.findItem(R.id.accion_borrar_aula).setOnMenuItemClickListener {
-                    Log.d("TurnoClase", "Borrar aula")
-                    dialogoConfirmarBorrado()
-                    true
-                }
-            } else {
-                menu.findItem(R.id.accion_borrar_aula).isVisible = false
-            }
-
-            if (!invitado) {
-                menu.findItem(R.id.accion_establecer_espera).isVisible = true
-                menu.findItem(R.id.accion_establecer_espera).setOnMenuItemClickListener {
-                    Log.d("TurnoClase", "Establecer tiempo de espera")
-                    dialogoTiempoEspera()
-                    true
-                }
-            } else {
-                menu.findItem(R.id.accion_establecer_espera).isVisible = false
-            }
-
             if (!invitado) {
                 menu.findItem(R.id.accion_conectar).isVisible = true
                 menu.findItem(R.id.accion_desconectar).isVisible = false
@@ -646,6 +649,9 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
             }
+        } else {
+            menu.findItem(R.id.accion_conectar).isVisible = false
+            menu.findItem(R.id.accion_desconectar).isVisible = false
         }
 
         if (codigoAula == "?") {
