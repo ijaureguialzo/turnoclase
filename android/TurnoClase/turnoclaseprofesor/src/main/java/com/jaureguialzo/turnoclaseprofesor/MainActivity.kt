@@ -153,8 +153,8 @@ class MainActivity : AppCompatActivity() {
                 aulaActual = position
                 Log.d(TAG, "Cargado aula en posición: " + aulaActual)
 
-                //desconectarListeners()
-                //conectarAula()
+                desconectarListeners()
+                conectarAula(aulaActual)
             }
 
             override fun onPageScrollStateChanged(state: Int) {
