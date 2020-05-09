@@ -55,7 +55,11 @@ class MainActivity : AppCompatActivity() {
     private var uid: String? = null
 
     // Conectar a otro aula
-    private var invitado = false
+    private var invitado: Boolean = false
+        set(value) {
+            field = value
+            pageIndicatorView?.visibility = if (value) View.INVISIBLE else View.VISIBLE
+        }
 
     // Listeners para recibir las actualizaciones
     private var listenerAula: ListenerRegistration? = null
@@ -98,6 +102,7 @@ class MainActivity : AppCompatActivity() {
     private var numAulas = 0
 
     private var adapter: ScreenSlidePagerAdapter? = null
+    private var pageIndicatorView: PageIndicatorView? = null
 
     // Soporte para varias aulas
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -137,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Paginador: https://github.com/romandanylyk/PageIndicatorView
-        val pageIndicatorView: PageIndicatorView = findViewById(R.id.pageIndicatorView)
+        pageIndicatorView = findViewById(R.id.pageIndicatorView)
 
         adapter = ScreenSlidePagerAdapter(supportFragmentManager)
         viewPager.adapter = adapter
@@ -147,13 +152,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                pageIndicatorView.selection = position
+                if (!invitado) {
+                    pageIndicatorView?.selection = position
 
-                aulaActual = position
-                Log.d(TAG, "Cargado aula en posición: " + aulaActual)
+                    aulaActual = position
+                    Log.d(TAG, "Cargado aula en posición: " + aulaActual)
 
-                desconectarListeners()
-                conectarAula(aulaActual)
+                    desconectarListeners()
+                    conectarAula(aulaActual)
+                }
             }
 
             override fun onPageScrollStateChanged(state: Int) {
