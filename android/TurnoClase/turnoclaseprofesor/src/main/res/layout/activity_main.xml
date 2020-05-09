@@ -7,6 +7,17 @@
     android:gravity="center_vertical"
     tools:context="com.jaureguialzo.turnoclaseprofesor.MainActivity">
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:elevation="5dp"
+        android:theme="@style/Theme.AppCompat.Light">
+
+    </androidx.viewpager.widget.ViewPager>
+
     <TextView
         android:id="@+id/circuloAmarillo"
         android:layout_width="285dp"
@@ -21,6 +32,24 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="18pt" />
 
+    <TextView
+        android:id="@+id/etiquetaNombreAlumno"
+        android:layout_width="253dp"
+        android:layout_height="253dp"
+        android:layout_centerInParent="true"
+        android:elegantTextHeight="false"
+        android:gravity="center_vertical|center_horizontal"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:text=""
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="24pt"
+        app:autoSizeMaxTextSize="24pt"
+        app:autoSizeMinTextSize="6pt"
+        app:autoSizeStepGranularity="2pt"
+        app:autoSizeTextType="uniform" />
+
     <FrameLayout
         android:id="@+id/contenedorBotonAula"
         android:layout_width="72dp"
@@ -32,7 +61,8 @@
         android:layout_toLeftOf="@+id/circuloAmarillo"
         android:width="72dp"
         android:height="72dp"
-        android:background="@drawable/circulo_gris">
+        android:background="@drawable/circulo_gris"
+        android:elevation="10dp">
 
         <Button
             android:id="@+id/botonCodigoAula"
@@ -58,7 +88,8 @@
         android:layout_toRightOf="@+id/circuloAmarillo"
         android:width="72dp"
         android:height="72dp"
-        android:background="@drawable/circulo_azul">
+        android:background="@drawable/circulo_azul"
+        android:elevation="10dp">
 
         <Button
             android:id="@+id/botonSiguiente"
@@ -82,7 +113,8 @@
         android:layout_toRightOf="@+id/circuloAmarillo"
         android:width="72dp"
         android:height="72dp"
-        android:background="@drawable/circulo_rojo">
+        android:background="@drawable/circulo_rojo"
+        android:elevation="10dp">
 
         <Button
             android:id="@+id/botonEnCola"
@@ -98,33 +130,20 @@
 
     </FrameLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
+    <com.rd.PageIndicatorView
+        android:id="@+id/pageIndicatorView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:elevation="5dp"
-        android:theme="@style/Theme.AppCompat.Light">
-
-        <TextView
-            android:id="@+id/etiquetaNombreAlumno"
-            android:layout_width="253dp"
-            android:layout_height="253dp"
-            android:layout_centerInParent="true"
-            android:elegantTextHeight="false"
-            android:gravity="center_vertical|center_horizontal"
-            android:includeFontPadding="false"
-            android:maxLines="1"
-            android:text=""
-            android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="24pt"
-            app:autoSizeMaxTextSize="24pt"
-            app:autoSizeMinTextSize="6pt"
-            app:autoSizeStepGranularity="2pt"
-            app:autoSizeTextType="uniform" />
-
-    </RelativeLayout>
+        android:layout_alignBottom="@id/circuloAmarillo"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-56dp"
+        app:piv_animationType="none"
+        app:piv_dynamicCount="true"
+        app:piv_interactiveAnimation="true"
+        app:piv_padding="8dp"
+        app:piv_radius="4dp"
+        app:piv_selectedColor="?android:attr/textColorSecondary"
+        app:piv_unselectedColor="?android:attr/textColorHint"
+        app:piv_viewPager="@id/viewPager" />
 
 </RelativeLayout>

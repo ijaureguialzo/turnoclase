@@ -33,12 +33,17 @@ import android.widget.NumberPicker
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
+import com.rd.PageIndicatorView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.HashMap
@@ -88,6 +93,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Soporte para varias aulas
+    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+
+        private var numAulas = 1
+
+        override fun getCount(): Int = numAulas
+
+        override fun getItem(position: Int): Fragment = Fragment()
+
+        fun incrementar() {
+            this.numAulas += 1
+            notifyDataSetChanged()
+        }
+
+        fun decrementar() {
+            this.numAulas -= 1
+            notifyDataSetChanged()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -106,6 +131,24 @@ class MainActivity : AppCompatActivity() {
 
         // Cargar el layout
         setContentView(R.layout.activity_main)
+
+        // Paginador: https://github.com/romandanylyk/PageIndicatorView
+        val pageIndicatorView: PageIndicatorView = findViewById(R.id.pageIndicatorView)
+
+        val adapter = ScreenSlidePagerAdapter(supportFragmentManager)
+        viewPager.adapter = adapter
+
+        viewPager.addOnPageChangeListener(object : OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                pageIndicatorView.selection = position
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+        })
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
@@ -155,6 +198,7 @@ class MainActivity : AppCompatActivity() {
 
         // Evento del botón botonEnCola
         botonEnCola.setOnClickListener {
+            adapter.incrementar() // Test
             botonEnCola()
         }
 

@@ -52,6 +52,6 @@ task clean(type: Delete) {
 // REF: Parámetros compartidos: https://stackoverflow.com/a/20436423/5136913
 ext {
     compileSdkVersion = 29
-    minSdkVersion = 19
+    minSdkVersion = 21
     targetSdkVersion = 29
 }
