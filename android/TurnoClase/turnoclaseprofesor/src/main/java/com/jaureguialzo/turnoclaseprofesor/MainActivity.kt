@@ -96,7 +96,9 @@ class MainActivity : AppCompatActivity() {
 
     private val MAX_AULAS = 16
     private var aulaActual = 0
-    private var numAulas = 1
+    private var numAulas = 0
+
+    private var adapter: ScreenSlidePagerAdapter? = null
 
     // Soporte para varias aulas
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -138,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         // Paginador: https://github.com/romandanylyk/PageIndicatorView
         val pageIndicatorView: PageIndicatorView = findViewById(R.id.pageIndicatorView)
 
-        val adapter = ScreenSlidePagerAdapter(supportFragmentManager)
+        adapter = ScreenSlidePagerAdapter(supportFragmentManager)
         viewPager.adapter = adapter
 
         viewPager.addOnPageChangeListener(object : OnPageChangeListener {
@@ -207,7 +209,6 @@ class MainActivity : AppCompatActivity() {
 
         // Evento del botón botonEnCola
         botonEnCola.setOnClickListener {
-            adapter.incrementar() // Test
             botonEnCola()
         }
 
@@ -242,7 +243,6 @@ class MainActivity : AppCompatActivity() {
                 .addOnSuccessListener { result ->
 
                     numAulas = result.documents.count()
-                    Log.e(TAG, "Número: $numAulas")
 
                     if (posicion >= 0 && posicion < numAulas) {
 
@@ -251,6 +251,7 @@ class MainActivity : AppCompatActivity() {
                         if (seleccionada != null) {
                             Log.i(TAG, "Conectado a aula existente")
                             this.refAula = seleccionada.reference
+                            adapter?.incrementar()
                             conectarListener()
                         }
                     } else {
@@ -293,7 +294,7 @@ class MainActivity : AppCompatActivity() {
                                 .addOnSuccessListener { nueva ->
                                     Log.d(TAG, "Aula creada")
                                     refAula = nueva
-                                    numAulas += 1
+                                    adapter?.incrementar()
                                     conectarListener()
                                 }
                                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
@@ -329,7 +330,7 @@ class MainActivity : AppCompatActivity() {
                         refMisAulas!!.add(datos)
                                 .addOnSuccessListener { nueva ->
                                     Log.d(TAG, "Aula creada")
-                                    numAulas += 1
+                                    adapter?.incrementar()
                                 }
                                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
                     }
@@ -508,6 +509,10 @@ class MainActivity : AppCompatActivity() {
         conectarAula()
     }
 
+    private fun borrarAulaReconectar(codigoAula: String) {
+        TODO("Not yet implemented")
+    }
+
     private fun borrarAula() {
 
         // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
@@ -604,7 +609,7 @@ class MainActivity : AppCompatActivity() {
                 menu.findItem(R.id.accion_borrar_aula).isVisible = true
                 menu.findItem(R.id.accion_borrar_aula).setOnMenuItemClickListener {
                     Log.d("TurnoClase", "Borrar aula")
-                    confirmarBorrado()
+                    dialogoConfirmarBorrado()
                     true
                 }
             } else {
@@ -657,10 +662,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         return result
-    }
-
-    private fun confirmarBorrado() {
-        TODO("Not yet implemented")
     }
 
     private fun dialogoConexion() {
@@ -762,6 +763,27 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
+    private fun dialogoConfirmarBorrado() {
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(getString(R.string.dialogo_confirmar_borrado_titulo))
+        builder.setMessage(getString(R.string.dialogo_confirmar_borrado_mensaje))
+
+        // Set up the buttons
+        builder.setPositiveButton(getString(R.string.dialogo_ok)) { _, _ ->
+            Log.d(TAG, "Borrando el aula...")
+            borrarAulaReconectar(codigoAula)
+        }
+
+        builder.setNegativeButton(getString(R.string.dialogo_cancelar)) { dialog, _ ->
+            Log.d(TAG, "Cancelado")
+            dialog.cancel()
+        }
+
+        builder.show()
+    }
+
     private fun buscarAula(codigo: String, pin: String) {
 
         Log.d(TAG, "Buscando UID del aula:$codigo:$pin")
@@ -806,7 +828,7 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle(getString(R.string.dialogo_error_titulo))
         builder.setMessage(getString(R.string.dialogo_error_mensaje))
 
-        builder.setPositiveButton(getString(R.string.dialogo_error_ok)) { _, _ ->
+        builder.setPositiveButton(getString(R.string.dialogo_ok)) { _, _ ->
             Log.e(TAG, "Error de conexión")
         }
 
