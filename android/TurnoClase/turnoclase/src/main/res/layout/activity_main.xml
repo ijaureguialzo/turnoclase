@@ -20,7 +20,7 @@
         android:layout_height="72dp"
         android:layout_below="@+id/circuloGris"
         android:layout_marginLeft="-107dp"
-        android:layout_marginTop="-65dp"
+        android:layout_marginTop="-56dp"
         android:layout_toEndOf="@+id/circuloGris"
         android:layout_toRightOf="@+id/circuloGris"
         android:width="72dp"
