@@ -513,7 +513,7 @@ class MainActivity : AppCompatActivity() {
 
         desconectarListeners()
 
-        refMisAulas!!.whereEqualTo("codigo", codigoAula)
+        refMisAulas!!.whereEqualTo("codigo", codigoAula.toUpperCase())
                 .get()
                 .addOnSuccessListener { result ->
 
