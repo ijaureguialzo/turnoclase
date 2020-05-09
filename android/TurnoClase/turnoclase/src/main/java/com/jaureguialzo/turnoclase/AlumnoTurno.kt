@@ -169,7 +169,7 @@ class AlumnoTurno : AppCompatActivity() {
     private fun encolarAlumno() {
 
         // Buscar el aula
-        db.collection("aulas")
+        db.collectionGroup("aulas")
                 .whereEqualTo("codigo", codigoAula)
                 .limit(1)
                 .get()

@@ -15,9 +15,14 @@
     <string name="dialogo_cancelar">Cancelar</string>
     <string name="dialogo_error_titulo">Error de conexión</string>
     <string name="dialogo_error_mensaje">No se ha podido acceder al aula con los datos proporcionados.</string>
-    <string name="dialogo_error_ok">Ok</string>
+    <string name="dialogo_ok">Ok</string>
     <string name="dialogo_conexion_titulo">Conectar a otra aula</string>
     <string name="menu_establecer_espera">Establecer tiempo de espera</string>
     <string name="dialogo_establecer_espera_titulo">Tiempo de espera (minutos)</string>
     <string name="dialogo_guardar">Guardar</string>
+    <string name="menu_accion_borrar_aula">Borrar aula</string>
+    <string name="menu_accion_recuperar_aula">Recuperar aula</string>
+    <string name="menu_accion_anyadir_aula">Añadir aula</string>
+    <string name="dialogo_confirmar_borrado_titulo">Borrar aula</string>
+    <string name="dialogo_confirmar_borrado_mensaje">Esta acción vaciará la cola de espera.</string>
 </resources>

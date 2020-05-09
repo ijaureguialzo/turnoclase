@@ -33,12 +33,17 @@ import android.widget.NumberPicker
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
+import com.rd.PageIndicatorView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.HashMap
@@ -50,8 +55,11 @@ class MainActivity : AppCompatActivity() {
     private var uid: String? = null
 
     // Conectar a otro aula
-    private var invitado = false
-    private var uidPropio: String? = null
+    private var invitado: Boolean = false
+        set(value) {
+            field = value
+            pageIndicatorView?.visibility = if (value) View.INVISIBLE else View.VISIBLE
+        }
 
     // Listeners para recibir las actualizaciones
     private var listenerAula: ListenerRegistration? = null
@@ -59,6 +67,7 @@ class MainActivity : AppCompatActivity() {
 
     // Referencias al documento del aula y la posición en la cola
     private var refAula: DocumentReference? = null
+    private var refMisAulas: CollectionReference? = null
 
     // Para simular el interfaz al hacer las capturas
     private var n = 2
@@ -88,6 +97,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val MAX_AULAS = 16
+    private var aulaActual = 0
+    private var numAulas = 0
+
+    private var adapter: ScreenSlidePagerAdapter? = null
+    private var pageIndicatorView: PageIndicatorView? = null
+
+    // Soporte para varias aulas
+    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+        override fun getCount(): Int = numAulas
+
+        override fun getItem(position: Int): Fragment = Fragment()
+
+        fun incrementar() {
+            numAulas += 1
+            notifyDataSetChanged()
+        }
+
+        fun decrementar() {
+            numAulas -= 1
+            notifyDataSetChanged()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -107,6 +141,32 @@ class MainActivity : AppCompatActivity() {
         // Cargar el layout
         setContentView(R.layout.activity_main)
 
+        // Paginador: https://github.com/romandanylyk/PageIndicatorView
+        pageIndicatorView = findViewById(R.id.pageIndicatorView)
+
+        adapter = ScreenSlidePagerAdapter(supportFragmentManager)
+        viewPager.adapter = adapter
+
+        viewPager.addOnPageChangeListener(object : OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                if (!invitado) {
+                    pageIndicatorView?.selection = position
+
+                    aulaActual = position
+                    Log.d(TAG, "Cargado aula en posición: " + aulaActual)
+
+                    desconectarListeners()
+                    conectarAula(aulaActual)
+                }
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+        })
+
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
             actualizarAula("BE131", 0)
@@ -125,7 +185,6 @@ class MainActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
 
                             uid = mAuth?.currentUser?.uid
-                            uidPropio = uid
                             Log.d(TAG, "Registrado como usuario con UID: $uid")
 
                             conectarAula()
@@ -178,33 +237,40 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun conectarAula() {
-        // Cargar el aula y si no, crearla
-        db.collection("aulas").document(uid!!)
-                .get()
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
+    private fun conectarAula(posicion: Int = 0) {
 
-                        val document = it.result!!
-                        if (!document.exists()) {
-                            Log.d(TAG, "Creando nueva aula")
-                            crearAula()
-                        } else {
-                            Log.d(TAG, "Conectado a aula existente")
-                            refAula = document.reference
+        // Colección que contiene las aulas del usuario
+        refMisAulas = db.collection("profesores").document(uid!!).collection("aulas")
+
+        // Cargar el aula y si no, crearla
+        refMisAulas!!.orderBy("timestamp")
+                .get()
+                .addOnSuccessListener { result ->
+
+                    numAulas = result.documents.count()
+                    adapter?.notifyDataSetChanged()
+
+                    if (posicion >= 0 && posicion < numAulas) {
+
+                        var seleccionada = result.documents[posicion]
+
+                        if (seleccionada != null) {
+                            Log.i(TAG, "Conectado a aula existente")
+                            this.refAula = seleccionada.reference
                             conectarListener()
                         }
                     } else {
-                        Log.e(TAG, "Error al conectar al aula", it.exception)
-                        actualizarAula("?", 0)
+                        Log.i(TAG, "Creando nueva aula...")
+                        crearAula()
                     }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e(TAG, "Error al conectar al aula", exception)
+                    actualizarAula("?", 0)
                 }
     }
 
     private fun crearAula() {
-
-        // Almacenar la referencia a la nueva aula
-        refAula = db.collection("aulas").document(uid!!)
 
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
@@ -221,17 +287,55 @@ class MainActivity : AppCompatActivity() {
                         // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
                         fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
 
-                        // Guardar el documento con un Timestamp, para que se genere el código
+                        // Guardar el documento
                         val datos = HashMap<String, Any>()
+                        datos["codigo"] = codigo
                         datos["timestamp"] = FieldValue.serverTimestamp()
                         datos["pin"] = "%04d".format((0..9999).random())
                         datos["espera"] = 5
-                        datos["codigo"] = codigo
 
-                        refAula!!.set(datos)
-                                .addOnSuccessListener {
+                        // Almacenar la referencia a la nueva aula
+                        refMisAulas!!.add(datos)
+                                .addOnSuccessListener { nueva ->
                                     Log.d(TAG, "Aula creada")
+                                    refAula = nueva
+                                    adapter?.incrementar()
                                     conectarListener()
+                                }
+                                .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
+                    }
+                })
+    }
+
+    private fun anyadirAula() {
+
+        // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
+        obtenerNuevoCodigo()
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        val e = task.exception
+                        if (e is FirebaseFunctionsException) {
+                            Log.e(TAG, e.details as String)
+                        }
+                    } else {
+
+                        val codigo = task.result?.get("codigo") as String
+
+                        // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
+                        fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
+
+                        // Guardar el documento
+                        val datos = HashMap<String, Any>()
+                        datos["codigo"] = codigo
+                        datos["timestamp"] = FieldValue.serverTimestamp()
+                        datos["pin"] = "%04d".format((0..9999).random())
+                        datos["espera"] = 5
+
+                        // Almacenar la referencia a la nueva aula
+                        refMisAulas!!.add(datos)
+                                .addOnSuccessListener { nueva ->
+                                    Log.d(TAG, "Aula creada")
+                                    adapter?.incrementar()
                                 }
                                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
                     }
@@ -405,24 +509,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun desconectarAula() {
         invitado = false
-        uid = uidPropio
         desconectarListeners()
-        conectarAula()
+        conectarAula(aulaActual)
     }
 
-    private fun borrarAula() {
+    private fun borrarAulaReconectar(codigoAula: String) {
 
-        // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+        desconectarListeners()
 
-        db.collection("aulas").document(uid!!).delete().addOnCompleteListener {
-            if (!it.isSuccessful) {
-                Log.e(TAG, "Error al borrar el aula: ", it.exception)
-            } else {
-                Log.d(TAG, "Aula borrada")
-                Log.d(TAG, "Creando nueva aula")
-                crearAula()
-            }
-        }
+        refMisAulas!!.whereEqualTo("codigo", codigoAula.toUpperCase())
+                .get()
+                .addOnSuccessListener { result ->
+
+                    result.documents.first().reference.delete().addOnCompleteListener {
+                        if (!it.isSuccessful) {
+                            Log.e(TAG, "Error al borrar el aula: ", it.exception)
+                        } else {
+                            Log.d(TAG, "Aula borrada")
+                            adapter?.decrementar()
+                            conectarAula(aulaActual)
+                        }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e(TAG, "Error al borrar el aula", exception)
+                }
     }
 
     private fun actualizarAula(codigo: String = "?", enCola: Int = -1) {
@@ -480,6 +591,9 @@ class MainActivity : AppCompatActivity() {
 
         // REF: Dar formato a strings localizados: https://developer.android.com/guide/topics/resources/string-resource?hl=es-419#dar-formato-a-las-strings
         if (!invitado) {
+            if (codigoAula == "?") {
+                PIN = "?"
+            }
             menu.findItem(R.id.etiqueta_pin).title = String.format(getString(R.string.menu_etiqueta_pin), PIN)
         } else {
             menu.findItem(R.id.etiqueta_pin).title = getString(R.string.menu_etiqueta_invitado)
@@ -490,19 +604,29 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        if (!invitado) {
-            menu.findItem(R.id.accion_generar).isVisible = true
-            menu.findItem(R.id.accion_generar).setOnMenuItemClickListener {
-                Log.d("TurnoClase", "Generar nueva aula")
-                desconectarListeners()
-                borrarAula()
+        if (!invitado && numAulas < MAX_AULAS && codigoAula != "?") {
+            menu.findItem(R.id.accion_anyadir_aula).isVisible = true
+            menu.findItem(R.id.accion_anyadir_aula).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Añadir aula")
+                anyadirAula()
                 true
             }
         } else {
-            menu.findItem(R.id.accion_generar).isVisible = false
+            menu.findItem(R.id.accion_anyadir_aula).isVisible = false
         }
 
-        if (!invitado) {
+        if (!invitado && numAulas > 1 && codigoAula != "?") {
+            menu.findItem(R.id.accion_borrar_aula).isVisible = true
+            menu.findItem(R.id.accion_borrar_aula).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Borrar aula")
+                dialogoConfirmarBorrado()
+                true
+            }
+        } else {
+            menu.findItem(R.id.accion_borrar_aula).isVisible = false
+        }
+
+        if (!invitado && codigoAula != "?") {
             menu.findItem(R.id.accion_establecer_espera).isVisible = true
             menu.findItem(R.id.accion_establecer_espera).setOnMenuItemClickListener {
                 Log.d("TurnoClase", "Establecer tiempo de espera")
@@ -513,24 +637,42 @@ class MainActivity : AppCompatActivity() {
             menu.findItem(R.id.accion_establecer_espera).isVisible = false
         }
 
-        if (!invitado) {
-            menu.findItem(R.id.accion_conectar).isVisible = true
-            menu.findItem(R.id.accion_desconectar).isVisible = false
+        if (codigoAula != "?") {
+            if (!invitado) {
+                menu.findItem(R.id.accion_conectar).isVisible = true
+                menu.findItem(R.id.accion_desconectar).isVisible = false
 
-            menu.findItem(R.id.accion_conectar).setOnMenuItemClickListener {
-                Log.d("TurnoClase", "Conectar a otra aula")
-                dialogoConexion()
-                true
+                menu.findItem(R.id.accion_conectar).setOnMenuItemClickListener {
+                    Log.d("TurnoClase", "Conectar a otra aula")
+                    dialogoConexion()
+                    true
+                }
+            } else {
+                menu.findItem(R.id.accion_conectar).isVisible = false
+                menu.findItem(R.id.accion_desconectar).isVisible = true
+
+                menu.findItem(R.id.accion_desconectar).setOnMenuItemClickListener {
+                    Log.d("TurnoClase", "Desconectar del aula")
+                    desconectarAula()
+                    true
+                }
             }
         } else {
             menu.findItem(R.id.accion_conectar).isVisible = false
-            menu.findItem(R.id.accion_desconectar).isVisible = true
+            menu.findItem(R.id.accion_desconectar).isVisible = false
+        }
 
-            menu.findItem(R.id.accion_desconectar).setOnMenuItemClickListener {
-                Log.d("TurnoClase", "Desconectar del aula")
-                desconectarAula()
+        if (codigoAula == "?") {
+            menu.findItem(R.id.accion_recuperar_aula).isVisible = true
+
+            menu.findItem(R.id.accion_recuperar_aula).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Recuperar aula")
+                desconectarListeners()
+                conectarAula()
                 true
             }
+        } else {
+            menu.findItem(R.id.accion_recuperar_aula).isVisible = false
         }
 
         return result
@@ -635,15 +777,35 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
+    private fun dialogoConfirmarBorrado() {
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(getString(R.string.dialogo_confirmar_borrado_titulo))
+        builder.setMessage(getString(R.string.dialogo_confirmar_borrado_mensaje))
+
+        // Set up the buttons
+        builder.setPositiveButton(getString(R.string.dialogo_ok)) { _, _ ->
+            Log.d(TAG, "Borrando el aula...")
+            borrarAulaReconectar(codigoAula)
+        }
+
+        builder.setNegativeButton(getString(R.string.dialogo_cancelar)) { dialog, _ ->
+            Log.d(TAG, "Cancelado")
+            dialog.cancel()
+        }
+
+        builder.show()
+    }
+
     private fun buscarAula(codigo: String, pin: String) {
 
         Log.d(TAG, "Buscando UID del aula:$codigo:$pin")
 
         // Buscar el aula
-        db.collection("aulas")
+        db.collectionGroup("aulas")
                 .whereEqualTo("codigo", codigo.toUpperCase())
                 .whereEqualTo("pin", pin)
-                .limit(1)
                 .get()
                 .addOnCompleteListener {
                     if (!it.isSuccessful) {
@@ -652,18 +814,15 @@ class MainActivity : AppCompatActivity() {
 
                         // Comprobar que se han recuperado registros
                         if (it.result!!.count() > 0) {
-
                             // Accedemos al primer documento
-                            val document = it.result!!.documents[0]
+                            val document = it.result!!.documents.first()
 
-                            val uid = document.reference.id
                             Log.d(TAG, "Aula encontrada")
 
-                            invitado = true
                             desconectarListeners()
-                            this.uid = uid
-                            conectarAula()
-
+                            invitado = true
+                            refAula = document.reference
+                            conectarListener()
                         } else {
                             Log.e(TAG, "Aula no encontrada")
                             dialogoError()
@@ -679,7 +838,7 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle(getString(R.string.dialogo_error_titulo))
         builder.setMessage(getString(R.string.dialogo_error_mensaje))
 
-        builder.setPositiveButton(getString(R.string.dialogo_error_ok)) { _, _ ->
+        builder.setPositiveButton(getString(R.string.dialogo_ok)) { _, _ ->
             Log.e(TAG, "Error de conexión")
         }
 
@@ -713,6 +872,6 @@ class MainActivity : AppCompatActivity() {
         private val TAG = "MainActivity"
 
     }
-    //endregion
+//endregion
 
 }

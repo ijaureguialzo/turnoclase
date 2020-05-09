@@ -14,10 +14,15 @@
     <string name="dialogo_conexion_conectar">Konektatu</string>
     <string name="dialogo_error_titulo">Konexio arazoa</string>
     <string name="dialogo_error_mensaje">Idatzitako datuekin ezin izan da gela horretara konektatu.</string>
-    <string name="dialogo_error_ok">Ados</string>
+    <string name="dialogo_ok">Ados</string>
     <string name="dialogo_conexion_titulo">Beste gela batera konektatu</string>
     <string name="dialogo_cancelar">Ezeztatu</string>
     <string name="menu_establecer_espera">Itxaroteko denbora ezarri</string>
     <string name="dialogo_establecer_espera_titulo">Itxaroteko denbora (minutuak)</string>
     <string name="dialogo_guardar">Gorde</string>
+    <string name="menu_accion_borrar_aula">Gela ezabatu</string>
+    <string name="menu_accion_recuperar_aula">Gela berreskuratu</string>
+    <string name="menu_accion_anyadir_aula">Gela bat gehitu</string>
+    <string name="dialogo_confirmar_borrado_titulo">Gela ezabatu</string>
+    <string name="dialogo_confirmar_borrado_mensaje">Akzio honek itxaroten daudenen lerroa ezabatuko du.</string>
 </resources>
