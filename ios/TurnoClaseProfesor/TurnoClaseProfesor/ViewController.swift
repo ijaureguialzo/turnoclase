@@ -42,8 +42,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var uid: String!
 
     // Conectar a otro aula
-    var invitado = false
-    var uidPropio: String!
+    var invitado: Bool = false {
+        didSet {
+            pageControl.isHidden = invitado
+        }
+    }
 
     // Para visualizar el diálogo de login
     var alertController: UIAlertController!
@@ -54,11 +57,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     // Referencias al documento del aula y la posición en la cola
     var refAula: DocumentReference!
+    var refMisAulas: CollectionReference!
 
     // Outlets para el interfaz de usuario
     @IBOutlet weak var etiquetaNombreAlumno: UILabel!
     @IBOutlet weak var etiquetaBotonEnCola: UIButton!
     @IBOutlet weak var etiquetaBotonCodigoAula: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
+
+    // Soporte para varias aulas
+    let MAX_AULAS = 16
+    var aulaActual = 0
+    var numAulas: Int = 0 {
+        didSet {
+            pageControl.numberOfPages = numAulas
+        }
+    }
 
     // Para llamar a las funciones Cloud
     lazy var functions = Functions.functions(region: "europe-west1")
@@ -74,21 +88,30 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     // Almacenar el número de alumnos anterior para detectar el paso de 0 a 1 y reproducir el sonido
     var recuentoAnterior = 0
 
-    fileprivate func conectarAula() {
-        // Cargar el aula y si no, crearla
-        db.collection("aulas").document(self.uid).getDocument() { (document, error) in
+    fileprivate func conectarAula(posicion: Int = 0) {
+
+        // Colección que contiene las aulas del usuario
+        refMisAulas = db.collection("profesores").document(self.uid).collection("aulas")
+
+        // Recuperar las aulas del usuario
+        refMisAulas.order(by: "timestamp").getDocuments() { (querySnapshot, error) in
 
             if let error = error {
-                log.error("Error al conectar al aula: \(error.localizedDescription)")
+                log.error("Error al recuperar la lista de aulas \(error.localizedDescription)")
                 self.actualizarAula(codigo: "?", enCola: 0)
             } else {
-                if !(document?.exists)! {
+
+                self.numAulas = querySnapshot?.documents.count ?? 0
+
+                if posicion >= 0 && posicion < self.numAulas {
+                    if let seleccionada = querySnapshot?.documents[posicion] {
+                        log.info("Conectado a aula existente")
+                        self.refAula = seleccionada.reference
+                        self.conectarListener()
+                    }
+                } else {
                     log.info("Creando nueva aula...")
                     self.crearAula()
-                } else {
-                    log.info("Conectado a aula existente")
-                    self.refAula = document?.reference
-                    self.conectarListener()
                 }
             }
         }
@@ -123,12 +146,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.actualizarAula(codigo: "...", enCola: 0)
             self.actualizarMensaje(texto: "")
 
+            // Cargar el número de aulas creadas por el usuario
+            pageControl.numberOfPages = numAulas
+
             // Iniciar sesión y conectar al aula
             Auth.auth().signInAnonymously() { (result, error) in
                 if let resultado = result {
 
                     self.uid = resultado.user.uid
-                    self.uidPropio = self.uid
                     log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
                     self.conectarAula()
@@ -142,9 +167,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     fileprivate func crearAula() {
-
-        // Almacenar la referencia a la nueva aula
-        self.refAula = db.collection("aulas").document(self.uid)
 
         // Generar el PIN del aula
         // REF: Números aleatorios en Swift 4.2: https://www.hackingwithswift.com/articles/102/how-to-generate-random-numbers-in-swift
@@ -163,18 +185,56 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                 log.info("Nuevo código de aula: \(codigo)")
 
-                // Guardar el documento con un Timestamp, para que se genere el código
-                self.refAula.setData([
+                // Guardar el documento
+                self.refAula = self.refMisAulas.addDocument(data: [
+                    "codigo": codigo,
                     "timestamp": FieldValue.serverTimestamp(),
                     "pin": String(format: "%04d", Int.random(in: 0...9999)),
                     "espera": 5,
-                    "codigo": codigo
                 ]) { error in
                     if let error = error {
                         log.error("Error al crear el aula: \(error.localizedDescription)")
                     } else {
                         log.info("Aula creada")
+                        self.numAulas += 1
                         self.conectarListener()
+                    }
+                }
+            }
+        }
+    }
+
+    fileprivate func anyadirAula() {
+
+        // Generar el PIN del aula
+        // REF: Números aleatorios en Swift 4.2: https://www.hackingwithswift.com/articles/102/how-to-generate-random-numbers-in-swift
+        // REF: Formatear un número con 0s a la izquierda: https://stackoverflow.com/a/25566860
+
+        // Llamar a la función Cloud que devuelve el código y crear el registro cuando lo retorne
+        // REF: https://firebase.google.com/docs/functions/callable#call_the_function
+        functions.httpsCallable("nuevoCodigo").call(["keepalive": false]) { (result, error) in
+            if let error = error as NSError? {
+                if error.domain == FunctionsErrorDomain {
+                    log.error(error.localizedDescription)
+                }
+            }
+
+            if let codigo = (result?.data as? [String: Any])?["codigo"] as? String {
+
+                log.info("Nuevo código de aula: \(codigo)")
+
+                // Guardar el documento
+                self.refMisAulas.addDocument(data: [
+                    "codigo": codigo,
+                    "timestamp": FieldValue.serverTimestamp(),
+                    "pin": String(format: "%04d", Int.random(in: 0...9999)),
+                    "espera": 5,
+                ]) { error in
+                    if let error = error {
+                        log.error("Error al crear el aula: \(error.localizedDescription)")
+                    } else {
+                        log.info("Aula creada")
+                        self.numAulas += 1
                     }
                 }
             }
@@ -200,16 +260,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
                             // Listener de la cola
                             if self.listenerCola == nil {
-                                self.listenerCola = db.collection("aulas").document(self.uid)
-                                    .collection("cola").addSnapshotListener { querySnapshot, error in
+                                self.listenerCola = self.refAula.collection("cola").addSnapshotListener { querySnapshot, error in
 
-                                        if let error = error {
-                                            log.error("Error al recuperar datos: \(error.localizedDescription)")
-                                        } else {
-                                            self.actualizarAula(codigo: self.codigoAula, enCola: querySnapshot!.documents.count)
-                                            self.mostrarSiguiente()
-                                            self.feedbackTactil(alerta: true)
-                                        }
+                                    if let error = error {
+                                        log.error("Error al recuperar datos: \(error.localizedDescription)")
+                                    } else {
+                                        self.actualizarAula(codigo: self.codigoAula, enCola: querySnapshot!.documents.count)
+                                        self.mostrarSiguiente()
+                                        self.feedbackTactil(alerta: true)
+                                    }
                                 }
                             }
                         }
@@ -219,6 +278,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                         // Detectar si el aula desaparece y si somos invitados, desconectar
                         if !self.invitado {
                             self.actualizarAula(codigo: "?", enCola: 0)
+                            self.PIN = "?"
+                            self.desconectarListeners()
+                            self.conectarAula()
                         } else {
                             self.desconectarAula()
                         }
@@ -318,18 +380,32 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         feedbackTactil()
     }
 
-    fileprivate func borrarAula() {
+    fileprivate func borrarAulaReconectar(codigo: String) {
 
-        // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+        self.desconectarListeners()
 
-        db.collection("aulas").document(self.uid).delete() { error in
-            if let error = error {
-                log.error("Error al borrar el aula: \(error.localizedDescription)")
-            } else {
-                log.info("Aula borrada")
-                log.info("Creando nueva aula...")
-                self.crearAula()
-            }
+        refMisAulas.whereField("codigo", isEqualTo: codigo.uppercased())
+            .getDocuments() { (querySnapshot, error) in
+
+                if let error = error {
+                    log.error("Error al recuperar datos: \(error.localizedDescription)")
+                } else {
+
+                    querySnapshot!.documents.first?.reference.delete() { error in
+                        if let error = error {
+                            log.error("Error al borrar el aula: \(error.localizedDescription)")
+                        } else {
+                            log.info("Aula borrada")
+
+                            self.numAulas -= 1
+                            if self.aulaActual == self.numAulas {
+                                self.aulaActual -= 1
+                            }
+
+                            self.conectarAula(posicion: self.aulaActual)
+                        }
+                    }
+                }
         }
     }
 
@@ -344,7 +420,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func enviarWatch(campo: String, _ dato: String) {
 
-        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && session != nil {
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && session?.isReachable == true {
             self.session!.sendMessage([campo: dato], replyHandler: { (response) -> Void in
                 log.info("Enviado al Watch")
             }, errorHandler: { (error) -> Void in
@@ -395,9 +471,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func desconectarAula() {
         self.invitado = false
-        self.uid = self.uidPropio
         self.desconectarListeners()
-        self.conectarAula()
+        self.conectarAula(posicion: self.aulaActual)
     }
 
     fileprivate func mostrarAcciones() {
@@ -417,10 +492,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             }
         }()
 
-        let accionGenerarNuevoCodigo = UIAlertAction(title: "Generar nueva aula".localized(), style: .destructive, handler: { (action) -> Void in
-            log.info("Generar nueva aula")
-            self.desconectarListeners()
-            self.borrarAula()
+        let accionAnyadirAula = UIAlertAction(title: "Añadir aula".localized(), style: .default, handler: { (action) -> Void in
+            log.info("Añadir aula")
+            self.anyadirAula()
+        })
+
+        let accionBorrarAula = UIAlertAction(title: "Borrar aula".localized(), style: .destructive, handler: { (action) -> Void in
+            log.info("Borrar aula")
+            self.confirmarBorrado()
         })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
@@ -433,6 +512,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.desconectarAula()
         })
 
+        let accionRecuperarAula = UIAlertAction(title: "Recuperar aula".localized(), style: .destructive, handler: { (action) -> Void in
+            log.info("Recuperar aula")
+            self.desconectarListeners()
+            self.conectarAula()
+        })
+
         let accionCancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel, handler: { (action) -> Void in
             log.info("Cancelar")
         })
@@ -442,10 +527,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.dialogoTiempoEspera()
         })
 
-        if(!invitado) {
-            alertController.addAction(accionGenerarNuevoCodigo)
-            alertController.addAction(accionEstablecerTiempoEspera)
-            alertController.addAction(accionConectarOtraAula)
+        if !invitado {
+            if codigoAula != "?" {
+                alertController.addAction(accionEstablecerTiempoEspera)
+                if numAulas < MAX_AULAS {
+                    alertController.addAction(accionAnyadirAula)
+                }
+                if numAulas > 1 {
+                    alertController.addAction(accionBorrarAula)
+                }
+                alertController.addAction(accionConectarOtraAula)
+            } else {
+                alertController.addAction(accionRecuperarAula)
+            }
         } else {
             alertController.addAction(accionDesconectarAula)
         }
@@ -455,16 +549,36 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         self.present(alertController, animated: true, completion: nil)
     }
 
+    fileprivate func confirmarBorrado() {
+
+        let dialogo = UIAlertController(title: "Borrar aula".localized(),
+                                        message: "Esta acción vaciará la cola de espera.".localized(),
+                                        preferredStyle: .alert)
+
+        let ok = UIAlertAction(title: "Ok".localized(), style: .destructive, handler: { (action) -> Void in
+            log.info("Ok")
+            self.borrarAulaReconectar(codigo: self.codigoAula)
+        })
+
+        let cancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel) { (action) -> Void in
+            log.info("Cancelar")
+        }
+
+        dialogo.addAction(ok)
+        dialogo.addAction(cancelar)
+
+        self.present(dialogo, animated: true, completion: nil)
+    }
+
     fileprivate func buscarAula(codigo: String?, pin: String?) {
 
         if let codigo = codigo, let pin = pin {
             log.debug("Buscando UID del aula: \(codigo):\(pin)")
 
             // Buscar el aula
-            db.collection("aulas")
+            db.collectionGroup("aulas")
                 .whereField("codigo", isEqualTo: codigo.uppercased())
                 .whereField("pin", isEqualTo: pin)
-                .limit(to: 1)
                 .getDocuments() { (querySnapshot, error) in
 
                     if let error = error {
@@ -472,22 +586,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     } else {
 
                         // Comprobar que se han recuperado registros
-                        if querySnapshot!.documents.count > 0 {
+                        if let documents = querySnapshot?.documents {
 
-                            // Accedemos al primer documento
-                            let document = querySnapshot!.documents[0]
+                            if documents.count > 0 {
+                                // Accedemos al primer documento
+                                let document = documents.first
 
-                            let uid = document.reference.documentID
-                            log.info("Aula encontrada: \(uid)")
+                                log.info("Aula encontrada: \(codigo)")
 
-                            self.invitado = true
-                            self.desconectarListeners()
-                            self.uid = uid
-                            self.conectarAula()
-
-                        } else {
-                            log.error("Aula no encontrada")
-                            self.dialogoError()
+                                self.desconectarListeners()
+                                self.invitado = true
+                                self.refAula = document?.reference
+                                self.conectarListener()
+                            } else {
+                                log.error("Aula no encontrada")
+                                self.dialogoError()
+                            }
                         }
                     }
             }
@@ -650,6 +764,37 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             return newLength <= 4
         default:
             return newLength <= 0
+        }
+    }
+
+    // Moverse entre aulas
+    @IBAction func swipeDerecha(_ sender: Any) {
+        if !invitado && numAulas > 1 {
+            if aulaActual > 0 {
+                aulaActual -= 1
+            }
+
+            log.debug("Aula anterior")
+
+            self.desconectarListeners()
+            self.conectarAula(posicion: self.aulaActual)
+
+            pageControl.currentPage = aulaActual
+        }
+    }
+
+    @IBAction func swipeIzquierda(_ sender: Any) {
+        if !invitado && numAulas > 1 {
+            if aulaActual < pageControl.numberOfPages - 1 {
+                aulaActual += 1
+            }
+
+            log.debug("Aula siguiente")
+
+            self.desconectarListeners()
+            self.conectarAula(posicion: self.aulaActual)
+
+            pageControl.currentPage = aulaActual
         }
     }
 

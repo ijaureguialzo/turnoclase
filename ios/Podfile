@@ -11,7 +11,6 @@ def turnoclase_ios_pods
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Firestore'
-    pod 'Firebase/Functions'
 end
 
 def turnoclase_watchos_pods
@@ -30,6 +29,8 @@ end
 target 'TurnoClaseProfesor' do
     project 'TurnoClaseProfesor/TurnoClaseProfesor'
     turnoclase_ios_pods
+
+    pod 'Firebase/Functions'
 end
 
 target 'TurnoClaseProfesorWatch Extension' do
