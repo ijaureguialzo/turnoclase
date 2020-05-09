@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
     // Conectar a otro aula
     private var invitado = false
-    private var uidPropio: String? = null
 
     // Listeners para recibir las actualizaciones
     private var listenerAula: ListenerRegistration? = null
@@ -179,7 +178,6 @@ class MainActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
 
                             uid = mAuth?.currentUser?.uid
-                            uidPropio = uid
                             Log.d(TAG, "Registrado como usuario con UID: $uid")
 
                             conectarAula()
@@ -504,9 +502,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun desconectarAula() {
         invitado = false
-        uid = uidPropio
         desconectarListeners()
-        conectarAula()
+        conectarAula(aulaActual)
     }
 
     private fun borrarAulaReconectar(codigoAula: String) {
@@ -799,10 +796,9 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Buscando UID del aula:$codigo:$pin")
 
         // Buscar el aula
-        db.collection("aulas")
+        db.collectionGroup("aulas")
                 .whereEqualTo("codigo", codigo.toUpperCase())
                 .whereEqualTo("pin", pin)
-                .limit(1)
                 .get()
                 .addOnCompleteListener {
                     if (!it.isSuccessful) {
@@ -811,18 +807,15 @@ class MainActivity : AppCompatActivity() {
 
                         // Comprobar que se han recuperado registros
                         if (it.result!!.count() > 0) {
-
                             // Accedemos al primer documento
-                            val document = it.result!!.documents[0]
+                            val document = it.result!!.documents.first()
 
-                            val uid = document.reference.id
                             Log.d(TAG, "Aula encontrada")
 
-                            invitado = true
                             desconectarListeners()
-                            this.uid = uid
-                            conectarAula()
-
+                            invitado = true
+                            refAula = document.reference
+                            conectarListener()
                         } else {
                             Log.e(TAG, "Aula no encontrada")
                             dialogoError()
