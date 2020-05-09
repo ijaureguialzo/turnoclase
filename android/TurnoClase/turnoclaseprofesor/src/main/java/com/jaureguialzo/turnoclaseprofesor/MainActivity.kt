@@ -243,6 +243,7 @@ class MainActivity : AppCompatActivity() {
                 .addOnSuccessListener { result ->
 
                     numAulas = result.documents.count()
+                    adapter?.notifyDataSetChanged()
 
                     if (posicion >= 0 && posicion < numAulas) {
 
@@ -251,7 +252,6 @@ class MainActivity : AppCompatActivity() {
                         if (seleccionada != null) {
                             Log.i(TAG, "Conectado a aula existente")
                             this.refAula = seleccionada.reference
-                            adapter?.incrementar()
                             conectarListener()
                         }
                     } else {
@@ -510,22 +510,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun borrarAulaReconectar(codigoAula: String) {
-        TODO("Not yet implemented")
-    }
 
-    private fun borrarAula() {
+        desconectarListeners()
 
-        // Pendiente: Llamar a la función de vaciar la cola porque no se borra la subcolección
+        refMisAulas!!.whereEqualTo("codigo", codigoAula)
+                .get()
+                .addOnSuccessListener { result ->
 
-        db.collection("aulas").document(uid!!).delete().addOnCompleteListener {
-            if (!it.isSuccessful) {
-                Log.e(TAG, "Error al borrar el aula: ", it.exception)
-            } else {
-                Log.d(TAG, "Aula borrada")
-                Log.d(TAG, "Creando nueva aula")
-                crearAula()
-            }
-        }
+                    result.documents.first().reference.delete().addOnCompleteListener {
+                        if (!it.isSuccessful) {
+                            Log.e(TAG, "Error al borrar el aula: ", it.exception)
+                        } else {
+                            Log.d(TAG, "Aula borrada")
+                            adapter?.decrementar()
+                            conectarAula(aulaActual)
+                        }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e(TAG, "Error al borrar el aula", exception)
+                }
     }
 
     private fun actualizarAula(codigo: String = "?", enCola: Int = -1) {
