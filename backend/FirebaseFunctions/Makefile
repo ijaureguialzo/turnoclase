@@ -18,7 +18,7 @@ build:
 	@docker-compose build --pull
 
 clean:
-	@docker-compose down
+	@docker-compose down -v
 
 deploy: start
 	@docker-compose exec node firebase login

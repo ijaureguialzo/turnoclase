@@ -19,7 +19,7 @@ build:
 	@docker-compose build --pull
 
 clean:
-	@docker-compose down
+	@docker-compose down -v
 
 serve: start
 	@cd jekyll && bundle exec jekyll serve
