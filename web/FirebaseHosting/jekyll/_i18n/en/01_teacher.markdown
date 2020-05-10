@@ -2,7 +2,7 @@
 
 Just load the app and a unique classroom code will be generated.
 
-> If the classroom code shows `?`, tap it and select `Generate new classroom` to try again.
+> If the classroom code shows `?`, tap it (on iOS) or the three dots (on Android) and select `Classroom recovery` to try again.
 
 <table>
 <caption style="caption-side: bottom">Main screen on iOS and Android.</caption>

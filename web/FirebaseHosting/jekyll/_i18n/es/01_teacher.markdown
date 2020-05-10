@@ -2,7 +2,7 @@
 
 Solo abre la aplicación y se generará un código único de aula.
 
-> Si el código de aula muestra `?`, pulsa sobre él y selecciona `Generar nueva aula` para volver a intentarlo.
+> Si el código de aula muestra `?`, pulsa sobre él (en iOS) o sobre los tres puntos (en Android) y selecciona `Recuperar aula` para volver a intentarlo.
 
 <table>
 <caption style="caption-side: bottom">Pantalla principal en iOS y Android.</caption>
