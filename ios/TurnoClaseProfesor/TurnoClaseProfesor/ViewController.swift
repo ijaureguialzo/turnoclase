@@ -64,6 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     @IBOutlet weak var etiquetaBotonEnCola: UIButton!
     @IBOutlet weak var etiquetaBotonCodigoAula: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var indicadorActividad: UIActivityIndicatorView!
 
     // Soporte para varias aulas
     let MAX_AULAS = 16
@@ -71,6 +72,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var numAulas: Int = 0 {
         didSet {
             pageControl.numberOfPages = numAulas
+            ocultarIndicador()
         }
     }
 
@@ -119,6 +121,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     var session: WCSession?
 
+    fileprivate func ocultarIndicador() {
+        indicadorActividad.stopAnimating()
+        indicadorActividad.isHidden = true
+    }
+
+    fileprivate func mostrarIndicador() {
+        indicadorActividad.isHidden = false
+        indicadorActividad.startAnimating()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -146,6 +158,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.actualizarAula(codigo: "...", enCola: 0)
             self.actualizarMensaje(texto: "")
 
+            ocultarIndicador()
+
             // Cargar el número de aulas creadas por el usuario
             pageControl.numberOfPages = numAulas
 
@@ -167,6 +181,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     fileprivate func crearAula() {
+
+        mostrarIndicador()
 
         // Generar el PIN del aula
         // REF: Números aleatorios en Swift 4.2: https://www.hackingwithswift.com/articles/102/how-to-generate-random-numbers-in-swift
@@ -205,6 +221,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     fileprivate func anyadirAula() {
+
+        mostrarIndicador()
 
         // Generar el PIN del aula
         // REF: Números aleatorios en Swift 4.2: https://www.hackingwithswift.com/articles/102/how-to-generate-random-numbers-in-swift
@@ -381,6 +399,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     fileprivate func borrarAulaReconectar(codigo: String) {
+
+        mostrarIndicador()
 
         self.desconectarListeners()
 

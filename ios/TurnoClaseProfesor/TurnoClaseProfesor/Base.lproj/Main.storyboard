@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -48,11 +49,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="16" translatesAutoresizingMaskIntoConstraints="NO" id="iFo-yO-TrL" userLabel="pageControl">
-                                <rect key="frame" x="83.5" y="622.5" width="247" height="37"/>
-                                <color key="pageIndicatorTintColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="currentPageIndicatorTintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                            </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hc-gA-Oel" userLabel="contenedorAula" customClass="FondoCircular" customModule="TurnoClaseShared">
                                 <rect key="frame" x="55" y="341" width="72" height="72"/>
                                 <subviews>
@@ -167,6 +163,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="REy-f5-hrA" userLabel="contenedorPaginas">
+                                <rect key="frame" x="90.5" y="622.5" width="247" height="65"/>
+                                <subviews>
+                                    <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="16" translatesAutoresizingMaskIntoConstraints="NO" id="iFo-yO-TrL" userLabel="pageControl">
+                                        <rect key="frame" x="0.0" y="0.0" width="247" height="37"/>
+                                        <color key="pageIndicatorTintColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="currentPageIndicatorTintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </pageControl>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="9ce-RT-PcA">
+                                        <rect key="frame" x="113.5" y="45" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
@@ -190,17 +199,17 @@
                                 <variation key="heightClass=compact" constant="-142"/>
                             </constraint>
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="centerX" secondItem="dkH-NG-bdu" secondAttribute="centerX" constant="-71" id="LzV-nl-BBZ"/>
+                            <constraint firstItem="REy-f5-hrA" firstAttribute="centerX" secondItem="aPZ-OB-zLv" secondAttribute="centerX" id="O8p-yN-Vaj"/>
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="centerY" secondItem="4hc-gA-Oel" secondAttribute="centerY" constant="0.5" id="UQh-YS-c2B">
                                 <variation key="heightClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="hEC-KV-Dai" firstAttribute="bottom" secondItem="iFo-yO-TrL" secondAttribute="top" constant="-32" id="VuD-vt-jhD"/>
                             <constraint firstItem="4hc-gA-Oel" firstAttribute="centerX" secondItem="hEC-KV-Dai" secondAttribute="centerX" constant="-142.5" id="aRr-Ry-4bd">
                                 <variation key="heightClass=compact" constant="-123"/>
                             </constraint>
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="centerY" secondItem="S7k-GT-Ntb" secondAttribute="centerY" constant="123" id="fUM-nT-EGd"/>
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="top" secondItem="S7k-GT-Ntb" secondAttribute="bottom" constant="-16" id="hkw-Hi-yju"/>
-                            <constraint firstItem="iFo-yO-TrL" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="hlO-UE-zjI"/>
                             <constraint firstItem="aPZ-OB-zLv" firstAttribute="centerY" secondItem="dkH-NG-bdu" secondAttribute="centerY" constant="-123" id="neX-or-DMN"/>
+                            <constraint firstItem="REy-f5-hrA" firstAttribute="top" secondItem="hEC-KV-Dai" secondAttribute="bottom" constant="32" id="rFg-eW-6iX"/>
                             <constraint firstItem="4hc-gA-Oel" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="sBn-6R-ZWr"/>
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="top" secondItem="4hc-gA-Oel" secondAttribute="bottom" constant="-36" id="v7F-xA-8R5"/>
                             <constraint firstItem="hEC-KV-Dai" firstAttribute="centerY" secondItem="dkH-NG-bdu" secondAttribute="centerY" constant="-123" id="wsJ-cB-5XH"/>
@@ -241,6 +250,7 @@
                         <outlet property="etiquetaBotonCodigoAula" destination="Gfn-8u-Zne" id="2iV-44-MQY"/>
                         <outlet property="etiquetaBotonEnCola" destination="anU-ip-9Dt" id="QJg-kS-3kR"/>
                         <outlet property="etiquetaNombreAlumno" destination="bbj-7Q-0e0" id="raP-0p-Xeb"/>
+                        <outlet property="indicadorActividad" destination="9ce-RT-PcA" id="Pfs-0W-OOb"/>
                         <outlet property="pageControl" destination="iFo-yO-TrL" id="kBM-JU-bVC"/>
                     </connections>
                 </viewController>
