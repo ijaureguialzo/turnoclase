@@ -135,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/circuloAmarillo"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-80dp"
+        android:layout_marginBottom="-84dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 

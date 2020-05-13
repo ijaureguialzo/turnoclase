@@ -30,6 +30,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.NumberPicker
+import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuCompat
@@ -103,6 +104,7 @@ class MainActivity : AppCompatActivity() {
 
     private var adapter: ScreenSlidePagerAdapter? = null
     private var pageIndicatorView: PageIndicatorView? = null
+    private var indicadorActividad: ProgressBar? = null
 
     // Soporte para varias aulas
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -112,14 +114,24 @@ class MainActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment = Fragment()
 
         fun incrementar() {
+            ocultarIndicador()
             numAulas += 1
             notifyDataSetChanged()
         }
 
         fun decrementar() {
+            ocultarIndicador()
             numAulas -= 1
             notifyDataSetChanged()
         }
+    }
+
+    fun ocultarIndicador() {
+        indicadorActividad?.visibility = View.INVISIBLE
+    }
+
+    fun mostrarIndicador() {
+        indicadorActividad?.visibility = View.VISIBLE
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,6 +155,8 @@ class MainActivity : AppCompatActivity() {
 
         // Paginador: https://github.com/romandanylyk/PageIndicatorView
         pageIndicatorView = findViewById(R.id.pageIndicatorView)
+
+        indicadorActividad = findViewById(R.id.progressBar)
 
         adapter = ScreenSlidePagerAdapter(supportFragmentManager)
         viewPager.adapter = adapter
@@ -176,6 +190,8 @@ class MainActivity : AppCompatActivity() {
             // Limpiar el UI
             actualizarAula("...", 0)
             actualizarMensaje("")
+
+            ocultarIndicador()
 
             // Iniciar sesión y conectar al aula
             mAuth = FirebaseAuth.getInstance()
@@ -272,6 +288,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun crearAula() {
 
+        mostrarIndicador()
+
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
                 .addOnCompleteListener(OnCompleteListener { task ->
@@ -308,6 +326,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun anyadirAula() {
+
+        mostrarIndicador()
 
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
@@ -514,6 +534,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun borrarAulaReconectar(codigoAula: String) {
+
+        mostrarIndicador()
 
         desconectarListeners()
 
