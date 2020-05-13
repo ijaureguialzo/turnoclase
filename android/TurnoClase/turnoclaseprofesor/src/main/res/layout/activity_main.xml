@@ -130,20 +130,34 @@
 
     </FrameLayout>
 
-    <com.rd.PageIndicatorView
-        android:id="@+id/pageIndicatorView"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/circuloAmarillo"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="-56dp"
-        app:piv_animationType="none"
-        app:piv_dynamicCount="true"
-        app:piv_interactiveAnimation="true"
-        app:piv_padding="8dp"
-        app:piv_radius="4dp"
-        app:piv_selectedColor="?android:attr/textColorSecondary"
-        app:piv_unselectedColor="?android:attr/textColorHint"
-        app:piv_viewPager="@id/viewPager" />
+        android:layout_alignBottom="@+id/circuloAmarillo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-84dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:piv_animationType="none"
+            app:piv_dynamicCount="true"
+            app:piv_interactiveAnimation="true"
+            app:piv_padding="8dp"
+            app:piv_radius="4dp"
+            app:piv_selectedColor="?android:attr/textColorSecondary"
+            app:piv_unselectedColor="?android:attr/textColorHint"
+            app:piv_viewPager="@id/viewPager" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 
 </RelativeLayout>
