@@ -121,6 +121,8 @@ class MainActivity : AppCompatActivity() {
 
         fun decrementar() {
             ocultarIndicador()
+            if (numAulas == 2)
+                viewPager.currentItem -= 1
             numAulas -= 1
             notifyDataSetChanged()
         }
