@@ -25,4 +25,5 @@
     <string name="menu_accion_anyadir_aula">Añadir aula</string>
     <string name="dialogo_confirmar_borrado_titulo">Borrar aula</string>
     <string name="dialogo_confirmar_borrado_mensaje">Esta acción vaciará la cola de espera.</string>
+    <string name="menu_ajustes">Settings</string>
 </resources>

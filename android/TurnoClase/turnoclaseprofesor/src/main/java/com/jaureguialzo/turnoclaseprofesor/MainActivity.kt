@@ -628,6 +628,11 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        menu.findItem(R.id.accion_ajustes).setOnMenuItemClickListener {
+            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+            true
+        }
+
         if (!invitado && numAulas < MAX_AULAS && codigoAula != "?") {
             menu.findItem(R.id.accion_anyadir_aula).isVisible = true
             menu.findItem(R.id.accion_anyadir_aula).setOnMenuItemClickListener {

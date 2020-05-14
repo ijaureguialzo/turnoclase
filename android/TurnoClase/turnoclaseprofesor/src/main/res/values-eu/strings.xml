@@ -25,4 +25,5 @@
     <string name="menu_accion_anyadir_aula">Gela bat gehitu</string>
     <string name="dialogo_confirmar_borrado_titulo">Gela ezabatu</string>
     <string name="dialogo_confirmar_borrado_mensaje">Akzio honek itxaroten daudenen lerroa ezabatuko du.</string>
+    <string name="menu_ajustes">Settings</string>
 </resources>
