@@ -79,9 +79,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-functions-ktx:19.0.2'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+    implementation 'androidx.preference:preference:1.1.1'
 
     // REF: Dependencias para tests: https://stackoverflow.com/a/56624085
-    implementation 'androidx.preference:preference:1.1.0-rc01'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
