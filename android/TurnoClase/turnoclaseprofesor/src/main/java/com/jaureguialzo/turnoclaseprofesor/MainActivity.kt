@@ -37,6 +37,7 @@ import androidx.core.view.MenuCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -574,7 +575,9 @@ class MainActivity : AppCompatActivity() {
     private fun actualizarAula(enCola: Int) {
         if (enCola != -1) {
 
-            if (recuentoAnterior == 0 && enCola == 1) {
+            val sonidoActivado = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("sonido", true)
+
+            if (sonidoActivado && recuentoAnterior == 0 && enCola == 1) {
                 try {
                     val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
                     val r = RingtoneManager.getRingtone(applicationContext, notification)
@@ -625,6 +628,11 @@ class MainActivity : AppCompatActivity() {
 
         menu.findItem(R.id.accion_acerca_de).setOnMenuItemClickListener {
             startActivity(Intent(this@MainActivity, AcercaDe::class.java))
+            true
+        }
+
+        menu.findItem(R.id.accion_ajustes).setOnMenuItemClickListener {
+            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
             true
         }
 

@@ -1,0 +1,11 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        app:defaultValue="true"
+        app:key="sonido"
+        app:summaryOff="@string/sonido_explicacion_on_off"
+        app:summaryOn="@string/sonido_explicacion_on_off"
+        app:title="@string/sonido_titulo" />
+
+</PreferenceScreen>
