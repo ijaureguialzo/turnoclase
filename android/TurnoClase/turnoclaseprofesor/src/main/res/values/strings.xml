@@ -55,21 +55,8 @@
     <string name="menu_accion_recuperar_aula">Classroom recovery</string>
     <string name="dialogo_confirmar_borrado_titulo">Delete classroom</string>
     <string name="dialogo_confirmar_borrado_mensaje">This action will clear the waiting queue.</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="title_activity_settings">Settings</string>
-    <string name="menu_ajustes">Settings</string>
+    <string name="sonido_explicacion_on_off">Alert when the first student is queued.</string>
+    <string name="sonido_titulo">Sound</string>
+    <string name="ajustes_titulo">Settings</string>
 
 </resources>
