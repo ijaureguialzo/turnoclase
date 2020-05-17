@@ -146,6 +146,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         // El texto encoge a medida que hay más caracteres
         etiquetaBotonCodigoAula.titleLabel?.adjustsFontSizeToFitWidth = true
 
+        if #available(iOS 13.0, *) {
+            indicadorActividad.style = .medium
+        } else {
+            indicadorActividad.style = .gray
+        }
+
         log.info("Iniciando la aplicación...")
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
