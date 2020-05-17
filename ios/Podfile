@@ -8,7 +8,6 @@ def turnoclase_ios_pods
     turnoclase_shared_pods
 
     # REF: Google Firebase: https://firebase.google.com/docs/ios
-    pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Firestore'
 end
