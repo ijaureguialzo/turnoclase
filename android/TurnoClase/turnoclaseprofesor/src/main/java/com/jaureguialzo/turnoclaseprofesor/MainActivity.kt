@@ -101,7 +101,16 @@ class MainActivity : AppCompatActivity() {
 
     private val MAX_AULAS = 16
     private var aulaActual = 0
-    private var numAulas = 0
+    private var numAulas: Int = 0
+        set(value) {
+            field = value
+            adapter?.notifyDataSetChanged()
+            ocultarIndicador()
+            if (aulaActual == value) {
+                aulaActual -= 1
+                viewPager.currentItem -= 1
+            }
+        }
 
     private var adapter: ScreenSlidePagerAdapter? = null
     private var pageIndicatorView: PageIndicatorView? = null
@@ -114,19 +123,6 @@ class MainActivity : AppCompatActivity() {
 
         override fun getItem(position: Int): Fragment = Fragment()
 
-        fun incrementar() {
-            ocultarIndicador()
-            numAulas += 1
-            notifyDataSetChanged()
-        }
-
-        fun decrementar() {
-            ocultarIndicador()
-            if (numAulas == 2)
-                viewPager.currentItem -= 1
-            numAulas -= 1
-            notifyDataSetChanged()
-        }
     }
 
     fun ocultarIndicador() {
@@ -170,8 +166,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                 if (!invitado) {
-                    pageIndicatorView?.selection = position
-
                     aulaActual = position
                     Log.d(TAG, "Cargado aula en posición: " + aulaActual)
 
@@ -320,7 +314,7 @@ class MainActivity : AppCompatActivity() {
                                 .addOnSuccessListener { nueva ->
                                     Log.d(TAG, "Aula creada")
                                     refAula = nueva
-                                    adapter?.incrementar()
+                                    numAulas += 1
                                     conectarListener()
                                 }
                                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
@@ -358,7 +352,7 @@ class MainActivity : AppCompatActivity() {
                         refMisAulas!!.add(datos)
                                 .addOnSuccessListener { nueva ->
                                     Log.d(TAG, "Aula creada")
-                                    adapter?.incrementar()
+                                    numAulas += 1
                                 }
                                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
                     }
@@ -551,7 +545,7 @@ class MainActivity : AppCompatActivity() {
                             Log.e(TAG, "Error al borrar el aula: ", it.exception)
                         } else {
                             Log.d(TAG, "Aula borrada")
-                            adapter?.decrementar()
+                            numAulas -= 1
                             conectarAula(aulaActual)
                         }
                     }
