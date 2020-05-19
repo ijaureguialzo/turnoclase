@@ -462,11 +462,14 @@ class TurnoViewController: UIViewController {
     }
 
     func iniciarCronometro() {
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarCronometro), userInfo: nil, repeats: true)
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarCronometro), userInfo: nil, repeats: true)
+        }
     }
 
     func reiniciarCronometro() {
         timer?.invalidate()
+        timer = nil
     }
 
     func tiempoEspera() -> Int {
