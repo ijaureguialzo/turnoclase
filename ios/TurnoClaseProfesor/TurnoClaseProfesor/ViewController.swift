@@ -683,7 +683,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         self.present(minutosAlert, animated: true)
     }
 
-    let tiempos = [1, 2, 3, 5, 10, 15, 20, 30, 45, 60]
+    let tiempos = [0, 1, 2, 3, 5, 10, 15, 20, 30, 45, 60]
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
