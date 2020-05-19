@@ -214,6 +214,7 @@ class TurnoViewController: UIViewController {
                 if !(self.tiempoEspera() > 0) {
                     self.mostrarBoton()
                     self.reiniciarCronometro()
+                    self.borrarUltimaPeticion()
 
                     self.refPosicion = self.refAula.collection("cola").addDocument(data: [
                         "alumno": self.uid!,
@@ -247,6 +248,7 @@ class TurnoViewController: UIViewController {
                 if self.atendido && !(self.tiempoEspera() > 0) {
                     self.mostrarBoton()
                     self.reiniciarCronometro()
+                    self.borrarUltimaPeticion()
                     self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
                 } else {
                     self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("ESPERA", comment: "Mensaje de que te toca esperar"))
@@ -462,11 +464,14 @@ class TurnoViewController: UIViewController {
     }
 
     func iniciarCronometro() {
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarCronometro), userInfo: nil, repeats: true)
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarCronometro), userInfo: nil, repeats: true)
+        }
     }
 
     func reiniciarCronometro() {
         timer?.invalidate()
+        timer = nil
     }
 
     func tiempoEspera() -> Int {
@@ -488,11 +493,16 @@ class TurnoViewController: UIViewController {
             etiquetaMinutos.text = String(format: "%02d", minutosRestantes)
             etiquetaSegundos.text = String(format: "%02d", segundosRestantes)
         } else {
-            mostrarBoton()
-            reiniciarCronometro()
-            self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
-            self.atendido = true
+            tiempoTerminado()
         }
+    }
+
+    fileprivate func tiempoTerminado() {
+        mostrarBoton()
+        reiniciarCronometro()
+        borrarUltimaPeticion()
+        self.actualizarAula(codigo: self.codigoAula, mensaje: NSLocalizedString("VOLVER_A_EMPEZAR", comment: "Mensaje de que ya nos han atendido"))
+        self.atendido = true
     }
 
     func recuperarUltimaPeticion(completado: @escaping () -> Void) {
@@ -507,6 +517,19 @@ class TurnoViewController: UIViewController {
                     self.ultimaPeticion = stamp?.dateValue()
                 }
                 completado()
+            }
+        }
+    }
+
+    func borrarUltimaPeticion() {
+
+        self.ultimaPeticion = nil
+
+        self.refAula.collection("espera").document(self.uid!).delete() { error in
+            if let error = error {
+                log.error("Error al borrar última petición: \(error.localizedDescription)")
+            } else {
+                log.info("Borrado el timestamp de última petición")
             }
         }
     }

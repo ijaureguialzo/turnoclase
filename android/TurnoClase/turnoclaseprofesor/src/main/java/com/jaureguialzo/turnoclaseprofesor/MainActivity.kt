@@ -766,7 +766,7 @@ class MainActivity : AppCompatActivity() {
 
         val picker = vista.findViewById(R.id.picker) as NumberPicker
 
-        val tiempos = arrayOf("1", "2", "3", "5", "10", "15", "20", "30", "45", "60")
+        val tiempos = arrayOf("0", "1", "2", "3", "5", "10", "15", "20", "30", "45", "60")
 
         picker.minValue = 0
         picker.maxValue = tiempos.size - 1
