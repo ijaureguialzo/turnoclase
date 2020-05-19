@@ -267,6 +267,7 @@ class AlumnoTurno : AppCompatActivity() {
                 if (tiempoEspera() <= 0) {
                     mostrarBoton()
                     reiniciarCronometro()
+                    borrarUltimaPeticion()
 
                     val datos = HashMap<String, Any>()
                     datos["alumno"] = uid!!
@@ -302,6 +303,7 @@ class AlumnoTurno : AppCompatActivity() {
                 if (App.atendido && tiempoEspera() <= 0) {
                     mostrarBoton()
                     reiniciarCronometro()
+                    borrarUltimaPeticion()
                     actualizarAula(codigoAula!!, resources.getString(R.string.VOLVER_A_EMPEZAR))
                 } else {
                     actualizarAula(codigoAula!!, resources.getString(R.string.ESPERA))
@@ -534,17 +536,19 @@ class AlumnoTurno : AppCompatActivity() {
                 }
 
                 override fun onFinish() {
-                    actualizarCronometro()
-
-                    mostrarBoton()
-                    reiniciarCronometro()
-
-                    App.atendido = true
-                    actualizarAula(codigoAula!!, resources.getString(R.string.VOLVER_A_EMPEZAR))
+                    tiempoTerminado()
                 }
             }
             timer?.start()
         }
+    }
+
+    fun tiempoTerminado() {
+        mostrarBoton()
+        reiniciarCronometro()
+        borrarUltimaPeticion()
+        actualizarAula(codigoAula!!, resources.getString(R.string.VOLVER_A_EMPEZAR))
+        App.atendido = true
     }
 
     fun reiniciarCronometro() {
@@ -579,6 +583,8 @@ class AlumnoTurno : AppCompatActivity() {
             val segundosRestantes = tiempoRestante % 60
             val minutosRestantes = tiempoRestante / 60
             etiquetaCronometro.text = "%02d:%02d".format(minutosRestantes, segundosRestantes)
+        } else {
+            tiempoTerminado()
         }
     }
 
@@ -604,5 +610,16 @@ class AlumnoTurno : AppCompatActivity() {
                         completado()
                     }
                 }
+    }
+
+    fun borrarUltimaPeticion() {
+
+        ultimaPeticion = null
+
+        refAula!!.collection("espera").document(uid!!)
+                .delete()
+                .addOnSuccessListener { Log.d(TAG, "Borrado el timestamp de última petición") }
+                .addOnFailureListener { e -> Log.e(TAG, "Error al borrar última petición", e) }
+
     }
 }
