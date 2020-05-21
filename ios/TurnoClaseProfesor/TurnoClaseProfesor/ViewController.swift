@@ -68,7 +68,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     // Soporte para varias aulas
     let MAX_AULAS = 16
-    var aulaActual = 0
+    var aulaActual: Int = 0 {
+        didSet {
+            pageControl.currentPage = aulaActual
+        }
+    }
     var numAulas: Int = 0 {
         didSet {
             pageControl.numberOfPages = numAulas
@@ -810,8 +814,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
             self.desconectarListeners()
             self.conectarAula(posicion: self.aulaActual)
-
-            pageControl.currentPage = aulaActual
         }
     }
 
@@ -829,8 +831,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
             self.desconectarListeners()
             self.conectarAula(posicion: self.aulaActual)
-
-            pageControl.currentPage = aulaActual
         }
     }
 
