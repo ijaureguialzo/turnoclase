@@ -469,7 +469,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func actualizarAula(enCola recuento: Int) {
 
-        let sonidoActivado = UserDefaults.standard.bool(forKey: "QUEUE_NOT_EMPTY")
+        let sonidoActivado = UserDefaults.standard.bool(forKey: "QUEUE_NOT_EMPTY_SOUND")
 
         if sonidoActivado && self.recuentoAnterior == 0 && recuento == 1 {
             AudioServicesPlaySystemSound(SystemSoundID(1315))

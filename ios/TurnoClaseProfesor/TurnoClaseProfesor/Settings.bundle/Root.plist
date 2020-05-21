@@ -16,7 +16,7 @@
 			<key>Title</key>
 			<string>Sound</string>
 			<key>Key</key>
-			<string>QUEUE_NOT_EMPTY</string>
+			<string>QUEUE_NOT_EMPTY_SOUND</string>
 			<key>DefaultValue</key>
 			<true/>
 		</dict>

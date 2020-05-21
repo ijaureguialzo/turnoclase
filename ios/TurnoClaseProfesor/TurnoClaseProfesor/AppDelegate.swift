@@ -53,6 +53,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         settings.isPersistenceEnabled = false
         db.settings = settings
 
+        // Valor por defecto para el sonido
+        UserDefaults.standard.register(defaults: [
+            "QUEUE_NOT_EMPTY_SOUND": true
+        ])
+
         return true
     }
 
