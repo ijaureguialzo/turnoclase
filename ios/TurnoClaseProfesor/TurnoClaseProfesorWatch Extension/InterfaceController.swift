@@ -39,10 +39,10 @@ class InterfaceController: WKInterfaceController {
         if(!demo) {
             if WCSession.isSupported() {
                 session!.sendMessage(["comando": "siguiente"], replyHandler: { (response) -> Void in
-                        log.debug("Comando: Siguiente")
-                    }, errorHandler: { (error) -> Void in
-                        log.error("Error al enviar petición al iPhone \(error)")
-                    })
+                    log.debug("Comando: Siguiente")
+                }, errorHandler: { (error) -> Void in
+                    log.error("Error al enviar petición al iPhone \(error)")
+                })
             }
         } else {
             if n >= 0 {
@@ -52,6 +52,30 @@ class InterfaceController: WKInterfaceController {
             }
 
             n -= 1
+        }
+    }
+
+    @IBAction func swipeIzquierda(_ sender: Any) {
+        if(!demo) {
+            if WCSession.isSupported() {
+                session!.sendMessage(["comando": "aulaSiguiente"], replyHandler: { (response) -> Void in
+                    log.debug("Comando: Aula siguiente")
+                }, errorHandler: { (error) -> Void in
+                    log.error("Error al enviar petición al iPhone \(error)")
+                })
+            }
+        }
+    }
+
+    @IBAction func swipeDerecha(_ sender: Any) {
+        if(!demo) {
+            if WCSession.isSupported() {
+                session!.sendMessage(["comando": "aulaAnterior"], replyHandler: { (response) -> Void in
+                    log.debug("Comando: Aula anterior")
+                }, errorHandler: { (error) -> Void in
+                    log.error("Error al enviar petición al iPhone \(error)")
+                })
+            }
         }
     }
 
@@ -114,10 +138,10 @@ extension InterfaceController: WCSessionDelegate {
         // Actualizar la pantalla al conectar por primera vez
         if(!demo) {
             session.sendMessage(["comando": "actualizar"], replyHandler: { (response) -> Void in
-                    log.debug("Comando: Actualizar")
-                }, errorHandler: { (error) -> Void in
-                    log.error("Error al enviar petición al iPhone \(error)")
-                })
+                log.debug("Comando: Actualizar")
+            }, errorHandler: { (error) -> Void in
+                log.error("Error al enviar petición al iPhone \(error)")
+            })
         }
     }
 
