@@ -800,7 +800,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     // Moverse entre aulas
-    @IBAction func swipeDerecha(_ sender: Any) {
+    fileprivate func aulaAnterior() {
         if !invitado && numAulas > 1 {
             if aulaActual > 0 {
                 aulaActual -= 1
@@ -815,7 +815,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
     }
 
-    @IBAction func swipeIzquierda(_ sender: Any) {
+    @IBAction func swipeDerecha(_ sender: Any) {
+        aulaAnterior()
+    }
+
+    fileprivate func aulaSiguiente() {
         if !invitado && numAulas > 1 {
             if aulaActual < pageControl.numberOfPages - 1 {
                 aulaActual += 1
@@ -828,6 +832,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
             pageControl.currentPage = aulaActual
         }
+    }
+
+    @IBAction func swipeIzquierda(_ sender: Any) {
+        aulaSiguiente()
     }
 
     // MARK: Funciones exclusivas de la versión iOS
@@ -891,6 +899,10 @@ extension ViewController: WCSessionDelegate {
         case "actualizar":
             self.actualizarAula(codigo: codigoAula)
             mostrarSiguiente(avanzarCola: false)
+        case "aulaSiguiente":
+            aulaSiguiente()
+        case "aulaAnterior":
+            aulaAnterior()
         default:
             break
         }
