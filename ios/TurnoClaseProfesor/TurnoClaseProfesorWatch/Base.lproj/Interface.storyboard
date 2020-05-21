@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14313.18" targetRuntime="watchKit" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
-    <device id="watch44" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="16097" targetRuntime="watchKit" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch44"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14238.10"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="16012"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
@@ -42,6 +40,18 @@
                                     <fontDescription key="font" type="system" pointSize="28"/>
                                 </label>
                             </items>
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer id="Qxo-QH-dc1">
+                                    <connections>
+                                        <action selector="swipeDerecha:" destination="AgC-eL-Hgc" id="VD4-tU-f2N"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="2" id="w47-gb-xRu">
+                                    <connections>
+                                        <action selector="swipeIzquierda:" destination="AgC-eL-Hgc" id="fpw-EI-JOz"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
                             <color key="backgroundColor" red="1" green="0.7775987982749939" blue="0.0045356974005699158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </group>
                         <group width="0.66000000000000003" height="0.34999999999999998" alignment="center" verticalAlignment="bottom" radius="6" id="JSe-e2-IyL" userLabel="Inferior">
@@ -63,6 +73,7 @@
                     </connections>
                 </controller>
             </objects>
+            <point key="canvasLocation" x="132" y="136"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="0.7775987982749939" blue="0.0045356974005699158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
