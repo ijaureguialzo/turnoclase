@@ -476,13 +476,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
         self.recuentoAnterior = recuento
 
-        self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
+        DispatchQueue.main.async {
+            self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
+        }
         log.info("Alumnos en cola: \(recuento)")
         enviarWatch(campo: "enCola", String(recuento))
     }
 
     fileprivate func actualizarMensaje(texto: String) {
-        self.etiquetaNombreAlumno.text = texto
+        DispatchQueue.main.async {
+            self.etiquetaNombreAlumno.text = texto
+        }
         enviarWatch(campo: "mensaje", texto)
     }
 
