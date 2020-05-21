@@ -68,11 +68,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     // Soporte para varias aulas
     let MAX_AULAS = 16
-    var aulaActual: Int = 0 {
-        didSet {
-            pageControl.currentPage = aulaActual
-        }
-    }
+    var aulaActual = 0
     var numAulas: Int = 0 {
         didSet {
             pageControl.numberOfPages = numAulas
@@ -462,6 +458,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     fileprivate func actualizarAula(codigo: String) {
         self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
         self.codigoAula = codigo
+        pageControl.currentPage = aulaActual
         log.info("Código de aula: \(codigo)")
         enviarWatch(campo: "codigoAula", codigo)
     }
