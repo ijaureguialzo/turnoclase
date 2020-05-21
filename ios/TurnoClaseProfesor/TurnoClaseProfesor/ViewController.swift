@@ -71,8 +71,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var aulaActual = 0
     var numAulas: Int = 0 {
         didSet {
-            pageControl.numberOfPages = numAulas
-            ocultarIndicador()
+            DispatchQueue.main.async {
+                self.pageControl.numberOfPages = self.numAulas
+                self.ocultarIndicador()
+            }
         }
     }
 
@@ -456,11 +458,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     fileprivate func actualizarAula(codigo: String) {
-        self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
         self.codigoAula = codigo
-        pageControl.currentPage = aulaActual
+        DispatchQueue.main.async {
+            self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
+            self.pageControl.currentPage = self.aulaActual
+        }
         log.info("Código de aula: \(codigo)")
-        enviarWatch(campo: "codigoAula", codigo)
+        self.enviarWatch(campo: "codigoAula", codigo)
     }
 
     fileprivate func actualizarAula(enCola recuento: Int) {
@@ -820,10 +824,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func aulaSiguiente() {
         if !invitado && numAulas > 1 {
-            if aulaActual < pageControl.numberOfPages - 1 {
+            if aulaActual < numAulas - 1 {
                 aulaActual += 1
             }
-
             log.debug("Aula siguiente")
 
             self.desconectarListeners()
