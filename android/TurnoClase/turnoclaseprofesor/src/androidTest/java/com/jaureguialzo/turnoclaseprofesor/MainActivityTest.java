@@ -36,6 +36,9 @@ public class MainActivityTest {
         Screengrab.setDefaultScreenshotStrategy(new FalconScreenshotStrategy(mActivityTestRule.getActivity()));
 
         ViewInteraction botonSiguiente = onView(allOf(withId(R.id.botonEnCola), isDisplayed()));
+        ViewInteraction botonCodigoAula = onView(allOf(withId(R.id.botonCodigoAula), isDisplayed()));
+
+        botonCodigoAula.perform(click());
 
         Screengrab.screenshot("00-NuevaAula");
         botonSiguiente.perform(click());
