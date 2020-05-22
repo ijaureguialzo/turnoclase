@@ -59,6 +59,7 @@ platform :android do
 
     capture_android_screenshots(
         locales: idiomas,
+        use_adb_root: true,
         clear_previous_screenshots: true,
         skip_open_summary: !options[:resumen] || false,
         device_type: options[:tipo],
@@ -144,16 +145,16 @@ platform :android do
     frame_screenshots
 
     if subir_appstore
-        upload_to_play_store(
-            package_name: "com.jaureguialzo." + aplicacion,
+      upload_to_play_store(
+          package_name: "com.jaureguialzo." + aplicacion,
 
-            skip_upload_screenshots: !subir_appstore,
-            metadata_path: "./fastlane/screenshots/" + aplicacion,
+          skip_upload_screenshots: !subir_appstore,
+          metadata_path: "./fastlane/screenshots/" + aplicacion,
 
-            skip_upload_apk: true,
-            skip_upload_metadata: true,
-            skip_upload_images: true
-        )
+          skip_upload_apk: true,
+          skip_upload_metadata: true,
+          skip_upload_images: true
+      )
     end
   end
 
