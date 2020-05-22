@@ -47,6 +47,9 @@ platform :ios do
     snapshot(
         skip_open_summary: true,
         devices: dispositivos,
+        override_status_bar: true,
+        dark_mode: false,
+        localize_simulator: true,
         languages: idiomas,
         scheme: app,
         output_directory: "./fastlane/screenshots/",
