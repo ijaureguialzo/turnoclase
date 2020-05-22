@@ -160,6 +160,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             self.actualizarAula(codigo: "BE131", enCola: 0)
             self.actualizarMensaje(texto: "")
+            self.PIN = "1234"
+            self.numAulas = 2
         } else {
 
             // Limpiar el UI
