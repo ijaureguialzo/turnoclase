@@ -142,7 +142,7 @@ platform :android do
 
     end
 
-    frame_screenshots
+    #frame_screenshots
 
     if subir_appstore
       upload_to_play_store(
