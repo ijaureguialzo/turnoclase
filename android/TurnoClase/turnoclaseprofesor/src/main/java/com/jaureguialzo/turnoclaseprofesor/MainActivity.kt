@@ -30,12 +30,14 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.NumberPicker
+import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -99,10 +101,20 @@ class MainActivity : AppCompatActivity() {
 
     private val MAX_AULAS = 16
     private var aulaActual = 0
-    private var numAulas = 0
+    private var numAulas: Int = 0
+        set(value) {
+            field = value
+            adapter?.notifyDataSetChanged()
+            ocultarIndicador()
+            if (aulaActual == value) {
+                aulaActual -= 1
+                viewPager.currentItem -= 1
+            }
+        }
 
     private var adapter: ScreenSlidePagerAdapter? = null
     private var pageIndicatorView: PageIndicatorView? = null
+    private var indicadorActividad: ProgressBar? = null
 
     // Soporte para varias aulas
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -111,15 +123,14 @@ class MainActivity : AppCompatActivity() {
 
         override fun getItem(position: Int): Fragment = Fragment()
 
-        fun incrementar() {
-            numAulas += 1
-            notifyDataSetChanged()
-        }
+    }
 
-        fun decrementar() {
-            numAulas -= 1
-            notifyDataSetChanged()
-        }
+    fun ocultarIndicador() {
+        indicadorActividad?.visibility = View.INVISIBLE
+    }
+
+    fun mostrarIndicador() {
+        indicadorActividad?.visibility = View.VISIBLE
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -144,6 +155,8 @@ class MainActivity : AppCompatActivity() {
         // Paginador: https://github.com/romandanylyk/PageIndicatorView
         pageIndicatorView = findViewById(R.id.pageIndicatorView)
 
+        indicadorActividad = findViewById(R.id.progressBar)
+
         adapter = ScreenSlidePagerAdapter(supportFragmentManager)
         viewPager.adapter = adapter
 
@@ -153,8 +166,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                 if (!invitado) {
-                    pageIndicatorView?.selection = position
-
                     aulaActual = position
                     Log.d(TAG, "Cargado aula en posición: " + aulaActual)
 
@@ -176,6 +187,8 @@ class MainActivity : AppCompatActivity() {
             // Limpiar el UI
             actualizarAula("...", 0)
             actualizarMensaje("")
+
+            ocultarIndicador()
 
             // Iniciar sesión y conectar al aula
             mAuth = FirebaseAuth.getInstance()
@@ -272,6 +285,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun crearAula() {
 
+        mostrarIndicador()
+
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
                 .addOnCompleteListener(OnCompleteListener { task ->
@@ -299,7 +314,7 @@ class MainActivity : AppCompatActivity() {
                                 .addOnSuccessListener { nueva ->
                                     Log.d(TAG, "Aula creada")
                                     refAula = nueva
-                                    adapter?.incrementar()
+                                    numAulas += 1
                                     conectarListener()
                                 }
                                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
@@ -308,6 +323,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun anyadirAula() {
+
+        mostrarIndicador()
 
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
@@ -335,7 +352,7 @@ class MainActivity : AppCompatActivity() {
                         refMisAulas!!.add(datos)
                                 .addOnSuccessListener { nueva ->
                                     Log.d(TAG, "Aula creada")
-                                    adapter?.incrementar()
+                                    numAulas += 1
                                 }
                                 .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
                     }
@@ -515,6 +532,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun borrarAulaReconectar(codigoAula: String) {
 
+        mostrarIndicador()
+
         desconectarListeners()
 
         refMisAulas!!.whereEqualTo("codigo", codigoAula.toUpperCase())
@@ -526,7 +545,7 @@ class MainActivity : AppCompatActivity() {
                             Log.e(TAG, "Error al borrar el aula: ", it.exception)
                         } else {
                             Log.d(TAG, "Aula borrada")
-                            adapter?.decrementar()
+                            numAulas -= 1
                             conectarAula(aulaActual)
                         }
                     }
@@ -550,7 +569,9 @@ class MainActivity : AppCompatActivity() {
     private fun actualizarAula(enCola: Int) {
         if (enCola != -1) {
 
-            if (recuentoAnterior == 0 && enCola == 1) {
+            val sonidoActivado = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("sonido", true)
+
+            if (sonidoActivado && recuentoAnterior == 0 && enCola == 1) {
                 try {
                     val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
                     val r = RingtoneManager.getRingtone(applicationContext, notification)
@@ -601,6 +622,11 @@ class MainActivity : AppCompatActivity() {
 
         menu.findItem(R.id.accion_acerca_de).setOnMenuItemClickListener {
             startActivity(Intent(this@MainActivity, AcercaDe::class.java))
+            true
+        }
+
+        menu.findItem(R.id.accion_ajustes).setOnMenuItemClickListener {
+            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
             true
         }
 
@@ -740,7 +766,7 @@ class MainActivity : AppCompatActivity() {
 
         val picker = vista.findViewById(R.id.picker) as NumberPicker
 
-        val tiempos = arrayOf("1", "2", "3", "5", "10", "15", "20", "30", "45", "60")
+        val tiempos = arrayOf("0", "1", "2", "3", "5", "10", "15", "20", "30", "45", "60")
 
         picker.minValue = 0
         picker.maxValue = tiempos.size - 1

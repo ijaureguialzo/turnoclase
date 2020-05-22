@@ -71,8 +71,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var aulaActual = 0
     var numAulas: Int = 0 {
         didSet {
-            pageControl.numberOfPages = numAulas
-            ocultarIndicador()
+            DispatchQueue.main.async {
+                self.pageControl.numberOfPages = self.numAulas
+                self.ocultarIndicador()
+            }
         }
     }
 
@@ -146,12 +148,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         // El texto encoge a medida que hay más caracteres
         etiquetaBotonCodigoAula.titleLabel?.adjustsFontSizeToFitWidth = true
 
+        if #available(iOS 13.0, *) {
+            indicadorActividad.style = .medium
+        } else {
+            indicadorActividad.style = .gray
+        }
+
         log.info("Iniciando la aplicación...")
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             self.actualizarAula(codigo: "BE131", enCola: 0)
             self.actualizarMensaje(texto: "")
+            self.PIN = "1234"
+            self.numAulas = 2
         } else {
 
             // Limpiar el UI
@@ -450,28 +460,35 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     fileprivate func actualizarAula(codigo: String) {
-        self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
         self.codigoAula = codigo
+        DispatchQueue.main.async {
+            self.etiquetaBotonCodigoAula.setTitle(codigo, for: UIControl.State())
+            self.pageControl.currentPage = self.aulaActual
+        }
         log.info("Código de aula: \(codigo)")
-        enviarWatch(campo: "codigoAula", codigo)
+        self.enviarWatch(campo: "codigoAula", codigo)
     }
 
     fileprivate func actualizarAula(enCola recuento: Int) {
 
-        let sonidoActivado = UserDefaults.standard.bool(forKey: "QUEUE_NOT_EMPTY")
+        let sonidoActivado = UserDefaults.standard.bool(forKey: "QUEUE_NOT_EMPTY_SOUND")
 
         if sonidoActivado && self.recuentoAnterior == 0 && recuento == 1 {
             AudioServicesPlaySystemSound(SystemSoundID(1315))
         }
         self.recuentoAnterior = recuento
 
-        self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
+        DispatchQueue.main.async {
+            self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
+        }
         log.info("Alumnos en cola: \(recuento)")
         enviarWatch(campo: "enCola", String(recuento))
     }
 
     fileprivate func actualizarMensaje(texto: String) {
-        self.etiquetaNombreAlumno.text = texto
+        DispatchQueue.main.async {
+            self.etiquetaNombreAlumno.text = texto
+        }
         enviarWatch(campo: "mensaje", texto)
     }
 
@@ -677,7 +694,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         self.present(minutosAlert, animated: true)
     }
 
-    let tiempos = [1, 2, 3, 5, 10, 15, 20, 30, 45, 60]
+    let tiempos = [0, 1, 2, 3, 5, 10, 15, 20, 30, 45, 60]
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -794,7 +811,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     // Moverse entre aulas
-    @IBAction func swipeDerecha(_ sender: Any) {
+    fileprivate func aulaAnterior() {
         if !invitado && numAulas > 1 {
             if aulaActual > 0 {
                 aulaActual -= 1
@@ -804,24 +821,27 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
             self.desconectarListeners()
             self.conectarAula(posicion: self.aulaActual)
-
-            pageControl.currentPage = aulaActual
         }
     }
 
-    @IBAction func swipeIzquierda(_ sender: Any) {
+    @IBAction func swipeDerecha(_ sender: Any) {
+        aulaAnterior()
+    }
+
+    fileprivate func aulaSiguiente() {
         if !invitado && numAulas > 1 {
-            if aulaActual < pageControl.numberOfPages - 1 {
+            if aulaActual < numAulas - 1 {
                 aulaActual += 1
             }
-
             log.debug("Aula siguiente")
 
             self.desconectarListeners()
             self.conectarAula(posicion: self.aulaActual)
-
-            pageControl.currentPage = aulaActual
         }
+    }
+
+    @IBAction func swipeIzquierda(_ sender: Any) {
+        aulaSiguiente()
     }
 
     // MARK: Funciones exclusivas de la versión iOS
@@ -885,6 +905,10 @@ extension ViewController: WCSessionDelegate {
         case "actualizar":
             self.actualizarAula(codigo: codigoAula)
             mostrarSiguiente(avanzarCola: false)
+        case "aulaSiguiente":
+            aulaSiguiente()
+        case "aulaAnterior":
+            aulaAnterior()
         default:
             break
         }
