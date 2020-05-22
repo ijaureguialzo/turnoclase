@@ -61,6 +61,7 @@ platform :ios do
 
     if subir_appstore
       deliver(
+          #app_version: "3.0.6",
           force: true,
           skip_binary_upload: true,
           skip_screenshots: false
