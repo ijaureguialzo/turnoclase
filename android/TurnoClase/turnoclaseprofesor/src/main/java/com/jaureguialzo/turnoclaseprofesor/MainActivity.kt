@@ -182,6 +182,8 @@ class MainActivity : AppCompatActivity() {
         if (isRunningTest) {
             actualizarAula("BE131", 0)
             actualizarMensaje("")
+            PIN = "1234"
+            numAulas = 2
         } else {
 
             // Limpiar el UI
