@@ -27,11 +27,11 @@ platform :android do
 
     case respuesta.downcase
     when "5"
-      sh "./emulador.sh Telefono5 5554"
+      sh "./emulador.sh Telefono5 6000"
     when "10"
-      sh "./emulador.sh Tablet10 5556"
+      sh "./emulador.sh Tablet10 6002"
     when "7"
-      sh "./emulador.sh Tablet7 5558"
+      sh "./emulador.sh Tablet7 6004"
     else
       UI.user_error!("No se puede iniciar el emulador")
       exit(1)
@@ -42,20 +42,6 @@ platform :android do
 
   desc "Hace una captura individual"
   private_lane :captura do |options|
-
-    # REF: Modo demo: https://github.com/FlorianRauscha/fastlane-plugin-demo_mode
-    demo_mode(
-        deactivate: false,
-        clock: "0941",
-        wifi: false,
-        wifi_level: 4,
-        mobile: true,
-        mobile_datatype: "lte",
-        mobile_level: 4,
-        plugged: false,
-        battery: 100,
-        notifications: false
-    )
 
     capture_android_screenshots(
         locales: idiomas,
@@ -69,8 +55,6 @@ platform :android do
         app_package_name: "com.jaureguialzo." + options[:app],
         output_directory: "./fastlane/screenshots/" + options[:app]
     )
-
-    demo_mode(deactivate: true)
 
   end
 
@@ -121,19 +105,19 @@ platform :android do
         captura(
             app: aplicacion,
             tipo: "phone",
-            emulador: "emulator-5554"
+            emulador: "emulator-6000"
         )
       when "tablet10"
         captura(
             app: aplicacion,
             tipo: "tenInch",
-            emulador: "emulator-5556"
+            emulador: "emulator-6002"
         )
       when "tablet7"
         captura(
             app: aplicacion,
             tipo: "sevenInch",
-            emulador: "emulator-5558"
+            emulador: "emulator-6004"
         )
       else
         UI.user_error!("Dispositivo equivocado")

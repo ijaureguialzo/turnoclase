@@ -5,6 +5,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,6 +14,8 @@ import org.junit.runner.RunWith;
 
 import tools.fastlane.screengrab.FalconScreenshotStrategy;
 import tools.fastlane.screengrab.Screengrab;
+import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy;
+import tools.fastlane.screengrab.cleanstatusbar.CleanStatusBar;
 import tools.fastlane.screengrab.locale.LocaleTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -35,7 +39,9 @@ public class MainActivityTest {
     @Test
     public void mainActivityTest() {
 
-        Screengrab.setDefaultScreenshotStrategy(new FalconScreenshotStrategy(mActivityTestRule.getActivity()));
+        CleanStatusBar.enableWithDefaults();
+
+        Screengrab.setDefaultScreenshotStrategy(new UiAutomatorScreenshotStrategy());
 
         ViewInteraction editText = onView(allOf(withId(R.id.campoAula), withText("BE131"), isDisplayed()));
         editText.check(matches(withText("BE131")));
@@ -66,6 +72,7 @@ public class MainActivityTest {
         botonActualizar.perform(click());
         Screengrab.screenshot("05-Terminado");
 
+        CleanStatusBar.disable();
     }
 
 }
