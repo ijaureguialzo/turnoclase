@@ -5,13 +5,16 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import tools.fastlane.screengrab.FalconScreenshotStrategy;
 import tools.fastlane.screengrab.Screengrab;
+import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy;
+import tools.fastlane.screengrab.cleanstatusbar.CleanStatusBar;
 import tools.fastlane.screengrab.locale.LocaleTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -31,10 +34,20 @@ public class MainActivityTest {
     @ClassRule
     public static final LocaleTestRule localeTestRule = new LocaleTestRule();
 
+    @BeforeClass
+    public static void beforeAll() {
+        CleanStatusBar.enableWithDefaults();
+    }
+
+    @AfterClass
+    public static void afterAll() {
+        CleanStatusBar.disable();
+    }
+
     @Test
     public void mainActivityTest() {
 
-        Screengrab.setDefaultScreenshotStrategy(new FalconScreenshotStrategy(mActivityTestRule.getActivity()));
+        Screengrab.setDefaultScreenshotStrategy(new UiAutomatorScreenshotStrategy());
 
         ViewInteraction botonSiguiente = onView(allOf(withId(R.id.botonEnCola), isDisplayed()));
         ViewInteraction botonCodigoAula = onView(allOf(withId(R.id.botonCodigoAula), isDisplayed()));
