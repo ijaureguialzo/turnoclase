@@ -2,8 +2,6 @@
 
 Just load the app and a unique classroom code will be generated.
 
-> If the classroom code shows `?`, tap it (on iOS) or the three dots (on Android) and select `Classroom recovery` to try again.
-
 <table>
 <caption style="caption-side: bottom">Main screen on iOS and Android.</caption>
 <tbody>
@@ -31,6 +29,6 @@ Tapping the classroom code on iOS or the three vertical dots on Android shows th
 Available options:
 
 - __PIN to share the classroom__: for using with the `Connect to another classroom` feature (see below).
-- __Generate new classroom__: clear the classroom and get a new code.
 - __Set wait time__: define the time, in minutes, a student has to wait before asking for a turn again (defaults to 5 minutes).
+- __Add/Delete classroom__: create and remove additional classrooms.
 - __Connect to another classroom__: allows two or more teachers to share same classroom queue.

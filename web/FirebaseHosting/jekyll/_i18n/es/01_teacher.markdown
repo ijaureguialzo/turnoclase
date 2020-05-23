@@ -2,8 +2,6 @@
 
 Solo abre la aplicación y se generará un código único de aula.
 
-> Si el código de aula muestra `?`, pulsa sobre él (en iOS) o sobre los tres puntos (en Android) y selecciona `Recuperar aula` para volver a intentarlo.
-
 <table>
 <caption style="caption-side: bottom">Pantalla principal en iOS y Android.</caption>
 <tbody>
@@ -31,6 +29,6 @@ Una pulsación sobre el código de aula en iOS o sobre los tres puntos verticale
 Opciones disponibles:
 
 - __PIN para compartir este aula__: para usarlo con la opción `Conectar a otra aula` (ver más abajo).
-- __Generar nueva aula__: vaciar el aula y generar un nuevo código.
 - __Establecer tiempo de espera__: define el tiempo, en minutos, que un estudiante tiene que esperar antes de pedir turno otra vez (por defecto 5 minutos).
+- __Añadir/Borrar aula__: crear y eliminar aulas adicionales.
 - __Conectar a otra aula__: permite que dos o más profesores compartan la cola de estudiantes de un aula.
