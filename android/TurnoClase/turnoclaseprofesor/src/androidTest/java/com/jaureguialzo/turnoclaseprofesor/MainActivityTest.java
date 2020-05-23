@@ -34,18 +34,10 @@ public class MainActivityTest {
     @ClassRule
     public static final LocaleTestRule localeTestRule = new LocaleTestRule();
 
-    @BeforeClass
-    public static void beforeAll() {
-        CleanStatusBar.enableWithDefaults();
-    }
-
-    @AfterClass
-    public static void afterAll() {
-        CleanStatusBar.disable();
-    }
-
     @Test
     public void mainActivityTest() {
+
+        CleanStatusBar.enableWithDefaults();
 
         Screengrab.setDefaultScreenshotStrategy(new UiAutomatorScreenshotStrategy());
 
@@ -69,6 +61,8 @@ public class MainActivityTest {
 
         openActionBarOverflowOrOptionsMenu(mActivityTestRule.getActivity());
         Screengrab.screenshot("05-Menu");
+
+        CleanStatusBar.disable();
     }
 
 }
