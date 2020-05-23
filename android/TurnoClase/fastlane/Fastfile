@@ -43,20 +43,6 @@ platform :android do
   desc "Hace una captura individual"
   private_lane :captura do |options|
 
-    # REF: Modo demo: https://github.com/FlorianRauscha/fastlane-plugin-demo_mode
-    demo_mode(
-        deactivate: false,
-        clock: "0941",
-        wifi: false,
-        wifi_level: 4,
-        mobile: true,
-        mobile_datatype: "lte",
-        mobile_level: 4,
-        plugged: false,
-        battery: 100,
-        notifications: false
-    )
-
     capture_android_screenshots(
         locales: idiomas,
         use_adb_root: true,
@@ -69,8 +55,6 @@ platform :android do
         app_package_name: "com.jaureguialzo." + options[:app],
         output_directory: "./fastlane/screenshots/" + options[:app]
     )
-
-    demo_mode(deactivate: true)
 
   end
 
