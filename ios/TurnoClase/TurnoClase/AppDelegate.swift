@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // REF: Aviso de "missing Push Entitlement" al enviar a la App Store por incluir Firebase: https://stackoverflow.com/a/46802075/5136913
         
         // Opciones de Firestore
-        let settings = db.settings
+        let settings = FirestoreSettings()
         settings.isPersistenceEnabled = false
         db.settings = settings
 
