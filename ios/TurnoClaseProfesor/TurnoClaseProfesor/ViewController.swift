@@ -581,12 +581,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.desconectarAula()
         })
 
-        let accionRecuperarAula = UIAlertAction(title: "Recuperar aula".localized(), style: .destructive, handler: { (action) -> Void in
-            log.info("Recuperar aula")
-            self.desconectarListeners()
-            self.conectarAula()
-        })
-
         let accionCancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel, handler: { (action) -> Void in
             log.info("Cancelar")
         })
@@ -607,7 +601,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 }
                 alertController.addAction(accionConectarOtraAula)
             } else {
-                alertController.addAction(accionRecuperarAula)
+                PIN = "..."
             }
         } else {
             alertController.addAction(accionDesconectarAula)
