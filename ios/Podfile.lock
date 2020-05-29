@@ -284,30 +284,30 @@ PODS:
   - "GoogleUtilities/NSData+zlib (6.6.0)"
   - GoogleUtilities/Reachability (6.6.0):
     - GoogleUtilities/Logger
-  - "gRPC-C++ (1.28.0)":
-    - "gRPC-C++/Implementation (= 1.28.0)"
-    - "gRPC-C++/Interface (= 1.28.0)"
-  - "gRPC-C++/Implementation (1.28.0)":
+  - "gRPC-C++ (1.28.2)":
+    - "gRPC-C++/Implementation (= 1.28.2)"
+    - "gRPC-C++/Interface (= 1.28.2)"
+  - "gRPC-C++/Implementation (1.28.2)":
     - abseil/container/inlined_vector (= 0.20200225.0)
     - abseil/memory/memory (= 0.20200225.0)
     - abseil/strings/str_format (= 0.20200225.0)
     - abseil/strings/strings (= 0.20200225.0)
     - abseil/types/optional (= 0.20200225.0)
-    - "gRPC-C++/Interface (= 1.28.0)"
-    - gRPC-Core (= 1.28.0)
-  - "gRPC-C++/Interface (1.28.0)"
-  - gRPC-Core (1.28.0):
-    - gRPC-Core/Implementation (= 1.28.0)
-    - gRPC-Core/Interface (= 1.28.0)
-  - gRPC-Core/Implementation (1.28.0):
+    - "gRPC-C++/Interface (= 1.28.2)"
+    - gRPC-Core (= 1.28.2)
+  - "gRPC-C++/Interface (1.28.2)"
+  - gRPC-Core (1.28.2):
+    - gRPC-Core/Implementation (= 1.28.2)
+    - gRPC-Core/Interface (= 1.28.2)
+  - gRPC-Core/Implementation (1.28.2):
     - abseil/container/inlined_vector (= 0.20200225.0)
     - abseil/memory/memory (= 0.20200225.0)
     - abseil/strings/str_format (= 0.20200225.0)
     - abseil/strings/strings (= 0.20200225.0)
     - abseil/types/optional (= 0.20200225.0)
     - BoringSSL-GRPC (= 0.0.7)
-    - gRPC-Core/Interface (= 1.28.0)
-  - gRPC-Core/Interface (1.28.0)
+    - gRPC-Core/Interface (= 1.28.2)
+  - gRPC-Core/Interface (1.28.2)
   - GTMSessionFetcher/Core (1.4.0)
   - leveldb-library (1.22)
   - Localize-Swift (3.1.0)
@@ -320,6 +320,7 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PromisesObjC (1.2.8)
+  - ReachabilitySwift (5.0.0)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
@@ -330,6 +331,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Functions
   - Localize-Swift
+  - ReachabilitySwift
   - XCGLogger
 
 SPEC REPOS:
@@ -355,6 +357,7 @@ SPEC REPOS:
     - nanopb
     - ObjcExceptionBridging
     - PromisesObjC
+    - ReachabilitySwift
     - XCGLogger
 
 SPEC CHECKSUMS:
@@ -371,16 +374,17 @@ SPEC CHECKSUMS:
   GoogleDataTransport: ad884314b81cdb808fb1d23787b367ff8da4e28a
   GoogleDataTransportCCTSupport: d70a561f7d236af529fee598835caad5e25f6d3d
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
-  "gRPC-C++": 2ea13a2e14f0b89991a0b4b0151e7c6a56319516
-  gRPC-Core: 325ba201411619a7302c621a1c8ee787719d4b9b
+  "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
+  gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   Localize-Swift: 4bed4f0ccac8be2ec3517ee359da80ba2adb0fae
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 80a86d5a0a35d9b375f2c19c1ab45133e019bfca
+PODFILE CHECKSUM: 1f7dbd57682326eb39d842daee46485cbb2ed021
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

@@ -36,6 +36,8 @@ import TurnoClaseShared
 
 import AudioToolbox
 
+import Reachability
+
 class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // ID de usuario único generado por Firebase
@@ -73,6 +75,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         didSet {
             DispatchQueue.main.async {
                 self.pageControl.numberOfPages = self.numAulas
+                self.pageControl.isHidden = false
                 self.ocultarIndicador()
             }
         }
@@ -143,6 +146,35 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             session = WCSession.default
             session?.delegate = self
             session?.activate()
+        }
+
+        // Detectar el estado de la conexión de red
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                log.info("Red Wifi")
+            } else {
+                log.info("Red móvil")
+            }
+
+            // Reconectar
+            if self.uid != nil {
+                self.conectarAula()
+            }
+        }
+
+        reachability.whenUnreachable = { _ in
+            self.actualizarAula(codigo: "?", enCola: 0)
+            self.actualizarMensaje(texto: "No hay conexión de red".localized())
+            self.pageControl.isHidden = true
+            self.ocultarIndicador()
+            self.desconectarListeners()
+            log.emergency("Red no disponible")
+        }
+
+        do {
+            try reachability.startNotifier()
+        } catch {
+            log.error("No se ha podido iniciar el notificador de estado de red")
         }
 
         // El texto encoge a medida que hay más caracteres
@@ -549,12 +581,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.desconectarAula()
         })
 
-        let accionRecuperarAula = UIAlertAction(title: "Recuperar aula".localized(), style: .destructive, handler: { (action) -> Void in
-            log.info("Recuperar aula")
-            self.desconectarListeners()
-            self.conectarAula()
-        })
-
         let accionCancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel, handler: { (action) -> Void in
             log.info("Cancelar")
         })
@@ -575,7 +601,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 }
                 alertController.addAction(accionConectarOtraAula)
             } else {
-                alertController.addAction(accionRecuperarAula)
+                PIN = "..."
             }
         } else {
             alertController.addAction(accionDesconectarAula)
