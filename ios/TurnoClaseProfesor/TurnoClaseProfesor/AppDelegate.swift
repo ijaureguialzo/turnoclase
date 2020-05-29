@@ -33,6 +33,11 @@ let log = XCGLogger.default
 // Conexión a Firestore
 let db = Firestore.firestore()
 
+// Detectar el estado de la conexión de red
+import Reachability
+
+let reachability = try! Reachability()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

@@ -33,3 +33,5 @@
 
 "Esta acción vaciará la cola de espera." = "Akzio honek itxaroten daudenen lerroa ezabatuko du.";
 "Recuperar aula" = "Gela berreskuratu";
+
+"No hay conexión de red" = "Ez dago sareko konexiorik";

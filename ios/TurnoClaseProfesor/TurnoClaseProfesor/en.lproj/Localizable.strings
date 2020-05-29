@@ -33,3 +33,5 @@
 
 "Esta acción vaciará la cola de espera." = "This action will clear the waiting queue.";
 "Recuperar aula" = "Classroom recovery";
+
+"No hay conexión de red" = "No network connection";
