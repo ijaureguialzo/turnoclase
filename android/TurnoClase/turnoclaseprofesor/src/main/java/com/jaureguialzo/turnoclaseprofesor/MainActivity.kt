@@ -699,19 +699,6 @@ class MainActivity : AppCompatActivity(), DroidListener {
             menu.findItem(R.id.accion_desconectar).isVisible = false
         }
 
-        if (codigoAula == "?") {
-            menu.findItem(R.id.accion_recuperar_aula).isVisible = true
-
-            menu.findItem(R.id.accion_recuperar_aula).setOnMenuItemClickListener {
-                Log.d("TurnoClase", "Recuperar aula")
-                desconectarListeners()
-                conectarAula()
-                true
-            }
-        } else {
-            menu.findItem(R.id.accion_recuperar_aula).isVisible = false
-        }
-
         return result
     }
 

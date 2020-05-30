@@ -32,9 +32,6 @@
         <item
             android:id="@+id/accion_desconectar"
             android:title="@string/menu_accion_desconectar" />
-        <item
-            android:id="@+id/accion_recuperar_aula"
-            android:title="@string/menu_accion_recuperar_aula" />
     </group>
     <group android:id="@+id/ajustes">
         <item
