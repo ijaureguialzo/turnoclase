@@ -294,16 +294,14 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
     private fun crearAula() {
 
-        mostrarIndicador()
+        if (networkAvailable)
+            mostrarIndicador()
 
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
                 .addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful) {
-                        val e = task.exception
-                        if (e is FirebaseFunctionsException) {
-                            Log.e(TAG, e.details as String)
-                        }
+                        Log.e(TAG, task.exception.toString())
                     } else {
 
                         val codigo = task.result?.get("codigo") as String
@@ -909,12 +907,27 @@ class MainActivity : AppCompatActivity(), DroidListener {
     }
 
     // Detectar si la conexión de red está activa o no
+    private var networkAvailable = true
+
     private fun netIsOn() {
+        networkAvailable = true
+        if (uid != null) {
+            conectarAula()
+        }
         Log.d("Reachability", "Net is ON")
     }
 
     private fun netIsOff() {
-        Log.d("Reachability", "Net is OFF")
+        networkAvailable = false
+        actualizarAula("?", 0)
+        actualizarMensaje("No hay conexión de red")
+        viewPager.currentItem = 0
+        invitado = false
+        numAulas = 0
+        aulaActual = 0
+        ocultarIndicador()
+        desconectarListeners()
+        Log.e("Reachability", "Net is OFF")
     }
 
     override fun onInternetConnectivityChanged(isConnected: Boolean) {
