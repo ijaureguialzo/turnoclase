@@ -166,6 +166,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.actualizarAula(codigo: "?", enCola: 0)
             self.actualizarMensaje(texto: "No hay conexión de red".localized())
             self.invitado = false
+            self.aulaActual = 0
             self.pageControl.isHidden = true
             self.ocultarIndicador()
             self.desconectarListeners()
