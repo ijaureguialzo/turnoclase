@@ -478,7 +478,11 @@ class MainActivity : AppCompatActivity(), DroidListener {
                                 }
                             } else {
                                 Log.d(TAG, "Cola vacía")
-                                actualizarMensaje("")
+                                if (codigoAula != "?") {
+                                    actualizarMensaje("")
+                                } else {
+                                    actualizarMensaje(getString(R.string.error_no_network))
+                                }
                             }
                         }
                     }
