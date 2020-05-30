@@ -920,7 +920,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
     private fun netIsOff() {
         networkAvailable = false
         actualizarAula("?", 0)
-        actualizarMensaje("No hay conexión de red")
+        actualizarMensaje(getString(R.string.error_no_network))
         viewPager.currentItem = 0
         invitado = false
         numAulas = 0

@@ -58,5 +58,6 @@
     <string name="sonido_explicacion_on_off">Alert when the first student is queued.</string>
     <string name="sonido_titulo">Sound</string>
     <string name="ajustes_titulo">Settings</string>
+    <string name="error_no_network">No network connection</string>
 
 </resources>
