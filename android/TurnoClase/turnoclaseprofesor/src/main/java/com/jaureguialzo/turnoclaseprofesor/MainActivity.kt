@@ -623,10 +623,10 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
         // REF: Dar formato a strings localizados: https://developer.android.com/guide/topics/resources/string-resource?hl=es-419#dar-formato-a-las-strings
         if (!invitado) {
-            if (codigoAula == "?") {
-                PIN = "?"
-            }
-            menu.findItem(R.id.etiqueta_pin).title = String.format(getString(R.string.menu_etiqueta_pin), PIN)
+            if (codigoAula == "?")
+                menu.findItem(R.id.etiqueta_pin).title = getString(R.string.error_no_network)
+            else
+                menu.findItem(R.id.etiqueta_pin).title = String.format(getString(R.string.menu_etiqueta_pin), PIN)
         } else {
             menu.findItem(R.id.etiqueta_pin).title = getString(R.string.menu_etiqueta_invitado)
         }
