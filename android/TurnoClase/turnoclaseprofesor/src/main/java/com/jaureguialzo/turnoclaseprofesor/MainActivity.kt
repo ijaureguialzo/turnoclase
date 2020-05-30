@@ -39,6 +39,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.droidnet.DroidListener
+import com.droidnet.DroidNet
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -50,8 +52,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.HashMap
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DroidListener {
 
     // ID de usuario único generado por Firebase
     private var uid: String? = null
@@ -133,8 +134,14 @@ class MainActivity : AppCompatActivity() {
         indicadorActividad?.visibility = View.VISIBLE
     }
 
+    private var mDroidNet: DroidNet? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Detectar si la conexión de red está activa o no
+        mDroidNet = DroidNet.getInstance();
+        mDroidNet!!.addInternetConnectivityListener(this);
 
         // Configurar las opciones de Firebase
         val settings = FirebaseFirestoreSettings.Builder()
@@ -900,6 +907,22 @@ class MainActivity : AppCompatActivity() {
         private val TAG = "MainActivity"
 
     }
-//endregion
 
+    // Detectar si la conexión de red está activa o no
+    private fun netIsOn() {
+        Log.d("Reachability", "Net is ON")
+    }
+
+    private fun netIsOff() {
+        Log.d("Reachability", "Net is OFF")
+    }
+
+    override fun onInternetConnectivityChanged(isConnected: Boolean) {
+        if (isConnected) {
+            netIsOn()
+        } else {
+            netIsOff()
+        }
+    }
+//endregion
 }
