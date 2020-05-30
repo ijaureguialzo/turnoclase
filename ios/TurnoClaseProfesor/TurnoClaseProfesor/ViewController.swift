@@ -165,6 +165,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         reachability.whenUnreachable = { _ in
             self.actualizarAula(codigo: "?", enCola: 0)
             self.actualizarMensaje(texto: "No hay conexión de red".localized())
+            self.invitado = false
             self.pageControl.isHidden = true
             self.ocultarIndicador()
             self.desconectarListeners()
@@ -554,13 +555,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         let alertController: UIAlertController = {
             // REF: Localizar una cadena con interpolación: https://github.com/marmelroy/Localize-Swift/issues/89#issuecomment-331673546
-            if !invitado {
-                return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                                         message: String(format: "PIN para compartir este aula: %@".localized(), PIN),
-                                         preferredStyle: .actionSheet)
+            if codigoAula != "?" {
+                if !invitado {
+                    return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
+                                             message: String(format: "PIN para compartir este aula: %@".localized(), PIN),
+                                             preferredStyle: .actionSheet)
+                } else {
+                    return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
+                                             message: "Conectado como invitado".localized(),
+                                             preferredStyle: .actionSheet)
+                }
             } else {
                 return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                                         message: "Conectado como invitado".localized(),
+                                         message: "No hay conexión de red".localized(),
                                          preferredStyle: .actionSheet)
             }
         }()
@@ -604,8 +611,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     alertController.addAction(accionBorrarAula)
                 }
                 alertController.addAction(accionConectarOtraAula)
-            } else {
-                PIN = "..."
             }
         } else {
             alertController.addAction(accionDesconectarAula)
