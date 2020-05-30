@@ -186,8 +186,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
         })
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
-        //if (isRunningTest) {
-        if (true) {
+        if (isRunningTest) {
             actualizarAula("BE131", 0)
             actualizarMensaje("")
             PIN = "1234"
