@@ -404,7 +404,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                         }
                     } else {
                         log.info("Cola vacía")
-                        self.actualizarMensaje(texto: "")
+                        if self.codigoAula != "?" {
+                            self.actualizarMensaje(texto: "")
+                        } else {
+                            self.actualizarMensaje(texto: "No hay conexión de red".localized())
+                        }
                     }
                 }
             }
