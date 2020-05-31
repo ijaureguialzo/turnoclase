@@ -19,9 +19,21 @@ package com.jaureguialzo.turnoclaseprofesor
 
 import androidx.multidex.MultiDexApplication
 
+import com.droidnet.DroidNet
+
 /**
  * Created by widemos on 19/6/15.
  */
 class App : MultiDexApplication() {
-    // No borrar esta clase, se usa en el AndroidManifest.xml
+
+    // Detectar si la conexión de red está activa o no
+    override fun onCreate() {
+        super.onCreate()
+        DroidNet.init(this)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        DroidNet.getInstance().removeAllInternetConnectivityChangeListeners()
+    }
 }

@@ -39,6 +39,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.droidnet.DroidListener
+import com.droidnet.DroidNet
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -50,8 +52,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.HashMap
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DroidListener {
 
     // ID de usuario único generado por Firebase
     private var uid: String? = null
@@ -133,8 +134,14 @@ class MainActivity : AppCompatActivity() {
         indicadorActividad?.visibility = View.VISIBLE
     }
 
+    private var mDroidNet: DroidNet? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Detectar si la conexión de red está activa o no
+        mDroidNet = DroidNet.getInstance();
+        mDroidNet!!.addInternetConnectivityListener(this);
 
         // Configurar las opciones de Firebase
         val settings = FirebaseFirestoreSettings.Builder()
@@ -287,16 +294,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun crearAula() {
 
-        mostrarIndicador()
+        if (networkAvailable)
+            mostrarIndicador()
 
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
                 .addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful) {
-                        val e = task.exception
-                        if (e is FirebaseFunctionsException) {
-                            Log.e(TAG, e.details as String)
-                        }
+                        Log.e(TAG, task.exception.toString())
                     } else {
 
                         val codigo = task.result?.get("codigo") as String
@@ -473,7 +478,11 @@ class MainActivity : AppCompatActivity() {
                                 }
                             } else {
                                 Log.d(TAG, "Cola vacía")
-                                actualizarMensaje("")
+                                if (codigoAula != "?") {
+                                    actualizarMensaje("")
+                                } else {
+                                    actualizarMensaje(getString(R.string.error_no_network))
+                                }
                             }
                         }
                     }
@@ -614,10 +623,10 @@ class MainActivity : AppCompatActivity() {
 
         // REF: Dar formato a strings localizados: https://developer.android.com/guide/topics/resources/string-resource?hl=es-419#dar-formato-a-las-strings
         if (!invitado) {
-            if (codigoAula == "?") {
-                PIN = "?"
-            }
-            menu.findItem(R.id.etiqueta_pin).title = String.format(getString(R.string.menu_etiqueta_pin), PIN)
+            if (codigoAula == "?")
+                menu.findItem(R.id.etiqueta_pin).title = getString(R.string.error_no_network)
+            else
+                menu.findItem(R.id.etiqueta_pin).title = String.format(getString(R.string.menu_etiqueta_pin), PIN)
         } else {
             menu.findItem(R.id.etiqueta_pin).title = getString(R.string.menu_etiqueta_invitado)
         }
@@ -688,19 +697,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             menu.findItem(R.id.accion_conectar).isVisible = false
             menu.findItem(R.id.accion_desconectar).isVisible = false
-        }
-
-        if (codigoAula == "?") {
-            menu.findItem(R.id.accion_recuperar_aula).isVisible = true
-
-            menu.findItem(R.id.accion_recuperar_aula).setOnMenuItemClickListener {
-                Log.d("TurnoClase", "Recuperar aula")
-                desconectarListeners()
-                conectarAula()
-                true
-            }
-        } else {
-            menu.findItem(R.id.accion_recuperar_aula).isVisible = false
         }
 
         return result
@@ -900,6 +896,37 @@ class MainActivity : AppCompatActivity() {
         private val TAG = "MainActivity"
 
     }
-//endregion
 
+    // Detectar si la conexión de red está activa o no
+    private var networkAvailable = true
+
+    private fun netIsOn() {
+        networkAvailable = true
+        if (uid != null) {
+            conectarAula()
+        }
+        Log.d("Reachability", "Net is ON")
+    }
+
+    private fun netIsOff() {
+        networkAvailable = false
+        actualizarAula("?", 0)
+        actualizarMensaje(getString(R.string.error_no_network))
+        viewPager.currentItem = 0
+        invitado = false
+        numAulas = 0
+        aulaActual = 0
+        ocultarIndicador()
+        desconectarListeners()
+        Log.e("Reachability", "Net is OFF")
+    }
+
+    override fun onInternetConnectivityChanged(isConnected: Boolean) {
+        if (isConnected) {
+            netIsOn()
+        } else {
+            netIsOff()
+        }
+    }
+//endregion
 }
