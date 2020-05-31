@@ -567,8 +567,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                                              preferredStyle: .actionSheet)
                 }
             } else {
-                return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                                         message: "No hay conexión de red".localized(),
+                return UIAlertController(title: "No hay conexión de red".localized(),
+                                         message: nil,
                                          preferredStyle: .actionSheet)
             }
         }()
