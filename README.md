@@ -6,8 +6,4 @@
 [![Versión de Kotlin](https://img.shields.io/badge/Kotlin-1.3.72-ff8802.svg?label=Kotlin&longCache=true)](https://kotlinlang.org/)
 [![Versión de fastlane](https://img.shields.io/badge/fastlane-2.150-ff0201.svg?label=fastlane&longCache=true)](https://fastlane.tools/)
 
-Este repositorio contiene el código fuente de la aplicación [TurnoClase](https://turnoclase.com).
-
-## Contribuye
-
-Si encuentras algún problema, [crea un issue](https://github.com/ijaureguialzo/turnoclase/issues).
+This repository contains the source code of [TurnoClase](https://turnoclase.com).
