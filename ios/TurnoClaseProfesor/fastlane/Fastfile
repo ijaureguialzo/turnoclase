@@ -17,7 +17,7 @@ default_platform :ios
 
 app = "TurnoClaseProfesor"
 
-ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t Signiant"
+#ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t Signiant"
 
 platform :ios do
 
