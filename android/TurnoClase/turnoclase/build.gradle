@@ -25,8 +25,8 @@ android {
         applicationId "com.jaureguialzo.turnoclase"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 37
-        versionName "3.0.2"
+        versionCode 38
+        versionName "3.0.3"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
