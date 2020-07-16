@@ -3,7 +3,7 @@ help:
 	@echo start / stop
 	@echo workspace
 	@echo build / clean
-	@deploy
+	@echo deploy
 
 start:
 	@docker-compose up -d
