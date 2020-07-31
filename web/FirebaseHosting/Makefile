@@ -28,4 +28,5 @@ deploy: start
 	@cd jekyll && bundle exec jekyll build
 	@cd ..
 	@docker-compose exec node firebase login
+	@docker-compose exec node firebase use turnoclase
 	@docker-compose exec node firebase deploy --only hosting
