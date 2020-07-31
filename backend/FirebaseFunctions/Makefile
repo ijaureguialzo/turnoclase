@@ -22,4 +22,5 @@ clean:
 
 deploy: start
 	@docker-compose exec node firebase login
+	@docker-compose exec node firebase use turnoclase-eu
 	@docker-compose exec node firebase deploy --only functions
