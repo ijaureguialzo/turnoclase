@@ -4,7 +4,7 @@ buildscript {
     ext {
         build_tools_version = '30.0.2'
 
-        gradle_plugin_version = '4.0.1'
+        gradle_plugin_version = '4.0.2'
         google_services_version = '4.3.3'
         kotlin_version = '1.4.10'
 
@@ -14,7 +14,7 @@ buildscript {
         multidex_support_lib_version = '2.0.1'
 
         firebase_auth_version = '19.4.0'
-        firebase_firestore_version = '21.6.0'
+        firebase_firestore_version = '21.7.1'
 
         fastlane_screengrab_version = '2.0.0'
 
@@ -50,7 +50,7 @@ task clean(type: Delete) {
 
 // REF: Parámetros compartidos: https://stackoverflow.com/a/20436423/5136913
 ext {
-    compileSdkVersion = 29
+    compileSdkVersion = 30
     minSdkVersion = 21
-    targetSdkVersion = 29
+    targetSdkVersion = 30
 }
