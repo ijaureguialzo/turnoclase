@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TurnoClase.iml" filepath="$PROJECT_DIR$/TurnoClase.iml" group="TurnoClase" />
-      <module fileurl="file://$PROJECT_DIR$/turnoclase/turnoclase.iml" filepath="$PROJECT_DIR$/turnoclase/turnoclase.iml" group="TurnoClase/turnoclase" />
-      <module fileurl="file://$PROJECT_DIR$/turnoclaseprofesor/turnoclaseprofesor.iml" filepath="$PROJECT_DIR$/turnoclaseprofesor/turnoclaseprofesor.iml" group="TurnoClase/turnoclaseprofesor" />
+      <module fileurl="file://$PROJECT_DIR$/TurnoClase.iml" filepath="$PROJECT_DIR$/TurnoClase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.iml" />
     </modules>
   </component>
 </project>
