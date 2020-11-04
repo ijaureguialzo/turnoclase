@@ -75,7 +75,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         didSet {
             DispatchQueue.main.async {
                 self.pageControl.numberOfPages = self.numAulas
-                self.pageControl.isHidden = false
+                self.pageControl.isHidden = self.numAulas <= 1
                 self.ocultarIndicador()
             }
         }
