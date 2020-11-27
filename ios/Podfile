@@ -4,7 +4,7 @@ workspace 'TurnoClase'
 
 def turnoclase_ios_pods
     # REF: Error de integración con los Pods del watch: https://github.com/CocoaPods/CocoaPods/issues/3382#issuecomment-392605607
-    platform :ios, '9.3'
+    platform :ios, '12.0'
     turnoclase_shared_pods
 
     # REF: Google Firebase: https://firebase.google.com/docs/ios
