@@ -18,6 +18,7 @@
 package com.jaureguialzo.turnoclase
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -26,7 +27,7 @@ import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.jaureguialzo.turnoclase.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +41,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Binding para acceso al UI de la actividad
+    private lateinit var binding: ActivityMainBinding
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,23 +56,25 @@ class MainActivity : AppCompatActivity() {
             supportActionBar!!.show()
 
         // Cargar el layout
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Nombre aleatorio
         val nombreAleatorio = Nombres().aleatorio()
-        campoNombre.hint = nombreAleatorio
+        binding.campoNombre.hint = nombreAleatorio
 
         // Depuración
         if (BuildConfig.DEBUG) {
-            campoAula.setText("BE131")
-            campoNombre.setText(nombreAleatorio)
+            binding.campoAula.setText("BE131")
+            binding.campoNombre.setText(nombreAleatorio)
         }
 
         // Evento del botón conectar, pasamos a la siguiente actividad
-        botonSiguiente.setOnClickListener {
+        binding.botonSiguiente.setOnClickListener {
             // Obtenemos los datos del interfaz
-            val codigoAula = campoAula!!.text.toString().toUpperCase()
-            val nombreUsuario = campoNombre!!.text.toString()
+            val codigoAula = binding.campoAula!!.text.toString().toUpperCase()
+            val nombreUsuario = binding.campoNombre!!.text.toString()
 
             // Si hay texto, pasamos a la siguiente actividad
             if (codigoAula.length >= 5 && nombreUsuario.length >= 2) {
@@ -81,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Animación del botón
-        botonSiguiente.setOnTouchListener { v, event ->
+        binding.botonSiguiente.setOnTouchListener { v, event ->
             animarBoton(event, v, "botonSiguiente")
             false
         }

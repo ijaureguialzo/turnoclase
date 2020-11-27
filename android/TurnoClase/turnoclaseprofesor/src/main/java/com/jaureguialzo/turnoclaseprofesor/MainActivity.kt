@@ -18,6 +18,7 @@
 package com.jaureguialzo.turnoclaseprofesor
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.media.RingtoneManager
@@ -47,8 +48,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
+import com.jaureguialzo.turnoclaseprofesor.databinding.ActivityMainBinding
 import com.rd.PageIndicatorView
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -109,7 +110,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
             ocultarIndicador()
             if (aulaActual == value) {
                 aulaActual -= 1
-                viewPager.currentItem -= 1
+                binding.viewPager.currentItem -= 1
             }
         }
 
@@ -136,6 +137,10 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
     private var mDroidNet: DroidNet? = null
 
+    // Binding para acceso al UI de la actividad
+    private lateinit var binding: ActivityMainBinding
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -157,7 +162,9 @@ class MainActivity : AppCompatActivity(), DroidListener {
             supportActionBar!!.show()
 
         // Cargar el layout
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Paginador: https://github.com/romandanylyk/PageIndicatorView
         pageIndicatorView = findViewById(R.id.pageIndicatorView)
@@ -165,9 +172,9 @@ class MainActivity : AppCompatActivity(), DroidListener {
         indicadorActividad = findViewById(R.id.progressBar)
 
         adapter = ScreenSlidePagerAdapter(supportFragmentManager)
-        viewPager.adapter = adapter
+        binding.viewPager.adapter = adapter
 
-        viewPager.addOnPageChangeListener(object : OnPageChangeListener {
+        binding.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }
 
@@ -219,40 +226,40 @@ class MainActivity : AppCompatActivity(), DroidListener {
         }
 
         // Evento del botón botonCodigoAula (vaciar el aula)
-        botonCodigoAula.setOnClickListener {
+        binding.botonCodigoAula.setOnClickListener {
             botonCodigoAulaCorto()
         }
 
         // Evento del botón botonCodigoAula (crear nueva aula)
-        botonCodigoAula.setOnLongClickListener {
+        binding.botonCodigoAula.setOnLongClickListener {
             botonCodigoAulaLargo()
             true
         }
 
         // Evento del botón Siguiente
-        botonSiguiente.setOnClickListener {
+        binding.botonSiguiente.setOnClickListener {
             botonSiguiente()
         }
 
         // Evento del botón botonEnCola
-        botonEnCola.setOnClickListener {
+        binding.botonEnCola.setOnClickListener {
             botonEnCola()
         }
 
         // Animación del botón Siguiente
-        botonSiguiente.setOnTouchListener { v, event ->
+        binding.botonSiguiente.setOnTouchListener { v, event ->
             animarBoton(event, v, "botonSiguiente")
             false
         }
 
         // Animación del botón botonEnCola
-        botonEnCola.setOnTouchListener { v, event ->
+        binding.botonEnCola.setOnTouchListener { v, event ->
             animarBoton(event, v, "botonEnCola")
             false
         }
 
         // Animación del botón botonCodigoAula
-        botonCodigoAula.setOnTouchListener { v, event ->
+        binding.botonCodigoAula.setOnTouchListener { v, event ->
             animarBoton(event, v, "botonCodigoAula")
             false
         }
@@ -572,7 +579,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
     }
 
     private fun actualizarAula(codigo: String) {
-        botonCodigoAula.text = codigo
+        binding.botonCodigoAula.text = codigo
         codigoAula = codigo
         Log.d(TAG, "Aula: $codigoAula")
     }
@@ -593,14 +600,14 @@ class MainActivity : AppCompatActivity(), DroidListener {
             }
             recuentoAnterior = enCola
 
-            botonEnCola.text = enCola.toString()
+            binding.botonEnCola.text = enCola.toString()
         } else
-            botonEnCola.text = "..."
+            binding.botonEnCola.text = "..."
         Log.d(TAG, "Alumnos en cola: $enCola")
     }
 
     private fun actualizarMensaje(texto: String = "?") {
-        etiquetaNombreAlumno.text = texto
+        binding.etiquetaNombreAlumno.text = texto
     }
 
     private fun actualizarPIN(pin: String) {
@@ -912,7 +919,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
         networkAvailable = false
         actualizarAula("?", 0)
         actualizarMensaje(getString(R.string.error_no_network))
-        viewPager.currentItem = 0
+        binding.viewPager.currentItem = 0
         invitado = false
         numAulas = 0
         aulaActual = 0
