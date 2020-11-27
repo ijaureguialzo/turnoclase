@@ -24,7 +24,7 @@ import UIKit
 
 import XCGLogger
 
-import Firebase
+import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFunctions
 
