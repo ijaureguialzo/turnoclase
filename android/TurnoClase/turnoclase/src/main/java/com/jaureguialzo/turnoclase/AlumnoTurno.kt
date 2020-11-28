@@ -18,6 +18,7 @@
 package com.jaureguialzo.turnoclase
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -30,7 +31,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
-import kotlinx.android.synthetic.main.activity_alumno_turno.*
+import com.jaureguialzo.turnoclase.databinding.ActivityAlumnoTurnoBinding
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
@@ -78,6 +79,10 @@ class AlumnoTurno : AppCompatActivity() {
         }
     }
 
+    // Binding para acceso al UI de la actividad
+    private lateinit var binding: ActivityAlumnoTurnoBinding
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -95,15 +100,17 @@ class AlumnoTurno : AppCompatActivity() {
             supportActionBar!!.show()
 
         // Cargar el layout
-        setContentView(R.layout.activity_alumno_turno)
+        binding = ActivityAlumnoTurnoBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         Log.d(TAG, "Iniciando la aplicación...")
 
         // Ver si estamos en modo test, haciendo capturas de pantalla
         if (isRunningTest) {
             // No usar la llamada a la función actualizar, no vuelve a tiempo para el test
-            etiquetaAula.text = "BE131"
-            etiquetaMensaje.text = "2"
+            binding.etiquetaAula.text = "BE131"
+            binding.etiquetaMensaje.text = "2"
             mostrarBoton()
         } else {
 
@@ -133,21 +140,21 @@ class AlumnoTurno : AppCompatActivity() {
         }
 
         // Evento del botón Actualizar
-        botonActualizar.setOnClickListener {
+        binding.botonActualizar.setOnClickListener {
             botonActualizar()
         }
 
         // Evento del botón Cancelar
-        botonCancelar.setOnClickListener { botonCancelar() }
+        binding.botonCancelar.setOnClickListener { botonCancelar() }
 
         // Animación del botón Actualizar
-        botonActualizar.setOnTouchListener { v, event ->
+        binding.botonActualizar.setOnTouchListener { v, event ->
             animarBoton(event, v, "botonActualizar")
             false
         }
 
         // Animación del botón Cancelar
-        botonCancelar.setOnTouchListener { v, event ->
+        binding.botonCancelar.setOnTouchListener { v, event ->
             animarBoton(event, v, "botonCancelar")
             false
         }
@@ -315,7 +322,7 @@ class AlumnoTurno : AppCompatActivity() {
     }
 
     private fun actualizarAula(codigo: String, mensaje: String? = null) {
-        etiquetaAula.text = codigo
+        binding.etiquetaAula.text = codigo
         Log.d(TAG, "Código de aula: $codigo")
         if (mensaje != null) {
             actualizarAula(mensaje)
@@ -325,12 +332,12 @@ class AlumnoTurno : AppCompatActivity() {
     private fun actualizarAula(mensaje: String) {
 
         if (mensaje.contains('\n')) {
-            etiquetaMensaje.maxLines = 2
+            binding.etiquetaMensaje.maxLines = 2
         } else {
-            etiquetaMensaje.maxLines = 1
+            binding.etiquetaMensaje.maxLines = 1
         }
 
-        etiquetaMensaje.text = mensaje
+        binding.etiquetaMensaje.text = mensaje
         Log.d(TAG, "Mensaje: $mensaje")
     }
 
@@ -512,19 +519,19 @@ class AlumnoTurno : AppCompatActivity() {
 
     fun mostrarCronometro() {
         actualizarCronometro()
-        botonActualizar.visibility = View.INVISIBLE
-        etiquetaCronometro.visibility = View.VISIBLE
+        binding.botonActualizar.visibility = View.INVISIBLE
+        binding.etiquetaCronometro.visibility = View.VISIBLE
     }
 
     fun mostrarBoton() {
-        etiquetaCronometro.visibility = View.INVISIBLE
-        botonActualizar.visibility = View.VISIBLE
+        binding.etiquetaCronometro.visibility = View.INVISIBLE
+        binding.botonActualizar.visibility = View.VISIBLE
     }
 
     fun mostrarError() {
-        botonActualizar.visibility = View.INVISIBLE
-        etiquetaCronometro.visibility = View.INVISIBLE
-        etiquetaError.visibility = View.VISIBLE
+        binding.botonActualizar.visibility = View.INVISIBLE
+        binding.etiquetaCronometro.visibility = View.INVISIBLE
+        binding.etiquetaError.visibility = View.VISIBLE
     }
 
     fun iniciarCronometro() {
@@ -582,7 +589,7 @@ class AlumnoTurno : AppCompatActivity() {
         if (tiempoRestante >= 0) {
             val segundosRestantes = tiempoRestante % 60
             val minutosRestantes = tiempoRestante / 60
-            etiquetaCronometro.text = "%02d:%02d".format(minutosRestantes, segundosRestantes)
+            binding.etiquetaCronometro.text = "%02d:%02d".format(minutosRestantes, segundosRestantes)
         } else {
             tiempoTerminado()
         }

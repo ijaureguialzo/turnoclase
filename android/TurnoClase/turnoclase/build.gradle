@@ -9,7 +9,6 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 // Make sure to apply this plugin *after* the Android plugin
 apply plugin: 'com.trello.victor'
@@ -25,8 +24,8 @@ android {
         applicationId "com.jaureguialzo.turnoclase"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 40
-        versionName "3.0.5"
+        versionCode 41
+        versionName "3.0.6"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
@@ -55,6 +54,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildToolsVersion "$build_tools_version"
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 victor {

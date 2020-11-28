@@ -22,25 +22,30 @@ import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_acerca_de.*
+import com.jaureguialzo.turnoclaseprofesor.databinding.ActivityAcercaDeBinding
 
 class AcercaDe : AppCompatActivity() {
 
+    // Binding para acceso al UI de la actividad
+    private lateinit var binding: ActivityAcercaDeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_acerca_de)
+        binding = ActivityAcercaDeBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Cargar HTML desde un @string
-        etiquetaASL.text = fromHtml(getString(R.string.texto_asl))
-        etiquetaASL.movementMethod = LinkMovementMethod.getInstance()
+        binding.etiquetaASL.text = fromHtml(getString(R.string.texto_asl))
+        binding.etiquetaASL.movementMethod = LinkMovementMethod.getInstance()
 
         // Cargar HTML desde un @string y activar los enlaces
-        etiquetaLicenciaImagenes.text = fromHtml(getString(R.string.texto_licencia_imagenes))
-        etiquetaLicenciaImagenes.movementMethod = LinkMovementMethod.getInstance()
+        binding.etiquetaLicenciaImagenes.text = fromHtml(getString(R.string.texto_licencia_imagenes))
+        binding.etiquetaLicenciaImagenes.movementMethod = LinkMovementMethod.getInstance()
 
         // Cargar HTML desde un @string
-        etiquetaLicenciaVictor.text = fromHtml(getString(R.string.texto_licencia_victor))
-        etiquetaLicenciaVictor.movementMethod = LinkMovementMethod.getInstance()
+        binding.etiquetaLicenciaVictor.text = fromHtml(getString(R.string.texto_licencia_victor))
+        binding.etiquetaLicenciaVictor.movementMethod = LinkMovementMethod.getInstance()
     }
 
     // REF: Método obsoleto en Android N: https://stackoverflow.com/a/37905107/5136913
