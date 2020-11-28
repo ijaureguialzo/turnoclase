@@ -364,7 +364,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
                         // Almacenar la referencia a la nueva aula
                         refMisAulas!!.add(datos)
-                                .addOnSuccessListener { nueva ->
+                                .addOnSuccessListener {
                                     Log.d(TAG, "Aula creada")
                                     numAulas += 1
                                 }
@@ -383,6 +383,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
                 .getHttpsCallable("nuevoCodigo")
                 .call(data)
                 .continueWith { task ->
+                    @Suppress("UNCHECKED_CAST")
                     task.result?.data as HashMap<String, String>
                 }
     }

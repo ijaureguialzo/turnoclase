@@ -73,8 +73,8 @@ class MainActivity : AppCompatActivity() {
         // Evento del botón conectar, pasamos a la siguiente actividad
         binding.botonSiguiente.setOnClickListener {
             // Obtenemos los datos del interfaz
-            val codigoAula = binding.campoAula!!.text.toString().toUpperCase()
-            val nombreUsuario = binding.campoNombre!!.text.toString()
+            val codigoAula = binding.campoAula.text.toString().toUpperCase()
+            val nombreUsuario = binding.campoNombre.text.toString()
 
             // Si hay texto, pasamos a la siguiente actividad
             if (codigoAula.length >= 5 && nombreUsuario.length >= 2) {
