@@ -2,7 +2,10 @@
     <div class="wrapper">
         <div class="footer-col-wrapper">
             <div class="footer-col">
-                <p>{{ site.author | escape }}</p>
+                <p>&copy;
+                    <script type="text/javascript">document.write(new Date().getFullYear());</script>
+                    {{ site.author | escape }}
+                </p>
             </div>
             <div class="footer-col" style="float:right">
                 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"

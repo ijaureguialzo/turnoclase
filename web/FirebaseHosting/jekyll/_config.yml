@@ -19,18 +19,18 @@
 # in the templates via {{ site.myvariable }}.
 
 title: TurnoClase
-author: © 2020 Ion Jaureguialzo Sarasola
+author: Ion Jaureguialzo Sarasola
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  ijaureguialzo
+github_username: ijaureguialzo
 
 # Build settings
 theme: minima
 plugins:
   - jekyll-multiple-languages-plugin
 
-languages: ["en", "es"]
-exclude_from_localizations: ["images"]
+languages: [ "en", "es" ]
+exclude_from_localizations: [ "images" ]
 
 # Exclude from processing.
 # The following items will not be processed, by default.
