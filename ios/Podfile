@@ -53,6 +53,13 @@ post_install do |installer|
         end
     end
 
+    # REF: https://developer.apple.com/forums/thread/656616
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+      end
+    end
+
     # Seleccionar la versión concreta de Swift para un Pod: https://github.com/CocoaPods/CocoaPods/issues/6791
 
     # Your list of targets here.

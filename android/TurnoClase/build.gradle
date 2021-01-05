@@ -6,15 +6,15 @@ buildscript {
 
         gradle_plugin_version = '4.1.1'
         google_services_version = '4.3.4'
-        kotlin_version = '1.4.20'
+        kotlin_version = '1.4.21'
 
         appcompat_version = '1.2.0'
-        media_version = '1.2.0'
+        media_version = '1.2.1'
         legacy_support_version = '1.0.0'
         multidex_support_lib_version = '2.0.1'
 
         firebase_auth_version = '20.0.1'
-        firebase_firestore_version = '22.0.0'
+        firebase_firestore_version = '22.0.1'
 
         fastlane_screengrab_version = '2.0.0'
 
