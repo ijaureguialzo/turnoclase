@@ -19,7 +19,9 @@ package com.jaureguialzo.turnoclase
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +30,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.jaureguialzo.turnoclase.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,7 +53,8 @@ class MainActivity : AppCompatActivity() {
 
         // Ocultar la barra de título en horizontal
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
-                !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE))
+            !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE)
+        )
             supportActionBar!!.hide()
         else
             supportActionBar!!.show()
@@ -64,8 +68,16 @@ class MainActivity : AppCompatActivity() {
         val nombreAleatorio = Nombres().aleatorio()
         binding.campoNombre.hint = nombreAleatorio
 
+        // Recordar los datos anteriores
+        // REF: https://stackoverflow.com/a/3585036
+        val preferences: SharedPreferences =
+            getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
+
+        binding.campoAula.setText(preferences.getString("codigoAula", ""))
+        binding.campoNombre.setText(preferences.getString("nombreUsuario", ""))
+
         // Depuración
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG && binding.campoAula.text.isEmpty()) {
             binding.campoAula.setText("BE131")
             binding.campoNombre.setText(nombreAleatorio)
         }
@@ -75,6 +87,12 @@ class MainActivity : AppCompatActivity() {
             // Obtenemos los datos del interfaz
             val codigoAula = binding.campoAula.text.toString().toUpperCase()
             val nombreUsuario = binding.campoNombre.text.toString()
+
+            // Guardar el último aula y usuario
+            val editor = preferences.edit()
+            editor.putString("codigoAula", codigoAula)
+            editor.putString("nombreUsuario", nombreUsuario)
+            editor.apply()
 
             // Si hay texto, pasamos a la siguiente actividad
             if (codigoAula.length >= 5 && nombreUsuario.length >= 2) {
