@@ -53,11 +53,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
             textoUsuario.attributedPlaceholder = NSAttributedString(string: nombre, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)])
         }
 
+        // Cargar los datos anteriores
+        // REF: https://betterprogramming.pub/userdefaults-in-swift-4-d1a278a0ec79
+        textoAula.text = UserDefaults.standard.string(forKey: "codigoAula")
+        textoUsuario.text = UserDefaults.standard.string(forKey: "nombreUsuario")
+
         // Depuración
         #if DEBUG
-            log.debug("Generando datos de prueba...")
-            textoAula.text = "BE131"
-            textoUsuario.text = nombre
+            if textoAula.text!.isEmpty {
+                log.debug("Generando datos de prueba...")
+                textoAula.text = "BE131"
+                textoUsuario.text = nombre
+            }
         #endif
     }
 
@@ -123,7 +130,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         efectoBoton(sender)
 
         codigoAula = textoAula.text!.uppercased()
-        nombreUsuario = textoUsuario.text
+        nombreUsuario = textoUsuario.text!
+
+        // Guardar el último aula y usuario
+        UserDefaults.standard.set(codigoAula, forKey: "codigoAula")
+        UserDefaults.standard.set(nombreUsuario, forKey: "nombreUsuario")
     }
 
     // MARK: Funciones exclusivas de la versión iOS
