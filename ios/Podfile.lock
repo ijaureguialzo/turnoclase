@@ -5,33 +5,21 @@ PODS:
   - Localize-Swift/LocalizeSwiftCore (3.2.0)
   - Localize-Swift/UIKit (3.2.0):
     - Localize-Swift/LocalizeSwiftCore
-  - ObjcExceptionBridging (1.0.1):
-    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
-  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - ReachabilitySwift (5.0.0)
-  - XCGLogger (7.0.1):
-    - XCGLogger/Core (= 7.0.1)
-  - XCGLogger/Core (7.0.1):
-    - ObjcExceptionBridging
 
 DEPENDENCIES:
   - Localize-Swift
   - ReachabilitySwift
-  - XCGLogger
 
 SPEC REPOS:
   trunk:
     - Localize-Swift
-    - ObjcExceptionBridging
     - ReachabilitySwift
-    - XCGLogger
 
 SPEC CHECKSUMS:
   Localize-Swift: 6f4475136bdb0d7b2882ea3d4ea919d70142b232
-  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 4bd4dcd69c7a3820054667378bfdb49c4c87490c
+PODFILE CHECKSUM: d34527c13f605c34cf4cd07d23767a4105421c27
 
 COCOAPODS: 1.10.1

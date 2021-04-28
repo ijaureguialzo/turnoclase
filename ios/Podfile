@@ -19,7 +19,7 @@ end
 
 def turnoclase_shared_pods
     # REF: Librería para mostrar mensajes de depuración: https://github.com/DaveWoodCom/XCGLogger
-    pod 'XCGLogger'
+    #pod 'XCGLogger'
 
     # REF: Localización: https://github.com/marmelroy/Localize-Swift
     pod 'Localize-Swift'
@@ -75,7 +75,7 @@ post_install do |installer|
     end
 
     # REF: Parche temporal: https://github.com/CocoaPods/CocoaPods/issues/9135
-    watchosPods = ['Localize-Swift-watchOS', 'XCGLogger-watchOS', 'ObjcExceptionBridging-watchOS']
+    watchosPods = ['Localize-Swift-watchOS', 'ObjcExceptionBridging-watchOS']
     installer.pods_project.targets.each do |target|
       if watchosPods.include? target.name
         target.build_configurations.each do |config|

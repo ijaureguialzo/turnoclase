@@ -25,6 +25,7 @@
 		4185BE7B26396E35002706CF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7A26396E35002706CF /* FirebaseAuth */; };
 		4185BE7D26396E35002706CF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7C26396E35002706CF /* FirebaseFirestore */; };
 		4185BE7F26396E35002706CF /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7E26396E35002706CF /* FirebaseFunctions */; };
+		4185BE8A263975A8002706CF /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE89263975A8002706CF /* XCGLogger */; };
 		41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BDE1B51643B000E3C8E /* Settings.bundle */; };
 		41A59BE21B516A20000E3C8E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BE11B516A20000E3C8E /* Licenses */; };
 		41B669B21FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */; };
@@ -189,6 +190,7 @@
 				4185BE7F26396E35002706CF /* FirebaseFunctions in Frameworks */,
 				4185BE7B26396E35002706CF /* FirebaseAuth in Frameworks */,
 				03354751DBF8642610BA6156 /* Pods_TurnoClaseProfesor.framework in Frameworks */,
+				4185BE8A263975A8002706CF /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +406,7 @@
 				4185BE7A26396E35002706CF /* FirebaseAuth */,
 				4185BE7C26396E35002706CF /* FirebaseFirestore */,
 				4185BE7E26396E35002706CF /* FirebaseFunctions */,
+				4185BE89263975A8002706CF /* XCGLogger */,
 			);
 			productName = TurnoClaseProfesor;
 			productReference = 41F4C5C91B34BCD5004AA55E /* TurnoClaseProfesor.app */;
@@ -466,6 +469,7 @@
 			mainGroup = 41F4C5C01B34BCD5004AA55E;
 			packageReferences = (
 				4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
 			);
 			productRefGroup = 41F4C5CA1B34BCD5004AA55E /* Products */;
 			projectDirPath = "";
@@ -531,16 +535,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging-iOS/ObjcExceptionBridging.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/XCGLogger-iOS/XCGLogger.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -555,14 +555,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift.root-LocalizeSwiftCore/Localize_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging-watchOS/ObjcExceptionBridging.framework",
-				"${BUILT_PRODUCTS_DIR}/XCGLogger-watchOS/XCGLogger.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1149,6 +1145,14 @@
 				minimumVersion = 7.11.1;
 			};
 		};
+		4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1166,6 +1170,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFunctions;
+		};
+		4185BE89263975A8002706CF /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

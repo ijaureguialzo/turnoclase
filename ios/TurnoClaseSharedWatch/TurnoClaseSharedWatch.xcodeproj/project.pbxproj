@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		413592D4221F85A00089E71C /* TurnoClaseSharedWatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 413592D2221F859F0089E71C /* TurnoClaseSharedWatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		413592DB221F85BD0089E71C /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413592DA221F85BD0089E71C /* Nombres.swift */; };
+		4185BE8D2639773D002706CF /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8C2639773D002706CF /* XCGLogger */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4185BE8D2639773D002706CF /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = TurnoClaseSharedWatch;
+			packageProductDependencies = (
+				4185BE8C2639773D002706CF /* XCGLogger */,
+			);
 			productName = TurnoClaseSharedWatch;
 			productReference = 413592CF221F859F0089E71C /* TurnoClaseSharedWatch.framework */;
 			productType = "com.apple.product-type.framework";
@@ -112,6 +117,9 @@
 				Base,
 			);
 			mainGroup = 413592C5221F859F0089E71C;
+			packageReferences = (
+				4185BE8B2639773D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
+			);
 			productRefGroup = 413592D0221F859F0089E71C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -342,6 +350,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4185BE8B2639773D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4185BE8C2639773D002706CF /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4185BE8B2639773D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 413592C6221F859F0089E71C /* Project object */;
 }
