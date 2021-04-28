@@ -8,8 +8,8 @@ def turnoclase_ios_pods
     turnoclase_shared_pods
 
     # REF: Google Firebase: https://firebase.google.com/docs/ios
-    pod 'Firebase/Auth'
-    pod 'Firebase/Firestore'
+    #pod 'Firebase/Auth'
+    #pod 'Firebase/Firestore'
 end
 
 def turnoclase_watchos_pods
@@ -29,7 +29,7 @@ target 'TurnoClaseProfesor' do
     project 'TurnoClaseProfesor/TurnoClaseProfesor'
     turnoclase_ios_pods
 
-    pod 'Firebase/Functions'
+    #pod 'Firebase/Functions'
     pod 'ReachabilitySwift'
 end
 
