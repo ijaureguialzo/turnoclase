@@ -18,7 +18,7 @@ TurnoClase está dividida en dos aplicaciones independientes, una para el alumno
 <tbody>
 <tr>
 <th> </th>
-<th style="text-align: center;">iOS</th>
+<th style="text-align: center;">iOS / macOS</th>
 <th style="text-align: center;">Android</th>
 </tr>
 <tr>
