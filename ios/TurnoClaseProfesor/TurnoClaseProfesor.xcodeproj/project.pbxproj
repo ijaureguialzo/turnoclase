@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,7 @@
 		410A3E201FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 410A3E1F1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		410A3E271FC42F1500B3AC3D /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A3E261FC42F1500B3AC3D /* ExtensionDelegate.swift */; };
 		410A3E291FC42F1500B3AC3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410A3E281FC42F1500B3AC3D /* Assets.xcassets */; };
-		410A3E2D1FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */; };
+		410A3E2D1FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */; platformFilter = ios; };
 		410D71001FA8D1B8009AC062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */; };
 		411081552173FDF900ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
 		4110815C2173FF4700ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
@@ -22,6 +22,10 @@
 		414C7986221F998F003E97E4 /* TurnoClaseShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 413592C3221F84BD0089E71C /* TurnoClaseShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		414C7993221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */; };
 		414C7994221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4185BE7B26396E35002706CF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7A26396E35002706CF /* FirebaseAuth */; };
+		4185BE7D26396E35002706CF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7C26396E35002706CF /* FirebaseFirestore */; };
+		4185BE7F26396E35002706CF /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7E26396E35002706CF /* FirebaseFunctions */; };
+		4185BE8A263975A8002706CF /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE89263975A8002706CF /* XCGLogger */; };
 		41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BDE1B51643B000E3C8E /* Settings.bundle */; };
 		41A59BE21B516A20000E3C8E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BE11B516A20000E3C8E /* Licenses */; };
 		41B669B21FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */; };
@@ -182,7 +186,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				414C7985221F998F003E97E4 /* TurnoClaseShared.framework in Frameworks */,
+				4185BE7D26396E35002706CF /* FirebaseFirestore in Frameworks */,
+				4185BE7F26396E35002706CF /* FirebaseFunctions in Frameworks */,
+				4185BE7B26396E35002706CF /* FirebaseAuth in Frameworks */,
 				03354751DBF8642610BA6156 /* Pods_TurnoClaseProfesor.framework in Frameworks */,
+				4185BE8A263975A8002706CF /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +402,12 @@
 				410A3E2C1FC42F1500B3AC3D /* PBXTargetDependency */,
 			);
 			name = TurnoClaseProfesor;
+			packageProductDependencies = (
+				4185BE7A26396E35002706CF /* FirebaseAuth */,
+				4185BE7C26396E35002706CF /* FirebaseFirestore */,
+				4185BE7E26396E35002706CF /* FirebaseFunctions */,
+				4185BE89263975A8002706CF /* XCGLogger */,
+			);
 			productName = TurnoClaseProfesor;
 			productReference = 41F4C5C91B34BCD5004AA55E /* TurnoClaseProfesor.app */;
 			productType = "com.apple.product-type.application";
@@ -453,6 +467,10 @@
 				eu,
 			);
 			mainGroup = 41F4C5C01B34BCD5004AA55E;
+			packageReferences = (
+				4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
+			);
 			productRefGroup = 41F4C5CA1B34BCD5004AA55E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -516,47 +534,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseFirestore/FirebaseFirestore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseFunctions/FirebaseFunctions.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging-iOS/ObjcExceptionBridging.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/XCGLogger-iOS/XCGLogger.framework",
-				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFirestore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFunctions.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -571,14 +555,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift.root-LocalizeSwiftCore/Localize_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjcExceptionBridging-watchOS/ObjcExceptionBridging.framework",
-				"${BUILT_PRODUCTS_DIR}/XCGLogger-watchOS/XCGLogger.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjcExceptionBridging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCGLogger.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -670,6 +650,7 @@
 		};
 		410A3E2C1FC42F1500B3AC3D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 410A3E121FC42F1500B3AC3D /* TurnoClaseProfesorWatch */;
 			targetProxy = 410A3E2B1FC42F1500B3AC3D /* PBXContainerItemProxy */;
 		};
@@ -736,14 +717,17 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 60;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				IBSC_MODULE = TurnoClaseProfesorWatch_Extension;
 				INFOPLIST_FILE = TurnoClaseProfesorWatch/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.0.15;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -771,13 +755,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				IBSC_MODULE = TurnoClaseProfesorWatch_Extension;
 				INFOPLIST_FILE = TurnoClaseProfesorWatch/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.0.15;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -802,13 +789,17 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 60;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TurnoClaseProfesorWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 3.0.15;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
@@ -834,12 +825,16 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TurnoClaseProfesorWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 3.0.15;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
@@ -868,7 +863,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = TurnoClaseProfesorUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.jaureguialzo.TurnoClaseProfesorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -895,7 +894,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = TurnoClaseProfesorUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.jaureguialzo.TurnoClaseProfesorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1013,7 +1016,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "a4a18b86-f33a-409b-8346-b97e7d7928c9";
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1027,20 +1031,24 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TurnoClaseProfesor/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.0.15;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1055,20 +1063,24 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TurnoClaseProfesor/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.0.15;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1123,6 +1135,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.1;
+			};
+		};
+		4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4185BE7A26396E35002706CF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		4185BE7C26396E35002706CF /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		4185BE7E26396E35002706CF /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		4185BE89263975A8002706CF /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 41F4C5C11B34BCD5004AA55E /* Project object */;
 }
