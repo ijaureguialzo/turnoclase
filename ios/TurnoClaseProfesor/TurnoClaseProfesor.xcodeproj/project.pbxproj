@@ -22,6 +22,7 @@
 		414C7986221F998F003E97E4 /* TurnoClaseShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 413592C3221F84BD0089E71C /* TurnoClaseShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		414C7993221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */; };
 		414C7994221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		417450A9263B5D2A001E3421 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 417450AB263B5D2A001E3421 /* InfoPlist.strings */; };
 		4185BE7B26396E35002706CF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7A26396E35002706CF /* FirebaseAuth */; };
 		4185BE7D26396E35002706CF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7C26396E35002706CF /* FirebaseFirestore */; };
 		4185BE7F26396E35002706CF /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7E26396E35002706CF /* FirebaseFunctions */; };
@@ -142,6 +143,9 @@
 		41675B1F1B553EC1001696CE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		41675B201B553EE9001696CE /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Main.strings; sourceTree = "<group>"; };
 		41675B211B553EE9001696CE /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		417450AA263B5D2A001E3421 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		417450AC263B5D31001E3421 /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		417450AD263B5D35001E3421 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4199FF0C1E32F16500F9E42F /* TurnoClaseProfesor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TurnoClaseProfesor.entitlements; sourceTree = "<group>"; };
 		41A59BDE1B51643B000E3C8E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = TurnoClaseProfesor/Settings.bundle; sourceTree = "<group>"; };
 		41A59BE11B516A20000E3C8E /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Licenses; path = TurnoClaseProfesor/Licenses; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 				4199FF0C1E32F16500F9E42F /* TurnoClaseProfesor.entitlements */,
 				410D70FF1FA8D1B8009AC062 /* GoogleService-Info.plist */,
 				41F4C5CD1B34BCD5004AA55E /* Info.plist */,
+				417450AB263B5D2A001E3421 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -515,6 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				410D71001FA8D1B8009AC062 /* GoogleService-Info.plist in Resources */,
+				417450A9263B5D2A001E3421 /* InfoPlist.strings in Resources */,
 				41F4C5D41B34BCD5004AA55E /* Main.storyboard in Resources */,
 				41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */,
 				411081552173FDF900ADD784 /* Localizable.strings in Resources */,
@@ -678,6 +684,16 @@
 				411081592173FE0300ADD784 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		417450AB263B5D2A001E3421 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				417450AA263B5D2A001E3421 /* en */,
+				417450AC263B5D31001E3421 /* eu */,
+				417450AD263B5D35001E3421 /* es */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		41F4C5D21B34BCD5004AA55E /* Main.storyboard */ = {

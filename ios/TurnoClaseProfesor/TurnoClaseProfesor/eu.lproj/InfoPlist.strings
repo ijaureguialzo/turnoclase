@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  TurnoClaseProfesor
+
+  Created by Ion Jaureguialzo Sarasola on 29/4/21.
+  Copyright © 2021 Ion Jaureguialzo Sarasola. All rights reserved.
+*/
+
+"CFBundleName" = "TurnoClase (Irakasle)";
+"CFBundleDisplayName" = "TurnoClase";
