@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "41F4C5C81B34BCD5004AA55E"
-               BuildableName = "TurnoClase (Teacher).app"
+               BuildableName = "TurnoClase Teacher.app"
                BlueprintName = "TurnoClaseProfesor"
                ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
             </BuildableReference>
@@ -31,7 +31,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "41F4C5C81B34BCD5004AA55E"
-            BuildableName = "TurnoClase (Teacher).app"
+            BuildableName = "TurnoClase Teacher.app"
             BlueprintName = "TurnoClaseProfesor"
             ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "41F4C5C81B34BCD5004AA55E"
-            BuildableName = "TurnoClase (Teacher).app"
+            BuildableName = "TurnoClase Teacher.app"
             BlueprintName = "TurnoClaseProfesor"
             ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "41F4C5C81B34BCD5004AA55E"
-            BuildableName = "TurnoClase (Teacher).app"
+            BuildableName = "TurnoClase Teacher.app"
             BlueprintName = "TurnoClaseProfesor"
             ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
          </BuildableReference>
