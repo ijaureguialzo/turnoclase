@@ -153,7 +153,7 @@
 		41B669B11FC10B7300DEB965 /* TurnoClaseProfesorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnoClaseProfesorUITests.swift; sourceTree = "<group>"; };
 		41B669B31FC10B7300DEB965 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41B669BB1FC10D3000DEB965 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
-		41F4C5C91B34BCD5004AA55E /* TurnoClase (Teacher).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TurnoClase (Teacher).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41F4C5C91B34BCD5004AA55E /* TurnoClase Teacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TurnoClase Teacher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41F4C5CD1B34BCD5004AA55E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41F4C5CE1B34BCD5004AA55E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41F4C5D01B34BCD5004AA55E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 		41F4C5CA1B34BCD5004AA55E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				41F4C5C91B34BCD5004AA55E /* TurnoClase (Teacher).app */,
+				41F4C5C91B34BCD5004AA55E /* TurnoClase Teacher.app */,
 				41B669AF1FC10B7300DEB965 /* TurnoClaseProfesorUITests.xctest */,
 				410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */,
 				410A3E1F1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex */,
@@ -414,7 +414,7 @@
 				4185BE89263975A8002706CF /* XCGLogger */,
 			);
 			productName = TurnoClaseProfesor;
-			productReference = 41F4C5C91B34BCD5004AA55E /* TurnoClase (Teacher).app */;
+			productReference = 41F4C5C91B34BCD5004AA55E /* TurnoClase Teacher.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -733,7 +733,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 62;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -771,7 +771,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 62;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				IBSC_MODULE = TurnoClaseProfesorWatch_Extension;
@@ -805,7 +805,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 62;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -841,7 +841,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 62;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TurnoClaseProfesorWatch Extension/Info.plist";
@@ -1047,7 +1047,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 62;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1061,7 +1061,7 @@
 				MARKETING_VERSION = 3.1.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor;
-				PRODUCT_NAME = "TurnoClase (Teacher)";
+				PRODUCT_NAME = "TurnoClase Teacher";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = YES;
@@ -1079,7 +1079,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 62;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1093,7 +1093,7 @@
 				MARKETING_VERSION = 3.1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClaseProfesor;
-				PRODUCT_NAME = "TurnoClase (Teacher)";
+				PRODUCT_NAME = "TurnoClase Teacher";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = YES;

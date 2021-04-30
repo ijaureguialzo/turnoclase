@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "41F4C5C81B34BCD5004AA55E"
-               BuildableName = "TurnoClaseProfesor.app"
+               BuildableName = "TurnoClase (Teacher).app"
                BlueprintName = "TurnoClaseProfesor"
                ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
             </BuildableReference>
