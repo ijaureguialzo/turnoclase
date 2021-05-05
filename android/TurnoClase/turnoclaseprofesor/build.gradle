@@ -1,6 +1,9 @@
 buildscript {
     repositories {
-        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+            name 'mvnrepository.com'
+        }
     }
     dependencies {
         classpath "com.trello:victor:$victor_version"
@@ -96,5 +99,8 @@ dependencies {
 
 apply plugin: 'com.google.gms.google-services'
 repositories {
-    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+        name 'mvnrepository.com'
+    }
 }
