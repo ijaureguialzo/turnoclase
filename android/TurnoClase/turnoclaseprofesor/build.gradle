@@ -82,7 +82,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    implementation 'com.google.firebase:firebase-functions-ktx:19.2.0'
+    implementation "com.google.firebase:firebase-functions-ktx:$firebase_functions_version"
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'com.job:droidnet:2.0.0'
