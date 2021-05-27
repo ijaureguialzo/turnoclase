@@ -6,7 +6,7 @@ buildscript {
 
         gradle_plugin_version = '4.2.1'
         google_services_version = '4.3.4'
-        kotlin_version = '1.5.0'
+        kotlin_version = '1.5.10'
 
         appcompat_version = '1.3.0'
         media_version = '1.3.1'
