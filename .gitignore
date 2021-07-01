@@ -90,3 +90,5 @@ web/FirebaseHosting/\.firebase/
 \.idea/
 
 ios/TurnoClaseProfesor/genstrings\.swift
+
+android/TurnoClase/fastlane/README.md
