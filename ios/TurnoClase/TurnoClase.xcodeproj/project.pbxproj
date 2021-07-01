@@ -22,9 +22,9 @@
 		415BC64D1B2F5305004FADE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 415BC64B1B2F5305004FADE0 /* Main.storyboard */; };
 		415BC64F1B2F5305004FADE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415BC64E1B2F5305004FADE0 /* Images.xcassets */; };
 		415BC6521B2F5305004FADE0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415BC6501B2F5305004FADE0 /* LaunchScreen.xib */; };
-		4185BE8226396E82002706CF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8126396E82002706CF /* SwiftPackageProductDependency */; };
-		4185BE8426396E82002706CF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8326396E82002706CF /* SwiftPackageProductDependency */; };
-		4185BE872639751E002706CF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE862639751E002706CF /* SwiftPackageProductDependency */; };
+		4185BE8226396E82002706CF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8126396E82002706CF /* FirebaseAuth */; };
+		4185BE8426396E82002706CF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8326396E82002706CF /* FirebaseFirestore */; };
+		4185BE872639751E002706CF /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE862639751E002706CF /* XCGLogger */; };
 		49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,10 +95,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */,
-				4185BE8426396E82002706CF /* BuildFile in Frameworks */,
-				4185BE8226396E82002706CF /* BuildFile in Frameworks */,
+				4185BE8426396E82002706CF /* FirebaseFirestore in Frameworks */,
+				4185BE8226396E82002706CF /* FirebaseAuth in Frameworks */,
 				414C797F221F991E003E97E4 /* TurnoClaseShared.framework in Frameworks */,
-				4185BE872639751E002706CF /* BuildFile in Frameworks */,
+				4185BE872639751E002706CF /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,9 +234,9 @@
 			);
 			name = TurnoClase;
 			packageProductDependencies = (
-				4185BE8126396E82002706CF /* SwiftPackageProductDependency */,
-				4185BE8326396E82002706CF /* SwiftPackageProductDependency */,
-				4185BE862639751E002706CF /* SwiftPackageProductDependency */,
+				4185BE8126396E82002706CF /* FirebaseAuth */,
+				4185BE8326396E82002706CF /* FirebaseFirestore */,
+				4185BE862639751E002706CF /* XCGLogger */,
 			);
 			productName = TurnoClase;
 			productReference = 415BC6421B2F5305004FADE0 /* TurnoClase.app */;
@@ -287,8 +287,8 @@
 			);
 			mainGroup = 415BC6391B2F5305004FADE0;
 			packageReferences = (
-				4185BE8026396E82002706CF /* RemoteSwiftPackageReference */,
-				4185BE852639751D002706CF /* RemoteSwiftPackageReference */,
+				4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
 			);
 			productRefGroup = 415BC6431B2F5305004FADE0 /* Products */;
 			projectDirPath = "";
@@ -609,7 +609,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 53;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -620,7 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.1.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -641,7 +641,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 53;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -652,7 +652,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -697,7 +697,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4185BE8026396E82002706CF /* RemoteSwiftPackageReference */ = {
+		4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -705,7 +705,7 @@
 				minimumVersion = 7.11.1;
 			};
 		};
-		4185BE852639751D002706CF /* RemoteSwiftPackageReference */ = {
+		4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger.git";
 			requirement = {
@@ -716,19 +716,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4185BE8126396E82002706CF /* SwiftPackageProductDependency */ = {
+		4185BE8126396E82002706CF /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE8026396E82002706CF /* RemoteSwiftPackageReference */;
+			package = 4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		4185BE8326396E82002706CF /* SwiftPackageProductDependency */ = {
+		4185BE8326396E82002706CF /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE8026396E82002706CF /* RemoteSwiftPackageReference */;
+			package = 4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		4185BE862639751E002706CF /* SwiftPackageProductDependency */ = {
+		4185BE862639751E002706CF /* XCGLogger */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE852639751D002706CF /* RemoteSwiftPackageReference */;
+			package = 4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */;
 			productName = XCGLogger;
 		};
 /* End XCSwiftPackageProductDependency section */
