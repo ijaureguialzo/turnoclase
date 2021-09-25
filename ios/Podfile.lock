@@ -5,21 +5,17 @@ PODS:
   - Localize-Swift/LocalizeSwiftCore (3.2.0)
   - Localize-Swift/UIKit (3.2.0):
     - Localize-Swift/LocalizeSwiftCore
-  - ReachabilitySwift (5.0.0)
 
 DEPENDENCIES:
   - Localize-Swift
-  - ReachabilitySwift
 
 SPEC REPOS:
   trunk:
     - Localize-Swift
-    - ReachabilitySwift
 
 SPEC CHECKSUMS:
   Localize-Swift: 6f4475136bdb0d7b2882ea3d4ea919d70142b232
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
 
-PODFILE CHECKSUM: d34527c13f605c34cf4cd07d23767a4105421c27
+PODFILE CHECKSUM: a3227d2c78593e0da8153a1c77875711e401a8fc
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
