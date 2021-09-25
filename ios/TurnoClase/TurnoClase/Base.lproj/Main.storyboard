@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,13 +27,13 @@
                                         <rect key="frame" x="14.666666666666686" y="14.333333333333314" width="256" height="256"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLASSROOM" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5W-k5-R8I" userLabel="etiquetaAula">
-                                        <rect key="frame" x="90.666666666666657" y="60.666666666666636" width="103.66666666666666" height="20.333333333333336"/>
+                                        <rect key="frame" x="90.666666666666657" y="59.666666666666636" width="103.66666666666666" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BE131" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KDG-Yu-H2h" userLabel="textoAula">
-                                        <rect key="frame" x="32" y="89" width="221" height="35"/>
+                                        <rect key="frame" x="32" y="88" width="221" height="36"/>
                                         <accessibility key="accessibilityConfiguration" identifier="textoAula"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
@@ -44,7 +45,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ion" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w4Z-4N-Fld" userLabel="textoUsuario">
-                                        <rect key="frame" x="32" y="168.66666666666663" width="221" height="35"/>
+                                        <rect key="frame" x="32" y="168.66666666666663" width="221" height="36"/>
                                         <accessibility key="accessibilityConfiguration" identifier="textoUsuario"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
@@ -133,7 +134,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ism-yy-2Lp" firstAttribute="centerX" secondItem="4Zt-ce-FAZ" secondAttribute="centerX" constant="-71" id="BfI-aM-GhY"/>
                             <constraint firstItem="Ism-yy-2Lp" firstAttribute="centerY" secondItem="4Zt-ce-FAZ" secondAttribute="centerY" constant="-123" id="U7t-5q-c0A"/>
@@ -384,7 +385,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Trg-x5-eMf" firstAttribute="centerX" secondItem="YOw-p5-o8R" secondAttribute="centerX" constant="71" id="Apg-fx-uHe"/>
                             <constraint firstAttribute="centerX" secondItem="YOw-p5-o8R" secondAttribute="centerX" constant="-7" id="BWf-IK-EQH"/>
@@ -411,7 +412,21 @@
             <point key="canvasLocation" x="1051" y="390"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Dp2-gh-yJM">
+            <size key="intrinsicContentSize" width="30" height="34"/>
+        </designable>
+        <designable name="d9k-nP-zxH">
+            <size key="intrinsicContentSize" width="30" height="34"/>
+        </designable>
+        <designable name="gRC-dO-aCu">
+            <size key="intrinsicContentSize" width="30" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Fondo" width="256" height="256"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
