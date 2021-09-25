@@ -18,6 +18,7 @@
 		411081552173FDF900ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
 		4110815C2173FF4700ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
 		4110815E217402BA00ADD784 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 411081572173FDF900ADD784 /* Localizable.strings */; };
+		4148914E26FF11E0008D9B9C /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 4148914D26FF11E0008D9B9C /* Reachability */; };
 		414C7985221F998F003E97E4 /* TurnoClaseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413592C3221F84BD0089E71C /* TurnoClaseShared.framework */; };
 		414C7986221F998F003E97E4 /* TurnoClaseShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 413592C3221F84BD0089E71C /* TurnoClaseShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		414C7993221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */; };
@@ -190,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				414C7985221F998F003E97E4 /* TurnoClaseShared.framework in Frameworks */,
+				4148914E26FF11E0008D9B9C /* Reachability in Frameworks */,
 				4185BE7D26396E35002706CF /* FirebaseFirestore in Frameworks */,
 				4185BE7F26396E35002706CF /* FirebaseFunctions in Frameworks */,
 				4185BE7B26396E35002706CF /* FirebaseAuth in Frameworks */,
@@ -412,6 +414,7 @@
 				4185BE7C26396E35002706CF /* FirebaseFirestore */,
 				4185BE7E26396E35002706CF /* FirebaseFunctions */,
 				4185BE89263975A8002706CF /* XCGLogger */,
+				4148914D26FF11E0008D9B9C /* Reachability */,
 			);
 			productName = TurnoClaseProfesor;
 			productReference = 41F4C5C91B34BCD5004AA55E /* TurnoClase Teacher.app */;
@@ -475,6 +478,7 @@
 			packageReferences = (
 				4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
+				4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = 41F4C5CA1B34BCD5004AA55E /* Products */;
 			projectDirPath = "";
@@ -541,12 +545,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1153,6 +1155,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1172,6 +1182,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4148914D26FF11E0008D9B9C /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
 		4185BE7A26396E35002706CF /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

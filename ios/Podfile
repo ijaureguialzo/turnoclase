@@ -30,7 +30,7 @@ target 'TurnoClaseProfesor' do
     turnoclase_ios_pods
 
     #pod 'Firebase/Functions'
-    pod 'ReachabilitySwift'
+    #pod 'ReachabilitySwift'
 end
 
 target 'TurnoClaseProfesorWatch Extension' do
