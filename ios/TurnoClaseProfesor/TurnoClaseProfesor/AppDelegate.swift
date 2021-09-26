@@ -45,6 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        // Tamaño de la ventana
+        if #available(iOS 13.0, *) {
+            UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
+                windowScene.sizeRestrictions?.minimumSize = CGSize(width: 680, height: 680)
+                windowScene.sizeRestrictions?.maximumSize = CGSize(width: 680, height: 680)
+            }
+        }
+
         // Configurar XCGLogger
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
 
@@ -61,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Valor por defecto para el sonido
         UserDefaults.standard.register(defaults: [
             "QUEUE_NOT_EMPTY_SOUND": true
-        ])
+            ])
 
         return true
     }
