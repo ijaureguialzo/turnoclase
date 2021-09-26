@@ -63,8 +63,10 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/TurnoClase">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "410A3E121FC42F1500B3AC3D"
@@ -72,7 +74,7 @@
             BlueprintName = "TurnoClaseProfesorWatch"
             ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -80,8 +82,10 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/TurnoClase">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "410A3E121FC42F1500B3AC3D"
@@ -89,7 +93,16 @@
             BlueprintName = "TurnoClaseProfesorWatch"
             ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "410A3E121FC42F1500B3AC3D"
+            BuildableName = "TurnoClaseProfesorWatch.app"
+            BlueprintName = "TurnoClaseProfesorWatch"
+            ReferencedContainer = "container:TurnoClaseProfesor.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
