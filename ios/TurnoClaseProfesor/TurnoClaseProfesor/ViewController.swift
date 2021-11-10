@@ -214,8 +214,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     self.uid = resultado.user.uid
                     log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
-                    self.conectarAula()
+                    // Si hemos estado conectados a otro aula, recuperarla
+                    let codigoAulaConectada = UserDefaults.standard.string(forKey: "codigoAulaConectada") ?? ""
+                    let pinConectada = UserDefaults.standard.string(forKey: "pinConectada") ?? ""
 
+                    if !codigoAulaConectada.isEmpty && !pinConectada.isEmpty {
+                        self.buscarAula(codigo: codigoAulaConectada, pin: pinConectada)
+                    } else {
+                        self.conectarAula()
+                    }
                 } else {
                     log.error("Error de inicio de sesión: \(error!.localizedDescription)")
                     self.actualizarAula(codigo: "?", enCola: 0)
@@ -545,6 +552,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     fileprivate func desconectarAula() {
+
+        // Borrar el aula y el pin al que hemos estado conectados
+        UserDefaults.standard.removeObject(forKey: "codigoAulaConectada")
+        UserDefaults.standard.removeObject(forKey: "pinConectada")
+
         self.invitado = false
         self.desconectarListeners()
         self.conectarAula(posicion: self.aulaActual)
@@ -660,29 +672,33 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 .whereField("pin", isEqualTo: pin)
                 .getDocuments() { (querySnapshot, error) in
 
-                    if let error = error {
-                        log.error("Error al recuperar datos: \(error.localizedDescription)")
-                    } else {
+                if let error = error {
+                    log.error("Error al recuperar datos: \(error.localizedDescription)")
+                } else {
 
-                        // Comprobar que se han recuperado registros
-                        if let documents = querySnapshot?.documents {
+                    // Comprobar que se han recuperado registros
+                    if let documents = querySnapshot?.documents {
 
-                            if documents.count > 0 {
-                                // Accedemos al primer documento
-                                let document = documents.first
+                        if documents.count > 0 {
+                            // Accedemos al primer documento
+                            let document = documents.first
 
-                                log.info("Aula encontrada: \(codigo)")
+                            log.info("Aula encontrada: \(codigo)")
 
-                                self.desconectarListeners()
-                                self.invitado = true
-                                self.refAula = document?.reference
-                                self.conectarListener()
-                            } else {
-                                log.error("Aula no encontrada")
-                                self.dialogoError()
-                            }
+                            // Guardar el aula y el pin para poder reconectar
+                            UserDefaults.standard.set(codigo, forKey: "codigoAulaConectada")
+                            UserDefaults.standard.set(pin, forKey: "pinConectada")
+
+                            self.desconectarListeners()
+                            self.invitado = true
+                            self.refAula = document?.reference
+                            self.conectarListener()
+                        } else {
+                            log.error("Aula no encontrada")
+                            self.dialogoError()
                         }
                     }
+                }
             }
         }
     }
