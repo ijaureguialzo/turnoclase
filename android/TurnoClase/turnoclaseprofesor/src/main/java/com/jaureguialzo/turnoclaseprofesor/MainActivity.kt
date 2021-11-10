@@ -121,7 +121,8 @@ class MainActivity : AppCompatActivity(), DroidListener {
     private var indicadorActividad: ProgressBar? = null
 
     // Soporte para varias aulas
-    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) :
+        FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getCount(): Int = numAulas
 
@@ -152,13 +153,14 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
         // Configurar las opciones de Firebase
         val settings = FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(false)
-                .build()
+            .setPersistenceEnabled(false)
+            .build()
         db.firestoreSettings = settings
 
         // Ocultar la barra de título en horizontal en pantallas pequeñas
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE &&
-                !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE))
+            !resources.configuration.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE)
+        )
             supportActionBar!!.hide()
         else
             supportActionBar!!.show()
@@ -177,7 +179,11 @@ class MainActivity : AppCompatActivity(), DroidListener {
         binding.viewPager.adapter = adapter
 
         binding.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
             }
 
             override fun onPageSelected(position: Int) {
@@ -212,29 +218,30 @@ class MainActivity : AppCompatActivity(), DroidListener {
             mAuth = FirebaseAuth.getInstance()
 
             mAuth!!.signInAnonymously()
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
 
-                            uid = mAuth?.currentUser?.uid
-                            Log.d(TAG, "Registrado como usuario con UID: $uid")
+                        uid = mAuth?.currentUser?.uid
+                        Log.d(TAG, "Registrado como usuario con UID: $uid")
 
-                            // Si hemos estado conectados a otro aula, recuperarla
-                            val preferences: SharedPreferences =
-                                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
+                        // Si hemos estado conectados a otro aula, recuperarla
+                        val preferences: SharedPreferences =
+                            getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
 
-                            val codigoAulaConectada = preferences.getString("codigoAulaConectada", "") ?: ""
-                            val pinConectada = preferences.getString("pinConectada", "") ?: ""
+                        val codigoAulaConectada =
+                            preferences.getString("codigoAulaConectada", "") ?: ""
+                        val pinConectada = preferences.getString("pinConectada", "") ?: ""
 
-                            if( codigoAulaConectada.isNotEmpty() && pinConectada.isNotEmpty()) {
-                                buscarAula(codigoAulaConectada, pinConectada)
-                            } else {
-                                conectarAula()
-                            }
+                        if (codigoAulaConectada.isNotEmpty() && pinConectada.isNotEmpty()) {
+                            buscarAula(codigoAulaConectada, pinConectada)
                         } else {
-                            Log.e(TAG, "Error de inicio de sesión", task.exception)
-                            actualizarAula("?", 0)
+                            conectarAula()
                         }
+                    } else {
+                        Log.e(TAG, "Error de inicio de sesión", task.exception)
+                        actualizarAula("?", 0)
                     }
+                }
         }
 
         // Evento del botón botonCodigoAula (vaciar el aula)
@@ -285,30 +292,30 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
         // Cargar el aula y si no, crearla
         refMisAulas!!.orderBy("timestamp")
-                .get()
-                .addOnSuccessListener { result ->
+            .get()
+            .addOnSuccessListener { result ->
 
-                    numAulas = result.documents.count()
-                    adapter?.notifyDataSetChanged()
+                numAulas = result.documents.count()
+                adapter?.notifyDataSetChanged()
 
-                    if (posicion >= 0 && posicion < numAulas) {
+                if (posicion >= 0 && posicion < numAulas) {
 
-                        var seleccionada = result.documents[posicion]
+                    var seleccionada = result.documents[posicion]
 
-                        if (seleccionada != null) {
-                            Log.i(TAG, "Conectado a aula existente")
-                            this.refAula = seleccionada.reference
-                            conectarListener()
-                        }
-                    } else {
-                        Log.i(TAG, "Creando nueva aula...")
-                        crearAula()
+                    if (seleccionada != null) {
+                        Log.i(TAG, "Conectado a aula existente")
+                        this.refAula = seleccionada.reference
+                        conectarListener()
                     }
+                } else {
+                    Log.i(TAG, "Creando nueva aula...")
+                    crearAula()
                 }
-                .addOnFailureListener { exception ->
-                    Log.e(TAG, "Error al conectar al aula", exception)
-                    actualizarAula("?", 0)
-                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e(TAG, "Error al conectar al aula", exception)
+                actualizarAula("?", 0)
+            }
     }
 
     private fun crearAula() {
@@ -318,34 +325,34 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
-                .addOnCompleteListener(OnCompleteListener { task ->
-                    if (!task.isSuccessful) {
-                        Log.e(TAG, task.exception.toString())
-                    } else {
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.e(TAG, task.exception.toString())
+                } else {
 
-                        val codigo = task.result?.get("codigo") as String
+                    val codigo = task.result?.get("codigo") as String
 
-                        // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
-                        fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
+                    // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
+                    fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
 
-                        // Guardar el documento
-                        val datos = HashMap<String, Any>()
-                        datos["codigo"] = codigo
-                        datos["timestamp"] = FieldValue.serverTimestamp()
-                        datos["pin"] = "%04d".format((0..9999).random())
-                        datos["espera"] = 5
+                    // Guardar el documento
+                    val datos = HashMap<String, Any>()
+                    datos["codigo"] = codigo
+                    datos["timestamp"] = FieldValue.serverTimestamp()
+                    datos["pin"] = "%04d".format((0..9999).random())
+                    datos["espera"] = 5
 
-                        // Almacenar la referencia a la nueva aula
-                        refMisAulas!!.add(datos)
-                                .addOnSuccessListener { nueva ->
-                                    Log.d(TAG, "Aula creada")
-                                    refAula = nueva
-                                    numAulas += 1
-                                    conectarListener()
-                                }
-                                .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
-                    }
-                })
+                    // Almacenar la referencia a la nueva aula
+                    refMisAulas!!.add(datos)
+                        .addOnSuccessListener { nueva ->
+                            Log.d(TAG, "Aula creada")
+                            refAula = nueva
+                            numAulas += 1
+                            conectarListener()
+                        }
+                        .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
+                }
+            })
     }
 
     private fun anyadirAula() {
@@ -354,50 +361,50 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
         // REF: Llamar a la función Cloud (en Android se hace en dos pasos): https://firebase.google.com/docs/functions/callable#call_the_function
         obtenerNuevoCodigo()
-                .addOnCompleteListener(OnCompleteListener { task ->
-                    if (!task.isSuccessful) {
-                        val e = task.exception
-                        if (e is FirebaseFunctionsException) {
-                            Log.e(TAG, e.details as String)
-                        }
-                    } else {
-
-                        val codigo = task.result?.get("codigo") as String
-
-                        // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
-                        fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
-
-                        // Guardar el documento
-                        val datos = HashMap<String, Any>()
-                        datos["codigo"] = codigo
-                        datos["timestamp"] = FieldValue.serverTimestamp()
-                        datos["pin"] = "%04d".format((0..9999).random())
-                        datos["espera"] = 5
-
-                        // Almacenar la referencia a la nueva aula
-                        refMisAulas!!.add(datos)
-                                .addOnSuccessListener {
-                                    Log.d(TAG, "Aula creada")
-                                    numAulas += 1
-                                }
-                                .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    val e = task.exception
+                    if (e is FirebaseFunctionsException) {
+                        Log.e(TAG, e.details as String)
                     }
-                })
+                } else {
+
+                    val codigo = task.result?.get("codigo") as String
+
+                    // REF: Enteros aleatorios en Kotlin: https://stackoverflow.com/a/45687695
+                    fun IntRange.random() = Random().nextInt((endInclusive + 1) - start) + start
+
+                    // Guardar el documento
+                    val datos = HashMap<String, Any>()
+                    datos["codigo"] = codigo
+                    datos["timestamp"] = FieldValue.serverTimestamp()
+                    datos["pin"] = "%04d".format((0..9999).random())
+                    datos["espera"] = 5
+
+                    // Almacenar la referencia a la nueva aula
+                    refMisAulas!!.add(datos)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "Aula creada")
+                            numAulas += 1
+                        }
+                        .addOnFailureListener { e -> Log.e(TAG, "Error al crear el aula", e) }
+                }
+            })
     }
 
     private fun obtenerNuevoCodigo(): Task<HashMap<String, String>> {
 
         val data = hashMapOf(
-                "keepalive" to false
+            "keepalive" to false
         )
 
         return functions
-                .getHttpsCallable("nuevoCodigo")
-                .call(data)
-                .continueWith { task ->
-                    @Suppress("UNCHECKED_CAST")
-                    task.result?.data as HashMap<String, String>
-                }
+            .getHttpsCallable("nuevoCodigo")
+            .call(data)
+            .continueWith { task ->
+                @Suppress("UNCHECKED_CAST")
+                task.result?.data as HashMap<String, String>
+            }
     }
 
     private fun conectarListener() {
@@ -421,15 +428,16 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
                     // Listener de la cola
                     if (listenerCola == null) {
-                        listenerCola = refAula!!.collection("cola").addSnapshotListener { querySnapshot, error ->
+                        listenerCola = refAula!!.collection("cola")
+                            .addSnapshotListener { querySnapshot, error ->
 
-                            if (error != null) {
-                                Log.e(TAG, "Error al recuperar datos: ", error)
-                            } else {
-                                actualizarAula(querySnapshot!!.documents.count())
-                                mostrarSiguiente()
+                                if (error != null) {
+                                    Log.e(TAG, "Error al recuperar datos: ", error)
+                                } else {
+                                    actualizarAula(querySnapshot!!.documents.count())
+                                    mostrarSiguiente()
+                                }
                             }
-                        }
                     }
 
                 } else {
@@ -454,58 +462,67 @@ class MainActivity : AppCompatActivity(), DroidListener {
         if (refAula != null) {
 
             refAula!!.collection("cola").orderBy("timestamp").get()
-                    .addOnCompleteListener { querySnapshot ->
-                        if (!querySnapshot.isSuccessful) {
-                            Log.e(TAG, "Error al recuperar datos: ", querySnapshot.exception)
-                        } else {
-                            if (querySnapshot.result!!.count() > 0) {
-                                val refPosicion = querySnapshot.result!!.documents[0].reference
+                .addOnCompleteListener { querySnapshot ->
+                    if (!querySnapshot.isSuccessful) {
+                        Log.e(TAG, "Error al recuperar datos: ", querySnapshot.exception)
+                    } else {
+                        if (querySnapshot.result!!.count() > 0) {
+                            val refPosicion = querySnapshot.result!!.documents[0].reference
 
-                                refPosicion.get().addOnCompleteListener {
-                                    val posicion = it.result
+                            refPosicion.get().addOnCompleteListener {
+                                val posicion = it.result
 
-                                    // Cargar el alumno
-                                    db.collection("alumnos").document(posicion!!["alumno"] as String)
-                                            .get()
-                                            .addOnCompleteListener { document ->
-                                                if (document.isSuccessful) {
-                                                    if (document.result!!.exists()) {
-                                                        val alumno = document.result
+                                // Cargar el alumno
+                                db.collection("alumnos").document(posicion!!["alumno"] as String)
+                                    .get()
+                                    .addOnCompleteListener { document ->
+                                        if (document.isSuccessful) {
+                                            if (document.result!!.exists()) {
+                                                val alumno = document.result
 
-                                                        // Mostrar el nombre
-                                                        actualizarMensaje(alumno!!["nombre"] as String)
+                                                // Mostrar el nombre
+                                                actualizarMensaje(alumno!!["nombre"] as String)
 
-                                                        // Borrar la entrada de la cola
-                                                        if (avanzarCola) {
+                                                // Borrar la entrada de la cola
+                                                if (avanzarCola) {
 
-                                                            // Marcar cuando hemos atendido al alumno
-                                                            val datos = HashMap<String, Any>()
-                                                            datos["timestamp"] = FieldValue.serverTimestamp()
+                                                    // Marcar cuando hemos atendido al alumno
+                                                    val datos = HashMap<String, Any>()
+                                                    datos["timestamp"] =
+                                                        FieldValue.serverTimestamp()
 
-                                                            refAula!!.collection("espera").document(posicion["alumno"] as String).set(datos)
-                                                                    .addOnFailureListener { e -> Log.e(TAG, "Error al añadir el documento", e) }
-
-                                                            refPosicion.delete()
+                                                    refAula!!.collection("espera")
+                                                        .document(posicion["alumno"] as String)
+                                                        .set(datos)
+                                                        .addOnFailureListener { e ->
+                                                            Log.e(
+                                                                TAG,
+                                                                "Error al añadir el documento",
+                                                                e
+                                                            )
                                                         }
-                                                    } else {
-                                                        Log.e(TAG, "El alumno no existe")
-                                                        actualizarMensaje("?")
-                                                    }
-                                                } else {
-                                                    Log.e(TAG, "Error al recuperar datos: ", it.exception)
+
+                                                    refPosicion.delete()
                                                 }
+                                            } else {
+                                                Log.e(TAG, "El alumno no existe")
+                                                actualizarMensaje("?")
                                             }
-                                }
+                                        } else {
+                                            Log.e(TAG, "Error al recuperar datos: ", it.exception)
+                                        }
+                                    }
+                            }
+                        } else {
+                            Log.d(TAG, "Cola vacía")
+                            if (codigoAula != "?") {
+                                actualizarMensaje("")
                             } else {
-                                Log.d(TAG, "Cola vacía")
-                                if (codigoAula != "?") {
-                                    actualizarMensaje("")
-                                } else {
-                                    actualizarMensaje(getString(R.string.error_no_network))
-                                }
+                                actualizarMensaje(getString(R.string.error_no_network))
                             }
                         }
                     }
+                }
         }
     }
 
@@ -578,22 +595,22 @@ class MainActivity : AppCompatActivity(), DroidListener {
         desconectarListeners()
 
         refMisAulas!!.whereEqualTo("codigo", codigoAula.toUpperCase())
-                .get()
-                .addOnSuccessListener { result ->
+            .get()
+            .addOnSuccessListener { result ->
 
-                    result.documents.first().reference.delete().addOnCompleteListener {
-                        if (!it.isSuccessful) {
-                            Log.e(TAG, "Error al borrar el aula: ", it.exception)
-                        } else {
-                            Log.d(TAG, "Aula borrada")
-                            numAulas -= 1
-                            conectarAula(aulaActual)
-                        }
+                result.documents.first().reference.delete().addOnCompleteListener {
+                    if (!it.isSuccessful) {
+                        Log.e(TAG, "Error al borrar el aula: ", it.exception)
+                    } else {
+                        Log.d(TAG, "Aula borrada")
+                        numAulas -= 1
+                        conectarAula(aulaActual)
                     }
                 }
-                .addOnFailureListener { exception ->
-                    Log.e(TAG, "Error al borrar el aula", exception)
-                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e(TAG, "Error al borrar el aula", exception)
+            }
     }
 
     private fun actualizarAula(codigo: String = "?", enCola: Int = -1) {
@@ -610,11 +627,13 @@ class MainActivity : AppCompatActivity(), DroidListener {
     private fun actualizarAula(enCola: Int) {
         if (enCola != -1) {
 
-            val sonidoActivado = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("sonido", true)
+            val sonidoActivado =
+                PreferenceManager.getDefaultSharedPreferences(this).getBoolean("sonido", true)
 
             if (sonidoActivado && recuentoAnterior == 0 && enCola == 1) {
                 try {
-                    val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                    val notification: Uri =
+                        RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
                     val r = RingtoneManager.getRingtone(applicationContext, notification)
                     r.play()
                 } catch (e: Exception) {
@@ -656,7 +675,8 @@ class MainActivity : AppCompatActivity(), DroidListener {
             if (codigoAula == "?")
                 menu.findItem(R.id.etiqueta_pin).title = getString(R.string.error_no_network)
             else
-                menu.findItem(R.id.etiqueta_pin).title = String.format(getString(R.string.menu_etiqueta_pin), PIN)
+                menu.findItem(R.id.etiqueta_pin).title =
+                    String.format(getString(R.string.menu_etiqueta_pin), PIN)
         } else {
             menu.findItem(R.id.etiqueta_pin).title = getString(R.string.menu_etiqueta_invitado)
         }
@@ -816,11 +836,11 @@ class MainActivity : AppCompatActivity(), DroidListener {
             datos["espera"] = tiempoEspera
 
             refAula!!.update(datos)
-                    .addOnSuccessListener {
-                        Log.d(TAG, "Aula actualizada")
-                        conectarListener()
-                    }
-                    .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
+                .addOnSuccessListener {
+                    Log.d(TAG, "Aula actualizada")
+                    conectarListener()
+                }
+                .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
         }
 
         builder.setNegativeButton(getString(R.string.dialogo_cancelar)) { dialog, _ ->
@@ -858,46 +878,46 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
         // Buscar el aula
         db.collectionGroup("aulas")
-                .whereEqualTo("codigo", codigo.toUpperCase())
-                .whereEqualTo("pin", pin)
-                .get()
-                .addOnCompleteListener {
-                    if (!it.isSuccessful) {
-                        Log.e(TAG, "Error al recuperar datos: ", it.exception)
+            .whereEqualTo("codigo", codigo.toUpperCase())
+            .whereEqualTo("pin", pin)
+            .get()
+            .addOnCompleteListener {
+                if (!it.isSuccessful) {
+                    Log.e(TAG, "Error al recuperar datos: ", it.exception)
+                } else {
+
+                    // Comprobar que se han recuperado registros
+                    if (it.result!!.count() > 0) {
+                        // Accedemos al primer documento
+                        val document = it.result!!.documents.first()
+
+                        Log.d(TAG, "Aula encontrada")
+
+                        // Guardar el aula y el pin para poder reconectar
+                        val preferences: SharedPreferences =
+                            getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
+
+                        val editor = preferences.edit()
+                        editor.putString("codigoAulaConectada", codigo)
+                        editor.putString("pinConectada", pin)
+                        editor.apply()
+
+                        desconectarListeners()
+                        invitado = true
+                        refAula = document.reference
+                        conectarListener()
                     } else {
-
-                        // Comprobar que se han recuperado registros
-                        if (it.result!!.count() > 0) {
-                            // Accedemos al primer documento
-                            val document = it.result!!.documents.first()
-
-                            Log.d(TAG, "Aula encontrada")
-
-                            // Guardar el aula y el pin para poder reconectar
-                            val preferences: SharedPreferences =
-                                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
-
-                            val editor = preferences.edit()
-                            editor.putString("codigoAulaConectada", codigo)
-                            editor.putString("pinConectada", pin)
-                            editor.apply()
-
-                            desconectarListeners()
-                            invitado = true
-                            refAula = document.reference
-                            conectarListener()
-                        } else {
-                            Log.e(TAG, "Aula no encontrada")
-                            // Si no hemos estado conectados a otro aula, mostrar el error
-                            val preferences: SharedPreferences =
-                                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
-                            if (preferences.getString("codigoAulaConectada", null) == null ){
-                                dialogoError()
-                            }
-                            desconectarAula()
+                        Log.e(TAG, "Aula no encontrada")
+                        // Si no hemos estado conectados a otro aula, mostrar el error
+                        val preferences: SharedPreferences =
+                            getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
+                        if (preferences.getString("codigoAulaConectada", null) == null) {
+                            dialogoError()
                         }
+                        desconectarAula()
                     }
                 }
+            }
     }
 
     fun dialogoError() {
