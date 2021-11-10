@@ -295,7 +295,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
             .get()
             .addOnSuccessListener { result ->
 
-                numAulas = result.documents.count()
+                numAulas = if (!invitado) result.documents.count() else 1
                 adapter?.notifyDataSetChanged()
 
                 if (posicion >= 0 && posicion < numAulas) {
