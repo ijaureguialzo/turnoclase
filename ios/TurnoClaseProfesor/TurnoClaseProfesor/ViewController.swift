@@ -214,8 +214,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     self.uid = resultado.user.uid
                     log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
-                    self.conectarAula()
+                    // Si hemos estado conectados a otro aula, recuperarla
+                    let codigoAulaConectada = UserDefaults.standard.string(forKey: "codigoAulaConectada") ?? ""
+                    let pinConectada = UserDefaults.standard.string(forKey: "pinConectada") ?? ""
 
+                    if !codigoAulaConectada.isEmpty && !pinConectada.isEmpty {
+                        self.buscarAula(codigo: codigoAulaConectada, pin: pinConectada)
+                    } else {
+                        self.conectarAula()
+                    }
                 } else {
                     log.error("Error de inicio de sesión: \(error!.localizedDescription)")
                     self.actualizarAula(codigo: "?", enCola: 0)
@@ -251,7 +258,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     "timestamp": FieldValue.serverTimestamp(),
                     "pin": String(format: "%04d", Int.random(in: 0...9999)),
                     "espera": 5,
-                ]) { error in
+                    ]) { error in
                     if let error = error {
                         log.error("Error al crear el aula: \(error.localizedDescription)")
                     } else {
@@ -291,7 +298,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     "timestamp": FieldValue.serverTimestamp(),
                     "pin": String(format: "%04d", Int.random(in: 0...9999)),
                     "espera": 5,
-                ]) { error in
+                    ]) { error in
                     if let error = error {
                         log.error("Error al crear el aula: \(error.localizedDescription)")
                     } else {
@@ -310,43 +317,43 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.listenerAula = self.refAula
                 .addSnapshotListener { documentSnapshot, error in
 
-                    if (documentSnapshot?.exists)! {
+                if (documentSnapshot?.exists)! {
 
-                        if let aula = documentSnapshot?.data() {
+                    if let aula = documentSnapshot?.data() {
 
-                            log.info("Actualizando datos del aula...")
+                        log.info("Actualizando datos del aula...")
 
-                            self.actualizarAula(codigo: aula["codigo"] ??? "?")
-                            self.actualizarPIN(aula["pin"] ??? "?")
-                            self.tiempoEspera = aula["espera"] as? Int ?? 5
+                        self.actualizarAula(codigo: aula["codigo"] ??? "?")
+                        self.actualizarPIN(aula["pin"] ??? "?")
+                        self.tiempoEspera = aula["espera"] as? Int ?? 5
 
-                            // Listener de la cola
-                            if self.listenerCola == nil {
-                                self.listenerCola = self.refAula.collection("cola").addSnapshotListener { querySnapshot, error in
+                        // Listener de la cola
+                        if self.listenerCola == nil {
+                            self.listenerCola = self.refAula.collection("cola").addSnapshotListener { querySnapshot, error in
 
-                                    if let error = error {
-                                        log.error("Error al recuperar datos: \(error.localizedDescription)")
-                                    } else {
-                                        self.actualizarAula(codigo: self.codigoAula, enCola: querySnapshot!.documents.count)
-                                        self.mostrarSiguiente()
-                                        self.feedbackTactil(alerta: true)
-                                    }
+                                if let error = error {
+                                    log.error("Error al recuperar datos: \(error.localizedDescription)")
+                                } else {
+                                    self.actualizarAula(codigo: self.codigoAula, enCola: querySnapshot!.documents.count)
+                                    self.mostrarSiguiente()
+                                    self.feedbackTactil(alerta: true)
                                 }
                             }
                         }
-                    } else {
-                        log.info("El aula ha desaparecido")
-
-                        // Detectar si el aula desaparece y si somos invitados, desconectar
-                        if !self.invitado {
-                            self.actualizarAula(codigo: "?", enCola: 0)
-                            self.PIN = "?"
-                            self.desconectarListeners()
-                            self.conectarAula()
-                        } else {
-                            self.desconectarAula()
-                        }
                     }
+                } else {
+                    log.info("El aula ha desaparecido")
+
+                    // Detectar si el aula desaparece y si somos invitados, desconectar
+                    if !self.invitado {
+                        self.actualizarAula(codigo: "?", enCola: 0)
+                        self.PIN = "?"
+                        self.desconectarListeners()
+                        self.conectarAula()
+                    } else {
+                        self.desconectarAula()
+                    }
+                }
             }
         }
     }
@@ -385,7 +392,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                                                     // Marcar cuando hemos atendido al alumno
                                                     self.refAula.collection("espera").document(posicion["alumno"] as! String).setData([
                                                         "timestamp": FieldValue.serverTimestamp()
-                                                    ]) { error in
+                                                        ]) { error in
                                                         if let error = error {
                                                             log.error("Error al añadir el documento: \(error.localizedDescription)")
                                                         }
@@ -455,25 +462,25 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         refMisAulas.whereField("codigo", isEqualTo: codigo.uppercased())
             .getDocuments() { (querySnapshot, error) in
 
-                if let error = error {
-                    log.error("Error al recuperar datos: \(error.localizedDescription)")
-                } else {
+            if let error = error {
+                log.error("Error al recuperar datos: \(error.localizedDescription)")
+            } else {
 
-                    querySnapshot!.documents.first?.reference.delete() { error in
-                        if let error = error {
-                            log.error("Error al borrar el aula: \(error.localizedDescription)")
-                        } else {
-                            log.info("Aula borrada")
+                querySnapshot!.documents.first?.reference.delete() { error in
+                    if let error = error {
+                        log.error("Error al borrar el aula: \(error.localizedDescription)")
+                    } else {
+                        log.info("Aula borrada")
 
-                            self.numAulas -= 1
-                            if self.aulaActual == self.numAulas {
-                                self.aulaActual -= 1
-                            }
-
-                            self.conectarAula(posicion: self.aulaActual)
+                        self.numAulas -= 1
+                        if self.aulaActual == self.numAulas {
+                            self.aulaActual -= 1
                         }
+
+                        self.conectarAula(posicion: self.aulaActual)
                     }
                 }
+            }
         }
     }
 
@@ -490,10 +497,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && session?.isReachable == true {
             self.session!.sendMessage([campo: dato], replyHandler: { (response) -> Void in
-                log.info("Enviado al Watch")
-            }, errorHandler: { (error) -> Void in
-                log.error("Error al enviar datos al Watch \(error)")
-            })
+                    log.info("Enviado al Watch")
+                }, errorHandler: { (error) -> Void in
+                    log.error("Error al enviar datos al Watch \(error)")
+                })
         }
     }
 
@@ -545,6 +552,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
 
     fileprivate func desconectarAula() {
+
+        // Borrar el aula y el pin al que hemos estado conectados
+        UserDefaults.standard.removeObject(forKey: "codigoAulaConectada")
+        UserDefaults.standard.removeObject(forKey: "pinConectada")
+
         self.invitado = false
         self.desconectarListeners()
         self.conectarAula(posicion: self.aulaActual)
@@ -559,48 +571,48 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             if codigoAula != "?" {
                 if !invitado {
                     return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                                             message: String(format: "PIN para compartir este aula: %@".localized(), PIN),
-                                             preferredStyle: .actionSheet)
+                        message: String(format: "PIN para compartir este aula: %@".localized(), PIN),
+                        preferredStyle: .actionSheet)
                 } else {
                     return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                                             message: "Conectado como invitado".localized(),
-                                             preferredStyle: .actionSheet)
+                        message: "Conectado como invitado".localized(),
+                        preferredStyle: .actionSheet)
                 }
             } else {
                 return UIAlertController(title: "No hay conexión de red".localized(),
-                                         message: nil,
-                                         preferredStyle: .actionSheet)
+                    message: nil,
+                    preferredStyle: .actionSheet)
             }
         }()
 
         let accionAnyadirAula = UIAlertAction(title: "Añadir aula".localized(), style: .default, handler: { (action) -> Void in
-            log.info("Añadir aula")
-            self.anyadirAula()
-        })
+                log.info("Añadir aula")
+                self.anyadirAula()
+            })
 
         let accionBorrarAula = UIAlertAction(title: "Borrar aula".localized(), style: .destructive, handler: { (action) -> Void in
-            log.info("Borrar aula")
-            self.confirmarBorrado()
-        })
+                log.info("Borrar aula")
+                self.confirmarBorrado()
+            })
 
         let accionConectarOtraAula = UIAlertAction(title: "Conectar a otra aula".localized(), style: .default, handler: { (action) -> Void in
-            log.info("Conectar a otra aula")
-            self.dialogoConexion()
-        })
+                log.info("Conectar a otra aula")
+                self.dialogoConexion()
+            })
 
         let accionDesconectarAula = UIAlertAction(title: "Desconectar del aula".localized(), style: .destructive, handler: { (action) -> Void in
-            log.info("Desconectar del aula")
-            self.desconectarAula()
-        })
+                log.info("Desconectar del aula")
+                self.desconectarAula()
+            })
 
         let accionCancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel, handler: { (action) -> Void in
-            log.info("Cancelar")
-        })
+                log.info("Cancelar")
+            })
 
         let accionEstablecerTiempoEspera = UIAlertAction(title: "Establecer tiempo de espera".localized(), style: .default, handler: { (action) -> Void in
-            log.info("Establecer tiempo de espera")
-            self.dialogoTiempoEspera()
-        })
+                log.info("Establecer tiempo de espera")
+                self.dialogoTiempoEspera()
+            })
 
         if !invitado {
             if codigoAula != "?" {
@@ -631,13 +643,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     fileprivate func confirmarBorrado() {
 
         let dialogo = UIAlertController(title: "Borrar aula".localized(),
-                                        message: "Esta acción vaciará la cola de espera.".localized(),
-                                        preferredStyle: .alert)
+            message: "Esta acción vaciará la cola de espera.".localized(),
+            preferredStyle: .alert)
 
         let ok = UIAlertAction(title: "Ok".localized(), style: .destructive, handler: { (action) -> Void in
-            log.info("Ok")
-            self.borrarAulaReconectar(codigo: self.codigoAula)
-        })
+                log.info("Ok")
+                self.borrarAulaReconectar(codigo: self.codigoAula)
+            })
 
         let cancelar = UIAlertAction(title: "Cancelar".localized(), style: .cancel) { (action) -> Void in
             log.info("Cancelar")
@@ -660,29 +672,37 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 .whereField("pin", isEqualTo: pin)
                 .getDocuments() { (querySnapshot, error) in
 
-                    if let error = error {
-                        log.error("Error al recuperar datos: \(error.localizedDescription)")
-                    } else {
+                if let error = error {
+                    log.error("Error al recuperar datos: \(error.localizedDescription)")
+                } else {
 
-                        // Comprobar que se han recuperado registros
-                        if let documents = querySnapshot?.documents {
+                    // Comprobar que se han recuperado registros
+                    if let documents = querySnapshot?.documents {
 
-                            if documents.count > 0 {
-                                // Accedemos al primer documento
-                                let document = documents.first
+                        if documents.count > 0 {
+                            // Accedemos al primer documento
+                            let document = documents.first
 
-                                log.info("Aula encontrada: \(codigo)")
+                            log.info("Aula encontrada: \(codigo)")
 
-                                self.desconectarListeners()
-                                self.invitado = true
-                                self.refAula = document?.reference
-                                self.conectarListener()
-                            } else {
-                                log.error("Aula no encontrada")
+                            // Guardar el aula y el pin para poder reconectar
+                            UserDefaults.standard.set(codigo, forKey: "codigoAulaConectada")
+                            UserDefaults.standard.set(pin, forKey: "pinConectada")
+
+                            self.desconectarListeners()
+                            self.invitado = true
+                            self.refAula = document?.reference
+                            self.conectarListener()
+                        } else {
+                            log.error("Aula no encontrada")
+                            // Si no hemos estado conectados a otro aula, mostrar el error
+                            if UserDefaults.standard.string(forKey: "codigoAulaConectada") == nil {
                                 self.dialogoError()
                             }
+                            self.desconectarAula()
                         }
                     }
+                }
             }
         }
     }
@@ -704,14 +724,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         // Guardar el nuevo tiempo para el aula
         let confirmAction = UIAlertAction(title: "Guardar".localized(),
-                                          style: .default) { _ in
+            style: .default) { _ in
 
             self.tiempoEspera = self.tiempos[pickerView.selectedRow(inComponent: 0)]
             log.info("Establecer tiempo de espera en \(self.tiempoEspera) minutos...")
 
             self.refAula.updateData([
                 "espera": self.tiempoEspera
-            ]) { error in
+                ]) { error in
                 if let error = error {
                     log.error("Error al actualizar el aula: \(error.localizedDescription)")
                 } else {
@@ -722,7 +742,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         // Cancelar
         let cancelAction = UIAlertAction(title: "Cancelar".localized(),
-                                         style: .cancel) { (_) in }
+            style: .cancel) { (_) in }
 
         minutosAlert.addAction(confirmAction)
         minutosAlert.addAction(cancelAction)
@@ -746,10 +766,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     fileprivate func dialogoError() {
         self.alertController = UIAlertController(title: "Error de conexión".localized(),
-                                                 message: "No se ha podido acceder al aula con los datos proporcionados.".localized(),
-                                                 preferredStyle: .alert)
+            message: "No se ha podido acceder al aula con los datos proporcionados.".localized(),
+            preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Ok".localized(),
-                                         style: .default) { (_) in }
+            style: .default) { (_) in }
         alertController.addAction(cancelAction)
         self.present(self.alertController, animated: true, completion: nil)
     }
@@ -767,12 +787,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         loginPinOk = false
 
         alertController = UIAlertController(title: "Conectar a otra aula".localized(),
-                                            message: "Introduce los datos del aula a la que quieres conectar.".localized(),
-                                            preferredStyle: .alert)
+            message: "Introduce los datos del aula a la que quieres conectar.".localized(),
+            preferredStyle: .alert)
 
         // Conectar
         let confirmAction = UIAlertAction(title: "Conectar".localized(),
-                                          style: .default) { (_) in
+            style: .default) { (_) in
 
             log.info("Conectando a otra aula")
 
@@ -793,7 +813,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         // Cancelar
         let cancelAction = UIAlertAction(title: "Cancelar".localized(),
-                                         style: .cancel) { (_) in }
+            style: .cancel) { (_) in }
 
         // Cuadros de texto
         alertController.addTextField { (textField) in
@@ -894,11 +914,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
             // Difuminar un botón
             UIView.animate(withDuration: 0.1,
-                           delay: 0,
-                           options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-                           animations: {
-                               sender.alpha = 0.15
-                           }, completion: nil)
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 0.15
+                }, completion: nil)
         }
     }
 
@@ -909,11 +929,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
             // Restaurar el botón
             UIView.animate(withDuration: 0.3,
-                           delay: 0,
-                           options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-                           animations: {
-                               sender.alpha = 1
-                           }, completion: nil)
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 1
+                }, completion: nil)
         }
     }
 
