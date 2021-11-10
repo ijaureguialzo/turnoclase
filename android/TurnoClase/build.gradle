@@ -4,17 +4,17 @@ buildscript {
     ext {
         build_tools_version = '30.0.2'
 
-        gradle_plugin_version = '7.0.2'
+        gradle_plugin_version = '7.0.3'
         google_services_version = '4.3.4'
         kotlin_version = '1.5.31'
 
         appcompat_version = '1.3.1'
-        media_version = '1.4.2'
+        media_version = '1.4.3'
         legacy_support_version = '1.0.0'
         multidex_support_lib_version = '2.0.1'
 
         firebase_auth_version = '21.0.1'
-        firebase_firestore_version = '23.0.3'
+        firebase_firestore_version = '24.0.0'
         firebase_functions_version = '20.0.1'
 
         fastlane_screengrab_version = '2.0.0'
@@ -57,7 +57,7 @@ task clean(type: Delete) {
 
 // REF: Parámetros compartidos: https://stackoverflow.com/a/20436423/5136913
 ext {
-    compileSdkVersion = 30
+    compileSdkVersion = 31
     minSdkVersion = 21
-    targetSdkVersion = 30
+    targetSdkVersion = 31
 }
