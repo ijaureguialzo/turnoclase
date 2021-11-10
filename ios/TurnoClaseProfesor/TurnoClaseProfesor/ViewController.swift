@@ -695,7 +695,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                             self.conectarListener()
                         } else {
                             log.error("Aula no encontrada")
-                            self.dialogoError()
+                            // Si no hemos estado conectados a otro aula, mostrar el error
+                            if UserDefaults.standard.string(forKey: "codigoAulaConectada") == nil {
+                                self.dialogoError()
+                            }
+                            self.desconectarAula()
                         }
                     }
                 }
