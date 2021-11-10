@@ -107,7 +107,7 @@ class TurnoViewController: UIViewController {
         // Guarda el nombre en el UID de este usuario. Si existe, lo sobreescribe.
         db.collection("alumnos").document(self.uid).setData([
             "nombre": self.nombreUsuario!
-        ], merge: true) { error in
+            ], merge: true) { error in
             if let error = error {
                 log.error("Error al actualizar el alumno: \(error.localizedDescription)")
             } else {
@@ -219,7 +219,7 @@ class TurnoViewController: UIViewController {
                     self.refPosicion = self.refAula.collection("cola").addDocument(data: [
                         "alumno": self.uid!,
                         "timestamp": FieldValue.serverTimestamp()
-                    ]) { error in
+                        ]) { error in
                         if let error = error {
                             log.error("Error al añadir el documento: \(error.localizedDescription)")
                         } else {
@@ -417,11 +417,11 @@ class TurnoViewController: UIViewController {
 
             // Difuminar un botón
             UIView.animate(withDuration: 0.1,
-                           delay: 0,
-                           options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-                           animations: {
-                               sender.alpha = 0.15
-                           }, completion: nil)
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 0.15
+                }, completion: nil)
         }
     }
 
@@ -432,11 +432,11 @@ class TurnoViewController: UIViewController {
 
             // Restaurar el botón
             UIView.animate(withDuration: 0.3,
-                           delay: 0,
-                           options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
-                           animations: {
-                               sender.alpha = 1
-                           }, completion: nil)
+                delay: 0,
+                options: UIView.AnimationOptions.curveLinear.intersection(UIView.AnimationOptions.allowUserInteraction).intersection(UIView.AnimationOptions.beginFromCurrentState),
+                animations: {
+                    sender.alpha = 1
+                }, completion: nil)
         }
     }
 
