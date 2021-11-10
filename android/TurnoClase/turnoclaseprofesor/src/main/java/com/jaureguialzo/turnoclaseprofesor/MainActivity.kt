@@ -19,7 +19,9 @@ package com.jaureguialzo.turnoclaseprofesor
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.media.RingtoneManager
 import android.net.Uri
@@ -216,8 +218,18 @@ class MainActivity : AppCompatActivity(), DroidListener {
                             uid = mAuth?.currentUser?.uid
                             Log.d(TAG, "Registrado como usuario con UID: $uid")
 
-                            conectarAula()
+                            // Si hemos estado conectados a otro aula, recuperarla
+                            val preferences: SharedPreferences =
+                                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
 
+                            val codigoAulaConectada = preferences.getString("codigoAulaConectada", "") ?: ""
+                            val pinConectada = preferences.getString("pinConectada", "") ?: ""
+
+                            if( codigoAulaConectada.isNotEmpty() && pinConectada.isNotEmpty()) {
+                                buscarAula(codigoAulaConectada, pinConectada)
+                            } else {
+                                conectarAula()
+                            }
                         } else {
                             Log.e(TAG, "Error de inicio de sesión", task.exception)
                             actualizarAula("?", 0)
@@ -544,6 +556,16 @@ class MainActivity : AppCompatActivity(), DroidListener {
     }
 
     private fun desconectarAula() {
+
+        // Borrar el aula y el pin al que hemos estado conectados
+        val preferences: SharedPreferences =
+            getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
+
+        val editor = preferences.edit()
+        editor.remove("codigoAulaConectada")
+        editor.remove("pinConectada")
+        editor.apply()
+
         invitado = false
         desconectarListeners()
         conectarAula(aulaActual)
@@ -851,13 +873,28 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
                             Log.d(TAG, "Aula encontrada")
 
+                            // Guardar el aula y el pin para poder reconectar
+                            val preferences: SharedPreferences =
+                                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
+
+                            val editor = preferences.edit()
+                            editor.putString("codigoAulaConectada", codigo)
+                            editor.putString("pinConectada", pin)
+                            editor.apply()
+
                             desconectarListeners()
                             invitado = true
                             refAula = document.reference
                             conectarListener()
                         } else {
                             Log.e(TAG, "Aula no encontrada")
-                            dialogoError()
+                            // Si no hemos estado conectados a otro aula, mostrar el error
+                            val preferences: SharedPreferences =
+                                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
+                            if (preferences.getString("codigoAulaConectada", null) == null ){
+                                dialogoError()
+                            }
+                            desconectarAula()
                         }
                     }
                 }
