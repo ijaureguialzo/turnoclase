@@ -519,7 +519,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         let sonidoActivado = UserDefaults.standard.bool(forKey: "QUEUE_NOT_EMPTY_SOUND")
 
         if sonidoActivado && self.recuentoAnterior == 0 && recuento == 1 {
-            AudioServicesPlaySystemSound(SystemSoundID(1315))
+            #if targetEnvironment(macCatalyst)
+                // https://stackoom.com/en/question/4cxhq
+                AudioServicesPlaySystemSound(SystemSoundID(0x00001000))
+            #else
+                AudioServicesPlaySystemSound(SystemSoundID(1315))
+            #endif
         }
         self.recuentoAnterior = recuento
 
