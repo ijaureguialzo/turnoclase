@@ -56,7 +56,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildToolsVersion "$build_tools_version"
     buildFeatures {
         viewBinding true
     }
@@ -79,12 +78,10 @@ dependencies {
     implementation "androidx.multidex:multidex:$multidex_support_lib_version"
     implementation "com.google.firebase:firebase-auth-ktx:$firebase_auth_version"
     implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation "com.google.firebase:firebase-functions-ktx:$firebase_functions_version"
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
-    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'com.job:droidnet:2.0.0'
 
     // REF: Dependencias para tests: https://stackoverflow.com/a/56624085
