@@ -4,12 +4,12 @@ buildscript {
     ext {
         build_tools_version = '32.0.0'
 
-        gradle_plugin_version = '7.1.1'
-        google_services_version = '4.3.4'
+        gradle_plugin_version = '7.1.2'
+        google_services_version = '4.3.10'
         kotlin_version = '1.6.10'
 
         appcompat_version = '1.4.1'
-        media_version = '1.4.3'
+        media_version = '1.5.0'
         legacy_support_version = '1.0.0'
         multidex_support_lib_version = '2.0.1'
 
