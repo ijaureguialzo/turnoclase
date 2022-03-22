@@ -25,6 +25,7 @@
 		4185BE8226396E82002706CF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8126396E82002706CF /* FirebaseAuth */; };
 		4185BE8426396E82002706CF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8326396E82002706CF /* FirebaseFirestore */; };
 		4185BE872639751E002706CF /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE862639751E002706CF /* XCGLogger */; };
+		41983C7427EA0E7C001B524A /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 41983C7327EA0E7C001B524A /* FirebaseAppCheck */; };
 		49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 				4185BE8426396E82002706CF /* FirebaseFirestore in Frameworks */,
 				4185BE8226396E82002706CF /* FirebaseAuth in Frameworks */,
 				414C797F221F991E003E97E4 /* TurnoClaseShared.framework in Frameworks */,
+				41983C7427EA0E7C001B524A /* FirebaseAppCheck in Frameworks */,
 				4185BE872639751E002706CF /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +239,7 @@
 				4185BE8126396E82002706CF /* FirebaseAuth */,
 				4185BE8326396E82002706CF /* FirebaseFirestore */,
 				4185BE862639751E002706CF /* XCGLogger */,
+				41983C7327EA0E7C001B524A /* FirebaseAppCheck */,
 			);
 			productName = TurnoClase;
 			productReference = 415BC6421B2F5305004FADE0 /* TurnoClase.app */;
@@ -289,6 +292,7 @@
 			packageReferences = (
 				4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
+				41983C7227EA0E7C001B524A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 415BC6431B2F5305004FADE0 /* Products */;
 			projectDirPath = "";
@@ -609,7 +613,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -620,7 +624,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.4;
+				MARKETING_VERSION = 3.1.5;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -641,7 +645,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 58;
 				DEVELOPMENT_TEAM = RSEH385M54;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -652,7 +656,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.4;
+				MARKETING_VERSION = 3.1.5;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaureguialzo.TurnoClase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -713,6 +717,14 @@
 				minimumVersion = 7.0.1;
 			};
 		};
+		41983C7227EA0E7C001B524A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -730,6 +742,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */;
 			productName = XCGLogger;
+		};
+		41983C7327EA0E7C001B524A /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

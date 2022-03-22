@@ -20,6 +20,9 @@ package com.jaureguialzo.turnoclaseprofesor
 import androidx.multidex.MultiDexApplication
 
 import com.droidnet.DroidNet
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 
 /**
  * Created by widemos on 19/6/15.
@@ -30,6 +33,12 @@ class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         DroidNet.init(this)
+
+        FirebaseApp.initializeApp(/*context=*/this)
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(
+            SafetyNetAppCheckProviderFactory.getInstance()
+        )
     }
 
     override fun onLowMemory() {
