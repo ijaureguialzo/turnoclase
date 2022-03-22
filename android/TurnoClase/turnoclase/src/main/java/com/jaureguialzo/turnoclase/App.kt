@@ -18,6 +18,9 @@
 package com.jaureguialzo.turnoclase
 
 import androidx.multidex.MultiDexApplication
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
@@ -33,5 +36,11 @@ class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+
+        FirebaseApp.initializeApp(/*context=*/this)
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(
+            SafetyNetAppCheckProviderFactory.getInstance()
+        )
     }
 }
