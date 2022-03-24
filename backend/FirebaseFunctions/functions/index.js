@@ -16,6 +16,11 @@ exports.nuevoCodigo = functions
     .region('europe-west1')
     .https.onCall((data, context) => {
 
+        // Verificar que haya un token de App Check válidos y, si no, retornar un error 401
+        if (context.app === undefined) {
+            throw new functions.https.HttpsError('failed-precondition', 'The function must be called from an App Check verified app.')
+        }
+
         const hashids = new Hashids("turnoclase", 5, "123456789ABCDEFGHIJKLNPQRSTUVXYZ");
 
         const refContador = db.collection('total').doc('aulas'); // Max: 234255 (9RRRR)
