@@ -26,7 +26,10 @@ import XCGLogger
 
 import Firebase
 import FirebaseFirestore
-import FirebaseAppCheck
+
+#if DEBUG
+    import FirebaseAppCheck
+#endif
 
 // Servicio de logs XCGLogger
 let log = XCGLogger.default
@@ -58,8 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
 
         // Debug de Firebase App Check
-        let providerFactory = AppCheckDebugProviderFactory()
-        AppCheck.setAppCheckProviderFactory(providerFactory)
+        #if DEBUG
+            let providerFactory = AppCheckDebugProviderFactory()
+            AppCheck.setAppCheckProviderFactory(providerFactory)
+        #endif
         
         // Habilitar Firebase
         FirebaseApp.configure()
