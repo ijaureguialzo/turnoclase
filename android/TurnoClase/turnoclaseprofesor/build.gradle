@@ -79,6 +79,7 @@ dependencies {
     implementation "com.google.firebase:firebase-auth-ktx:$firebase_auth_version"
     implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_version"
     implementation "com.google.firebase:firebase-appcheck-safetynet:$firebase_safetynet_version"
+    implementation "com.google.firebase:firebase-appcheck-debug:$firebase_appcheck_debug_version"
 
     implementation "com.google.firebase:firebase-functions-ktx:$firebase_functions_version"
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'

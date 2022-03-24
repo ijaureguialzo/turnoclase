@@ -17,6 +17,7 @@ buildscript {
         firebase_firestore_version = '24.0.2'
         firebase_functions_version = '20.0.2'
         firebase_safetynet_version = '16.0.0-beta04'
+        firebase_appcheck_debug_version = '16.0.0-beta04'
 
         fastlane_screengrab_version = '2.0.0'
 
