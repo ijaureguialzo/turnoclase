@@ -4,7 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TurnoClase.iml" filepath="$PROJECT_DIR$/TurnoClase.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.main.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.main.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclaseprofesor/TurnoClase.turnoclaseprofesor.unitTest.iml" />
     </modules>
   </component>
 </project>

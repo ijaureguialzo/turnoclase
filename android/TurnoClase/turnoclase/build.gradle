@@ -59,6 +59,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.jaureguialzo.turnoclase'
 }
 
 victor {
