@@ -482,7 +482,6 @@
 				4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
 				4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability" */,
-				41983C7527EA0E96001B524A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 41F4C5CA1B34BCD5004AA55E /* Products */;
 			projectDirPath = "";
@@ -1172,7 +1171,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
+				minimumVersion = 9.0.0;
 			};
 		};
 		4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
@@ -1181,14 +1180,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.0.1;
-			};
-		};
-		41983C7527EA0E96001B524A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
