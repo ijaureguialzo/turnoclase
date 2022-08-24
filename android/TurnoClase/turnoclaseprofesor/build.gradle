@@ -87,6 +87,8 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'com.job:droidnet:2.0.0'
 
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
     // REF: Dependencias para tests: https://stackoverflow.com/a/56624085
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:core:1.4.0'

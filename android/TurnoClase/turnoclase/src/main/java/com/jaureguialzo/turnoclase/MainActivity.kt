@@ -30,6 +30,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.jaureguialzo.turnoclase.databinding.ActivityMainBinding
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         // Evento del botón conectar, pasamos a la siguiente actividad
         binding.botonSiguiente.setOnClickListener {
             // Obtenemos los datos del interfaz
-            val codigoAula = binding.campoAula.text.toString().toUpperCase()
+            val codigoAula = binding.campoAula.text.toString().uppercase(Locale.getDefault())
             val nombreUsuario = binding.campoNombre.text.toString()
 
             // Guardar el último aula y usuario

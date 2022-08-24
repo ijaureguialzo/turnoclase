@@ -594,7 +594,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
         desconectarListeners()
 
-        refMisAulas!!.whereEqualTo("codigo", codigoAula.toUpperCase())
+        refMisAulas!!.whereEqualTo("codigo", codigoAula.uppercase(Locale.getDefault()))
             .get()
             .addOnSuccessListener { result ->
 
@@ -878,7 +878,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
 
         // Buscar el aula
         db.collectionGroup("aulas")
-            .whereEqualTo("codigo", codigo.toUpperCase())
+            .whereEqualTo("codigo", codigo.uppercase(Locale.getDefault()))
             .whereEqualTo("pin", pin)
             .get()
             .addOnCompleteListener {
