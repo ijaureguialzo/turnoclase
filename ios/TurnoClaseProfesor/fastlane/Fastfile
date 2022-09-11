@@ -77,7 +77,7 @@ platform :ios do
     gym(
         scheme: app,
         workspace: "../TurnoClase.xcworkspace",
-        include_bitcode: true)
+        include_bitcode: false)
     deliver(
         force: true,
         automatic_release: true,
