@@ -6,16 +6,16 @@ buildscript {
         google_services_version = '4.3.10'
         kotlin_version = '1.7.10'
 
-        appcompat_version = '1.5.0'
+        appcompat_version = '1.5.1'
         media_version = '1.6.0'
         legacy_support_version = '1.0.0'
         multidex_support_lib_version = '2.0.1'
 
-        firebase_auth_version = '21.0.7'
-        firebase_firestore_version = '24.2.2'
-        firebase_functions_version = '20.1.0'
-        firebase_safetynet_version = '16.0.0'
-        firebase_appcheck_debug_version = '16.0.0'
+        firebase_auth_version = '21.0.8'
+        firebase_firestore_version = '24.3.0'
+        firebase_functions_version = '20.1.1'
+        firebase_safetynet_version = '16.0.1'
+        firebase_appcheck_debug_version = '16.0.1'
 
         fastlane_screengrab_version = '2.0.0'
 
