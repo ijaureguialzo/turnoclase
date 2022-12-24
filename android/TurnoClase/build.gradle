@@ -2,20 +2,20 @@
 
 buildscript {
     ext {
-        gradle_plugin_version = '7.3.0'
+        gradle_plugin_version = '7.3.1'
         google_services_version = '4.3.10'
-        kotlin_version = '1.7.10'
+        kotlin_version = '1.7.20'
 
         appcompat_version = '1.5.1'
         media_version = '1.6.0'
         legacy_support_version = '1.0.0'
         multidex_support_lib_version = '2.0.1'
 
-        firebase_auth_version = '21.0.8'
-        firebase_firestore_version = '24.3.0'
-        firebase_functions_version = '20.1.1'
-        firebase_safetynet_version = '16.0.1'
-        firebase_appcheck_debug_version = '16.0.1'
+        firebase_auth_version = '21.1.0'
+        firebase_firestore_version = '24.4.1'
+        firebase_functions_version = '20.2.1'
+        firebase_playintegrity_version = '16.1.0'
+        firebase_appcheck_debug_version = '16.1.0'
 
         fastlane_screengrab_version = '2.0.0'
 
