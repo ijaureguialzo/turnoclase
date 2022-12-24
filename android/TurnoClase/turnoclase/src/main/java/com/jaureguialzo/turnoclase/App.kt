@@ -21,7 +21,7 @@ import androidx.multidex.MultiDexApplication
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
-import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
@@ -43,7 +43,7 @@ class App : MultiDexApplication() {
 
         if (!BuildConfig.DEBUG) {
             firebaseAppCheck.installAppCheckProviderFactory(
-                SafetyNetAppCheckProviderFactory.getInstance()
+                PlayIntegrityAppCheckProviderFactory.getInstance()
             )
         } else {
             firebaseAppCheck.installAppCheckProviderFactory(

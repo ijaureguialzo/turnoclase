@@ -18,12 +18,11 @@
 package com.jaureguialzo.turnoclaseprofesor
 
 import androidx.multidex.MultiDexApplication
-
 import com.droidnet.DroidNet
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
-import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 
 /**
  * Created by widemos on 19/6/15.
@@ -40,7 +39,7 @@ class App : MultiDexApplication() {
 
         if (!BuildConfig.DEBUG) {
             firebaseAppCheck.installAppCheckProviderFactory(
-                SafetyNetAppCheckProviderFactory.getInstance()
+                PlayIntegrityAppCheckProviderFactory.getInstance()
             )
         } else {
             firebaseAppCheck.installAppCheckProviderFactory(
