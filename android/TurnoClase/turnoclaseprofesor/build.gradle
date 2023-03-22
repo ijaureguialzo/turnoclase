@@ -27,8 +27,8 @@ android {
         applicationId "com.jaureguialzo.turnoclaseprofesor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 59
-        versionName "3.0.25"
+        versionCode 60
+        versionName "3.0.26"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
@@ -87,7 +87,7 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'com.job:droidnet:2.0.0'
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
 
     // REF: Dependencias para tests: https://stackoverflow.com/a/56624085
     testImplementation 'junit:junit:4.13.2'
