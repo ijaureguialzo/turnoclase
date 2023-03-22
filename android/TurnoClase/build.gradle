@@ -4,7 +4,7 @@ buildscript {
     ext {
         gradle_plugin_version = '7.4.2'
         google_services_version = '4.3.10'
-        kotlin_version = '1.7.21'
+        kotlin_version = '1.8.0'
 
         appcompat_version = '1.6.1'
         media_version = '1.6.0'
