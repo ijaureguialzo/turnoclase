@@ -10,6 +10,7 @@
 		413592D4221F85A00089E71C /* TurnoClaseSharedWatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 413592D2221F859F0089E71C /* TurnoClaseSharedWatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		413592DB221F85BD0089E71C /* Nombres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413592DA221F85BD0089E71C /* Nombres.swift */; };
 		4185BE8D2639773D002706CF /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8C2639773D002706CF /* XCGLogger */; };
+		4188EE9429CB9F79009EEC94 /* Localize_Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 4188EE9329CB9F79009EEC94 /* Localize_Swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4185BE8D2639773D002706CF /* XCGLogger in Frameworks */,
+				4188EE9429CB9F79009EEC94 /* Localize_Swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +89,7 @@
 			name = TurnoClaseSharedWatch;
 			packageProductDependencies = (
 				4185BE8C2639773D002706CF /* XCGLogger */,
+				4188EE9329CB9F79009EEC94 /* Localize_Swift */,
 			);
 			productName = TurnoClaseSharedWatch;
 			productReference = 413592CF221F859F0089E71C /* TurnoClaseSharedWatch.framework */;
@@ -119,6 +122,7 @@
 			mainGroup = 413592C5221F859F0089E71C;
 			packageReferences = (
 				4185BE8B2639773D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
+				4188EE9229CB9F79009EEC94 /* XCRemoteSwiftPackageReference "Localize-Swift" */,
 			);
 			productRefGroup = 413592D0221F859F0089E71C /* Products */;
 			projectDirPath = "";
@@ -360,6 +364,14 @@
 				minimumVersion = 7.0.1;
 			};
 		};
+		4188EE9229CB9F79009EEC94 /* XCRemoteSwiftPackageReference "Localize-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ijaureguialzo/Localize-Swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -367,6 +379,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4185BE8B2639773D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */;
 			productName = XCGLogger;
+		};
+		4188EE9329CB9F79009EEC94 /* Localize_Swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4188EE9229CB9F79009EEC94 /* XCRemoteSwiftPackageReference "Localize-Swift" */;
+			productName = Localize_Swift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

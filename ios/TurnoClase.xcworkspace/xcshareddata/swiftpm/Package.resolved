@@ -82,6 +82,15 @@
       }
     },
     {
+      "identity" : "localize-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ijaureguialzo/Localize-Swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "ff76bf3434881a4b056200f4a68d1326959a6366"
+      }
+    },
+    {
       "identity" : "nanopb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",

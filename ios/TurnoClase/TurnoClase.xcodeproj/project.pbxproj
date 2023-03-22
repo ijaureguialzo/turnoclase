@@ -25,8 +25,8 @@
 		4185BE8226396E82002706CF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8126396E82002706CF /* FirebaseAuth */; };
 		4185BE8426396E82002706CF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE8326396E82002706CF /* FirebaseFirestore */; };
 		4185BE872639751E002706CF /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE862639751E002706CF /* XCGLogger */; };
+		4188EE9129CB9F13009EEC94 /* Localize_Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 4188EE9029CB9F13009EEC94 /* Localize_Swift */; };
 		41983C7427EA0E7C001B524A /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 41983C7327EA0E7C001B524A /* FirebaseAppCheck */; };
-		49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,9 +78,6 @@
 		415BC64E1B2F5305004FADE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		415BC6511B2F5305004FADE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4199FF0B1E32EF9500F9E42F /* TurnoClase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TurnoClase.entitlements; sourceTree = "<group>"; };
-		A58F32411CFA55EA494330C8 /* Pods-TurnoClase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.debug.xcconfig"; sourceTree = "<group>"; };
-		CF984E0ACB82BD169BB892C2 /* Pods-TurnoClase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClase.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClase/Pods-TurnoClase.release.xcconfig"; sourceTree = "<group>"; };
-		D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49465695920D6E1935E4ABEC /* Pods_TurnoClase.framework in Frameworks */,
+				4188EE9129CB9F13009EEC94 /* Localize_Swift in Frameworks */,
 				4185BE8426396E82002706CF /* FirebaseFirestore in Frameworks */,
 				4185BE8226396E82002706CF /* FirebaseAuth in Frameworks */,
 				414C797F221F991E003E97E4 /* TurnoClaseShared.framework in Frameworks */,
@@ -133,7 +130,6 @@
 				411608771B517B6E008C9A1E /* Resources */,
 				410088F71FBED8F70058B3F5 /* TurnoClaseUITests */,
 				415BC6431B2F5305004FADE0 /* Products */,
-				B0948F3D7E593A26302C6559 /* Pods */,
 				DF45B9DA60FC384B1AA2D15F /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -180,20 +176,10 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		B0948F3D7E593A26302C6559 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A58F32411CFA55EA494330C8 /* Pods-TurnoClase.debug.xcconfig */,
-				CF984E0ACB82BD169BB892C2 /* Pods-TurnoClase.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		DF45B9DA60FC384B1AA2D15F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				413592BB221F814C0089E71C /* TurnoClaseShared.framework */,
-				D41C1BACA65550CE3D4C967A /* Pods_TurnoClase.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -223,11 +209,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 415BC6611B2F5305004FADE0 /* Build configuration list for PBXNativeTarget "TurnoClase" */;
 			buildPhases = (
-				FDA9A6751056FF140DDB2260 /* [CP] Check Pods Manifest.lock */,
 				415BC63E1B2F5305004FADE0 /* Sources */,
 				415BC63F1B2F5305004FADE0 /* Frameworks */,
 				415BC6401B2F5305004FADE0 /* Resources */,
-				26437CE5268AF2C04A0D4E3D /* [CP] Embed Pods Frameworks */,
 				414C7981221F991F003E97E4 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -240,6 +224,7 @@
 				4185BE8326396E82002706CF /* FirebaseFirestore */,
 				4185BE862639751E002706CF /* XCGLogger */,
 				41983C7327EA0E7C001B524A /* FirebaseAppCheck */,
+				4188EE9029CB9F13009EEC94 /* Localize_Swift */,
 			);
 			productName = TurnoClase;
 			productReference = 415BC6421B2F5305004FADE0 /* TurnoClase.app */;
@@ -290,8 +275,9 @@
 			);
 			mainGroup = 415BC6391B2F5305004FADE0;
 			packageReferences = (
-				4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
+				4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */,
+				4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger.git" */,
+				4188EE8F29CB9F13009EEC94 /* XCRemoteSwiftPackageReference "Localize-Swift.git" */,
 			);
 			productRefGroup = 415BC6431B2F5305004FADE0 /* Products */;
 			projectDirPath = "";
@@ -327,45 +313,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		26437CE5268AF2C04A0D4E3D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TurnoClase/Pods-TurnoClase-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TurnoClase/Pods-TurnoClase-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FDA9A6751056FF140DDB2260 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TurnoClase-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		410088F21FBED8F60058B3F5 /* Sources */ = {
@@ -605,7 +552,6 @@
 		};
 		415BC6621B2F5305004FADE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A58F32411CFA55EA494330C8 /* Pods-TurnoClase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TurnoClase/TurnoClase.entitlements;
@@ -637,7 +583,6 @@
 		};
 		415BC6631B2F5305004FADE0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF984E0ACB82BD169BB892C2 /* Pods-TurnoClase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TurnoClase/TurnoClase.entitlements;
@@ -700,7 +645,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -708,7 +653,7 @@
 				minimumVersion = 10.0.0;
 			};
 		};
-		4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+		4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger.git";
 			requirement = {
@@ -716,27 +661,40 @@
 				minimumVersion = 7.0.1;
 			};
 		};
+		4188EE8F29CB9F13009EEC94 /* XCRemoteSwiftPackageReference "Localize-Swift.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ijaureguialzo/Localize-Swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		4185BE8126396E82002706CF /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseAuth;
 		};
 		4185BE8326396E82002706CF /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseFirestore;
 		};
 		4185BE862639751E002706CF /* XCGLogger */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			package = 4185BE852639751D002706CF /* XCRemoteSwiftPackageReference "XCGLogger.git" */;
 			productName = XCGLogger;
+		};
+		4188EE9029CB9F13009EEC94 /* Localize_Swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4188EE8F29CB9F13009EEC94 /* XCRemoteSwiftPackageReference "Localize-Swift.git" */;
+			productName = Localize_Swift;
 		};
 		41983C7327EA0E7C001B524A /* FirebaseAppCheck */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 4185BE8026396E82002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseAppCheck;
 		};
 /* End XCSwiftPackageProductDependency section */

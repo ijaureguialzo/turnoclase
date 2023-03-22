@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03354751DBF8642610BA6156 /* Pods_TurnoClaseProfesor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */; };
 		410A3E171FC42F1500B3AC3D /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 410A3E151FC42F1500B3AC3D /* Interface.storyboard */; };
 		410A3E191FC42F1500B3AC3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410A3E181FC42F1500B3AC3D /* Assets.xcassets */; };
 		410A3E201FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 410A3E1F1FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -28,6 +27,7 @@
 		4185BE7D26396E35002706CF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7C26396E35002706CF /* FirebaseFirestore */; };
 		4185BE7F26396E35002706CF /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE7E26396E35002706CF /* FirebaseFunctions */; };
 		4185BE8A263975A8002706CF /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 4185BE89263975A8002706CF /* XCGLogger */; };
+		4188EE8E29CB9ED6009EEC94 /* Localize_Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 4188EE8D29CB9ED6009EEC94 /* Localize_Swift */; };
 		41983C7727EA0E96001B524A /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 41983C7627EA0E96001B524A /* FirebaseAppCheck */; };
 		41A59BDF1B51643B000E3C8E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BDE1B51643B000E3C8E /* Settings.bundle */; };
 		41A59BE21B516A20000E3C8E /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 41A59BE11B516A20000E3C8E /* Licenses */; };
@@ -40,7 +40,6 @@
 		41F4C5D91B34BCD6004AA55E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F4C5D71B34BCD6004AA55E /* LaunchScreen.xib */; };
 		41F8B927216A156D006EBBAC /* Teclado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8B926216A156D006EBBAC /* Teclado.swift */; };
 		41FBD076217B397F007FFCA2 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A3E241FC42F1500B3AC3D /* InterfaceController.swift */; };
-		C6FDB4D28A1D7A94784141B5 /* Pods_TurnoClaseProfesorWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,7 +124,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		410A3E131FC42F1500B3AC3D /* TurnoClaseProfesorWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurnoClaseProfesorWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		410A3E181FC42F1500B3AC3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		410A3E1A1FC42F1500B3AC3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -163,11 +161,6 @@
 		41F4C5D51B34BCD5004AA55E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		41F4C5D81B34BCD6004AA55E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		41F8B926216A156D006EBBAC /* Teclado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teclado.swift; sourceTree = "<group>"; };
-		A2B5FCD9A98F46DE39F2C927 /* Pods-TurnoClaseProfesor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.debug.xcconfig"; sourceTree = "<group>"; };
-		AEF6504144637E62FC53D0E7 /* Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		C8F0C998A673C21B6D08D9D4 /* Pods-TurnoClaseProfesor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesor.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor.release.xcconfig"; sourceTree = "<group>"; };
-		C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TurnoClaseProfesorWatch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EEC2D70D195470DB34D41967 /* Pods-TurnoClaseProfesorWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TurnoClaseProfesorWatch Extension.release.xcconfig"; path = "../Pods/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +168,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6FDB4D28A1D7A94784141B5 /* Pods_TurnoClaseProfesorWatch_Extension.framework in Frameworks */,
 				414C7993221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,10 +186,10 @@
 				41983C7727EA0E96001B524A /* FirebaseAppCheck in Frameworks */,
 				414C7985221F998F003E97E4 /* TurnoClaseShared.framework in Frameworks */,
 				4148914E26FF11E0008D9B9C /* Reachability in Frameworks */,
+				4188EE8E29CB9ED6009EEC94 /* Localize_Swift in Frameworks */,
 				4185BE7D26396E35002706CF /* FirebaseFirestore in Frameworks */,
 				4185BE7F26396E35002706CF /* FirebaseFunctions in Frameworks */,
 				4185BE7B26396E35002706CF /* FirebaseAuth in Frameworks */,
-				03354751DBF8642610BA6156 /* Pods_TurnoClaseProfesor.framework in Frameworks */,
 				4185BE8A263975A8002706CF /* XCGLogger in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,7 +264,6 @@
 				410A3E141FC42F1500B3AC3D /* TurnoClaseProfesorWatch */,
 				410A3E231FC42F1500B3AC3D /* TurnoClaseProfesorWatch Extension */,
 				41F4C5CA1B34BCD5004AA55E /* Products */,
-				C7081229FC52421FC6A6135B /* Pods */,
 				5031ED4ECEA45C73F5F6EF1B /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -315,22 +306,9 @@
 			isa = PBXGroup;
 			children = (
 				413592C3221F84BD0089E71C /* TurnoClaseShared.framework */,
-				13994CCB709873A7C6C55E01 /* Pods_TurnoClaseProfesor.framework */,
 				414C7992221F9CB5003E97E4 /* TurnoClaseSharedWatch.framework */,
-				C9169F3BE64962A8D553ADE3 /* Pods_TurnoClaseProfesorWatch_Extension.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C7081229FC52421FC6A6135B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A2B5FCD9A98F46DE39F2C927 /* Pods-TurnoClaseProfesor.debug.xcconfig */,
-				C8F0C998A673C21B6D08D9D4 /* Pods-TurnoClaseProfesor.release.xcconfig */,
-				AEF6504144637E62FC53D0E7 /* Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig */,
-				EEC2D70D195470DB34D41967 /* Pods-TurnoClaseProfesorWatch Extension.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,11 +337,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 410A3E321FC42F1500B3AC3D /* Build configuration list for PBXNativeTarget "TurnoClaseProfesorWatch Extension" */;
 			buildPhases = (
-				80E6339796820AB15ADDD957 /* [CP] Check Pods Manifest.lock */,
 				410A3E1B1FC42F1500B3AC3D /* Sources */,
 				410A3E1C1FC42F1500B3AC3D /* Frameworks */,
 				410A3E1D1FC42F1500B3AC3D /* Resources */,
-				58164D55F8CEF4F64B109A0E /* [CP] Embed Pods Frameworks */,
 				414C7995221F9CB5003E97E4 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -397,12 +373,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41F4C5E81B34BCD6004AA55E /* Build configuration list for PBXNativeTarget "TurnoClaseProfesor" */;
 			buildPhases = (
-				69F8D8E51D129774679F12D9 /* [CP] Check Pods Manifest.lock */,
 				41F4C5C51B34BCD5004AA55E /* Sources */,
 				41F4C5C61B34BCD5004AA55E /* Frameworks */,
 				41F4C5C71B34BCD5004AA55E /* Resources */,
 				410A3E351FC42F1500B3AC3D /* Embed Watch Content */,
-				086D67162CA5CA8247BFCBEB /* [CP] Embed Pods Frameworks */,
 				414C7987221F998F003E97E4 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -418,6 +392,7 @@
 				4185BE89263975A8002706CF /* XCGLogger */,
 				4148914D26FF11E0008D9B9C /* Reachability */,
 				41983C7627EA0E96001B524A /* FirebaseAppCheck */,
+				4188EE8D29CB9ED6009EEC94 /* Localize_Swift */,
 			);
 			productName = TurnoClaseProfesor;
 			productReference = 41F4C5C91B34BCD5004AA55E /* TurnoClase Teacher.app */;
@@ -479,9 +454,10 @@
 			);
 			mainGroup = 41F4C5C01B34BCD5004AA55E;
 			packageReferences = (
-				4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */,
-				4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability" */,
+				4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */,
+				4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger.git" */,
+				4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability.swift" */,
+				4188EE8C29CB9ED6009EEC94 /* XCRemoteSwiftPackageReference "Localize-Swift.git" */,
 			);
 			productRefGroup = 41F4C5CA1B34BCD5004AA55E /* Products */;
 			projectDirPath = "";
@@ -538,89 +514,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		086D67162CA5CA8247BFCBEB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TurnoClaseProfesor/Pods-TurnoClaseProfesor-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		58164D55F8CEF4F64B109A0E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Localize-Swift.root-LocalizeSwiftCore/Localize_Swift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TurnoClaseProfesorWatch Extension/Pods-TurnoClaseProfesorWatch Extension-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		69F8D8E51D129774679F12D9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TurnoClaseProfesor-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		80E6339796820AB15ADDD957 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TurnoClaseProfesorWatch Extension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		410A3E1B1FC42F1500B3AC3D /* Sources */ = {
@@ -800,7 +693,6 @@
 		};
 		410A3E301FC42F1500B3AC3D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AEF6504144637E62FC53D0E7 /* Pods-TurnoClaseProfesorWatch Extension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -836,7 +728,6 @@
 		};
 		410A3E311FC42F1500B3AC3D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EEC2D70D195470DB34D41967 /* Pods-TurnoClaseProfesorWatch Extension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1045,7 +936,6 @@
 		};
 		41F4C5E91B34BCD6004AA55E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2B5FCD9A98F46DE39F2C927 /* Pods-TurnoClaseProfesor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TurnoClaseProfesor/TurnoClaseProfesor.entitlements;
@@ -1077,7 +967,6 @@
 		};
 		41F4C5EA1B34BCD6004AA55E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C8F0C998A673C21B6D08D9D4 /* Pods-TurnoClaseProfesor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TurnoClaseProfesor/TurnoClaseProfesor.entitlements;
@@ -1158,7 +1047,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability" */ = {
+		4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
 			requirement = {
@@ -1166,7 +1055,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -1174,7 +1063,7 @@
 				minimumVersion = 10.0.0;
 			};
 		};
-		4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+		4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger.git";
 			requirement = {
@@ -1182,37 +1071,50 @@
 				minimumVersion = 7.0.1;
 			};
 		};
+		4188EE8C29CB9ED6009EEC94 /* XCRemoteSwiftPackageReference "Localize-Swift.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ijaureguialzo/Localize-Swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		4148914D26FF11E0008D9B9C /* Reachability */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability" */;
+			package = 4148914C26FF11E0008D9B9C /* XCRemoteSwiftPackageReference "Reachability.swift" */;
 			productName = Reachability;
 		};
 		4185BE7A26396E35002706CF /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseAuth;
 		};
 		4185BE7C26396E35002706CF /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseFirestore;
 		};
 		4185BE7E26396E35002706CF /* FirebaseFunctions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseFunctions;
 		};
 		4185BE89263975A8002706CF /* XCGLogger */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			package = 4185BE88263975A8002706CF /* XCRemoteSwiftPackageReference "XCGLogger.git" */;
 			productName = XCGLogger;
+		};
+		4188EE8D29CB9ED6009EEC94 /* Localize_Swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4188EE8C29CB9ED6009EEC94 /* XCRemoteSwiftPackageReference "Localize-Swift.git" */;
+			productName = Localize_Swift;
 		};
 		41983C7627EA0E96001B524A /* FirebaseAppCheck */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 4185BE7926396E35002706CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk.git" */;
 			productName = FirebaseAppCheck;
 		};
 /* End XCSwiftPackageProductDependency section */
