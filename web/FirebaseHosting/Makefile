@@ -1,32 +1,27 @@
 help:
 	@echo Opciones:
-	@echo start / stop
+	@echo build
 	@echo workspace
-	@echo build / clean
-	@echo serve
 	@echo deploy
-	
-start:
-	@docker-compose up -d
-
-stop:
-	@docker-compose stop
-
-workspace: start
-	@docker-compose exec node /bin/bash
+	@echo update / serve
+	@echo clean
 
 build:
-	@docker-compose build --pull
+	@docker compose build --pull
 
-clean:
-	@docker-compose down -v
+workspace:
+	@docker compose run --rm node /bin/bash
 
-serve: start
-	@cd jekyll && bundle exec jekyll serve
-
-deploy: start
+deploy:
 	@cd jekyll && bundle exec jekyll build
 	@cd ..
-	@docker-compose exec node firebase login
-	@docker-compose exec node firebase use turnoclase-eu
-	@docker-compose exec node firebase deploy --only hosting
+	@docker compose run --rm --service-ports node /bin/sh -c 'firebase login && firebase use turnoclase-eu && firebase deploy --only hosting'
+
+update:
+	@cd jekyll && bundle update
+
+serve:
+	@cd jekyll && bundle exec jekyll serve
+
+clean:
+	@docker compose down -v --remove-orphans

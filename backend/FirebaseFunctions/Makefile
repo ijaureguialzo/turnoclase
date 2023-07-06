@@ -1,26 +1,18 @@
 help:
 	@echo Opciones:
-	@echo start / stop
+	@echo build
 	@echo workspace
-	@echo build / clean
 	@echo deploy
-
-start:
-	@docker-compose up -d
-
-stop:
-	@docker-compose stop
-
-workspace: start
-	@docker-compose exec node /bin/bash
+	@echo clean
 
 build:
-	@docker-compose build --pull
+	@docker compose build --pull
+
+workspace:
+	@docker compose run --rm node /bin/bash
+
+deploy:
+	@docker compose run --rm --service-ports node /bin/sh -c 'firebase login && firebase use turnoclase-eu && firebase deploy --only functions'
 
 clean:
-	@docker-compose down -v
-
-deploy: start
-	@docker-compose exec node firebase login
-	@docker-compose exec node firebase use turnoclase-eu
-	@docker-compose exec node firebase deploy --only functions
+	@docker compose down -v --remove-orphans
