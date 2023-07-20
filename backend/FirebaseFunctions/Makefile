@@ -1,9 +1,17 @@
-help:
+help: _header
+	${info }
 	@echo Opciones:
+	@echo --------------------
 	@echo build
 	@echo workspace
 	@echo deploy
 	@echo clean
+	@echo --------------------
+
+_header:
+	@echo --------------------
+	@echo TurnoClase - Backend
+	@echo --------------------
 
 build:
 	@docker compose build --pull
