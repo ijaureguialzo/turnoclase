@@ -11,11 +11,11 @@ buildscript {
         legacy_support_version = '1.0.0'
         multidex_support_lib_version = '2.0.1'
 
-        firebase_auth_version = '21.1.0'
-        firebase_firestore_version = '24.4.4'
-        firebase_functions_version = '20.2.2'
-        firebase_playintegrity_version = '16.1.2'
-        firebase_appcheck_debug_version = '16.1.2'
+        firebase_auth_version = '22.3.0'
+        firebase_firestore_version = '24.9.1'
+        firebase_functions_version = '20.4.0'
+        firebase_playintegrity_version = '17.1.1'
+        firebase_appcheck_debug_version = '17.1.1'
 
         fastlane_screengrab_version = '2.0.0'
 

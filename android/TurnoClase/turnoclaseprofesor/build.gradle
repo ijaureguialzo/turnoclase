@@ -27,8 +27,8 @@ android {
         applicationId "com.jaureguialzo.turnoclaseprofesor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 60
-        versionName "3.0.26"
+        versionCode 61
+        versionName "3.0.27"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
@@ -84,10 +84,10 @@ dependencies {
 
     implementation "com.google.firebase:firebase-functions-ktx:$firebase_functions_version"
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
-    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'com.job:droidnet:2.0.0'
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
 
     // REF: Dependencias para tests: https://stackoverflow.com/a/56624085
     testImplementation 'junit:junit:4.13.2'
