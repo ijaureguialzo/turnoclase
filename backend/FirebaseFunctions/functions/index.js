@@ -14,6 +14,9 @@ const Hashids = require('hashids/cjs');
 // Generar el código de aula y retornarlo
 exports.nuevoCodigo = functions
     .region('europe-west1')
+    .runWith({
+        enforceAppCheck: true,
+    })
     .https.onCall((data, context) => {
 
         // Verificar que haya un token de App Check válidos y, si no, retornar un error 401
