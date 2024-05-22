@@ -1,6 +1,6 @@
 // REF: Configuración: https://cloud.google.com/firestore/docs/quickstart
 const admin = require('firebase-admin');
-const functions = require('firebase-functions');
+const functions = require('firebase-functions/v1');
 
 // Inicializar la aplicación
 admin.initializeApp(functions.config().firebase);
