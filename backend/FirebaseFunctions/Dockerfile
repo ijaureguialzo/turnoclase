@@ -8,6 +8,11 @@ RUN apk update && apk add --no-cache \
 
 RUN npm install -g firebase-tools
 
+RUN apk update && apk add --no-cache \
+    python3 make build-base
+
+RUN npm install -g node-gyp
+
 WORKDIR /firebase
 
 RUN mkdir -p /home/node/.config && chown node:node /home/node/.config
