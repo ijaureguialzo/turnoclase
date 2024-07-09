@@ -10,9 +10,6 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
-// Make sure to apply this plugin *after* the Android plugin
-//apply plugin: 'com.trello.victor'
-
 // REF: Firmado automáticamente: https://stackoverflow.com/a/43230396/5136913
 def keystorePropertiesFile = rootProject.file("../../private/android/keystore.properties")
 def keystoreProperties = new Properties()
