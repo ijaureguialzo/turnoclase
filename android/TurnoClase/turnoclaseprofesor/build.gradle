@@ -63,12 +63,16 @@ dependencies {
     implementation "androidx.media:media:$media_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_support_version"
     implementation "androidx.multidex:multidex:$multidex_support_lib_version"
-    implementation "com.google.firebase:firebase-auth-ktx:$firebase_auth_version"
-    implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_version"
-    implementation "com.google.firebase:firebase-appcheck-playintegrity:$firebase_playintegrity_version"
-    implementation "com.google.firebase:firebase-appcheck-debug:$firebase_appcheck_debug_version"
 
-    implementation "com.google.firebase:firebase-functions-ktx:$firebase_functions_version"
+    implementation(platform("com.google.firebase:firebase-bom:$firebase_bom_version"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-appcheck-ktx")
+    implementation("com.google.firebase:firebase-appcheck-debug")
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
+
+    implementation("com.google.firebase:firebase-functions-ktx")
+
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'com.job:droidnet:2.0.0'
