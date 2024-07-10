@@ -5,16 +5,10 @@ buildscript {
             name 'mvnrepository.com'
         }
     }
-    dependencies {
-        classpath "com.trello:victor:$victor_version"
-    }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-
-// Make sure to apply this plugin *after* the Android plugin
-apply plugin: 'com.trello.victor'
 
 // REF: Firmado automáticamente: https://stackoverflow.com/a/43230396/5136913
 def keystorePropertiesFile = rootProject.file("../../private/android/keystore.properties")
@@ -27,8 +21,8 @@ android {
         applicationId "com.jaureguialzo.turnoclase"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 58
-        versionName "3.0.23"
+        versionCode 59
+        versionName "3.0.24"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
@@ -47,27 +41,22 @@ android {
         }
     }
     sourceSets {
-        main {
-            svg.srcDir 'src/main/svg'
-        }
         main.java.srcDirs += 'src/main/kotlin'
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of("17"))
+        }
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
     namespace 'com.jaureguialzo.turnoclase'
-}
-
-victor {
-    // Any assets defined in relative terms needs a base DPI specified
-    svgDpi = 72
-
-    // Do not generate these densities for SVG assets
-    excludeDensities = ['ldpi']
 }
 
 // REF: Generar árbol de dependencias: https://stackoverflow.com/a/42374426/5136913
@@ -77,20 +66,23 @@ dependencies {
     implementation "androidx.media:media:$media_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_support_version"
     implementation "androidx.multidex:multidex:$multidex_support_lib_version"
-    implementation "com.google.firebase:firebase-auth-ktx:$firebase_auth_version"
-    implementation "com.google.firebase:firebase-firestore-ktx:$firebase_firestore_version"
-    implementation "com.google.firebase:firebase-appcheck-playintegrity:$firebase_playintegrity_version"
-    implementation "com.google.firebase:firebase-appcheck-debug:$firebase_appcheck_debug_version"
+
+    implementation(platform("com.google.firebase:firebase-bom:$firebase_bom_version"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-appcheck-ktx")
+    implementation("com.google.firebase:firebase-appcheck-debug")
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
 
     implementation 'com.jakewharton.threetenabp:threetenabp:1.4.0'
 
     // REF: Dependencias para tests: https://stackoverflow.com/a/56624085
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:core:1.5.0'
-    androidTestImplementation 'androidx.test:runner:1.5.2'
-    androidTestImplementation 'androidx.test:rules:1.5.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:core:1.6.1'
+    androidTestImplementation 'androidx.test:runner:1.6.1'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     androidTestImplementation "tools.fastlane:screengrab:$fastlane_screengrab_version"
 }
 

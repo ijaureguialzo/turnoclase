@@ -2,24 +2,18 @@
 
 buildscript {
     ext {
-        gradle_plugin_version = '7.4.2'
-        google_services_version = '4.3.10'
-        kotlin_version = '1.8.0'
+        gradle_plugin_version = '8.5.0'
+        google_services_version = '4.4.2'
+        kotlin_version = '1.9.20'
 
-        appcompat_version = '1.6.1'
-        media_version = '1.6.0'
+        appcompat_version = '1.7.0'
+        media_version = '1.7.0'
         legacy_support_version = '1.0.0'
         multidex_support_lib_version = '2.0.1'
 
-        firebase_auth_version = '22.3.0'
-        firebase_firestore_version = '24.9.1'
-        firebase_functions_version = '20.4.0'
-        firebase_playintegrity_version = '17.1.1'
-        firebase_appcheck_debug_version = '17.1.1'
+        firebase_bom_version = '33.1.1'
 
         fastlane_screengrab_version = '2.0.0'
-
-        victor_version = '1.1.2'
     }
     repositories {
         maven {
@@ -51,13 +45,13 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register('clean', Delete) {
+    delete.layout.buildDirectory
 }
 
 // REF: Parámetros compartidos: https://stackoverflow.com/a/20436423/5136913
 ext {
-    compileSdkVersion = 33
-    minSdkVersion = 21
-    targetSdkVersion = 33
+    compileSdkVersion = 35
+    minSdkVersion = 23
+    targetSdkVersion = 35
 }

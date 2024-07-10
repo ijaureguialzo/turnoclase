@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/svg_boton_siguiente"
-        android:state_pressed="true" />
-    <item android:drawable="@drawable/svg_boton_siguiente"
-        android:state_focused="true" />
-    <item android:drawable="@drawable/svg_boton_siguiente" />
-</selector>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="72"
+    android:viewportHeight="72">
+    <path android:pathData="M0,0h72v72h-72z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M44.1,20.7l-1.2,1.2l13.2,13.2l-43.5,0l0,1.8l43.5,0l-13.2,13.2l1.2,1.2l15.3,-15.3z" />
+</vector>

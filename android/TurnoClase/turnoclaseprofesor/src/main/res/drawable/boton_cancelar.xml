@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/svg_boton_cancelar"
-        android:state_pressed="true" />
-    <item android:drawable="@drawable/svg_boton_cancelar"
-        android:state_focused="true" />
-    <item android:drawable="@drawable/svg_boton_cancelar" />
-</selector>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="72"
+    android:viewportHeight="72">
+    <path android:pathData="M0,0h72v72h-72z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M51.7,21.3l-1,-1l-14.7,14.7l-14.7,-14.7l-1,1l14.7,14.7l-14.7,14.7l1,1l14.7,-14.7l14.7,14.7l1,-1l-14.7,-14.7z" />
+</vector>
