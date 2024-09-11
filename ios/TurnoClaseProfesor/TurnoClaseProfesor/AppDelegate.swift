@@ -73,7 +73,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Opciones de Firestore
         let settings = FirestoreSettings()
-        settings.isPersistenceEnabled = false
+
+        // Use memory-only cache
+        settings.cacheSettings = MemoryCacheSettings(garbageCollectorSettings: MemoryLRUGCSettings())
+
         db.settings = settings
 
         // Valor por defecto para el sonido
