@@ -91,6 +91,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var codigoAula = "..."
     var PIN = "..."
     var tiempoEspera = -1
+    var etiquetaAula = ""
 
     // Almacenar el número de alumnos anterior para detectar el paso de 0 a 1 y reproducir el sonido
     var recuentoAnterior = 0
@@ -574,15 +575,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         let alertController: UIAlertController = {
             // REF: Localizar una cadena con interpolación: https://github.com/marmelroy/Localize-Swift/issues/89#issuecomment-331673546
             if codigoAula != "?" {
-                if !invitado {
-                    return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                        message: String(format: "PIN para compartir este aula: %@".localized(), PIN),
-                        preferredStyle: .actionSheet)
-                } else {
-                    return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula),
-                        message: "Conectado como invitado".localized(),
-                        preferredStyle: .actionSheet)
-                }
+                let mensaje = {
+                    if !invitado {
+                        return String(format: "PIN para compartir este aula: %@".localized(), PIN)
+                    } else {
+                        return "Conectado como invitado".localized()
+                    }
+                }()
+                return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula) +
+                        (etiquetaAula.count > 0 ? String(format: "\n» %@ «", etiquetaAula) : ""),
+                    message: mensaje,
+                    preferredStyle: .actionSheet)
             } else {
                 return UIAlertController(title: "No hay conexión de red".localized(),
                     message: nil,
@@ -619,9 +622,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 self.dialogoTiempoEspera()
             })
 
+        let accionEtiquetarAula = UIAlertAction(title: "Etiquetar aula".localized(), style: .default, handler: { (action) -> Void in
+                log.info("Etiquetar aula")
+                self.dialogoEtiquetarAula()
+            })
+
         if !invitado {
             if codigoAula != "?" {
                 alertController.addAction(accionEstablecerTiempoEspera)
+                alertController.addAction(accionEtiquetarAula)
                 if numAulas < MAX_AULAS {
                     alertController.addAction(accionAnyadirAula)
                 }
@@ -710,6 +719,53 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 }
             }
         }
+    }
+
+    // Para gestionar si se activa el botón de guardar
+    fileprivate var etiquetaAulaOk = false
+
+    func dialogoEtiquetarAula() {
+
+        etiquetaAulaOk = false
+
+        alertController = UIAlertController(title: "Etiquetar aula".localized(),
+            message: "Introduce la nueva etiqueta.".localized(),
+            preferredStyle: .alert)
+
+        // Guardar
+        let confirmAction = UIAlertAction(title: "Guardar".localized(),
+            style: .default) { (_) in
+
+            log.info("Guardando la etiqueta del aula")
+
+            self.etiquetaAula = (self.alertController.textFields?[0].text)!
+
+        }
+
+        // Desactivar el botón de confirmar por defecto
+        confirmAction.isEnabled = false
+
+        // Cancelar
+        let cancelAction = UIAlertAction(title: "Cancelar".localized(),
+            style: .cancel) { (_) in }
+
+        // Cuadro de texto
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Etiqueta".localized()
+            textField.tag = 30
+            textField.autocapitalizationType = .sentences
+            textField.keyboardType = .asciiCapable
+            textField.autocorrectionType = .no
+            textField.enablesReturnKeyAutomatically = true
+            textField.delegate = self
+        }
+
+        // Añadir los controles al cuadro de diálogo
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+        // Presentarlo asociado a este ViewController
+        self.present(alertController, animated: true, completion: nil)
     }
 
     func dialogoTiempoEspera() {
@@ -866,6 +922,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             loginPinOk = newLength >= 4
             self.alertController.actions[0].isEnabled = loginAulaOk && loginPinOk
             return newLength <= 4
+        case 30:
+            etiquetaAulaOk = newLength >= 3
+            self.alertController.actions[0].isEnabled = etiquetaAulaOk
+            return newLength <= 50
         default:
             return newLength <= 0
         }
