@@ -4,8 +4,8 @@ help: _header
 	@echo --------------------
 	@echo build
 	@echo workspace
-	@echo deploy
 	@echo update / serve
+	@echo deploy
 	@echo clean
 	@echo --------------------
 
@@ -20,13 +20,13 @@ build:
 workspace:
 	@docker compose run --rm node /bin/bash
 
+update:
+	@cd jekyll && bundle update
+
 deploy:
 	@cd jekyll && bundle exec jekyll build
 	@cd ..
 	@docker compose run --rm --service-ports node /bin/sh -c 'firebase login && firebase use turnoclase-eu && firebase deploy --only hosting'
-
-update:
-	@cd jekyll && bundle update
 
 serve:
 	@cd jekyll && bundle exec jekyll serve
