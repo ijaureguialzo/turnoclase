@@ -22,6 +22,9 @@ workspace:
 
 update:
 	@cd jekyll && bundle update
+	@echo Generando commit...
+	@sleep 5
+	@cd ../../ && git commit -a -m "Actualización de dependencias"
 
 deploy:
 	@cd jekyll && bundle exec jekyll build
