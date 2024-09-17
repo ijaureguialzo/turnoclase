@@ -327,6 +327,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                         self.actualizarAula(codigo: aula["codigo"] ??? "?")
                         self.actualizarPIN(aula["pin"] ??? "?")
                         self.tiempoEspera = aula["espera"] as? Int ?? 5
+                        self.etiquetaAula = aula["etiqueta"] ??? ""
 
                         // Listener de la cola
                         if self.listenerCola == nil {
@@ -740,6 +741,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
             self.etiquetaAula = (self.alertController.textFields?[0].text)!
 
+            self.refAula.updateData([
+                "etiqueta": self.etiquetaAula
+                ]) { error in
+                if let error = error {
+                    log.error("Error al actualizar el aula: \(error.localizedDescription)")
+                } else {
+                    log.info("Aula actualizada")
+                }
+            }
         }
 
         // Desactivar el botón de confirmar por defecto
