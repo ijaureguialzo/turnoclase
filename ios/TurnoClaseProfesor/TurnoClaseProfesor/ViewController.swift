@@ -765,7 +765,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             textField.tag = 30
             textField.autocapitalizationType = .sentences
             textField.keyboardType = .asciiCapable
-            textField.autocorrectionType = .no
+            textField.autocorrectionType = .default
             textField.enablesReturnKeyAutomatically = true
             textField.delegate = self
         }
