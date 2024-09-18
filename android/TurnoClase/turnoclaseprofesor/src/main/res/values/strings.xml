@@ -59,5 +59,9 @@
     <string name="sonido_titulo">Sound</string>
     <string name="ajustes_titulo">Settings</string>
     <string name="error_no_network">No network connection</string>
+    <string name="menu_etiquetar_aula">Set classroom label</string>
+    <string name="dialogo_etiqueta_aula">Label</string>
+    <string name="dialogo_etiquetar_aula_titulo">Set classroom label</string>
+    <string name="dialogo_etiquetar_aula_mensaje">Insert the new label.</string>
 
 </resources>

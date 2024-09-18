@@ -19,7 +19,14 @@
         android:visible="true">
         <item
             android:id="@+id/accion_establecer_espera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:title="@string/menu_establecer_espera" />
+        <item
+            android:id="@+id/accion_etiquetar_aula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="@string/menu_etiquetar_aula" />
         <item
             android:id="@+id/accion_anyadir_aula"
             android:title="@string/menu_accion_anyadir_aula" />

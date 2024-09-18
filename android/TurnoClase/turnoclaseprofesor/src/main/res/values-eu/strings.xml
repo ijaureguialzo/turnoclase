@@ -29,4 +29,8 @@
     <string name="sonido_titulo">Soinua</string>
     <string name="ajustes_titulo">Ezarpenak</string>
     <string name="error_no_network">Ez dago sareko konexiorik</string>
+    <string name="menu_etiquetar_aula">Gela etiketatu</string>
+    <string name="dialogo_etiqueta_aula">Etiketa</string>
+    <string name="dialogo_etiquetar_aula_titulo">Gela etiketatu</string>
+    <string name="dialogo_etiquetar_aula_mensaje">Sartu etiketa berria.</string>
 </resources>

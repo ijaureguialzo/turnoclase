@@ -727,6 +727,17 @@ class MainActivity : AppCompatActivity(), DroidListener {
             menu.findItem(R.id.accion_establecer_espera).isVisible = false
         }
 
+        if (!invitado && codigoAula != "?") {
+            menu.findItem(R.id.accion_etiquetar_aula).isVisible = true
+            menu.findItem(R.id.accion_etiquetar_aula).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Etiquetar aula")
+                dialogoEtiquetarAula()
+                true
+            }
+        } else {
+            menu.findItem(R.id.accion_etiquetar_aula).isVisible = false
+        }
+
         if (codigoAula != "?") {
             if (!invitado) {
                 menu.findItem(R.id.accion_conectar).isVisible = true
@@ -790,6 +801,46 @@ class MainActivity : AppCompatActivity(), DroidListener {
                 dialogoError()
             }
 
+        }
+
+        builder.setNegativeButton(getString(R.string.dialogo_cancelar)) { dialog, _ ->
+            Log.d(TAG, "Cancelado")
+            dialog.cancel()
+        }
+
+        builder.show()
+    }
+
+    private fun dialogoEtiquetarAula() {
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(getString(R.string.dialogo_etiquetar_aula_titulo))
+        builder.setMessage(getString(R.string.dialogo_etiquetar_aula_mensaje))
+
+        val vista = layoutInflater.inflate(R.layout.dialogo_etiquetar_aula, null)
+
+        builder.setView(vista)
+
+        // Set up the input
+        val inputEtiqueta = vista.findViewById(R.id.etiqueta_aula) as EditText
+
+        // Set up the buttons
+        builder.setPositiveButton(getString(R.string.dialogo_guardar)) { _, _ ->
+
+            Log.d(TAG, "Guardando la etiqueta del aula")
+
+            etiquetaAula = inputEtiqueta.text.toString()
+
+            val datos = HashMap<String, Any>()
+            datos["etiqueta"] = etiquetaAula
+
+            refAula!!.update(datos)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Aula actualizada")
+                    conectarListener()
+                }
+                .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
         }
 
         builder.setNegativeButton(getString(R.string.dialogo_cancelar)) { dialog, _ ->
