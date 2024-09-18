@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
     private var codigoAula = "..."
     private var PIN = "..."
     private var tiempoEspera = -1
+    private var etiquetaAula = ""
 
     // Almacenar el número de alumnos anterior para detectar el paso de 0 a 1 y reproducir el sonido
     private var recuentoAnterior = 0
@@ -422,6 +423,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
                     val codigoAula = aula!!["codigo"] as? String ?: "?"
                     val pin = aula["pin"] as? String ?: "?"
                     tiempoEspera = (aula["espera"] as? Long ?: 5).toInt()
+                    etiquetaAula = aula["etiqueta"] as? String ?: ""
 
                     actualizarAula(codigoAula)
                     actualizarPIN(pin)
@@ -622,6 +624,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
         binding.botonCodigoAula.text = codigo
         codigoAula = codigo
         Log.d(TAG, "Aula: $codigoAula")
+        supportActionBar?.subtitle = etiquetaAula
     }
 
     private fun actualizarAula(enCola: Int) {
