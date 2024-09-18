@@ -16,7 +16,7 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.jaureguialzo.turnoclaseprofesor"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -68,24 +68,24 @@ dependencies {
     implementation "androidx.multidex:multidex:$multidex_support_lib_version"
 
     implementation(platform("com.google.firebase:firebase-bom:$firebase_bom_version"))
-    implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation("com.google.firebase:firebase-appcheck-ktx")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-appcheck")
     implementation("com.google.firebase:firebase-appcheck-debug")
     implementation("com.google.firebase:firebase-appcheck-playintegrity")
 
-    implementation("com.google.firebase:firebase-functions-ktx")
+    implementation("com.google.firebase:firebase-functions")
 
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'com.job:droidnet:2.0.0'
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5"
 
     // REF: Dependencias para tests: https://stackoverflow.com/a/56624085
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:core:1.6.1'
-    androidTestImplementation 'androidx.test:runner:1.6.1'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
     androidTestImplementation 'androidx.test:rules:1.6.1'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
