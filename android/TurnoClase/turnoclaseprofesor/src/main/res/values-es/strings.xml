@@ -29,4 +29,8 @@
     <string name="sonido_titulo">Sonido</string>
     <string name="ajustes_titulo">Ajustes</string>
     <string name="error_no_network">No hay conexión de red</string>
+    <string name="menu_etiquetar_aula">Etiquetar aula</string>
+    <string name="dialogo_etiqueta_aula">Etiqueta</string>
+    <string name="dialogo_etiquetar_aula_titulo">Etiquetar aula</string>
+    <string name="dialogo_etiquetar_aula_mensaje">Introduce la nueva etiqueta.</string>
 </resources>

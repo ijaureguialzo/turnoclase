@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
     private var codigoAula = "..."
     private var PIN = "..."
     private var tiempoEspera = -1
+    private var etiquetaAula = ""
 
     // Almacenar el número de alumnos anterior para detectar el paso de 0 a 1 y reproducir el sonido
     private var recuentoAnterior = 0
@@ -422,6 +423,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
                     val codigoAula = aula!!["codigo"] as? String ?: "?"
                     val pin = aula["pin"] as? String ?: "?"
                     tiempoEspera = (aula["espera"] as? Long ?: 5).toInt()
+                    etiquetaAula = aula["etiqueta"] as? String ?: ""
 
                     actualizarAula(codigoAula)
                     actualizarPIN(pin)
@@ -622,6 +624,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
         binding.botonCodigoAula.text = codigo
         codigoAula = codigo
         Log.d(TAG, "Aula: $codigoAula")
+        supportActionBar?.subtitle = etiquetaAula
     }
 
     private fun actualizarAula(enCola: Int) {
@@ -724,6 +727,17 @@ class MainActivity : AppCompatActivity(), DroidListener {
             menu.findItem(R.id.accion_establecer_espera).isVisible = false
         }
 
+        if (!invitado && codigoAula != "?") {
+            menu.findItem(R.id.accion_etiquetar_aula).isVisible = true
+            menu.findItem(R.id.accion_etiquetar_aula).setOnMenuItemClickListener {
+                Log.d("TurnoClase", "Etiquetar aula")
+                dialogoEtiquetarAula()
+                true
+            }
+        } else {
+            menu.findItem(R.id.accion_etiquetar_aula).isVisible = false
+        }
+
         if (codigoAula != "?") {
             if (!invitado) {
                 menu.findItem(R.id.accion_conectar).isVisible = true
@@ -787,6 +801,46 @@ class MainActivity : AppCompatActivity(), DroidListener {
                 dialogoError()
             }
 
+        }
+
+        builder.setNegativeButton(getString(R.string.dialogo_cancelar)) { dialog, _ ->
+            Log.d(TAG, "Cancelado")
+            dialog.cancel()
+        }
+
+        builder.show()
+    }
+
+    private fun dialogoEtiquetarAula() {
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(getString(R.string.dialogo_etiquetar_aula_titulo))
+        builder.setMessage(getString(R.string.dialogo_etiquetar_aula_mensaje))
+
+        val vista = layoutInflater.inflate(R.layout.dialogo_etiquetar_aula, null)
+
+        builder.setView(vista)
+
+        // Set up the input
+        val inputEtiqueta = vista.findViewById(R.id.etiqueta_aula) as EditText
+
+        // Set up the buttons
+        builder.setPositiveButton(getString(R.string.dialogo_guardar)) { _, _ ->
+
+            Log.d(TAG, "Guardando la etiqueta del aula")
+
+            etiquetaAula = inputEtiqueta.text.toString()
+
+            val datos = HashMap<String, Any>()
+            datos["etiqueta"] = etiquetaAula
+
+            refAula!!.update(datos)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Aula actualizada")
+                    conectarListener()
+                }
+                .addOnFailureListener { e -> Log.e(TAG, "Error al actualizar el aula", e) }
         }
 
         builder.setNegativeButton(getString(R.string.dialogo_cancelar)) { dialog, _ ->
