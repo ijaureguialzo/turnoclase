@@ -739,7 +739,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
             log.info("Guardando la etiqueta del aula")
 
-            self.etiquetaAula = (self.alertController.textFields?[0].text)!
+            self.etiquetaAula = (self.alertController.textFields?[0].text)!.trimmingCharacters(in: .whitespacesAndNewlines)
 
             self.refAula.updateData([
                 "etiqueta": self.etiquetaAula
