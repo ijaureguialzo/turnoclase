@@ -80,12 +80,38 @@ platform :ios do
       duration: 1200, # optional (maximum 1200)
       in_house: false # optional but may be required if using match/sigh
     )
-    match(type: "appstore")
-    gym(
+=begin
+    match(
+        type: "appstore",
+        additional_cert_types: "mac_installer_distribution",
+        platform: "catalyst",
+        derive_catalyst_app_identifier: true
+    )
+    build_ios_app(
         scheme: app,
         workspace: "../TurnoClase.xcworkspace",
-        include_bitcode: false)
+        include_bitcode: false
+    )
+    build_mac_app(
+        scheme: app,
+        workspace: "../TurnoClase.xcworkspace",
+        include_bitcode: false
+    )
+=end
     deliver(
+        platform: "ios",
+        app_version: "3.1.15",
+        build_number: "69",
+        force: true,
+        automatic_release: true,
+        skip_screenshots: true,
+        submission_information: {
+            add_id_info_uses_idfa: false
+        },
+    	precheck_include_in_app_purchases: false
+    )
+    deliver(
+        platform: "osx",
         app_version: "3.1.15",
         build_number: "69",
         force: true,
@@ -107,7 +133,12 @@ platform :ios do
       duration: 1200, # optional (maximum 1200)
       in_house: false # optional but may be required if using match/sigh
     )
-    match_nuke(type: "appstore")
+    match_nuke(
+        type: "appstore",
+        additional_cert_types: "mac_installer_distribution",
+        platform: "catalyst",
+        derive_catalyst_app_identifier: true
+    )
   end
 end
 
