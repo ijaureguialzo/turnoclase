@@ -86,8 +86,8 @@ platform :ios do
         workspace: "../TurnoClase.xcworkspace",
         include_bitcode: false)
     deliver(
-        app_version: "3.1.17",
-        build_number: "79",
+        app_version: "3.1.18",
+        build_number: "80",
         force: true,
         automatic_release: true,
         skip_screenshots: true,
