@@ -4,7 +4,7 @@ buildscript {
     ext {
         gradle_plugin_version = '8.6.0'
         google_services_version = '4.4.2'
-        kotlin_version = '1.9.20'
+        kotlin_version = '2.0.20'
 
         appcompat_version = '1.7.0'
         media_version = '1.7.0'
@@ -12,7 +12,7 @@ buildscript {
         multidex_support_lib_version = '2.0.1'
 
         // https://firebase.google.com/support/release-notes/android
-        firebase_bom_version = '33.3.0'
+        firebase_bom_version = '33.4.0'
 
         fastlane_screengrab_version = '2.0.0'
     }
