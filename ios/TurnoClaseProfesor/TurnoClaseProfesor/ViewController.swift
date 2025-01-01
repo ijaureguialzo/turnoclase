@@ -215,6 +215,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     self.uid = resultado.user.uid
                     log.info("Registrado como usuario con UID: \(self.uid ??? "[Desconocido]")")
 
+                    // Si ya tenemos un uid anterior, usarlo
+                    let uidAnterior = UserDefaults.standard.string(forKey: "uidAnterior") ?? ""
+
+                    if !uidAnterior.isEmpty && uidAnterior != self.uid {
+                        self.uid = uidAnterior
+                        log.info("Ya estaba registrado como usuario con UID: \(uidAnterior)")
+                    } else {
+                        UserDefaults.standard.set(self.uid, forKey: "uidAnterior")
+                    }
+                    
                     // Si hemos estado conectados a otro aula, recuperarla
                     let codigoAulaConectada = UserDefaults.standard.string(forKey: "codigoAulaConectada") ?? ""
                     let pinConectada = UserDefaults.standard.string(forKey: "pinConectada") ?? ""

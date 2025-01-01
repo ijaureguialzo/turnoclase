@@ -225,10 +225,22 @@ class MainActivity : AppCompatActivity(), DroidListener {
                         uid = mAuth?.currentUser?.uid
                         Log.d(TAG, "Registrado como usuario con UID: $uid")
 
-                        // Si hemos estado conectados a otro aula, recuperarla
                         val preferences: SharedPreferences =
                             getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE)
 
+                        // Si ya tenemos un uid anterior, usarlo
+                        val uidAnterior = preferences.getString("uidAnterior", "") ?: ""
+
+                        if (uidAnterior.isNotEmpty() && uidAnterior != uid) {
+                            uid = uidAnterior
+                            Log.d(TAG, "Ya estaba registrado como usuario con UID: $uidAnterior")
+                        } else {
+                            val editor = preferences.edit()
+                            editor.putString("uidAnterior", uid)
+                            editor.apply()
+                        }
+
+                        // Si hemos estado conectados a otro aula, recuperarla
                         val codigoAulaConectada =
                             preferences.getString("codigoAulaConectada", "") ?: ""
                         val pinConectada = preferences.getString("pinConectada", "") ?: ""
