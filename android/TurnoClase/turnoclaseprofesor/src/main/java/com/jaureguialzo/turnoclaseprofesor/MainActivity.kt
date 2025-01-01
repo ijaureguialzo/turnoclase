@@ -416,7 +416,7 @@ class MainActivity : AppCompatActivity(), DroidListener {
             .call(data)
             .continueWith { task ->
                 @Suppress("UNCHECKED_CAST")
-                task.result?.data as HashMap<String, String>
+                task.result?.getData() as HashMap<String, String>
             }
     }
 

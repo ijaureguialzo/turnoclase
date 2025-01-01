@@ -62,12 +62,12 @@ android {
 // REF: Generar árbol de dependencias: https://stackoverflow.com/a/42374426/5136913
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "androidx.media:media:$media_version"
-    implementation "androidx.legacy:legacy-support-v4:$legacy_support_version"
-    implementation "androidx.multidex:multidex:$multidex_support_lib_version"
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "androidx.media:media:1.7.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "androidx.multidex:multidex:2.0.1"
 
-    implementation(platform("com.google.firebase:firebase-bom:$firebase_bom_version"))
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-appcheck")
@@ -83,7 +83,7 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.6.1'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
-    androidTestImplementation "tools.fastlane:screengrab:$fastlane_screengrab_version"
+    androidTestImplementation "tools.fastlane:screengrab:2.0.0"
 }
 
 apply plugin: 'com.google.gms.google-services'

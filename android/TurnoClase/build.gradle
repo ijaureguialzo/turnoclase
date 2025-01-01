@@ -1,26 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext {
-        // https://developer.android.com/build/releases/gradle-plugin
-        gradle_plugin_version = '8.7.0'
-
-        // https://developers.google.com/android/guides/google-services-plugin
-        google_services_version = '4.4.2'
-
-        // https://kotlinlang.org/docs/releases.html
-        kotlin_version = '2.0.21'
-
-        appcompat_version = '1.7.0'
-        media_version = '1.7.0'
-        legacy_support_version = '1.0.0'
-        multidex_support_lib_version = '2.0.1'
-
-        // https://firebase.google.com/support/release-notes/android
-        firebase_bom_version = '33.5.1'
-
-        fastlane_screengrab_version = '2.0.0'
-    }
     repositories {
         maven {
             url "https://plugins.gradle.org/m2/"
@@ -33,9 +13,9 @@ buildscript {
         google()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradle_plugin_version"
-        classpath "com.google.gms:google-services:$google_services_version"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.android.tools.build:gradle:8.7.3"
+        classpath "com.google.gms:google-services:4.4.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
