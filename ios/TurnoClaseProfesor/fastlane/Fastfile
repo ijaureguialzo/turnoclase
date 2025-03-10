@@ -89,8 +89,8 @@ platform :ios do
 =end
     deliver(
         platform: "ios",
-        app_version: "3.1.19",
-        build_number: "81",
+        app_version: "3.1.20",
+        build_number: "82",
         force: true,
         automatic_release: true,
         skip_screenshots: true,
@@ -101,8 +101,8 @@ platform :ios do
     )
     deliver(
         platform: "osx",
-        app_version: "3.1.19",
-        build_number: "81",
+        app_version: "3.1.20",
+        build_number: "82",
         force: true,
         automatic_release: true,
         skip_screenshots: true,
