@@ -10,7 +10,4 @@
    <FileRef
       location = "group:TurnoClaseShared/TurnoClaseShared.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:TurnoClaseSharedWatch/TurnoClaseSharedWatch.xcodeproj">
-   </FileRef>
 </Workspace>

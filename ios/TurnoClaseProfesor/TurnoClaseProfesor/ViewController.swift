@@ -28,8 +28,6 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFunctions
 
-import WatchConnectivity
-
 import Localize_Swift
 
 import TurnoClaseShared
@@ -125,8 +123,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
     }
 
-    var session: WCSession?
-
     fileprivate func ocultarIndicador() {
         indicadorActividad.stopAnimating()
         indicadorActividad.isHidden = true
@@ -139,15 +135,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // REF: Tutorial sobre el Watch: https://www.raywenderlich.com/117329/watchos-2-tutorial-part-4-watch-connectivity
-        // REF: Tutorial sobre conectividad iPhone<->Watch: http://www.techotopia.com/index.php/A_watchOS_2_WatchConnectivity_Messaging_Tutorial
-
-        if WCSession.isSupported() {
-            session = WCSession.default
-            session?.delegate = self
-            session?.activate()
-        }
 
         // Detectar el estado de la conexión de red
         reachability.whenReachable = { reachability in
@@ -505,17 +492,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         actualizarAula(enCola: recuento)
     }
 
-    fileprivate func enviarWatch(campo: String, _ dato: String) {
-
-        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") && session?.isReachable == true {
-            self.session!.sendMessage([campo: dato], replyHandler: { (response) -> Void in
-                    log.info("Enviado al Watch")
-                }, errorHandler: { (error) -> Void in
-                    log.error("Error al enviar datos al Watch \(error)")
-                })
-        }
-    }
-
     fileprivate func actualizarAula(codigo: String) {
         self.codigoAula = codigo
         DispatchQueue.main.async {
@@ -523,7 +499,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.pageControl.currentPage = self.aulaActual
         }
         log.info("Código de aula: \(codigo)")
-        self.enviarWatch(campo: "codigoAula", codigo)
     }
 
     fileprivate func actualizarAula(enCola recuento: Int) {
@@ -544,14 +519,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             self.etiquetaBotonEnCola.setTitle("\(recuento)", for: UIControl.State())
         }
         log.info("Alumnos en cola: \(recuento)")
-        enviarWatch(campo: "enCola", String(recuento))
     }
 
     fileprivate func actualizarMensaje(texto: String) {
         DispatchQueue.main.async {
             self.etiquetaNombreAlumno.text = texto
         }
-        enviarWatch(campo: "mensaje", texto)
     }
 
     fileprivate func actualizarPIN(_ pin: String) {
@@ -1020,42 +993,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     sender.alpha = 1
                 }, completion: nil)
         }
-    }
-
-}
-
-extension ViewController: WCSessionDelegate {
-
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        log.debug("iPhone: sesión activa")
-    }
-
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        log.debug("iPhone: sesión inactiva")
-    }
-
-    func sessionDidDeactivate(_ session: WCSession) {
-        log.debug("iPhone: sesión desactivada")
-    }
-
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
-
-        switch message["comando"] as! String {
-        case "siguiente":
-            mostrarSiguiente(avanzarCola: true)
-        case "actualizar":
-            self.actualizarAula(codigo: codigoAula)
-            mostrarSiguiente(avanzarCola: false)
-        case "aulaSiguiente":
-            aulaSiguiente()
-        case "aulaAnterior":
-            aulaAnterior()
-        default:
-            break
-        }
-
-        // No se si es necesario enviar una respuesta vacía
-        replyHandler([String: String]())
     }
 
 }
