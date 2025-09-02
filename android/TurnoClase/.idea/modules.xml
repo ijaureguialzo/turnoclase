@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TurnoClase.iml" filepath="$PROJECT_DIR$/TurnoClase.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.main.iml" filepath="$PROJECT_DIR$/.idea/modules/turnoclase/TurnoClase.turnoclase.main.iml" />
