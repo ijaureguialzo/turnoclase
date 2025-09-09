@@ -211,7 +211,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                     } else {
                         UserDefaults.standard.set(self.uid, forKey: "uidAnterior")
                     }
-                    
+
                     // Si hemos estado conectados a otro aula, recuperarla
                     let codigoAulaConectada = UserDefaults.standard.string(forKey: "codigoAulaConectada") ?? ""
                     let pinConectada = UserDefaults.standard.string(forKey: "pinConectada") ?? ""
@@ -566,8 +566,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                         return "Conectado como invitado".localized()
                     }
                 }()
-                return UIAlertController(title: String(format: "Aula %@".localized(), codigoAula) +
-                        (etiquetaAula.count > 0 ? String(format: "\n» %@ «", etiquetaAula) : ""),
+                let titulo = String(format: "Aula %@".localized(), codigoAula)
+                return UIAlertController(title: titulo,
                     message: mensaje,
                     preferredStyle: .actionSheet)
             } else {
@@ -606,15 +606,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 self.dialogoTiempoEspera()
             })
 
-        let accionEtiquetarAula = UIAlertAction(title: "Etiquetar aula".localized(), style: .default, handler: { (action) -> Void in
+        let accionEtiquetarAula = UIAlertAction(title: (etiquetaAula.count > 0 ? String(format: "» %@ «", etiquetaAula) : "Etiquetar aula".localized()), style: .default, handler: { (action) -> Void in
                 log.info("Etiquetar aula")
                 self.dialogoEtiquetarAula()
             })
 
         if !invitado {
             if codigoAula != "?" {
-                alertController.addAction(accionEstablecerTiempoEspera)
                 alertController.addAction(accionEtiquetarAula)
+                alertController.addAction(accionEstablecerTiempoEspera)
                 if numAulas < MAX_AULAS {
                     alertController.addAction(accionAnyadirAula)
                 }
